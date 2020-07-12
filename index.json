@@ -4,14 +4,14 @@
 	"title": "Go",
 	"tags": [],
 	"description": "Golang",
-	"content": " Go Daily Note \r\rGo语言第三方库 \r\r\r"
+	"content": " Go Daily Note \r\rGo语言第三方库 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/daily/",
 	"title": "Go Daily Note",
 	"tags": [],
 	"description": "Daily Note",
-	"content": " Json \r\rSSH \r\r\r"
+	"content": " Json \r\rSort \r\rSSH \r\r文件操作 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/github.com/",
@@ -32,7 +32,7 @@
 	"title": "Json ",
 	"tags": [],
 	"description": "Daily Note",
-	"content": " Json   func Marshal(v interface{}) ([]byte, error) // json编码\n  func MarshalIndent(v interface{}, prefix, indent string) ([]byte, error) // json编码带缩进\n  func Unmarshal(data []byte, v interface{}) error // json解码\n  package main import ( \u0026#34;fmt\u0026#34; // \u0026#34;reflect\u0026#34;  \u0026#34;encoding/json\u0026#34; ) type User struct{ // Name string `json:\u0026#34;-,\u0026#34;` // 这个导出才是 {\u0026#34;-\u0026#34;:\u0026#34;张三\u0026#34;,\u0026#34;age\u0026#34;:20}  // Name string `json:\u0026#34;-\u0026#34;` // always omitted  // Name string `json:\u0026#34;,omitempty\u0026#34;` // 如果为零值导出为空. 然而不想重命名.  Name string `json:\u0026#34;name,omitempty\u0026#34;` // 如果为零值导出为空.  // Age int `json:\u0026#34;age,string\u0026#34;` // 这个会把int变成json string...  // 上面那个很有用. 在 A map =\u0026gt; string =\u0026gt; B map 的时候可能会被弄成科学计数法..  // 用字符串表示时间戳这种可以避免这个...  Age int `json:\u0026#34;age\u0026#34;` sex int `json:\u0026#34;sex\u0026#34;` } func main() { u := User{\u0026#34;张三\u0026#34;, 20, 1} uu, _ := json.Marshal(u) // 只会导出公有的, 即首字母大写的  fmt.Println(string(uu)) } "
+	"content": " Json   func Marshal(v interface{}) ([]byte, error) // json编码\n  func MarshalIndent(v interface{}, prefix, indent string) ([]byte, error) // json编码带缩进\n  func Unmarshal(data []byte, v interface{}) error // json解码\n  package main import ( \u0026#34;fmt\u0026#34; // \u0026#34;reflect\u0026#34;  \u0026#34;encoding/json\u0026#34; ) type User struct{ // Name string `json:\u0026#34;-,\u0026#34;` // 这个导出才是 {\u0026#34;-\u0026#34;:\u0026#34;张三\u0026#34;,\u0026#34;age\u0026#34;:20}  // Name string `json:\u0026#34;-\u0026#34;` // always omitted  // Name string `json:\u0026#34;,omitempty\u0026#34;` // 如果为零值导出为空. 然而不想重命名.  Name string `json:\u0026#34;name,omitempty\u0026#34;` // 如果为零值导出为空.  // Age int `json:\u0026#34;age,string\u0026#34;` // 这个会把int变成json string...  // 上面那个很有用. 在 A map =\u0026gt; string =\u0026gt; B map 的时候可能会被弄成科学计数法..  // 用字符串表示时间戳这种可以避免这个...  Age int `json:\u0026#34;age\u0026#34;` sex int `json:\u0026#34;sex\u0026#34;` } func main() { u := User{\u0026#34;张三\u0026#34;, 20, 1} uu, _ := json.Marshal(u) // 只会导出公有的, 即首字母大写的  fmt.Println(string(uu)) }  Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/essay/july/",
@@ -46,21 +46,42 @@
 	"title": "Programming",
 	"tags": [],
 	"description": "Programming",
-	"content": " Go \r\r\r"
+	"content": " Go \r\r\r  Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/daily/sort/",
+	"title": "Sort",
+	"tags": [],
+	"description": "Daily Note",
+	"content": " 实现Go提供的sort接口，来进行自定义排序  只需要实现下列三个接口，就可以进行排序\n package sort type Interface interface { Len() int // 获取元素数量  Less(i, j int) bool // i，j是序列元素的指数。  Swap(i, j int) // 交换元素 } 自己模拟了一个最简单的示例\npackage main\rimport (\r\u0026quot;fmt\u0026quot;\r\u0026quot;sort\u0026quot;\r)\rfunc main() {\rvar mysort MySort\rvar a SortType\ra.id = 5\ra.Name = \u0026quot;a\u0026quot;\rvar b SortType\rb.id = 51\rb.Name = \u0026quot;b\u0026quot;\rvar c SortType\rc.id = 6\rc.Name = \u0026quot;c\u0026quot;\rvar d SortType\rd.id = 1\rd.Name = \u0026quot;d\u0026quot;\rmysort = []SortType{a, b, c, d}\rsort.Sort(mysort)\rfmt.Println(mysort)\r}\rtype MySort []SortType\rtype SortType struct {\rName string\rid int\r}\rfunc (a MySort) Len() int { return len(a) }\rfunc (a MySort) Swap(i, j int) { a[i], a[j] = a[j], a[i] }\rfunc (a MySort) Less(i, j int) bool { return a[i].id \u0026lt; a[j].id }\r//输出结果为\r[{d 1} {a 5} {c 6} {b 51}]\r 接口实现不受限于结构体，任何类型都可以实现接口。但是系统自定义的类型是无法实现的，因为GO语言自己实现了这些[]int ,[]string 的接口。如果要自己实现自定义的排序的话，可以添加别名类型。\n  Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/booknote/sre/",
 	"title": "SRE",
 	"tags": [],
 	"description": "SRE",
-	"content": " \r Back\r\r"
+	"content": " SRE介绍 \r\r\r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/booknote/sre/sre%E4%BB%8B%E7%BB%8D/",
+	"title": "SRE介绍",
+	"tags": [],
+	"description": "Note",
+	"content": " \rSRE\r\rSRE是指Site Reliability Engineer (网站可靠性工程师)。他是软件工程师和系统管理员的结合，一个SRE工程师基本上需要掌握很多知识：算法，数据结构，编程能力，网络编程，分布式系统，可扩展架构，故障排除。\r\r\r\rSRE都干些什么？ SRE不是做底层硬件维护，而是负责各种服务的性能和稳定性。\r远离底层硬件，更多靠近软件基础架构层面，帮助企业客户打造强大的软件基础构架。\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/daily/ssh/",
 	"title": "SSH",
 	"tags": [],
 	"description": "Daily Note",
-	"content": " 利用Go语言提供的ssh包实现一个ssh工具 package main import ( \u0026#34;fmt\u0026#34; \u0026#34;log\u0026#34; \u0026#34;net\u0026#34; \u0026#34;os\u0026#34; \u0026#34;time\u0026#34; \u0026#34;golang.org/x/crypto/ssh\u0026#34; ) func main() { session, err := connect(\u0026#34;root\u0026#34;, \u0026#34;abc@123A\u0026#34;, \u0026#34;10.45.11.115\u0026#34;, 22) if err != nil { log.Fatal(err) } defer session.Close() fmt.Printf(\u0026#34;----\u0026gt;\u0026#34;) session.Stdout = os.Stdout session.Stderr = os.Stderr session.Stdin = os.Stdin session.Run(\u0026#34;sh\u0026#34;) } func connect(user, password, host string, port int) (*ssh.Session, error) { var ( addr string clientConfig *ssh.ClientConfig client *ssh.Client session *ssh.Session err error ) clientConfig = \u0026amp;ssh.ClientConfig{ User: user, Auth: []ssh.AuthMethod{ ssh.Password(password), }, Timeout: 30 * time.Second, HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error { return nil }, } // connet to ssh \taddr = fmt.Sprintf(\u0026#34;%s:%d\u0026#34;, host, port) if client, err = ssh.Dial(\u0026#34;tcp\u0026#34;, addr, clientConfig); err != nil { return nil, err } // create session \tif session, err = client.NewSession(); err != nil { return nil, err } return session, nil }  需要补充的：包装下os.Stdin接口，加入点显示什么的 ssh用来执行远程批量任务比较好。这个先写下来，回头实现下。 解决下windows下os.Stdin结束的行尾存在\u0026rsquo;\\r\\n\u0026rsquo;问题\n "
+	"content": " 利用Go语言提供的ssh包实现一个ssh工具 package main import ( \u0026#34;fmt\u0026#34; \u0026#34;log\u0026#34; \u0026#34;net\u0026#34; \u0026#34;os\u0026#34; \u0026#34;time\u0026#34; \u0026#34;golang.org/x/crypto/ssh\u0026#34; ) func main() { session, err := connect(\u0026#34;root\u0026#34;, \u0026#34;abc@123A\u0026#34;, \u0026#34;10.45.11.115\u0026#34;, 22) if err != nil { log.Fatal(err) } defer session.Close() fmt.Printf(\u0026#34;----\u0026gt;\u0026#34;) session.Stdout = os.Stdout session.Stderr = os.Stderr session.Stdin = os.Stdin session.Run(\u0026#34;sh\u0026#34;) } func connect(user, password, host string, port int) (*ssh.Session, error) { var ( addr string clientConfig *ssh.ClientConfig client *ssh.Client session *ssh.Session err error ) clientConfig = \u0026amp;ssh.ClientConfig{ User: user, Auth: []ssh.AuthMethod{ ssh.Password(password), }, Timeout: 30 * time.Second, HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error { return nil }, } // connet to ssh \taddr = fmt.Sprintf(\u0026#34;%s:%d\u0026#34;, host, port) if client, err = ssh.Dial(\u0026#34;tcp\u0026#34;, addr, clientConfig); err != nil { return nil, err } // create session \tif session, err = client.NewSession(); err != nil { return nil, err } return session, nil }  需要补充的：包装下os.Stdin接口，加入点显示什么的 ssh用来执行远程批量任务比较好。这个先写下来，回头实现下。 解决下windows下os.Stdin结束的行尾存在\u0026rsquo;\\r\\n\u0026rsquo;问题\n  Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/",
+	"title": "文件操作",
+	"tags": [],
+	"description": "Note",
+	"content": " 1.打开关闭文件 file open/close\npackage main import ( \u0026#34;fmt\u0026#34; \u0026#34;os\u0026#34; ) func main() { // 只读方式打开当前目录下的main.go文件 \tfile, err := os.Open(\u0026#34;./main.go\u0026#34;) if err != nil { fmt.Println(\u0026#34;open file failed!, err:\u0026#34;, err) return } // 关闭文件 \tfile.Close() } 2.文件读取 file read 它接收一个字节切片，返回读取的字节数和可能的具体错误，读到文件末尾时会返回0和io.EOF\nfunc (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式打开当前目录下的main.go文件 \tfile, err := os.Open(\u0026#34;./main.go\u0026#34;) if err != nil { fmt.Println(\u0026#34;open file failed!, err:\u0026#34;, err) return } defer file.Close() // 使用Read方法读取数据 \tvar tmp = make([]byte, 128) n, err := file.Read(tmp) if err == io.EOF { fmt.Println(\u0026#34;文件读完了\u0026#34;) return } if err != nil { fmt.Println(\u0026#34;read file failed, err:\u0026#34;, err) return } fmt.Printf(\u0026#34;读取了%d字节数据\\n\u0026#34;, n) fmt.Println(string(tmp[:n])) } 3.使用for循环读取文件中的所有数据。 func main() { // 只读方式打开当前目录下的main.go文件 \tfile, err := os.Open(\u0026#34;./main.go\u0026#34;) if err != nil { fmt.Println(\u0026#34;open file failed!, err:\u0026#34;, err) return } defer file.Close() // 循环读取文件 \tvar content []byte var tmp = make([]byte, 128) for { n, err := file.Read(tmp) if err == io.EOF { fmt.Println(\u0026#34;文件读完了\u0026#34;) break } if err != nil { fmt.Println(\u0026#34;read file failed, err:\u0026#34;, err) return } content = append(content, tmp[:n]...) } fmt.Println(string(content)) } 4.bufio  可以用来配合channel使用读取大文件\n package main import ( \u0026#34;bufio\u0026#34; \u0026#34;fmt\u0026#34; \u0026#34;io\u0026#34; \u0026#34;os\u0026#34; ) // bufio按行读取示例 func main() { file, err := os.Open(\u0026#34;./xx.txt\u0026#34;) if err != nil { fmt.Println(\u0026#34;open file failed, err:\u0026#34;, err) return } defer file.Close() reader := bufio.NewReader(file) for { line, err := reader.ReadString(\u0026#39;\\n\u0026#39;) //注意是字符 \tif err == io.EOF { if len(line) != 0 { fmt.Println(line) } fmt.Println(\u0026#34;文件读完了\u0026#34;) break } if err != nil { fmt.Println(\u0026#34;read file failed, err:\u0026#34;, err) return } fmt.Print(line) } } 5.ioutil 读取整个文件 package main import ( \u0026#34;fmt\u0026#34; \u0026#34;io/ioutil\u0026#34; ) // ioutil.ReadFile读取整个文件 func main() { content, err := ioutil.ReadFile(\u0026#34;./main.go\u0026#34;) if err != nil { fmt.Println(\u0026#34;read file failed, err:\u0026#34;, err) return } fmt.Println(string(content)) } 6.文件写入操作  os.OpenFile()函数能够以指定模式打开文件，从而实现文件写入相关功能。 func OpenFile(name string, flag int, perm FileMode) (*File, error) {\r...\r}\n name：要打开的文件名 flag：打开文件的模式。 模式有以下几种：\n    模式 含义      os.O_WRONLY 只写    os.O_CREATE 创建文件    os.O_RDONLY 只读    os.O_RDWR 读写    os.O_TRUNC 清空    os.O_APPEND 追加      perm：文件权限，一个八进制数。r（读）04，w（写）02，x（执行）01。\n 7.Write和WriteString func main() { file, err := os.OpenFile(\u0026#34;xx.txt\u0026#34;, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666) if err != nil { fmt.Println(\u0026#34;open file failed, err:\u0026#34;, err) return } defer file.Close() str := \u0026#34;hello 沙河\u0026#34; file.Write([]byte(str)) //写入字节切片数据 \tfile.WriteString(\u0026#34;hello 小王子\u0026#34;) //直接写入字符串数据 }  bufio.NewWriter\n func main() { file, err := os.OpenFile(\u0026#34;xx.txt\u0026#34;, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666) if err != nil { fmt.Println(\u0026#34;open file failed, err:\u0026#34;, err) return } defer file.Close() writer := bufio.NewWriter(file) for i := 0; i \u0026lt; 10; i++ { writer.WriteString(\u0026#34;hello沙河\\n\u0026#34;) //将数据先写入缓存 \t} writer.Flush() //将缓存中的内容写入文件 }  ioutil.WriteFile\n func main() { str := \u0026#34;hello 沙河\u0026#34; err := ioutil.WriteFile(\u0026#34;./xx.txt\u0026#34;, []byte(str), 0666) if err != nil { fmt.Println(\u0026#34;write file failed, err:\u0026#34;, err) return } } 8.copyFile 借助io.Copy()实现一个拷贝文件函数。\n// CopyFile 拷贝文件函数 func CopyFile(dstName, srcName string) (written int64, err error) { // 以读方式打开源文件 \tsrc, err := os.Open(srcName) if err != nil { fmt.Printf(\u0026#34;open %s failed, err:%v.\\n\u0026#34;, srcName, err) return } defer src.Close() // 以写|创建的方式打开目标文件 \tdst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644) if err != nil { fmt.Printf(\u0026#34;open %s failed, err:%v.\\n\u0026#34;, dstName, err) return } defer dst.Close() return io.Copy(dst, src) //调用io.Copy()拷贝内容 } func main() { _, err := CopyFile(\u0026#34;dst.txt\u0026#34;, \u0026#34;src.txt\u0026#34;) if err != nil { fmt.Println(\u0026#34;copy file failed, err:\u0026#34;, err) return } fmt.Println(\u0026#34;copy done!\u0026#34;) }  实现一个cat命令 使用文件操作相关知识，模拟实现linux平台cat命令的功能。\n package main import ( \u0026#34;bufio\u0026#34; \u0026#34;flag\u0026#34; \u0026#34;fmt\u0026#34; \u0026#34;io\u0026#34; \u0026#34;os\u0026#34; ) // cat命令实现 func cat(r *bufio.Reader) { for { buf, err := r.ReadBytes(\u0026#39;\\n\u0026#39;) //注意是字符 \tif err == io.EOF { break } fmt.Fprintf(os.Stdout, \u0026#34;%s\u0026#34;, buf) } } func main() { flag.Parse() // 解析命令行参数 \tif flag.NArg() == 0 { // 如果没有参数默认从标准输入读取内容 \tcat(bufio.NewReader(os.Stdin)) } // 依次读取每个指定文件的内容并打印到终端 \tfor i := 0; i \u0026lt; flag.NArg(); i++ { f, err := os.Open(flag.Arg(i)) if err != nil { fmt.Fprintf(os.Stdout, \u0026#34;reading from %s failed, err:%v\\n\u0026#34;, flag.Arg(i), err) continue } cat(bufio.NewReader(f)) } }  Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/linux/",

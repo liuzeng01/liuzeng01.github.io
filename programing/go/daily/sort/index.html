@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/daily/json/">
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/daily/sort/">
 
     <title>
         
-        Json  | iNote
+        Sort | iNote
         
     </title>
 
@@ -85,13 +85,13 @@
         
         <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1 active">
+        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1">
                 
                  <a href="/programing/go/daily/json/" class="nav-link p-0">
                     Json 
                 </a>
         </li>
-        <li data-nav-id="/programing/go/daily/sort/" class="nav-item my-1">
+        <li data-nav-id="/programing/go/daily/sort/" class="nav-item my-1 active">
                 
                  <a href="/programing/go/daily/sort/" class="nav-link p-0">
                     Sort
@@ -193,7 +193,7 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#json">Json</a></li>
+    <li><a href="#实现go提供的sort接口来进行自定义排序">实现Go提供的sort接口，来进行自定义排序</a></li>
   </ul>
 </nav>
 </div>
@@ -201,48 +201,64 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Json </h1>
+<h1>Sort</h1>
 
 <hr>
-<h2 id="json">Json</h2>
-<ul>
-<li>
-<p><code>func Marshal(v interface{}) ([]byte, error) // json编码</code></p>
-</li>
-<li>
-<p><code>func MarshalIndent(v interface{}, prefix, indent string) ([]byte, error) // json编码带缩进</code></p>
-</li>
-<li>
-<p><code>func Unmarshal(data []byte, v interface{}) error // json解码</code></p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+<h2 id="实现go提供的sort接口来进行自定义排序">实现Go提供的sort接口，来进行自定义排序</h2>
+<blockquote>
+<p>只需要实现下列三个接口，就可以进行排序</p>
+</blockquote>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">sort</span>
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Interface</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">Len</span><span style="color:#111">()</span> <span style="color:#00a8c8">int</span>            <span style="color:#75715e">// 获取元素数量
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Less</span><span style="color:#111">(</span><span style="color:#75af00">i</span><span style="color:#111">,</span> <span style="color:#75af00">j</span> <span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#00a8c8">bool</span> <span style="color:#75715e">// i，j是序列元素的指数。
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Swap</span><span style="color:#111">(</span><span style="color:#75af00">i</span><span style="color:#111">,</span> <span style="color:#75af00">j</span> <span style="color:#00a8c8">int</span><span style="color:#111">)</span>        <span style="color:#75715e">// 交换元素
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><p><strong>自己模拟了一个最简单的示例</strong></p>
+<pre><code>package main
 
-<span style="color:#f92672">import</span> <span style="color:#111">(</span>
-    <span style="color:#d88200">&#34;fmt&#34;</span>
-    <span style="color:#75715e">// &#34;reflect&#34;
-</span><span style="color:#75715e"></span>    <span style="color:#d88200">&#34;encoding/json&#34;</span>
-<span style="color:#111">)</span>
+import (
+	&quot;fmt&quot;
+	&quot;sort&quot;
+)
 
-<span style="color:#00a8c8">type</span> <span style="color:#75af00">User</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{</span>
-    <span style="color:#75715e">// Name string `json:&#34;-,&#34;`  // 这个导出才是  {&#34;-&#34;:&#34;张三&#34;,&#34;age&#34;:20}
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Name string `json:&#34;-&#34;`   // always omitted
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Name string `json:&#34;,omitempty&#34;`     // 如果为零值导出为空. 然而不想重命名.
-</span><span style="color:#75715e"></span>    <span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;name,omitempty&#34;`</span>  <span style="color:#75715e">// 如果为零值导出为空.
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Age int `json:&#34;age,string&#34;`         // 这个会把int变成json string...
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 上面那个很有用.  在 A map =&gt; string =&gt; B map 的时候可能会被弄成科学计数法..
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 用字符串表示时间戳这种可以避免这个...
-</span><span style="color:#75715e"></span>    <span style="color:#75af00">Age</span> <span style="color:#00a8c8">int</span> <span style="color:#d88200">`json:&#34;age&#34;`</span>
-    <span style="color:#75af00">sex</span> <span style="color:#00a8c8">int</span> <span style="color:#d88200">`json:&#34;sex&#34;`</span>
-<span style="color:#111">}</span>
+func main() {
 
-<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">u</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">User</span><span style="color:#111">{</span><span style="color:#d88200">&#34;张三&#34;</span><span style="color:#111">,</span> <span style="color:#ae81ff">20</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">}</span>
-    <span style="color:#75af00">uu</span><span style="color:#111">,</span> <span style="color:#75af00">_</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Marshal</span><span style="color:#111">(</span><span style="color:#75af00">u</span><span style="color:#111">)</span>
-    <span style="color:#75715e">// 只会导出公有的, 即首字母大写的
-</span><span style="color:#75715e"></span>    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">uu</span><span style="color:#111">))</span>
-<span style="color:#111">}</span>
-</code></pre></div><hr>
+	var mysort MySort
+	var a SortType
+	a.id = 5
+	a.Name = &quot;a&quot;
+	var b SortType
+	b.id = 51
+	b.Name = &quot;b&quot;
+	var c SortType
+	c.id = 6
+	c.Name = &quot;c&quot;
+	var d SortType
+	d.id = 1
+	d.Name = &quot;d&quot;
+	mysort = []SortType{a, b, c, d}
+	sort.Sort(mysort)
+	fmt.Println(mysort)
+}
+
+type MySort []SortType
+
+type SortType struct {
+	Name string
+	id   int
+}
+
+func (a MySort) Len() int           { return len(a) }
+func (a MySort) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a MySort) Less(i, j int) bool { return a[i].id &lt; a[j].id }
+
+</code></pre><pre><code>//输出结果为
+[{d 1} {a 5} {c 6} {b 51}]
+</code></pre><blockquote>
+<p>接口实现不受限于结构体，任何类型都可以实现接口。但是系统自定义的类型是无法实现的，因为GO语言自己实现了这些[]int ,[]string 的接口。如果要自己实现自定义的排序的话，可以添加别名类型。</p>
+</blockquote>
+<hr>
 
 
 
@@ -261,8 +277,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/daily/" title="Go Daily Note"><i class="fas fa-chevron-left p-1"></i>Go Daily Note</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/daily/sort/" title="Sort">Sort<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/daily/json/" title="Json "><i class="fas fa-chevron-left p-1"></i>Json </a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/daily/ssh/" title="SSH">SSH<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

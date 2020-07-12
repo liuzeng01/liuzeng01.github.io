@@ -10,5 +10,14 @@
 	<atom:link href="https://liuzeng01.github.io/booknote/sre/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>SRE介绍</title>
+      <link>https://liuzeng01.github.io/booknote/sre/sre%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/booknote/sre/sre%E4%BB%8B%E7%BB%8D/</guid>
+      <description> SRESRE是指Site Reliability Engineer (网站可靠性工程师)。他是软件工程师和系统管理员的结合，一个SRE工程师基本上需要掌握很多知识：算法，数据结构，编程能力，网络编程，分布式系统，可扩展架构，故障排除。SRE都干些什么？ SRE不是做底层硬件维护，而是负责各种服务的性能和稳定性。远离底层硬件，更多靠近软件基础架构层面，帮助企业客户打造强大的软件基础构架。 Back</description>
+    </item>
+    
   </channel>
 </rss>
