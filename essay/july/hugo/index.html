@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/github.com/">
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/july/hugo/">
 
     <title>
         
-        Go语言第三方库 | iNote
+        hugo语法 | iNote
         
     </title>
 
@@ -70,12 +70,12 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -99,7 +99,7 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
@@ -127,23 +127,24 @@
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1 active">
                 
-                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
-                    routine
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
                 </a>
         </li>
-        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
-                    hugo
-                </a>
-        </li>
+        </ul>
+    </li>
         </ul>
     </li>
     <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
@@ -172,7 +173,18 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#hahahugoshortcode-s0-hbhb">HAHAHUGOSHORTCODE-s0-HBHB</a></li>
+    <li><a href="#1-hugo">1. hugo</a></li>
+    <li><a href="#2-ace-document">2. Ace Document</a></li>
+    <li><a href="#button">button</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#alert">Alert</a>
+      <ul>
+        <li><a href="#usage-1">Usage</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
@@ -180,28 +192,184 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Go语言第三方库</h1>
+<h1>hugo语法</h1>
 
 <hr>
-<h2 id="hahahugoshortcode-s0-hbhb">
+<h2 id="1-hugo">1. hugo</h2>
+<h2 id="2-ace-document">2. Ace Document</h2>
+<ul>
+<li>
+<h2 id="button">button</h2>
+<p>The button shortcode allows you to add a button to the page. This button is a HTML <em>anchor</em> element and can thus be used to link to another page or website.</p>
+<p>
 
 
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/programing/go/github.com/x-mod/routine/"> routine </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/programing/go/github.com/gohugoio/hugo/"> hugo </a>
-			</li>
-		
+<a href="" class="btn btn-primary">
+    Button
+</a>
 
-	
+
+
+
+<a href="" class="btn btn-secondary">
+    Button
+</a>
+
+
+
+
+<a href="" class="btn btn-outline-primary">
+    Button
+</a>
+
+
+
+
+<a href="" class="btn btn-danger">
+    Button
+</a>
+
+
+
+
+<a href="" class="btn btn-warning">
+    Button
+</a>
+
+
+
+
+<a href="" class="btn btn-success">
+    Button
+</a>
+
+
+
+
+<a href="" class="btn btn-info">
+    Button
+</a>
+</p>
+<h4 id="usage">Usage</h4>
+<p>Place the following shortcode on the page
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_9c341db3dc">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_9c341db3dc">
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> 
+    {{<span style="color:#111">&lt;</span> <span style="color:#f92672">button</span> <span style="color:#75af00">style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;STYLE&#34;</span> <span style="color:#75af00">link</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;https://yourwebsite.com&#34;</span> <span style="color:#111">&gt;</span>}} [content] {{<span style="color:#111">&lt;</span> <span style="color:#111">/</span><span style="color:#f92672">button</span> <span style="color:#111">&gt;</span>}}
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+</p>
+<h4 id="parameters">Parameters</h4>
+<h5 id="style"><em>style</em></h5>
+<p>The style parameter is directly applied to the alert as a class in the format <em>&ldquo;btn-{STYLE}&quot;</em>. Bootstrap comes with a variety of styles that can be used with this:</p>
+<ul>
+<li>primary</li>
+<li>secondary</li>
+<li>danger</li>
+<li>warning</li>
+<li>success</li>
+<li>info</li>
 </ul>
+<p>Each style can also be presented as an &lsquo;outline&rsquo; variant by prefixing the style with &lsquo;outline-&rsquo;.<br>
+Example: <code>style=&quot;outline-primary&quot;</code>.</p>
+<h5 id="link"><em>link</em></h5>
+<p>The link parameter may consist of an URL leading to a page or other website. Simply use it by defining a URL for the button to link to.<br>
+Example: <code>link=&quot;https://google.com&quot;</code>.</p>
+</li>
+<li>
+<h2 id="alert">Alert</h2>
+<p>The alerts shortcode allows you to let information stand out by means of an alert styled box. This can be used to indicate danger, warning, success or info.</p>
+<p>
+<div class="alert alert-danger" role="alert">
+    I&rsquo;m a danger alert
+</div>
+
+
+<div class="alert alert-warning" role="alert">
+    I&rsquo;m a warning alert
+</div>
+
+
+<div class="alert alert-success" role="alert">
+    I&rsquo;m a success alert
+</div>
+
+
+<div class="alert alert-info" role="alert">
+    I&rsquo;m an info alert
+</div>
+</p>
+<h3 id="usage-1">Usage</h3>
+<p>Place the following shortcode on the page
 
 
 
-</h2>
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2d6f34148f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2d6f34148f">
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> 
+    {{<span style="color:#111">&lt;</span> <span style="color:#f92672">alert</span> <span style="color:#75af00">style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;STYLE&#34;</span> <span style="color:#111">&gt;</span>}} [content] {{<span style="color:#111">&lt;</span> <span style="color:#111">/</span><span style="color:#f92672">alert</span> <span style="color:#111">&gt;</span>}}
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+</p>
+<h4 id="parameters-1">Parameters</h4>
+<h5 id="style-1">Style</h5>
+<ul>
+<li>danger</li>
+<li>warning</li>
+<li>success</li>
+<li>info</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
 
 
     
@@ -213,8 +381,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/daily/ssh/" title="SSH"><i class="fas fa-chevron-left p-1"></i>SSH</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/github.com/x-mod/routine/" title="routine">routine<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/july/" title="July"><i class="fas fa-chevron-left p-1"></i>July</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/booknote/" title="BookNote">BookNote<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
