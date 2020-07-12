@@ -42,11 +42,11 @@
 	"content": " hugo语法 \r\r\r Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/",
-	"title": "Programming",
+	"uri": "https://liuzeng01.github.io/linux/shell/",
+	"title": "Shell",
 	"tags": [],
-	"description": "Programming",
-	"content": " Go \r\r\r  Back\r\r"
+	"description": "Shell",
+	"content": " \r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/daily/sort/",
@@ -88,7 +88,14 @@
 	"title": "Linux",
 	"tags": [],
 	"description": "Linux Daily",
-	"content": "\r\r"
+	"content": "\rShell \r\rRedis \r\rDocker \r\rKernel \r\rOpenStack \r\rKubernetes \r\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/redis/",
+	"title": "Redis",
+	"tags": [],
+	"description": "Redis",
+	"content": " \r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/github.com/x-mod/routine/",
@@ -96,6 +103,20 @@
 	"tags": [],
 	"description": "github.com/x-mod/routine",
 	"content": "github.com/x-mod/routine  为什么要写这么一个基础库呢？\n  每段程序都是从 main 函数开始的，但是，却不会将整个程序的功能实现都放在 main 函数里。而是，通过层层功能的抽象与封装，最终，在 main 函数仅提供功能函数的入口。所以，当我们看很多大型程序时，其实，main 函数是非常简单的。\n  但是，即使 main 函数越变越简单，有些必要的功能则是逃不掉的。例如程序启动参数、程序的信号处理，这些通常还是会放在 main 函数进行处理。\n  除了以上 main 函数本身的处理以外，我发现将程序中的执行绪，也就是固定的 Go 协程的入口放在 main 函数中进行定义，可以帮助维护者更加快速的理解应用的逻辑实现。\n link 使用方法 import \u0026#34;github.com/x-mod/routine\u0026#34; //timeout timeout := routine.Timeout(time.Minute, exec) //retry retry := routine.Retry(3, exec) //repeat repeat := routine.Repeat(10, time.Second, exec) //concurrent concurrent := routine.Concurrent(4, exec) //schedule executor crontab := routine.Crontab(\u0026#34;* * * * *\u0026#34;, exec) //command command := routine.Command(\u0026#34;echo\u0026#34;, routine.ARG(\u0026#34;hello routine!\u0026#34;)) //parallel parallel := routine.Parallel(exec1, exec2, exec3, ...) //sequence sequece := routine.Append(exec1, exec2, exec3, ...)  github上提供的示例程序\n package main import ( \u0026#34;context\u0026#34; \u0026#34;log\u0026#34; \u0026#34;os\u0026#34; \u0026#34;syscall\u0026#34; \u0026#34;time\u0026#34; _ \u0026#34;net/http/pprof\u0026#34; \u0026#34;runtime/trace\u0026#34; \u0026#34;github.com/x-mod/routine\u0026#34; ) func prepare(ctx context.Context) error { log.Println(\u0026#34;prepare begin\u0026#34;) defer log.Println(\u0026#34;prepare end\u0026#34;) trace.Logf(ctx, \u0026#34;prepare\u0026#34;, \u0026#34;prepare ... ok\u0026#34;) return nil } func cleanup(ctx context.Context) error { log.Println(\u0026#34;cleanup begin\u0026#34;) defer log.Println(\u0026#34;cleanup end\u0026#34;) time.Sleep(time.Millisecond * 50) trace.Logf(ctx, \u0026#34;cleanup\u0026#34;, \u0026#34;cleanup ... ok\u0026#34;) return nil } func foo(ctx context.Context) error { log.Println(\u0026#34;foo begin\u0026#34;) defer log.Println(\u0026#34;foo end\u0026#34;) time.Sleep(time.Second * 2) trace.Logf(ctx, \u0026#34;foo\u0026#34;, \u0026#34;sleeping 2s done\u0026#34;) return nil } func bar(ctx context.Context) error { log.Println(\u0026#34;bar begin\u0026#34;) defer log.Println(\u0026#34;bar end\u0026#34;) for i := 0; i \u0026lt; 10; i++ { log.Println(i) trace.Logf(ctx, \u0026#34;bar\u0026#34;, \u0026#34;counting ... %d\u0026#34;, i) } return nil } func main() { f, err := os.Create(\u0026#34;trace.out\u0026#34;) if err != nil { log.Fatalf(\u0026#34;failed to create trace output file: %v\u0026#34;, err) } defer func() { if err := f.Close(); err != nil { log.Fatalf(\u0026#34;failed to close trace file: %v\u0026#34;, err) } }() if err := routine.Main( context.TODO(), routine.ExecutorFunc(bar), routine.Signal(syscall.SIGINT, routine.SigHandler(func() { os.Exit(1) })), routine.Prepare(routine.ExecutorFunc(prepare)), routine.Cleanup(routine.ExecutorFunc(cleanup)), routine.Trace(f), routine.Go(routine.ExecutorFunc(foo)), routine.Go(routine.ExecutorFunc(foo)), routine.Go(routine.ExecutorFunc(foo)), ); err != nil { log.Println(err) } }  接下来是自己的一些模仿实现\n package main import ( \u0026#34;context\u0026#34; \u0026#34;time\u0026#34; \u0026#34;fmt\u0026#34; \u0026#34;github.com/x-mod/routine\u0026#34; ) func main() { err := routine.Main( context.TODO(), routine.ExecutorFunc(bar), //main协程入口 \troutine.Prepare(routine.ExecutorFunc(prepare)), //启动开始前的准备函数 \troutine.Cleanup(routine.ExecutorFunc(exitclean)), //启动关闭后的清理函数 \troutine.Go(routine.ExecutorFunc(dosomething)), //启动并发的协程 \troutine.Go(routine.Concurrent(5, routine.ExecutorFunc(conexec))), //启动并发执行同一程序 \t//routine.Go(routine.Crontab(\u0026#34;*/1 * * * *\u0026#34;, routine.ExecutorFunc(crontabexec))), //定时执行任务，配置crontab表达式 \troutine.Go(routine.Repeat(3, time.Second, routine.ExecutorFunc(repeatexec))), //定时重复执行一项程序 \t//routine.Go(routine.Deadline(time.Now().Add(5*time.Second), routine.ExecutorFunc(deadlinexec))),这个没搞明白 \t) if err != nil { fmt.Println(err) } } func bar(ctx context.Context) error { fmt.Println(\u0026#34;bar begin\u0026#34;) fmt.Println(time.Now()) defer fmt.Println(\u0026#34;bar end\u0026#34;) return nil } func prepare(ctx context.Context) error { fmt.Println(\u0026#34;Start Prepare !!\u0026#34;) defer fmt.Println(\u0026#34;Prepare finish !!\u0026#34;) return nil } func exitclean(ctx context.Context) error { fmt.Println(\u0026#34;Exiting !!\u0026#34;) defer fmt.Println(\u0026#34;Exited\u0026#34;) return nil } func dosomething(ctx context.Context) error { routine.New(routine.ExecutorFunc(bar)).Execute(ctx) //启动新的协程 \ttime.Sleep(50 * time.Millisecond) fmt.Println(time.Now()) return nil } func conexec(ctx context.Context) error { fmt.Println(\u0026#34;并发执行中！！！\u0026#34;) return nil } func crontabexec(ctx context.Context) error { fmt.Println(\u0026#34;定时执行中 ~~~\u0026#34;) return nil } func repeatexec(ctx context.Context) error { fmt.Println(\u0026#34;重复执行中，每隔一秒执行一次\u0026#34;) return nil } func deadlinexec(ctx context.Context) error { for i := 0; i \u0026lt; 10; i++ { fmt.Printf(\u0026#34;等待deadline。。。,%d 秒\\n\u0026#34;, i) time.Sleep(time.Second) } return nil }   image title   总结  这个库包装了所有常见的需要goroutine操作的情景，可以支持并发，串行，重复执行，重试，定时执行，启动新协程等一系列常用的Go并发场景，以后多包装使用这个库，能剩下不少的事情   \u0026ndash;\n"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/sql/",
+	"title": "SQL",
+	"tags": [],
+	"description": "SQL",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/docker/",
+	"title": "Docker",
+	"tags": [],
+	"description": "Docker",
+	"content": " \r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/essay/",
@@ -112,11 +133,74 @@
 	"content": " \rDescription\r\rHugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。 Hugo采用 Go 编程语言开发，Hugo 的设计目标是让创建网站重新变得有趣。\r\r\r\rShow More \rHugo 是一个通用的网站框架。从技术上讲，Hugo 是一个静态站点生成器。与动态构建页面的系统不同，Hugo 在创建或更新内容时构建页面。由于网站的浏览频率远高于编辑频率，因此 Hugo 旨在为您的网站最终用户提供最佳的浏览体验，并为网站作者提供理想的写作体验。\r使用 Hugo 构建的网站非常快速和安全。Hugo 构建的网站可以托管在任何地方，包括 Netlify、Heroku、GoDaddy、DreamHost、GitHub Pages、GitLab Pages、Surge、Aerobatic、Firebase、Google Cloud Storage、Amazon S3、Rackspace、Azure, 和 CloudFront，并且与 CDN 更配。Hugo 网站在运行时不需要数据库或依赖于诸如 Ruby、Python 或 PHP 等昂贵的运行时环境。\r我们认为 Hugo 是一个理想的网站创建工具，具有几乎即时的构建时间，能够在网站修改时即刻重建。\r\r\n1. Hugo 部署   二进制安装（推荐：简单、快速） 到 Hugo Releases 下载对应的操作系统版本的Hugo二进制文件（hugo或者hugo.exe）\n  编译部署 熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。\ngo get -u -v github.com/spf13/hugo\n  开始建立hugo project hugo new site mydocs 建立好之后的目录结构为\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml   刚创建好的hugo project还需设定主题模板之类的 到主题网站上面下载一个中意的模板，创建目录 themes，在 themes 目录里把皮肤 git clone 下来 Copy\r\r\r# 创建 themes 目录 $ cd themes $ git clone https://github.com/spf13/hyde.git \r\r\r  开始运行\nhugo server\r然后打开浏览器，输入http://localhost:1313就可以实时预览了\n  2. Ace document 配置方法 hugo new site docs cd docs cd themes git clone https://github.com/vantagedesign/ace-documentation 然后将themes\\ace-documentation\\exampleSite下面的三个文件夹拷贝到docs目录下面，覆盖掉原来的文件。 如果想自己开始创建文章的话，可以将content下面的文章清空，然后重新开始编写文章\n#接下来就可以生成静态站点了,在docs目录下输入 hugo #然后将生成的public文件夹发布到静态文章服务器就行了。 #文章后面会提供一个静态文章服务器的Go语言脚本，可以自己在虚拟机或者云服务器上先试下 3. 使用Github pages进行发布 在自己的GitHub仓库中新建一个仓库，Github提供了免费的静态页面托管服务，创建仓库的时候可以用github用户名.github.io创建，然后直接访问这个地址就可以访问自己的主页了。我们接下来就需要在public目录下面git clone这个仓库，然后把我们更新的内容推送上去，直接打开页面预览就可以了。\n$ cd public $ git init $ git remote add origin https://github.com/github用户名/GitHub用户名.github.io $ git add -A $ git commit -m \u0026#34;first commit\u0026#34; $ git push -u origin master 4.静态网站服务器 package main import ( \u0026#34;fmt\u0026#34; \u0026#34;net/http\u0026#34; \u0026#34;path/filepath\u0026#34; ) func main() { p, _ := filepath.Abs(filepath.Dir(\u0026#34;.\u0026#34;)) http.Handle(\u0026#34;/\u0026#34;, http.FileServer(http.Dir(p))) err := http.ListenAndServe(\u0026#34;:8088\u0026#34;, nil) if err != nil { fmt.Println(err) } }  这是个非常简易的脚本，不过用来显示我们之前做的静态网页是足够了。将public下面的所有文件拷入编译后的可执行文件目录下，执行这个可执行文件后，就可以去浏览效果了 下面会抽时间再补充一个自动同步文件的程序\n "
 },
 {
+	"uri": "https://liuzeng01.github.io/programing/java/",
+	"title": "Java",
+	"tags": [],
+	"description": "Java",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/kernel/",
+	"title": "Kernel",
+	"tags": [],
+	"description": "Kernel",
+	"content": " \r Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/booknote/",
 	"title": "BookNote",
 	"tags": [],
 	"description": "Note",
 	"content": " SRE \r\r\r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/c/",
+	"title": "C/C++",
+	"tags": [],
+	"description": "C/C++",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/python/",
+	"title": "python",
+	"tags": [],
+	"description": "python",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/javascript/",
+	"title": "JavaScript",
+	"tags": [],
+	"description": "JavaScript",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/openstack/",
+	"title": "OpenStack",
+	"tags": [],
+	"description": "OpenStack",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/",
+	"title": "Programming",
+	"tags": [],
+	"description": "Programming",
+	"content": " Go \r\rSQL \r\rJava \r\rC/C\u0026#43;\u0026#43; \r\rpython \r\rJavaScript \r\rFlutter \r\r\r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/flutter/",
+	"title": "Flutter",
+	"tags": [],
+	"description": "Flutter",
+	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/kubernetes/",
+	"title": "Kubernetes",
+	"tags": [],
+	"description": "Kubernetes",
+	"content": " \r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/zsmart/",
@@ -137,7 +221,7 @@
 	"title": "My Document",
 	"tags": [],
 	"description": "",
-	"content": " Programming \r\rLinux \r\rEssay \r\rBookNote \r\rZSmart \r\r\r"
+	"content": " Linux \r\rEssay \r\rBookNote \r\rProgramming \r\rZSmart \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/tags/",
