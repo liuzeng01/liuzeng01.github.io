@@ -23,5 +23,18 @@
  link 使用方法 import &amp;#34;github.com/x-mod/routine&amp;#34; //timeout timeout := routine.Timeout(time.Minute, exec) //retry retry := routine.Retry(3, exec) //repeat repeat := routine.Repeat(10, time.Second, exec) //concurrent concurrent := routine.Concurrent(4, exec) //schedule executor crontab := routine.Crontab(&amp;#34;* * * * *&amp;#34;, exec) //command command := routine.Command(&amp;#34;echo&amp;#34;, routine.ARG(&amp;#34;hello routine!</description>
     </item>
     
+    <item>
+      <title>hugo</title>
+      <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</guid>
+      <description>DescriptionHugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。 Hugo采用 Go 编程语言开发，Hugo 的设计目标是让创建网站重新变得有趣。Show More Hugo 是一个通用的网站框架。从技术上讲，Hugo 是一个静态站点生成器。与动态构建页面的系统不同，Hugo 在创建或更新内容时构建页面。由于网站的浏览频率远高于编辑频率，因此 Hugo 旨在为您的网站最终用户提供最佳的浏览体验，并为网站作者提供理想的写作体验。使用 Hugo 构建的网站非常快速和安全。Hugo 构建的网站可以托管在任何地方，包括 Netlify、Heroku、GoDaddy、DreamHost、GitHub Pages、GitLab Pages、Surge、Aerobatic、Firebase、Google Cloud Storage、Amazon S3、Rackspace、Azure, 和 CloudFront，并且与 CDN 更配。Hugo 网站在运行时不需要数据库或依赖于诸如 Ruby、Python 或 PHP 等昂贵的运行时环境。我们认为 Hugo 是一个理想的网站创建工具，具有几乎即时的构建时间，能够在网站修改时即刻重建。
+1. Hugo 部署   二进制安装（推荐：简单、快速） 到 Hugo Releases 下载对应的操作系统版本的Hugo二进制文件（hugo或者hugo.exe）
+  编译部署 熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。
+go get -u -v github.com/spf13/hugo
+  开始建立hugo project hugo new site mydocs 建立好之后的目录结构为</description>
+    </item>
+    
   </channel>
 </rss>

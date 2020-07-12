@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/">
+
+    <title>
+        
+        hugo | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programings</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-hugo-部署">1. Hugo 部署</a></li>
+    <li><a href="#2-ace-document-配置方法">2. Ace document 配置方法</a></li>
+    <li><a href="#3---使用github-pages进行发布">3.   使用Github pages进行发布</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>hugo</h1>
+
+<hr>
+<p>
+
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-primary rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-primary">
+            <h3>Description</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            Hugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。
+Hugo采用 Go 编程语言开发，Hugo 的设计目标是让创建网站重新变得有趣。
+        </div>
+    </div>
+</div>
+
+
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse_3684897acb" aria-expanded="false">
+    Show More 
+</button>
+
+<div class="collapse" id="collapse_3684897acb">
+  <div class="card card-body">
+    Hugo 是一个通用的网站框架。从技术上讲，Hugo 是一个静态站点生成器。与动态构建页面的系统不同，Hugo 在创建或更新内容时构建页面。由于网站的浏览频率远高于编辑频率，因此 Hugo 旨在为您的网站最终用户提供最佳的浏览体验，并为网站作者提供理想的写作体验。
+
+使用 Hugo 构建的网站非常快速和安全。Hugo 构建的网站可以托管在任何地方，包括 Netlify、Heroku、GoDaddy、DreamHost、GitHub Pages、GitLab Pages、Surge、Aerobatic、Firebase、Google Cloud Storage、Amazon S3、Rackspace、Azure, 和 CloudFront，并且与 CDN 更配。Hugo 网站在运行时不需要数据库或依赖于诸如 Ruby、Python 或 PHP 等昂贵的运行时环境。
+
+我们认为 Hugo 是一个理想的网站创建工具，具有几乎即时的构建时间，能够在网站修改时即刻重建。
+  </div>
+</div></p>
+<h2 id="1-hugo-部署">1. Hugo 部署</h2>
+<ol>
+<li>
+<p>二进制安装（推荐：简单、快速）
+到 <a href="https://github.com/spf13/hugo/releases">Hugo Releases</a> 下载对应的操作系统版本的Hugo二进制文件（hugo或者hugo.exe）</p>
+</li>
+<li>
+<p>编译部署
+熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。</p>
+<p><code>go get -u -v github.com/spf13/hugo</code></p>
+</li>
+<li>
+<p>开始建立hugo project
+<code>hugo new site mydocs</code>
+建立好之后的目录结构为</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">▸ archetypes/
+▸ content/
+▸ layouts/
+▸ static/
+ config.toml
+</code></pre></div></li>
+<li>
+<p>刚创建好的hugo project还需设定主题模板之类的
+到<a href="https://www.gohugo.org/theme/">主题网站</a>上面下载一个中意的模板，创建目录 themes，在 themes 目录里把皮肤 git clone 下来
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3612cbe7aa">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3612cbe7aa">
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  
+    <span style="color:#75715e"># 创建 themes 目录</span>
+    $ <span style="color:#111">cd</span> themes
+    $ git clone https://github.com/spf13/hyde.git
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+</p>
+</li>
+<li>
+<p>开始运行</p>
+<pre><code>hugo server
+</code></pre><p>然后打开浏览器，输入<code>http://localhost:1313</code>就可以实时预览了</p>
+</li>
+</ol>
+<h2 id="2-ace-document-配置方法">2. Ace document 配置方法</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hugo new site docs
+<span style="color:#111">cd</span> docs
+<span style="color:#111">cd</span> themes
+git clone https://github.com/vantagedesign/ace-documentation
+</code></pre></div><p><strong>然后将<code>themes\ace-documentation\exampleSite</code>下面的三个文件夹拷贝到docs目录下面，覆盖掉原来的文件。
+如果想自己开始创建文章的话，可以将content下面的文章清空，然后重新开始编写文章</strong></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#接下来就可以生成静态站点了,在docs目录下输入</span>
+hugo
+<span style="color:#75715e">#然后将生成的public文件夹发布到静态文章服务器就行了。</span>
+<span style="color:#75715e">#文章后面会提供一个静态文章服务器的Go语言脚本，可以自己在虚拟机或者云服务器上先试下</span>
+</code></pre></div><h2 id="3---使用github-pages进行发布">3.   使用Github pages进行发布</h2>
+<p>在自己的GitHub仓库中新建一个仓库，Github提供了免费的静态页面托管服务，创建仓库的时候可以用<code>github用户名.github.io</code>创建，然后直接访问这个地址就可以访问自己的主页了。我们接下来就需要在public目录下面git clone这个仓库，然后把我们更新的内容推送上去，直接打开页面预览就可以了。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#111">cd</span> public
+$ git init
+$ git remote add origin https://github.com/github用户名/GitHub用户名.github.io
+$ git add -A
+$ git commit -m <span style="color:#d88200">&#34;first commit&#34;</span>
+$ git push -u origin master
+</code></pre></div>
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/github.com/x-mod/routine/" title="routine"><i class="fas fa-chevron-left p-1"></i>routine</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/github.com/x-mod/routine/" title="routine">routine<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>
