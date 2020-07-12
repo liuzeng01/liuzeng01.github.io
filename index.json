@@ -3,8 +3,15 @@
 	"uri": "https://liuzeng01.github.io/programing/go/",
 	"title": "Go",
 	"tags": [],
-	"description": "Go Note",
-	"content": "\rGo语言第三方库 \r\r\r"
+	"description": "Golang",
+	"content": " Go Daily Note \r\rGo语言第三方库 \r\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/daily/",
+	"title": "Go Daily Note",
+	"tags": [],
+	"description": "Daily Note",
+	"content": " Json \r\rSSH \r\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/github.com/",
@@ -14,11 +21,32 @@
 	"content": " routine \r\rhugo \r\r\r "
 },
 {
+	"uri": "https://liuzeng01.github.io/programing/go/daily/json/",
+	"title": "Json ",
+	"tags": [],
+	"description": "Daily Note",
+	"content": " Json   func Marshal(v interface{}) ([]byte, error) // json编码\n  func MarshalIndent(v interface{}, prefix, indent string) ([]byte, error) // json编码带缩进\n  func Unmarshal(data []byte, v interface{}) error // json解码\n  package main import ( \u0026#34;fmt\u0026#34; // \u0026#34;reflect\u0026#34;  \u0026#34;encoding/json\u0026#34; ) type User struct{ // Name string `json:\u0026#34;-,\u0026#34;` // 这个导出才是 {\u0026#34;-\u0026#34;:\u0026#34;张三\u0026#34;,\u0026#34;age\u0026#34;:20}  // Name string `json:\u0026#34;-\u0026#34;` // always omitted  // Name string `json:\u0026#34;,omitempty\u0026#34;` // 如果为零值导出为空. 然而不想重命名.  Name string `json:\u0026#34;name,omitempty\u0026#34;` // 如果为零值导出为空.  // Age int `json:\u0026#34;age,string\u0026#34;` // 这个会把int变成json string...  // 上面那个很有用. 在 A map =\u0026gt; string =\u0026gt; B map 的时候可能会被弄成科学计数法..  // 用字符串表示时间戳这种可以避免这个...  Age int `json:\u0026#34;age\u0026#34;` sex int `json:\u0026#34;sex\u0026#34;` } func main() { u := User{\u0026#34;张三\u0026#34;, 20, 1} uu, _ := json.Marshal(u) // 只会导出公有的, 即首字母大写的  fmt.Println(string(uu)) } "
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/",
+	"title": "Programming",
+	"tags": [],
+	"description": "Programming",
+	"content": " Go \r\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/daily/ssh/",
+	"title": "SSH",
+	"tags": [],
+	"description": "Daily Note",
+	"content": " 利用Go语言提供的ssh包实现一个ssh工具 package main import ( \u0026#34;fmt\u0026#34; \u0026#34;log\u0026#34; \u0026#34;net\u0026#34; \u0026#34;os\u0026#34; \u0026#34;time\u0026#34; \u0026#34;golang.org/x/crypto/ssh\u0026#34; ) func main() { session, err := connect(\u0026#34;root\u0026#34;, \u0026#34;abc@123A\u0026#34;, \u0026#34;10.45.11.115\u0026#34;, 22) if err != nil { log.Fatal(err) } defer session.Close() fmt.Printf(\u0026#34;----\u0026gt;\u0026#34;) session.Stdout = os.Stdout session.Stderr = os.Stderr session.Stdin = os.Stdin session.Run(\u0026#34;sh\u0026#34;) } func connect(user, password, host string, port int) (*ssh.Session, error) { var ( addr string clientConfig *ssh.ClientConfig client *ssh.Client session *ssh.Session err error ) clientConfig = \u0026amp;ssh.ClientConfig{ User: user, Auth: []ssh.AuthMethod{ ssh.Password(password), }, Timeout: 30 * time.Second, HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error { return nil }, } // connet to ssh \taddr = fmt.Sprintf(\u0026#34;%s:%d\u0026#34;, host, port) if client, err = ssh.Dial(\u0026#34;tcp\u0026#34;, addr, clientConfig); err != nil { return nil, err } // create session \tif session, err = client.NewSession(); err != nil { return nil, err } return session, nil }  需要补充的：包装下os.Stdin接口，加入点显示什么的 ssh用来执行远程批量任务比较好。这个先写下来，回头实现下。 解决下windows下os.Stdin结束的行尾存在\u0026rsquo;\\r\\n\u0026rsquo;问题\n "
+},
+{
 	"uri": "https://liuzeng01.github.io/linux/",
 	"title": "Linux",
 	"tags": [],
 	"description": "Linux Daily",
-	"content": ""
+	"content": "\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/github.com/x-mod/routine/",
@@ -32,7 +60,14 @@
 	"title": "hugo",
 	"tags": [],
 	"description": "github.com/gohugoio/hugo",
-	"content": " \rDescription\r\rHugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。 Hugo采用 Go 编程语言开发，Hugo 的设计目标是让创建网站重新变得有趣。\r\r\r\rShow More \rHugo 是一个通用的网站框架。从技术上讲，Hugo 是一个静态站点生成器。与动态构建页面的系统不同，Hugo 在创建或更新内容时构建页面。由于网站的浏览频率远高于编辑频率，因此 Hugo 旨在为您的网站最终用户提供最佳的浏览体验，并为网站作者提供理想的写作体验。\r使用 Hugo 构建的网站非常快速和安全。Hugo 构建的网站可以托管在任何地方，包括 Netlify、Heroku、GoDaddy、DreamHost、GitHub Pages、GitLab Pages、Surge、Aerobatic、Firebase、Google Cloud Storage、Amazon S3、Rackspace、Azure, 和 CloudFront，并且与 CDN 更配。Hugo 网站在运行时不需要数据库或依赖于诸如 Ruby、Python 或 PHP 等昂贵的运行时环境。\r我们认为 Hugo 是一个理想的网站创建工具，具有几乎即时的构建时间，能够在网站修改时即刻重建。\r\r\n1. Hugo 部署   二进制安装（推荐：简单、快速） 到 Hugo Releases 下载对应的操作系统版本的Hugo二进制文件（hugo或者hugo.exe）\n  编译部署 熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。\ngo get -u -v github.com/spf13/hugo\n  开始建立hugo project hugo new site mydocs 建立好之后的目录结构为\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml   刚创建好的hugo project还需设定主题模板之类的 到主题网站上面下载一个中意的模板，创建目录 themes，在 themes 目录里把皮肤 git clone 下来 Copy\r\r\r# 创建 themes 目录 $ cd themes $ git clone https://github.com/spf13/hyde.git \r\r\r  开始运行\nhugo server\r然后打开浏览器，输入http://localhost:1313就可以实时预览了\n  2. Ace document 配置方法 hugo new site docs cd docs cd themes git clone https://github.com/vantagedesign/ace-documentation 然后将themes\\ace-documentation\\exampleSite下面的三个文件夹拷贝到docs目录下面，覆盖掉原来的文件。 如果想自己开始创建文章的话，可以将content下面的文章清空，然后重新开始编写文章\n#接下来就可以生成静态站点了,在docs目录下输入 hugo #然后将生成的public文件夹发布到静态文章服务器就行了。 #文章后面会提供一个静态文章服务器的Go语言脚本，可以自己在虚拟机或者云服务器上先试下 3. 使用Github pages进行发布 在自己的GitHub仓库中新建一个仓库，Github提供了免费的静态页面托管服务，创建仓库的时候可以用github用户名.github.io创建，然后直接访问这个地址就可以访问自己的主页了。我们接下来就需要在public目录下面git clone这个仓库，然后把我们更新的内容推送上去，直接打开页面预览就可以了。\n$ cd public $ git init $ git remote add origin https://github.com/github用户名/GitHub用户名.github.io $ git add -A $ git commit -m \u0026#34;first commit\u0026#34; $ git push -u origin master "
+	"content": " \rDescription\r\rHugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。 Hugo采用 Go 编程语言开发，Hugo 的设计目标是让创建网站重新变得有趣。\r\r\r\rShow More \rHugo 是一个通用的网站框架。从技术上讲，Hugo 是一个静态站点生成器。与动态构建页面的系统不同，Hugo 在创建或更新内容时构建页面。由于网站的浏览频率远高于编辑频率，因此 Hugo 旨在为您的网站最终用户提供最佳的浏览体验，并为网站作者提供理想的写作体验。\r使用 Hugo 构建的网站非常快速和安全。Hugo 构建的网站可以托管在任何地方，包括 Netlify、Heroku、GoDaddy、DreamHost、GitHub Pages、GitLab Pages、Surge、Aerobatic、Firebase、Google Cloud Storage、Amazon S3、Rackspace、Azure, 和 CloudFront，并且与 CDN 更配。Hugo 网站在运行时不需要数据库或依赖于诸如 Ruby、Python 或 PHP 等昂贵的运行时环境。\r我们认为 Hugo 是一个理想的网站创建工具，具有几乎即时的构建时间，能够在网站修改时即刻重建。\r\r\n1. Hugo 部署   二进制安装（推荐：简单、快速） 到 Hugo Releases 下载对应的操作系统版本的Hugo二进制文件（hugo或者hugo.exe）\n  编译部署 熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。\ngo get -u -v github.com/spf13/hugo\n  开始建立hugo project hugo new site mydocs 建立好之后的目录结构为\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml   刚创建好的hugo project还需设定主题模板之类的 到主题网站上面下载一个中意的模板，创建目录 themes，在 themes 目录里把皮肤 git clone 下来 Copy\r\r\r# 创建 themes 目录 $ cd themes $ git clone https://github.com/spf13/hyde.git \r\r\r  开始运行\nhugo server\r然后打开浏览器，输入http://localhost:1313就可以实时预览了\n  2. Ace document 配置方法 hugo new site docs cd docs cd themes git clone https://github.com/vantagedesign/ace-documentation 然后将themes\\ace-documentation\\exampleSite下面的三个文件夹拷贝到docs目录下面，覆盖掉原来的文件。 如果想自己开始创建文章的话，可以将content下面的文章清空，然后重新开始编写文章\n#接下来就可以生成静态站点了,在docs目录下输入 hugo #然后将生成的public文件夹发布到静态文章服务器就行了。 #文章后面会提供一个静态文章服务器的Go语言脚本，可以自己在虚拟机或者云服务器上先试下 3. 使用Github pages进行发布 在自己的GitHub仓库中新建一个仓库，Github提供了免费的静态页面托管服务，创建仓库的时候可以用github用户名.github.io创建，然后直接访问这个地址就可以访问自己的主页了。我们接下来就需要在public目录下面git clone这个仓库，然后把我们更新的内容推送上去，直接打开页面预览就可以了。\n$ cd public $ git init $ git remote add origin https://github.com/github用户名/GitHub用户名.github.io $ git add -A $ git commit -m \u0026#34;first commit\u0026#34; $ git push -u origin master 4.静态网站服务器 package main import ( \u0026#34;fmt\u0026#34; \u0026#34;net/http\u0026#34; \u0026#34;path/filepath\u0026#34; ) func main() { p, _ := filepath.Abs(filepath.Dir(\u0026#34;.\u0026#34;)) http.Handle(\u0026#34;/\u0026#34;, http.FileServer(http.Dir(p))) err := http.ListenAndServe(\u0026#34;:8088\u0026#34;, nil) if err != nil { fmt.Println(err) } }  这是个非常简易的脚本，不过用来显示我们之前做的静态网页是足够了。将public下面的所有文件拷入编译后的可执行文件目录下，执行这个可执行文件后，就可以去浏览效果了 下面会抽时间再补充一个自动同步文件的程序\n "
+},
+{
+	"uri": "https://liuzeng01.github.io/zsmart/",
+	"title": "ZSmart",
+	"tags": [],
+	"description": "",
+	"content": ""
 },
 {
 	"uri": "https://liuzeng01.github.io/categories/",
@@ -46,14 +81,7 @@
 	"title": "My Document",
 	"tags": [],
 	"description": "",
-	"content": "Start My Document "
-},
-{
-	"uri": "https://liuzeng01.github.io/programing/",
-	"title": "Programings",
-	"tags": [],
-	"description": "",
-	"content": ""
+	"content": " Programming \r\rLinux \r\rZSmart \r\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/tags/",

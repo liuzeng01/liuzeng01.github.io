@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/linux/">
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/daily/json/">
 
     <title>
         
-        Linux | iNote
+        Json  | iNote
         
     </title>
 
@@ -70,22 +70,22 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1">
+        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1 active">
                 
                  <a href="/programing/go/daily/json/" class="nav-link p-0">
                     Json 
@@ -122,7 +122,7 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/" class="nav-item my-1 parent active
+    <li data-nav-id="/linux/" class="nav-item my-1
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -139,26 +139,58 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#json">Json</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Linux</h1>
+<h1>Json </h1>
 
-
-
-
-<ul class="docs-children list-unstyled">
-
-	
+<hr>
+<h2 id="json">Json</h2>
+<ul>
+<li>
+<p><code>func Marshal(v interface{}) ([]byte, error) // json编码</code></p>
+</li>
+<li>
+<p><code>func MarshalIndent(v interface{}, prefix, indent string) ([]byte, error) // json编码带缩进</code></p>
+</li>
+<li>
+<p><code>func Unmarshal(data []byte, v interface{}) error // json解码</code></p>
+</li>
 </ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
 
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+    <span style="color:#d88200">&#34;fmt&#34;</span>
+    <span style="color:#75715e">// &#34;reflect&#34;
+</span><span style="color:#75715e"></span>    <span style="color:#d88200">&#34;encoding/json&#34;</span>
+<span style="color:#111">)</span>
 
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">User</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{</span>
+    <span style="color:#75715e">// Name string `json:&#34;-,&#34;`  // 这个导出才是  {&#34;-&#34;:&#34;张三&#34;,&#34;age&#34;:20}
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Name string `json:&#34;-&#34;`   // always omitted
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Name string `json:&#34;,omitempty&#34;`     // 如果为零值导出为空. 然而不想重命名.
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;name,omitempty&#34;`</span>  <span style="color:#75715e">// 如果为零值导出为空.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Age int `json:&#34;age,string&#34;`         // 这个会把int变成json string...
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 上面那个很有用.  在 A map =&gt; string =&gt; B map 的时候可能会被弄成科学计数法..
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 用字符串表示时间戳这种可以避免这个...
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Age</span> <span style="color:#00a8c8">int</span> <span style="color:#d88200">`json:&#34;age&#34;`</span>
+    <span style="color:#75af00">sex</span> <span style="color:#00a8c8">int</span> <span style="color:#d88200">`json:&#34;sex&#34;`</span>
+<span style="color:#111">}</span>
 
-
-
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">u</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">User</span><span style="color:#111">{</span><span style="color:#d88200">&#34;张三&#34;</span><span style="color:#111">,</span> <span style="color:#ae81ff">20</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">}</span>
+    <span style="color:#75af00">uu</span><span style="color:#111">,</span> <span style="color:#75af00">_</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Marshal</span><span style="color:#111">(</span><span style="color:#75af00">u</span><span style="color:#111">)</span>
+    <span style="color:#75715e">// 只会导出公有的, 即首字母大写的
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">uu</span><span style="color:#111">))</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 
     
 
@@ -169,8 +201,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/github.com/gohugoio/hugo/" title="hugo"><i class="fas fa-chevron-left p-1"></i>hugo</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/zsmart/" title="ZSmart">ZSmart<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/daily/" title="Go Daily Note"><i class="fas fa-chevron-left p-1"></i>Go Daily Note</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/daily/ssh/" title="SSH">SSH<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
