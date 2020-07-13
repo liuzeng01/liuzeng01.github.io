@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/github.com/xujiajun/nutsdb/">
+
+    <title>
+        
+        nutsdb | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading"></a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#1-安装">1. 安装</a></li>
+    <li><a href="#2-使用">2. 使用</a>
+      <ul>
+        <li><a href="#开启数据库">开启数据库</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-使用方法">2. 使用方法</a>
+      <ul>
+        <li><a href="#使用bucket">使用bucket</a></li>
+        <li><a href="#写入数据">写入数据</a></li>
+        <li><a href="#读取数据">读取数据</a></li>
+        <li><a href="#删除数据">删除数据</a></li>
+        <li><a href="#更新数据">更新数据</a></li>
+        <li><a href="#ttl时间设置">TTL时间设置</a></li>
+        <li><a href="#扫描key">扫描key</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-补充概念">3. 补充概念</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>nutsdb</h1>
+
+<hr>
+<h2 id="heading"></h2>
+
+
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-primary rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-primary">
+            <h3>Description</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            <p>NutsDB是纯Go语言编写一个简单、高性能、内嵌型、持久化的key-value数据库。</p>
+<p>NutsDB支持事务，从v0.2.0之后的版本开始支持ACID的特性，建议使用最新的release版本。v0.2.0之前的版本，保持高性能，没有作sync，但是具备高性能的写（本地测试，百万数据写入达40~50W+/s）。所有的操作都在事务中执行。NutsDB从v0.2.0版本开始支持多种数据结构，如列表(list)、集合(set)、有序集合(sorted set)。从0.4.0版本开始增加自定义配置读写方式、启动时候的文件载入方式、sync是否开启等</p>
+
+        </div>
+    </div>
+</div>
+
+<h4 id="githubcomxujiajunnutsdb">github.com/xujiajun/nutsdb</h4>
+<hr>
+<p><a href="https://github.com/xujiajun/nutsdb/blob/master/README-CN.md">官方文档</a></p>
+<h2 id="1-安装">1. 安装</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">go</span> <span style="color:#75af00">get</span> <span style="color:#f92672">-</span><span style="color:#75af00">u</span> <span style="color:#75af00">github</span><span style="color:#111">.</span><span style="color:#75af00">com</span><span style="color:#f92672">/</span><span style="color:#75af00">xujiajun</span><span style="color:#f92672">/</span><span style="color:#75af00">nutsdb</span>
+</code></pre></div><h2 id="2-使用">2. 使用</h2>
+<h3 id="开启数据库">开启数据库</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;log&#34;</span>
+
+	<span style="color:#d88200">&#34;github.com/xujiajun/nutsdb&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">opt</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">DefaultOptions</span>
+	<span style="color:#75af00">opt</span><span style="color:#111">.</span><span style="color:#75af00">Dir</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;/tmp/nutsdb&#34;</span> <span style="color:#75715e">//这边数据库会自动创建这个目录文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">db</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#75af00">opt</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+
+	<span style="color:#f92672">...</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>这里的默认配置是</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">var</span> <span style="color:#75af00">DefaultOptions</span> <span style="color:#111">=</span> <span style="color:#75af00">Options</span><span style="color:#111">{</span>
+	<span style="color:#75af00">EntryIdxMode</span><span style="color:#111">:</span>         <span style="color:#75af00">HintKeyValAndRAMIdxMode</span><span style="color:#111">,</span> <span style="color:#75715e">//EntryIdxMode 代表索引entry的模式. EntryIdxMode 包括选项: HintKeyValAndRAMIdxMode 、HintKeyAndRAMIdxMode和 HintBPTSparseIdxMode。其中HintKeyValAndRAMIdxMode 代表纯内存索引模式（key和value都会被cache）。 HintKeyAndRAMIdxMode 代表内存+磁盘的索引模式（只有key被cache）。 HintBPTSparseIdxMode（v0.4.0之后的版本支持） 是专门节约内存的设计方案，单机10亿条数据，只要80几M内存。但是读性能不高，需要自己加缓存来加速。
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">SegmentSize</span><span style="color:#111">:</span>          <span style="color:#75af00">defaultSegmentSize</span><span style="color:#111">,</span>
+	<span style="color:#75af00">NodeNum</span><span style="color:#111">:</span>              <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#75715e">//代表节点的号码.
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">RWMode</span><span style="color:#111">:</span>               <span style="color:#75af00">FileIO</span><span style="color:#111">,</span> <span style="color:#75715e">//RWMode 代表读写模式. RWMode 包括两种选项: FileIO and MMap. FileIO 用标准的 I/O读写。 MMap 代表使用mmap进行读写
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">SyncEnable</span><span style="color:#111">:</span>           <span style="color:#00a8c8">true</span><span style="color:#111">,</span><span style="color:#75715e">//SyncEnable 代表调用了 Sync() 方法. 如果 SyncEnable 为 false， 写性能会很高，但是如果遇到断电或者系统奔溃，会有数据丢失的风险。 如果 SyncEnable 为 true，写性能会相比false的情况慢很多，但是数据更有保障，每次事务提交成功都会落盘
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">StartFileLoadingMode</span><span style="color:#111">:</span> <span style="color:#75af00">MMap</span><span style="color:#111">,</span><span style="color:#75715e">//StartFileLoadingMode 代表启动数据库的载入文件的方式。参数选项同RWMode
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><h2 id="2-使用方法">2. 使用方法</h2>
+<h3 id="使用bucket">使用bucket</h3>
+<p><strong>buckets中文翻译过来是桶的意思，你可以理解成类似mysql的table表的概念，也可以理解成命名空间，或者多租户的概念。 
+所以你可以用他存不同的key的键值对，也可以存相同的key的键值对。所有的key在一个bucket里面不能重复。</strong></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#75af00">key</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;key001&#34;</span><span style="color:#111">)</span>
+<span style="color:#75af00">val</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;val001&#34;</span><span style="color:#111">)</span>
+
+<span style="color:#75af00">bucket001</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket001&#34;</span>
+<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Update</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Put</span><span style="color:#111">(</span><span style="color:#75af00">bucket001</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75af00">bucket002</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket002&#34;</span>
+<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Update</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Put</span><span style="color:#111">(</span><span style="color:#75af00">bucket002</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><h3 id="写入数据">写入数据</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Update</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">key</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">val</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;val1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket1&#34;</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Put</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><h3 id="读取数据">读取数据</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">View</span><span style="color:#111">(</span>
+<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">key</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket1&#34;</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">e</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+	<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">))</span> <span style="color:#75715e">// &#34;val1-modify&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="删除数据">删除数据</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Update</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">key</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket1&#34;</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Delete</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="更新数据">更新数据</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Update</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">key</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">val</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;val1-modify&#34;</span><span style="color:#111">)</span> <span style="color:#75715e">// 更新值
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket1&#34;</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Put</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">//仍然可以使用添加数据的方法
+</span></code></pre></div><h3 id="ttl时间设置">TTL时间设置</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">Update</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">key</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;name1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">val</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;val1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;bucket1&#34;</span>
+	
+	<span style="color:#75715e">// 如果设置 ttl = 0 or Persistent, 这个key就会永久不删除
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 这边 ttl = 60 , 60s之后就会过期。
+</span><span style="color:#75715e"></span>	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">Put</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span><span style="color:#111">,</span> <span style="color:#ae81ff">60</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="扫描key">扫描key</h3>
+<p>key在一个bucket里面按照<strong>byte-sorted</strong>有序排序的，所以对于keys的扫描操作，在NutsDB里是很高效的。</p>
+<h4 id="前缀扫描">前缀扫描</h4>
+<ul>
+<li>对于前缀的扫描，我们可以用PrefixScan 方法, 使用参数 offSet和limitNum 来限制返回的结果的数量，比方下面例子限制100个entries:</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">View</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">prefix</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;user_&#34;</span><span style="color:#111">)</span>
+		<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;user_list&#34;</span>
+		<span style="color:#75715e">// 从offset=0开始 ，限制 100 entries 返回 
+</span><span style="color:#75715e"></span>		<span style="color:#00a8c8">if</span> <span style="color:#75af00">entries</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">PrefixScan</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">prefix</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">entry</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">entries</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Key</span><span style="color:#111">),</span> <span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">))</span>
+			<span style="color:#111">}</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h4 id="前缀后的正则扫描">前缀后的正则扫描</h4>
+<p>对于前缀后的扫描，可以通过正则表达式对键的第二部分进行搜索来遍历一个键前缀，我们可以使用<strong>PrefixSearchScan</strong>方法，用参数reg来编写正则表达式，使用参数offsetNum、limitNum 来约束返回的条目的数量:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">View</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">prefix</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;user_&#34;</span><span style="color:#111">)</span> <span style="color:#75715e">// 定义前缀
+</span><span style="color:#75715e"></span>		<span style="color:#75af00">reg</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;99&#34;</span>  <span style="color:#75715e">// 定义正则表达式
+</span><span style="color:#75715e"></span>		<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;user_list&#34;</span>
+		<span style="color:#75715e">// 从offset=25开始，限制 100 entries 返回 
+</span><span style="color:#75715e"></span>		<span style="color:#00a8c8">if</span> <span style="color:#75af00">entries</span><span style="color:#111">,</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">PrefixSearchScan</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">prefix</span><span style="color:#111">,</span> <span style="color:#75af00">reg</span><span style="color:#111">,</span> <span style="color:#ae81ff">25</span><span style="color:#111">,</span> <span style="color:#ae81ff">100</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">entry</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">entries</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Key</span><span style="color:#111">),</span> <span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">))</span>
+			<span style="color:#111">}</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h4 id="范围扫描">范围扫描</h4>
+<p>对于范围的扫描，我们可以用<strong>RangeScan</strong>方法。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">View</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+		<span style="color:#75715e">// 假设用户key从 user_0000000 to user_9999999.
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// 执行区间扫描类似这样一个start和end作为主要参数.
+</span><span style="color:#75715e"></span>		<span style="color:#75af00">start</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;user_0010001&#34;</span><span style="color:#111">)</span>
+		<span style="color:#75af00">end</span> <span style="color:#f92672">:=</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#d88200">&#34;user_0010010&#34;</span><span style="color:#111">)</span>
+		<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;user_list&#34;</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">entries</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">RangeScan</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">,</span> <span style="color:#75af00">start</span><span style="color:#111">,</span> <span style="color:#75af00">end</span><span style="color:#111">);</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">entry</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">entries</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Key</span><span style="color:#111">),</span> <span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">))</span>
+			<span style="color:#111">}</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Fatal</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h4 id="读取全部数据">读取全部数据</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">db</span><span style="color:#111">.</span><span style="color:#75af00">View</span><span style="color:#111">(</span>
+	<span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">tx</span> <span style="color:#f92672">*</span><span style="color:#75af00">nutsdb</span><span style="color:#111">.</span><span style="color:#75af00">Tx</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;user_list&#34;</span>
+		<span style="color:#75af00">entries</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tx</span><span style="color:#111">.</span><span style="color:#75af00">GetAll</span><span style="color:#111">(</span><span style="color:#75af00">bucket</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+		<span style="color:#111">}</span>
+
+		<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">entry</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">entries</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Key</span><span style="color:#111">),</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">entry</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">))</span>
+		<span style="color:#111">}</span>
+
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">});</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+</code></pre></div><h2 id="3-补充概念">3. 补充概念</h2>
+<p>从v0.3.0版本起，NutsDB支持（A）原子性、C（一致性）、I（隔离性），并保证（D）持久化。以下参考wiki百科的对ACID定义分别讲一下。</p>
+<p>1、（A）原子性</p>
+<pre><code>所谓原子性，一个事务（transaction）中的所有操作，或者全部完成，或者全部不完成，不会结束在中间某个环节。实现事务的原子性，要支持回滚操作，在某个操作失败后，回滚到事务执行之前的状态。一般的做法是类似数据快照的方案。关于这一点，NutsDB支持回滚操作。NutsDB的作法是先实际预演一边所有要执行的操作，这个时候数据其实还是uncommitted状态，一直到所有环节都没有问题，才会作commit操作，如果中间任何环节一旦发生错误，直接作rollback回滚操作，保证原子性。 就算发生错误的时候已经有数据进磁盘，下次启动也不会被索引到这些数据。
+</code></pre>
+<p>2、（C）一致性</p>
+<pre><code>在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的数据必须完全符合预期的。NutsDB基于读写锁实现锁机制，在高并发场景下，一个读写事务具有排他性的，比如一个goroutine需要执行一个读写事务，其他不管想要读写的事务或者只读的只能等待，直到这个锁释放为止。保证了数据的一致性。所以这一点NutsDB满足一致性。
+</code></pre>
+<p>3、（I）隔离性</p>
+<pre><code>数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。如上面的一致性所说，NutsDB基于读写锁实现锁机制。不会出现数据串的情况。所以也是满足隔离性的。
+
+关于事务的隔离级别，我们也来对照wiki百科，来看下NutsDB属于哪一个级别：
+
+隔离级别低到高：
+    1）未提交读（READ UNCOMMITTED）
+    这个是最低的隔离级别。允许“脏读”（dirty reads），事务可以看到其他事务“尚未提交”的修改。很明显nutsDB是避免脏读的。
+
+    2）在提交读（READ COMMITTED）
+    定义：这个隔离级别中，基于锁机制并发控制的DBMS需要对选定对象的写锁一直保持到事务结束，但是读锁在SELECT操作完成后马上释放（因此“不可重复读”现象可能会发生）。 看下“不可重复读”的定义：在一次事务中，当一行数据获取两遍得到不同的结果表示发生了“不可重复读”。
+
+    nutsDB不会出现“不可重复读”这种情况，当高并发的时候，正在进行读写操作，一个goroutine刚好先拿到只读锁，这个时候要完成一个读写事务操作的那个goroutine要阻塞等到只读锁释放为止。也就避免上面的问题。
+
+    3）在可重复读（REPEATABLE READS）
+    定义：这个隔离级别中，基于锁机制并发控制的DBMS需要对选定对象的读锁（read locks）和写锁（write locks）一直保持到事务结束，但不要求“范围锁”，因此可能会发生“幻影读”。
+
+    关于幻影读定义，指在事务执行过程中，当两个完全相同的查询语句执行得到不同的结果集。这种现象称为“幻影读（phantom read）”，有些人也叫他幻读，正如上面所说，在nutsDB中，当进行只读操作的时候，同一时间只能并发只读操作，其他有关“写”的事务是被阻塞的，直到这些只读锁释放为止，因此不会出现“幻影读”的情况。
+
+    4）可串行化 （Serializable）
+    定义：这个隔离级别是最高的。避免了所有上面的“脏读”、不可重复读”、“幻影读”现象。
+
+在nutsDB中，一个只读事务和一个写（读写）事务，是互斥的，需要串行执行，不会出现并发执行。nutsDB属于这个可串行化级别。 这个级别的隔离一般来说在高并发场景下性能会受到影响。但是如果锁本身性能还可以，也不失为一个简单有效的方法。当前版本nutsDB基于读写锁，在并发读多写少的场景下，性能会好一点。
+
+4、（D）持久化
+
+    事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。
+</code></pre>
+<hr>
+
+
+
+<a href="../../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/github.com/gohugoio/hugo/" title="hugo"><i class="fas fa-chevron-left p-1"></i>hugo</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/sql/" title="SQL">SQL<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

@@ -98,5 +98,18 @@ go get -u -v github.com/spf13/hugo
   开始建立hugo project hugo new site mydocs 建立好之后的目录结构为</description>
     </item>
     
+    <item>
+      <title>nutsdb</title>
+      <link>https://liuzeng01.github.io/programing/go/github.com/xujiajun/nutsdb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/github.com/xujiajun/nutsdb/</guid>
+      <description>DescriptionNutsDB是纯Go语言编写一个简单、高性能、内嵌型、持久化的key-value数据库。
+NutsDB支持事务，从v0.2.0之后的版本开始支持ACID的特性，建议使用最新的release版本。v0.2.0之前的版本，保持高性能，没有作sync，但是具备高性能的写（本地测试，百万数据写入达40~50W+/s）。所有的操作都在事务中执行。NutsDB从v0.2.0版本开始支持多种数据结构，如列表(list)、集合(set)、有序集合(sorted set)。从0.4.0版本开始增加自定义配置读写方式、启动时候的文件载入方式、sync是否开启等
+github.com/xujiajun/nutsdb  官方文档
+1. 安装 go get -u github.com/xujiajun/nutsdb 2. 使用 开启数据库 package main import ( &amp;#34;log&amp;#34; &amp;#34;github.com/xujiajun/nutsdb&amp;#34; ) func main() { opt := nutsdb.DefaultOptions opt.Dir = &amp;#34;/tmp/nutsdb&amp;#34; //这边数据库会自动创建这个目录文件 	db, err := nutsdb.Open(opt) if err != nil { log.Fatal(err) } defer db.Close() ... } 这里的默认配置是
+var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxMode 代表索引entry的模式. EntryIdxMode 包括选项: HintKeyValAndRAMIdxMode 、HintKeyAndRAMIdxMode和 HintBPTSparseIdxMode。其中HintKeyValAndRAMIdxMode 代表纯内存索引模式（key和value都会被cache）。 HintKeyAndRAMIdxMode 代表内存+磁盘的索引模式（只有key被cache）。 HintBPTSparseIdxMode（v0.</description>
+    </item>
+    
   </channel>
 </rss>
