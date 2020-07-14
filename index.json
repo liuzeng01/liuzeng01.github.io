@@ -18,7 +18,7 @@
 	"title": "Go语言第三方库",
 	"tags": [],
 	"description": "GitHub上的Go开源库",
-	"content": " routine \r\rcobra \r\rhugo \r\rnutsdb \r\r\r "
+	"content": " routine \r\rcobra \r\rhugo \r\rnutsdb \r\rtview \r\r\r "
 },
 {
 	"uri": "https://liuzeng01.github.io/essay/july/hugo/",
@@ -243,6 +243,13 @@
 	"tags": [],
 	"description": "go modules 使用方法",
 	"content": " mod\r\rgo mod能管理的依赖包的版本，能保证在不同地方构建，获得的依赖模块是一致的。\r\r\r\r1. 常用代理地址 https://mirrors.aliyun.com/goproxy/ //阿里云镜像 https://goproxy.io https://goproxy.cn //七牛云镜像 https://athens.azurefd.net //微软镜像 2. 常用命令 * go mod init # 初始化当前目录为模块根目录，生成go.mod, go.sum文件 * go mod download # 下载依赖包 * go mod tidy # 整理检查依赖，如果缺失包会下载或者引用的不需要的包会删除 * go mod vendor # 复制依赖到vendor目录下面 * go mod # 可看完整所有的命令 ## 如果发现编译不过，可以通过下面命令列出指定mod的版本，然后go get拉指定版本号的包 go list -m -versions rsc.io/sampler go get rsc.io/sampler@v1.3.1 补充   用 go get 拉取新的依赖\r拉取最新的版本(优先择取 tag)：go get golang.org/x/text@latest\r拉取 master 分支的最新 commit：go get golang.org/x/text@master\r拉取 tag 为 v0.3.2 的 commit：go get golang.org/x/text@v0.3.2\r拉取 hash 为 342b231 的 commit，最终会被转换为 v0.3.2：go get golang.org/x/text@342b2e\r用 go get -u 更新现有的依赖\r用 go mod tidy 整理现有的依赖\r用 go mod graph 查看现有的依赖结构\r用 go get -u 更新现有的依赖\r用 go mod download 下载 go.mod 文件中指明的所有依赖\r用 go mod tidy 整理现有的依赖\r用 go mod edit 编辑 go.mod 文件\r用 go mod vendor 导出现有的所有依赖 (事实上 Go modules 正在淡化 Vendor 的概念)\r用 go mod verify 校验一个模块是否被篡改过\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/github.com/rivo/tview/",
+	"title": "tview",
+	"tags": [],
+	"description": "github.com/rivo/tview",
+	"content": " github.com/rivo/tview 1. 常用的控件    TextView: A scrollable window that display multi-colored text. Text may also be highlighted. Table: A scrollable display of tabular data. Table cells, rows, or columns may also be highlighted. TreeView: A scrollable display for hierarchical data. Tree nodes can be highlighted, collapsed, expanded, and more. List: A navigable text list with optional keyboard shortcuts. InputField: One-line input fields to enter text. DropDown: Drop-down selection fields. Checkbox: Selectable checkbox for boolean values. Button: Buttons which get activated when the user selects them. Form: Forms composed of input fields, drop down selections, checkboxes, and buttons. Modal: A centered window with a text message and one or more buttons. Grid: A grid based layout manager. Flex: A Flexbox based layout manager. Pages: A page based layout manager.  "
 },
 {
 	"uri": "https://liuzeng01.github.io/zsmart/",
