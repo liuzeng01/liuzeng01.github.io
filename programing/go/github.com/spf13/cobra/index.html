@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/">
+
+    <title>
+        
+        cobra | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Golang 数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#可提供的功能点">可提供的功能点</a></li>
+        <li><a href="#安装方法">安装方法</a></li>
+        <li><a href="#使用方法">使用方法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>cobra</h1>
+
+
+
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-primary rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-primary">
+            <h3>cobra</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            Cobra 是一个用来创建命令行的 golang 库，同时也是一个用于生成应用和命令行文件的程序, 包括docker，k8s 都用的类似方式去实现，用于实现CLI非常好用
+        </div>
+    </div>
+</div>
+
+<h3 id="可提供的功能点">可提供的功能点</h3>
+<ul>
+<li>简易的子命令行模式，如 app server， app fetch等等</li>
+<li>完全兼容posix命令行模式</li>
+<li>嵌套子命令subcommand</li>
+<li>支持全局，局部，串联flags</li>
+<li>使用Cobra很容易的生成应用程序和命令，使用cobra create appname和cobra add cmdname</li>
+<li>如果命令输入错误，将提供智能建议，如 app srver，将提示srver没有，是否是app server</li>
+<li>自动生成commands和flags的帮助信息</li>
+<li>自动生成详细的help信息，如app help</li>
+<li>自动识别-h，&ndash;help帮助flag</li>
+<li>自动生成应用程序在bash下命令自动完成功能</li>
+<li>自动生成应用程序的man手册</li>
+<li>命令行别名</li>
+<li>自定义help和usage信息</li>
+<li>可选的紧密集成的viper apps</li>
+</ul>
+<h3 id="安装方法">安装方法</h3>
+<p><code>go get -v github.com/spf13/cobra/cobra</code></p>
+<h3 id="使用方法">使用方法</h3>
+<h4 id="1-新建一个cobra项目">1. 新建一个cobra项目</h4>
+<p><code>cobra init --pkg-name cobrademo</code></p>
+<h4 id="2-目录结构">2. 目录结构</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">▾ demo
+    ▾ cmd/
+        root.go
+    main.go
+</code></pre></div><h5 id="maingo">main.go</h5>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;GoStudy/week16/cobrademo/cmd&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">cmd</span><span style="color:#111">.</span><span style="color:#75af00">Execute</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><h5 id="rootgo">root.go</h5>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">cmd</span>
+
+
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;GoStudy/week16/cobrademo/internal&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/cobra&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+
+	<span style="color:#75af00">homedir</span> <span style="color:#d88200">&#34;github.com/mitchellh/go-homedir&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/viper&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">cfgFile</span> <span style="color:#00a8c8">string</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">name</span> <span style="color:#00a8c8">string</span>
+<span style="color:#75715e">// rootCmd represents the base command when called without any subcommands
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">rootCmd</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">{</span>
+	<span style="color:#75af00">Use</span><span style="color:#111">:</span>   <span style="color:#d88200">&#34;cobrademo&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Short</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;A brief description of your application&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Long</span><span style="color:#111">:</span> <span style="color:#d88200">`A longer description that spans multiple lines and likely contains
+</span><span style="color:#d88200">examples and usage of using your application. For example:
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">Cobra is a CLI library for Go that empowers applications.
+</span><span style="color:#d88200">This application is a tool to generate the needed files
+</span><span style="color:#d88200">to quickly create a Cobra application.`</span><span style="color:#111">,</span>
+
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">Execute</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Execute</span><span style="color:#111">();</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Exit</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">OnInitialize</span><span style="color:#111">(</span><span style="color:#75af00">initConfig</span><span style="color:#111">)</span>
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">PersistentFlags</span><span style="color:#111">().</span><span style="color:#75af00">StringVar</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">cfgFile</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;config&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;config file (default is $HOME/.cobrademo.yaml)&#34;</span><span style="color:#111">)</span>
+
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// initConfig reads in config file and ENV variables if set.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">initConfig</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+
+<span style="color:#111">}</span>
+</code></pre></div><p><strong>各个函数的作用</strong></p>
+<ul>
+<li>rootCmd 注册业务函数，实现业务功能</li>
+<li>init 提供命令行对外接口</li>
+<li>initconfig 读取配置文件</li>
+<li>execute 提供main调用的包装入口</li>
+</ul>
+<h4 id="3-简易实现">3. 简易实现</h4>
+<p>新建一个功能包 <strong>internal</strong> ，在这里面来写业务逻辑</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">internal</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;fmt&#34;</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">Name</span><span style="color:#111">(</span><span style="color:#75af00">name</span> <span style="color:#00a8c8">string</span><span style="color:#111">){</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;The input name is %s&#34;</span><span style="color:#111">,</span><span style="color:#75af00">name</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>在<strong>cmd/root.go</strong>下面增加关联</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">cmd</span>
+
+
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;GoStudy/week16/cobrademo/internal&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/cobra&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+
+	<span style="color:#75af00">homedir</span> <span style="color:#d88200">&#34;github.com/mitchellh/go-homedir&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/viper&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">cfgFile</span> <span style="color:#00a8c8">string</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">name</span> <span style="color:#00a8c8">string</span>
+<span style="color:#75715e">// rootCmd represents the base command when called without any subcommands
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">rootCmd</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">{</span>
+	<span style="color:#75af00">Use</span><span style="color:#111">:</span>   <span style="color:#d88200">&#34;cobrademo&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Short</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;A brief description of your application&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Long</span><span style="color:#111">:</span> <span style="color:#d88200">`A longer description that spans multiple lines and likely contains
+</span><span style="color:#d88200">examples and usage of using your application. For example:
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">Cobra is a CLI library for Go that empowers applications.
+</span><span style="color:#d88200">This application is a tool to generate the needed files
+</span><span style="color:#d88200">to quickly create a Cobra application.`</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Run</span><span style="color:#111">:</span> <span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">cmd</span> <span style="color:#f92672">*</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">,</span> <span style="color:#75af00">args</span> <span style="color:#111">[]</span><span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">)</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">cmd</span><span style="color:#111">.</span><span style="color:#75af00">Help</span><span style="color:#111">()</span>
+				<span style="color:#00a8c8">return</span>
+			<span style="color:#111">}</span>
+			<span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">Name</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">)</span>
+	<span style="color:#111">},</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">Execute</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Execute</span><span style="color:#111">();</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Exit</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">OnInitialize</span><span style="color:#111">(</span><span style="color:#75af00">initConfig</span><span style="color:#111">)</span>
+    <span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">PersistentFlags</span><span style="color:#111">().</span><span style="color:#75af00">StringVar</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">cfgFile</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;config&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;config file (default is $HOME/.cobrademo.yaml)&#34;</span><span style="color:#111">)</span>
+    <span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Flags</span><span style="color:#111">().</span><span style="color:#75af00">StringVarP</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">name</span><span style="color:#111">,</span><span style="color:#d88200">&#34;name&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;n&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;input your name :&#34;</span><span style="color:#111">)</span>
+
+
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// initConfig reads in config file and ENV variables if set.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">initConfig</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+
+<span style="color:#111">}</span>
+</code></pre></div><h5 id="主要需要修改的就是init函数与rootcmd下面的run函数">主要需要修改的就是init函数与rootCmd下面的Run函数</h5>
+<h4 id="4-添加子命令">4. 添加子命令</h4>
+<p><code>cobra add test</code>
+然后就会在cmd包下新建了一个<strong>test.go</strong>的文件，用来实现子命令的入口</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">cmd</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+
+	<span style="color:#d88200">&#34;github.com/spf13/cobra&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#75715e">// testCmd represents the test command
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">testCmd</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">{</span>
+	<span style="color:#75af00">Use</span><span style="color:#111">:</span>   <span style="color:#d88200">&#34;test&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Short</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;A brief description of your command&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Long</span><span style="color:#111">:</span> <span style="color:#d88200">`A longer description that spans multiple lines and likely contains examples
+</span><span style="color:#d88200">and usage of using your command. For example:
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">Cobra is a CLI library for Go that empowers applications.
+</span><span style="color:#d88200">This application is a tool to generate the needed files
+</span><span style="color:#d88200">to quickly create a Cobra application.`</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Run</span><span style="color:#111">:</span> <span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">cmd</span> <span style="color:#f92672">*</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">,</span> <span style="color:#75af00">args</span> <span style="color:#111">[]</span><span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;test called&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">},</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">AddCommand</span><span style="color:#111">(</span><span style="color:#75af00">testCmd</span><span style="color:#111">)</span>
+
+	<span style="color:#75715e">// Here you will define your flags and configuration settings.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Cobra supports Persistent Flags which will work for this command
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// and all subcommands, e.g.:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// testCmd.PersistentFlags().String(&#34;foo&#34;, &#34;&#34;, &#34;A help for foo&#34;)
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Cobra supports local flags which will only run when this command
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// is called directly, e.g.:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// testCmd.Flags().BoolP(&#34;toggle&#34;, &#34;t&#34;, false, &#34;Help message for toggle&#34;)
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+</code></pre></div>
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/github.com/x-mod/routine/" title="routine"><i class="fas fa-chevron-left p-1"></i>routine</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/github.com/gohugoio/hugo/" title="hugo">hugo<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

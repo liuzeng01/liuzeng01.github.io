@@ -24,6 +24,17 @@
     </item>
     
     <item>
+      <title>cobra</title>
+      <link>https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/</guid>
+      <description>cobraCobra 是一个用来创建命令行的 golang 库，同时也是一个用于生成应用和命令行文件的程序, 包括docker，k8s 都用的类似方式去实现，用于实现CLI非常好用可提供的功能点  简易的子命令行模式，如 app server， app fetch等等 完全兼容posix命令行模式 嵌套子命令subcommand 支持全局，局部，串联flags 使用Cobra很容易的生成应用程序和命令，使用cobra create appname和cobra add cmdname 如果命令输入错误，将提供智能建议，如 app srver，将提示srver没有，是否是app server 自动生成commands和flags的帮助信息 自动生成详细的help信息，如app help 自动识别-h，&amp;ndash;help帮助flag 自动生成应用程序在bash下命令自动完成功能 自动生成应用程序的man手册 命令行别名 自定义help和usage信息 可选的紧密集成的viper apps  安装方法 go get -v github.com/spf13/cobra/cobra
+使用方法 1. 新建一个cobra项目 cobra init --pkg-name cobrademo
+2. 目录结构 ▾ demo ▾ cmd/ root.go main.go main.go package main import ( &amp;#34;GoStudy/week16/cobrademo/cmd&amp;#34; ) func main() { cmd.</description>
+    </item>
+    
+    <item>
       <title>hugo</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

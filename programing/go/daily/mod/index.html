@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/">
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/daily/mod/">
 
     <title>
         
-        Go | iNote
+        mod | iNote
         
     </title>
 
@@ -158,12 +158,12 @@
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
@@ -204,7 +204,7 @@
                     IP
                 </a>
         </li>
-        <li data-nav-id="/programing/go/daily/mod/" class="nav-item my-1">
+        <li data-nav-id="/programing/go/daily/mod/" class="nav-item my-1 active">
                 
                  <a href="/programing/go/daily/mod/" class="nav-link p-0">
                     mod
@@ -289,43 +289,77 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-常用代理地址">1. 常用代理地址</a></li>
+        <li><a href="#2-常用命令">2. 常用命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Go</h1>
+<h1>mod</h1>
 
 <hr>
 
 
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-danger rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-danger">
+            <h3>mod</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            go mod能管理的依赖包的版本，能保证在不同地方构建，获得的依赖模块是一致的。
+        </div>
+    </div>
+</div>
 
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/programing/go/daily/"> Go Daily Note </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/programing/go/github.com/"> Go语言第三方库 </a>
-			</li>
-		
-
-	
-</ul>
-
-
+<h3 id="1-常用代理地址">1. 常用代理地址</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">https</span><span style="color:#111">:</span><span style="color:#75715e">//mirrors.aliyun.com/goproxy/   //阿里云镜像
+</span><span style="color:#75715e"></span><span style="color:#75af00">https</span><span style="color:#111">:</span><span style="color:#75715e">//goproxy.io
+</span><span style="color:#75715e"></span><span style="color:#75af00">https</span><span style="color:#111">:</span><span style="color:#75715e">//goproxy.cn  //七牛云镜像
+</span><span style="color:#75715e"></span><span style="color:#75af00">https</span><span style="color:#111">:</span><span style="color:#75715e">//athens.azurefd.net  //微软镜像
+</span></code></pre></div><h3 id="2-常用命令">2. 常用命令</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+* go mod init <span style="color:#75715e"># 初始化当前目录为模块根目录，生成go.mod, go.sum文件</span>
+* go mod download <span style="color:#75715e"># 下载依赖包</span>
+* go  mod tidy <span style="color:#75715e"># 整理检查依赖，如果缺失包会下载或者引用的不需要的包会删除</span>
+* go mod vendor <span style="color:#75715e"># 复制依赖到vendor目录下面</span>
+* go mod <span style="color:#75715e"># 可看完整所有的命令</span>
 
 
+<span style="color:#75715e">## 如果发现编译不过，可以通过下面命令列出指定mod的版本，然后go get拉指定版本号的包</span>
+go list -m -versions rsc.io/sampler
+go get rsc.io/sampler@v1.3.1
+</code></pre></div><h4 id="补充">补充</h4>
 <hr>
+<pre><code>    用 go get 拉取新的依赖
+
+    拉取最新的版本(优先择取 tag)：go get golang.org/x/text@latest
+    拉取 master 分支的最新 commit：go get golang.org/x/text@master
+    拉取 tag 为 v0.3.2 的 commit：go get golang.org/x/text@v0.3.2
+    拉取 hash 为 342b231 的 commit，最终会被转换为 v0.3.2：go get golang.org/x/text@342b2e
+
+    用 go get -u 更新现有的依赖
+    用 go mod tidy 整理现有的依赖
+    用 go mod graph 查看现有的依赖结构
+    用 go get -u 更新现有的依赖
+    用 go mod download 下载 go.mod 文件中指明的所有依赖
+    用 go mod tidy 整理现有的依赖
 
 
-
-<a href="../" class="btn btn-info">
-    Back
-</a>
-
-
+    用 go mod edit 编辑 go.mod 文件
+    用 go mod vendor 导出现有的所有依赖 (事实上 Go modules 正在淡化 Vendor 的概念)
+    用 go mod verify 校验一个模块是否被篡改过
+</code></pre>
 
     
 
@@ -336,8 +370,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/" title="Programming"><i class="fas fa-chevron-left p-1"></i>Programming</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/daily/" title="Go Daily Note">Go Daily Note<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/daily/ip/" title="IP"><i class="fas fa-chevron-left p-1"></i>IP</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/github.com/" title="Go语言第三方库">Go语言第三方库<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

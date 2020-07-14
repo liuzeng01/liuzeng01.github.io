@@ -115,6 +115,17 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>cobra</title>
+      <link>https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/</guid>
+      <description>cobraCobra 是一个用来创建命令行的 golang 库，同时也是一个用于生成应用和命令行文件的程序, 包括docker，k8s 都用的类似方式去实现，用于实现CLI非常好用可提供的功能点  简易的子命令行模式，如 app server， app fetch等等 完全兼容posix命令行模式 嵌套子命令subcommand 支持全局，局部，串联flags 使用Cobra很容易的生成应用程序和命令，使用cobra create appname和cobra add cmdname 如果命令输入错误，将提供智能建议，如 app srver，将提示srver没有，是否是app server 自动生成commands和flags的帮助信息 自动生成详细的help信息，如app help 自动识别-h，&amp;ndash;help帮助flag 自动生成应用程序在bash下命令自动完成功能 自动生成应用程序的man手册 命令行别名 自定义help和usage信息 可选的紧密集成的viper apps  安装方法 go get -v github.com/spf13/cobra/cobra
+使用方法 1. 新建一个cobra项目 cobra init --pkg-name cobrademo
+2. 目录结构 ▾ demo ▾ cmd/ root.go main.go main.go package main import ( &amp;#34;GoStudy/week16/cobrademo/cmd&amp;#34; ) func main() { cmd.</description>
+    </item>
+    
+    <item>
       <title>hugo</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -147,6 +158,24 @@ var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxM
       
       <guid>https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
       <description>golang本质是全局按照值传递的，也就是copy值，那么你必须知道你的内存对象是包含哪些内容，才能清楚掌握你在copy值的时候复制了哪些东西  num bool string array slice map channel interface  package main func main () { var n int64 = 11 //n就是一个8字节的数据块。 var b bool = true //是一个1字节的数据块。  var s string = &amp;#34;test-string-1&amp;#34; //x  var a [3]bool = [3]bool{true, false, true} var sl []int = []int{1,2,3,4} var m map[int]string var c chan int var in interface{} _, _, _, _, _, _, _, _ = n, b, s, a, sl, m, c , in } string类型 (gdb) pt s type = struct string { uint8 *str; int len; } //string类型在go里是一个复合类型，s变量是一个16字节的变量。其中str字段指向字符串存储的地方 //s就是代表了一个16字节的数据块。所以我们每次定义一个string变量，除了字符序列，s的本身结构是分配16个字节在栈上。 数组类型 //数组类型，就是在地址空间中连续的一段内存块，和c一样（旁白：和c一样，都是平坦的内存结构）。 (gdb) p &amp;amp;a $13 = ([3]bool *) 0xc00003070d (gdb) x/6bx 0xc00003070d 0xc00003070d: 0x01 0x00 0x01 0x0b 0x00 0x00 切片类型 // 是个复合类型，变量本身是一个管理结构（和string一样），这个管理结构管理着一段连续的内存 (gdb) pt sl type = struct []int { int *array; int len; int cap; } map 类型 和 channel 类型 map类型和channel类型特别提一点，变量本身本质上是一个指针类型。也就是说上面我们定义了两个变量m，c，从内存分配的角度来讲，只在栈上分配了一个指针变量，并且这个指针还是nil值，所以我们经常看到 go 的一个特殊说明：slice，map，channel 这三种类型必须使用make来创建，就是这个道理。因为如果仅仅定义了类型变量，那仅仅是代表了分配了这个变量本身的内存空间，并且初始化是nil，一旦你直接用，那么就会导致非法地址引用的问题。slice 的24个字节的管理空间，map和channel的一个指针8个字节的空间。那么如果是调用了make，其实就会把下面的结构分配并初始化出来。</description>
+    </item>
+    
+    <item>
+      <title>IP</title>
+      <link>https://liuzeng01.github.io/programing/go/daily/ip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/daily/ip/</guid>
+      <description>在cobra里面写了一个IP地址转16进制的脚本，用到了net包 package internal import ( &amp;#34;encoding/hex&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strings&amp;#34; ) func ParseIPV4(ipaddr string){ if len(ipaddr) == 0 { return } hexaddr := strings.ToUpper(hex.EncodeToString(net.ParseIP(ipaddr).To4())) fmt.Println(hexaddr) } func ParseIPV6(ipaddr string){ if len(ipaddr) == 0 { return } hexaddr := strings.ToUpper(hex.EncodeToString(net.ParseIP(ipaddr).To16())) fmt.Println(hexaddr) } //光有转16进制是不行的，还需要从16进制转回ip地址 func ParseHexToIpv4(hexstring string) { if len(hexstring) == 0 { return } var ip net.IP ip, err := hex.DecodeString(hexstring) if err != nil { fmt.Println(err) return } fmt.Println(ip.To4()) } func ParseHexToIpv6(hexstring string) { if len(hexstring) == 0 { return } var ip net.</description>
+    </item>
+    
+    <item>
+      <title>mod</title>
+      <link>https://liuzeng01.github.io/programing/go/daily/mod/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/daily/mod/</guid>
+      <description>modgo mod能管理的依赖包的版本，能保证在不同地方构建，获得的依赖模块是一致的。1. 常用代理地址 https://mirrors.aliyun.com/goproxy/ //阿里云镜像 https://goproxy.io https://goproxy.cn //七牛云镜像 https://athens.azurefd.net //微软镜像 2. 常用命令 * go mod init # 初始化当前目录为模块根目录，生成go.mod, go.sum文件 * go mod download # 下载依赖包 * go mod tidy # 整理检查依赖，如果缺失包会下载或者引用的不需要的包会删除 * go mod vendor # 复制依赖到vendor目录下面 * go mod # 可看完整所有的命令 ## 如果发现编译不过，可以通过下面命令列出指定mod的版本，然后go get拉指定版本号的包 go list -m -versions rsc.io/sampler go get rsc.io/sampler@v1.3.1 补充   用 go get 拉取新的依赖拉取最新的版本(优先择取 tag)：go get golang.</description>
     </item>
     
   </channel>
