@@ -86,6 +86,35 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>网络相关</title>
+      <link>https://liuzeng01.github.io/essay/july/net/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/net/</guid>
+      <description>1. 网络结构 因特网服务提供商 ISP（Internet Service Provider） 不同的ISP根据其规模大小被拆分为不同层次，覆盖面积最广的就是主干ISP，通常为国家级范围，其次是地区，借助一个或多个主干并联，最后是本地ISP，可以直接连主干，也可以连地区，也就是我们最常用的（比如公司内网私有云、学校、公有云厂商）
+任何一个ISP(除了顶层)都可以和多个ISP互联，成为他们的下级，也就是多宿（multi-home）, 这时候即使提供商之一出现问题，他仍然不会断网
+用户那么多，主干ISP就那么几个，肯定要涵盖超大的网络数据流量，就算他有最大的带宽，可以完成流量交换，但是距离越远传输速度越慢是亘古不变的真理，如果先把相邻地区流量转发到千里之外再转发回来，是一种对网络资源的浪费
+为了避免这种浪费，一种更有效快速的转发方式出现了，那就是因特网交换点 IXP （Internet Exchange Point）
+这个时候BAT在干嘛呢？BAT 严格意义上来说不属于ISP，他们是提供内容的，所以被叫做因特网内容提供商 ICP（Internet Content Provider），内容供应商有内容，他们的数据中心需要和运营商网络互联互通，才能被他们的用户访问。
+一般是拉通了专线边界网关协议 BGP（Border Gateway Protocol），简单来说你向BAT发消息，他们就近原则回消息，根据你访问的源地址，判断消息从哪里过来的，如果是电信，就走电信的线路回去。如果是联通，就走联通的线路回去。
+以前互联网数据中心 IDC（Internet Data Center）都是运营商的，为了让自己的服务跑的更快，现在是 BAT都自建数据中心，也就是云，多余的计算资源也向外提供，把计算放到云上，这就是云计算.
+再结合一个叫软件定义网络 SDN（Software Defined Network）的东西，特别是可编程路由，使得路由可以根据业务需求，流量需求，怎么省钱怎么来，用他来充当IXP的角色，成本比路由器还要便宜，而且可以按需调度，可以支持复杂流量工程，以实现分布式拒绝服务（DDOS）防止被攻击。
+2. 网络协议 网络协议类似于人类协议，只不过把对话的人换成了某些硬件和软件设备（例如计算机、手机、路由器），他们之间使用的都是同一种语言（byte 流，最终解析成电信号），严格受协议的制约。
+  硬件直接通过网线互联，通过协议控制网卡之间的比特流
+  端系统通过阻塞控制协议，控制收发包过程中分组发送速率
+  路由器协议，控制分组从源到目的地之间的路径
+  七层协议 从第七层到第一层，分别对应了不同的一个数据包（报文）在不同解决的不同处理办法（协议），每个报文在传输出去的时候会经历打包的过程，套七层外套，在接收和传递的时候会经历拆包的过程，脱下七层衣服。
+每一层都会携带一些关键信息给对应的设备识别，为了保证输出包顺利的投递，在传输过程中会经历很多设备，也会经历很多次拆包打包。
+交换机和路由器的区别就是，路由器在网络层，可以处理TCP/IP协议，可以把一个IP分配给多个主机而交换机不能，交换机在链路层是根据MAC寻址，可以提供防火墙功能而路由器不能。路由器主要用来连接多个网络，交换机主要用来使局域网连接更多计算机。
+常见家用交换机是指二层交换机，现在有三层及三层以上的交换机可基于网络层甚至传输层工作。
+没有提到会话层和表示层，我个人的理解这两层从来没有独立实现过，都是和应用层在一起实现。一般的程序员都是在应用层编程，应用层主要加入了会话保持、断点下载能力，表示层主要是做数据加密解密压缩以及转码（虚拟终端协议 VTP，定义了统一的字符集、终端命令、格式控制符等等）的工作，比如大部分主机使用ASCII码，IBM 主机使用 EBCDIC 编码
+有一个安全加密层，很多人都使用过，只是一直没有人想去划分层次结构，它的名字叫SSL/TLS，有了安全层提供的服务，位于应用层的HTTP/SMTP/FTP，都可以在其名字后加一个S（Security），比如HTTPS，其实这个世界压根不存在HTTPS协议，只有HTTP协议，加上 S 的后缀只是告诉大家HTTP使用的是六层结构，有了SSL/TLS的安全保护。
+网络延迟丢包 为什么高峰期就会卡，不应该是我独享的宽带吗？事实上是共享的，在介绍为什么共享之前，先介绍下传输过程中产生的速度损耗。
+还是让我们回到最常用的分组交换，分组交换我们说过，他把报文切片，变成一个一个的数据包进行传输，在传输给分组交换机的时候，交换机本身会进行一些包检查，这里浪费的时间叫节点处理时延（nodal processing delay）
+多数分组交换机在链路的输入端使用存储转发传输（store-and-forward transmission）机制，在交换机输出该分组的第一个比特之前，必须接收到整个分组，这个等待的时间叫存储转发时延</description>
+    </item>
+    
+    <item>
       <title>hugo</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -109,6 +138,15 @@ NutsDB支持事务，从v0.2.0之后的版本开始支持ACID的特性，建议�
 github.com/xujiajun/nutsdb  官方文档
 1. 安装 go get -u github.com/xujiajun/nutsdb 2. 使用 开启数据库 package main import ( &amp;#34;log&amp;#34; &amp;#34;github.com/xujiajun/nutsdb&amp;#34; ) func main() { opt := nutsdb.DefaultOptions opt.Dir = &amp;#34;/tmp/nutsdb&amp;#34; //这边数据库会自动创建这个目录文件 	db, err := nutsdb.Open(opt) if err != nil { log.Fatal(err) } defer db.Close() ... } 这里的默认配置是
 var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxMode 代表索引entry的模式. EntryIdxMode 包括选项: HintKeyValAndRAMIdxMode 、HintKeyAndRAMIdxMode和 HintBPTSparseIdxMode。其中HintKeyValAndRAMIdxMode 代表纯内存索引模式（key和value都会被cache）。 HintKeyAndRAMIdxMode 代表内存+磁盘的索引模式（只有key被cache）。 HintBPTSparseIdxMode（v0.</description>
+    </item>
+    
+    <item>
+      <title>Golang 数据结构</title>
+      <link>https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>golang本质是全局按照值传递的，也就是copy值，那么你必须知道你的内存对象是包含哪些内容，才能清楚掌握你在copy值的时候复制了哪些东西  num bool string array slice map channel interface  package main func main () { var n int64 = 11 //n就是一个8字节的数据块。 var b bool = true //是一个1字节的数据块。  var s string = &amp;#34;test-string-1&amp;#34; //x  var a [3]bool = [3]bool{true, false, true} var sl []int = []int{1,2,3,4} var m map[int]string var c chan int var in interface{} _, _, _, _, _, _, _, _ = n, b, s, a, sl, m, c , in } string类型 (gdb) pt s type = struct string { uint8 *str; int len; } //string类型在go里是一个复合类型，s变量是一个16字节的变量。其中str字段指向字符串存储的地方 //s就是代表了一个16字节的数据块。所以我们每次定义一个string变量，除了字符序列，s的本身结构是分配16个字节在栈上。 数组类型 //数组类型，就是在地址空间中连续的一段内存块，和c一样（旁白：和c一样，都是平坦的内存结构）。 (gdb) p &amp;amp;a $13 = ([3]bool *) 0xc00003070d (gdb) x/6bx 0xc00003070d 0xc00003070d: 0x01 0x00 0x01 0x0b 0x00 0x00 切片类型 // 是个复合类型，变量本身是一个管理结构（和string一样），这个管理结构管理着一段连续的内存 (gdb) pt sl type = struct []int { int *array; int len; int cap; } map 类型 和 channel 类型 map类型和channel类型特别提一点，变量本身本质上是一个指针类型。也就是说上面我们定义了两个变量m，c，从内存分配的角度来讲，只在栈上分配了一个指针变量，并且这个指针还是nil值，所以我们经常看到 go 的一个特殊说明：slice，map，channel 这三种类型必须使用make来创建，就是这个道理。因为如果仅仅定义了类型变量，那仅仅是代表了分配了这个变量本身的内存空间，并且初始化是nil，一旦你直接用，那么就会导致非法地址引用的问题。slice 的24个字节的管理空间，map和channel的一个指针8个字节的空间。那么如果是调用了make，其实就会把下面的结构分配并初始化出来。</description>
     </item>
     
   </channel>

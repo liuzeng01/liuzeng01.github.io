@@ -53,5 +53,14 @@ package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; ) func main() {
 func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式打开当前目录下的main.go文件 	file, err := os.Open(&amp;#34;./main.go&amp;#34;) if err != nil { fmt.Println(&amp;#34;open file failed!, err:&amp;#34;, err) return } defer file.</description>
     </item>
     
+    <item>
+      <title>Golang 数据结构</title>
+      <link>https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>golang本质是全局按照值传递的，也就是copy值，那么你必须知道你的内存对象是包含哪些内容，才能清楚掌握你在copy值的时候复制了哪些东西  num bool string array slice map channel interface  package main func main () { var n int64 = 11 //n就是一个8字节的数据块。 var b bool = true //是一个1字节的数据块。  var s string = &amp;#34;test-string-1&amp;#34; //x  var a [3]bool = [3]bool{true, false, true} var sl []int = []int{1,2,3,4} var m map[int]string var c chan int var in interface{} _, _, _, _, _, _, _, _ = n, b, s, a, sl, m, c , in } string类型 (gdb) pt s type = struct string { uint8 *str; int len; } //string类型在go里是一个复合类型，s变量是一个16字节的变量。其中str字段指向字符串存储的地方 //s就是代表了一个16字节的数据块。所以我们每次定义一个string变量，除了字符序列，s的本身结构是分配16个字节在栈上。 数组类型 //数组类型，就是在地址空间中连续的一段内存块，和c一样（旁白：和c一样，都是平坦的内存结构）。 (gdb) p &amp;amp;a $13 = ([3]bool *) 0xc00003070d (gdb) x/6bx 0xc00003070d 0xc00003070d: 0x01 0x00 0x01 0x0b 0x00 0x00 切片类型 // 是个复合类型，变量本身是一个管理结构（和string一样），这个管理结构管理着一段连续的内存 (gdb) pt sl type = struct []int { int *array; int len; int cap; } map 类型 和 channel 类型 map类型和channel类型特别提一点，变量本身本质上是一个指针类型。也就是说上面我们定义了两个变量m，c，从内存分配的角度来讲，只在栈上分配了一个指针变量，并且这个指针还是nil值，所以我们经常看到 go 的一个特殊说明：slice，map，channel 这三种类型必须使用make来创建，就是这个道理。因为如果仅仅定义了类型变量，那仅仅是代表了分配了这个变量本身的内存空间，并且初始化是nil，一旦你直接用，那么就会导致非法地址引用的问题。slice 的24个字节的管理空间，map和channel的一个指针8个字节的空间。那么如果是调用了make，其实就会把下面的结构分配并初始化出来。</description>
+    </item>
+    
   </channel>
 </rss>
