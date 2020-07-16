@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PCRF Structrue on iNote</title>
+    <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/</link>
+    <description>Recent content in PCRF Structrue on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/zsmart/pcrf/structrue/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PCRF Application </title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</guid>
+      <description>  Back</description>
+    </item>
+    
+    <item>
+      <title>PCRF Backend Process</title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</guid>
+      <description>  Back</description>
+    </item>
+    
+  </channel>
+</rss>

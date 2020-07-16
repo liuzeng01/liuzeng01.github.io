@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Basic Gx Case</title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</guid>
+      <description> 1. 基础配置 pcrf侧 ocs侧 2. 测试流程 开户流程 phub对接流程 发包流程 3. 日志流程 PDE日志 SyPro日志 4. 相关问题记录 SyPro未返回policy plan code PDE进行分拣时core退出问题  Back</description>
+    </item>
+    
+    <item>
       <title>hugo语法</title>
       <link>https://liuzeng01.github.io/essay/july/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -62,6 +71,35 @@ package mainimport (&amp;quot;fmt&amp;quot;&amp;quot;sort&amp;quot;)func ma
     </item>
     
     <item>
+      <title>viper</title>
+      <link>https://liuzeng01.github.io/programing/go/github.com/spf13/viper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/github.com/spf13/viper/</guid>
+      <description>1. 介绍  Viper是Go应用程序的完整配置解决方案，包括12-Factor应用程序。它旨在在应用程序中工作，并可以处理所有类型的配置需求和格式。它支持：
+ 设置默认值从JSON，TOML，YAML，HCL和Java属性配置文件中读取实时观看和重新读取配置文件（可选）从环境变量中读取从远程配置系统（etcd或Consul）读取，并观察变化从命令行标志读取从缓冲区读取设置显式值 Viper可以被认为是所有应用程序配置需求的注册表。
+在构建现代应用程序时，您不必担心配置文件格式; 你可以专注于构建出色的软件。 Viper 可以做如下工作：
+ 加载并解析JSON、TOML、YAML、HCL 或 Java properties 格式的配置文件可以为各种配置项设置默认值可以在命令行中指定配置项来覆盖配置值提供了别名系统，可以不破坏现有代码来实现参数重命名可以很容易地分辨出用户提供的命令行参数或配置文件与默认相同的区别 Viper读取配置信息的优先级顺序，从高到低，如下：
+ 显式调用Set函数命令行参数环境变量配置文件key/value 存储系统默认值 Viper 的配置项的key不区分大小写。
+2. 使用示例  1. 配置文件示例 internal.toml,配置数据库的连接信息 [DataBase] DBType = &amp;#34;mysql&amp;#34; Host = &amp;#34;127.0.0.1:3306&amp;#34; Username = &amp;#34;golang&amp;#34; Password = &amp;#34;golang&amp;#34; Charset = &amp;#34;utf8&amp;#34; 2. 声明数据库连接对象 type DBModel struct { Engine *sql.</description>
+    </item>
+    
+    <item>
+      <title>动态规划</title>
+      <link>https://liuzeng01.github.io/booknote/algorithm/dynamic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/booknote/algorithm/dynamic/</guid>
+      <description> 1.实例说明什么是动态规划 计算1到10的和 计算过程：1+2+3+4+5+6+7+8+9+10，得55
+上述如果口算，最快也要前后凑整10的相加，就是需要计算所有的值，才能得出结果。这时候，如果再加一个11，你肯定会脱口而出，得66，为什么直接能说出来呢，因为你记住了前面所求的得和，这一次得计算不需要关心前面这个55怎么来得，只关注这一步即可。
+引出定义：（有点难理解）在现实生活中，有一类活动的过程，由于它的特殊性，可将过程分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效果。因此各个阶段决策的选取不能任意确定，它依赖于当前面临的状态，又影响以后的发展。当各个阶段决策确定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线．这种把一个问题看作是一个前后关联具有链状结构的多阶段过程就称为多阶段决策过程，这种问题称为多阶段决策问题。在多阶段决策问题中，各个阶段采取的决策，一般来说是与时间有关的，决策依赖于当前状态，又随即引起状态的转移，一个决策序列就是在变化的状态中产生出来的，故有“动态”的含义，称这种解决多阶段决策最优化的过程为动态规划方法。
+优化理解：动态规划是把一个大问题拆解成一堆小问题，这个本身没什么问题，但是核心不是能拆分，而是取决于该问题拆分出的小问题是否能被特定的规律重复利用。  2. 实际问题解决例子：路径最小值问题 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点
+例如，给定三角形： [ [2], [3,4], [6,5,7], [4,1,8,3] ] 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+过程解析：自上而下计算时，只要每一步都记录路径上最小的值即可，因为路径上只能访问相邻的两个点，所以比较两个相邻点和本点数据的和，保存较小的一个值即可。不断向下类推，最后一组数据中最小的值就是i最小路径。
+func minimumTotal(triangle [][]int) int { for i, v := range triangle { if i == 0 {//第一层没有上一级，不用计算  continue } for idx, val := range v { if idx == len(v)-1 {//最后一个值,他的上一级比他小一位数,所以相邻点只有一个直接赋值  triangle[i][idx] = val + triangle[i-1][idx-1] continue } if idx == 0 {//第一位，相邻点也只有一个，直接赋值  triangle[i][idx] = val + triangle[i-1][idx] continue } if val+triangle[i-1][idx] &amp;gt; val+triangle[i-1][idx-1] {// 比较相邻点较小值，并记录  triangle[i][idx] = val + triangle[i-1][idx-1]// 不需要原来的值,直接赋值保存即可,因为只关心路径结果即可  } else { triangle[i][idx] = val + triangle[i-1][idx] } } } min := triangle[len(triangle)-1][0] for _, v := range triangle[len(triangle)-1] {//最后一组中最小值就是路径最小  if v &amp;lt; min { min = v } } return min }  Back</description>
+    </item>
+    
+    <item>
       <title>文件操作</title>
       <link>https://liuzeng01.github.io/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -70,6 +108,15 @@ package mainimport (&amp;quot;fmt&amp;quot;&amp;quot;sort&amp;quot;)func ma
       <description>1.打开关闭文件 file open/close
 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; ) func main() { // 只读方式打开当前目录下的main.go文件 	file, err := os.Open(&amp;#34;./main.go&amp;#34;) if err != nil { fmt.Println(&amp;#34;open file failed!, err:&amp;#34;, err) return } // 关闭文件 	file.Close() } 2.文件读取 file read 它接收一个字节切片，返回读取的字节数和可能的具体错误，读到文件末尾时会返回0和io.EOF
 func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式打开当前目录下的main.go文件 	file, err := os.Open(&amp;#34;./main.go&amp;#34;) if err != nil { fmt.Println(&amp;#34;open file failed!, err:&amp;#34;, err) return } defer file.</description>
+    </item>
+    
+    <item>
+      <title>PCRF Application </title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</guid>
+      <description>  Back</description>
     </item>
     
     <item>
@@ -126,6 +173,15 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Core net structrue</title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/corenet/net/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/corenet/net/</guid>
+      <description>  Back</description>
+    </item>
+    
+    <item>
       <title>hugo</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -136,6 +192,15 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
   编译部署 熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。
 go get -u -v github.com/spf13/hugo
   开始建立hugo project hugo new site mydocs 建立好之后的目录结构为</description>
+    </item>
+    
+    <item>
+      <title>PCRF Backend Process</title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</guid>
+      <description>  Back</description>
     </item>
     
     <item>
@@ -176,6 +241,16 @@ var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxM
       
       <guid>https://liuzeng01.github.io/programing/go/daily/mod/</guid>
       <description>modgo mod能管理的依赖包的版本，能保证在不同地方构建，获得的依赖模块是一致的。1. 常用代理地址 https://mirrors.aliyun.com/goproxy/ //阿里云镜像 https://goproxy.io https://goproxy.cn //七牛云镜像 https://athens.azurefd.net //微软镜像 2. 常用命令 * go mod init # 初始化当前目录为模块根目录，生成go.mod, go.sum文件 * go mod download # 下载依赖包 * go mod tidy # 整理检查依赖，如果缺失包会下载或者引用的不需要的包会删除 * go mod vendor # 复制依赖到vendor目录下面 * go mod # 可看完整所有的命令 ## 如果发现编译不过，可以通过下面命令列出指定mod的版本，然后go get拉指定版本号的包 go list -m -versions rsc.io/sampler go get rsc.io/sampler@v1.3.1 补充   用 go get 拉取新的依赖拉取最新的版本(优先择取 tag)：go get golang.</description>
+    </item>
+    
+    <item>
+      <title>toml</title>
+      <link>https://liuzeng01.github.io/essay/july/toml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/toml/</guid>
+      <description>TOML是前GitHub CEO， Tom Preston-Werner，于2013年创建的语言，其目标是成为一个小规模的易于使用的语义化配置文件格式。TOML被设计为可以无二义性的转换为一个哈希表(Hash table)。TOML是大小写敏感的，必须是UTF-8编码。
+title = &amp;#34;TOML Example&amp;#34; [owner] name = &amp;#34;Lance Uppercut&amp;#34; dob = 1979-05-27T07:32:00-08:00 # 日期是一等公民 [database] server = &amp;#34;192.168.1.1&amp;#34; ports = [ 8001, 8001, 8002 ] connection_max = 5000 enabled = true [servers] #你可以使用空格、制表符进行缩进，或者根本不缩进。TOML不关心缩进。 [servers.alpha] ip = &amp;#34;10.0.0.1&amp;#34; dc = &amp;#34;eqdc10&amp;#34; [servers.beta] ip = &amp;#34;10.0.0.2&amp;#34; dc = &amp;#34;eqdc10&amp;#34; [clients] data = [ [&amp;#34;gamma&amp;#34;, &amp;#34;delta&amp;#34;], [1, 2] ] # 数组内可以混入换行符 hosts = [ &amp;#34;alpha&amp;#34;, &amp;#34;omega&amp;#34; ] 注释 注释使用#开头</description>
     </item>
     
     <item>

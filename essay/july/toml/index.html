@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/july/toml/">
+
+    <title>
+        
+        toml | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1 active">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Golang 数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/daily/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/daily/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>PCRF Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#注释">注释</a></li>
+        <li><a href="#基本字符串">基本字符串</a></li>
+        <li><a href="#多行字符串">多行字符串</a></li>
+        <li><a href="#字面量字符串">字面量字符串</a></li>
+        <li><a href="#多行-字面量字符串">多行-字面量字符串</a></li>
+        <li><a href="#日期">日期</a></li>
+        <li><a href="#数组">数组</a></li>
+        <li><a href="#表格注意概念">表格(注意概念)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>toml</h1>
+
+<hr>
+<p>TOML是前GitHub CEO， Tom Preston-Werner，于2013年创建的语言，其目标是成为一个小规模的易于使用的语义化配置文件格式。TOML被设计为可以无二义性的转换为一个哈希表(Hash table)。TOML是大小写敏感的，必须是UTF-8编码。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75af00">title</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;TOML Example&#34;</span>
+
+<span style="color:#111">[</span><span style="color:#75af00">owner</span><span style="color:#111">]</span>
+<span style="color:#75af00">name</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;Lance Uppercut&#34;</span>
+<span style="color:#75af00">dob</span> <span style="color:#111">=</span> <span style="color:#d88200">1979-05-27T07:32:00-08:00</span> <span style="color:#75715e"># 日期是一等公民</span>
+
+<span style="color:#111">[</span><span style="color:#75af00">database</span><span style="color:#111">]</span>
+<span style="color:#75af00">server</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;192.168.1.1&#34;</span>
+<span style="color:#75af00">ports</span> <span style="color:#111">=</span> <span style="color:#111">[</span> <span style="color:#ae81ff">8001</span><span style="color:#111">,</span> <span style="color:#ae81ff">8001</span><span style="color:#111">,</span> <span style="color:#ae81ff">8002</span> <span style="color:#111">]</span>
+<span style="color:#75af00">connection_max</span> <span style="color:#111">=</span> <span style="color:#ae81ff">5000</span>
+<span style="color:#75af00">enabled</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span>
+
+<span style="color:#111">[</span><span style="color:#75af00">servers</span><span style="color:#111">]</span>
+  <span style="color:#75715e">#你可以使用空格、制表符进行缩进，或者根本不缩进。TOML不关心缩进。</span>
+  <span style="color:#111">[</span><span style="color:#75af00">servers</span><span style="color:#111">.</span><span style="color:#75af00">alpha</span><span style="color:#111">]</span>
+  <span style="color:#75af00">ip</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;10.0.0.1&#34;</span>
+  <span style="color:#75af00">dc</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;eqdc10&#34;</span>
+
+  <span style="color:#111">[</span><span style="color:#75af00">servers</span><span style="color:#111">.</span><span style="color:#75af00">beta</span><span style="color:#111">]</span>
+  <span style="color:#75af00">ip</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;10.0.0.2&#34;</span>
+  <span style="color:#75af00">dc</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;eqdc10&#34;</span>
+
+<span style="color:#111">[</span><span style="color:#75af00">clients</span><span style="color:#111">]</span>
+<span style="color:#75af00">data</span> <span style="color:#111">=</span> <span style="color:#111">[</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;gamma&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;delta&#34;</span><span style="color:#111">],</span> <span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#111">]</span> <span style="color:#111">]</span>
+
+<span style="color:#75715e"># 数组内可以混入换行符</span>
+<span style="color:#75af00">hosts</span> <span style="color:#111">=</span> <span style="color:#111">[</span>
+  <span style="color:#d88200">&#34;alpha&#34;</span><span style="color:#111">,</span>
+  <span style="color:#d88200">&#34;omega&#34;</span>
+<span style="color:#111">]</span>
+</code></pre></div><h3 id="注释">注释</h3>
+<p>注释使用<code>#</code>开头</p>
+<h3 id="基本字符串">基本字符串</h3>
+<p>字符串使用 <code>&quot; &quot;</code>包裹，所有Unicode字符均可出现，除了双引号、反斜线、控制字符(U+0000 to U+001F)需要转义。</p>
+<h3 id="多行字符串">多行字符串</h3>
+<p>多行字符串使用<code>&quot;&quot;&quot;</code>包裹，换行会进行保留</p>
+<h3 id="字面量字符串">字面量字符串</h3>
+<p>使用<code>' ' </code>包裹，内部不允许转义，例如 <code>winpath = 'C:\Users\nodejs\templates'</code></p>
+<h3 id="多行-字面量字符串">多行-字面量字符串</h3>
+<p>使用<code>''' '''</code> 进行包裹</p>
+<h3 id="日期">日期</h3>
+<p>使用此种格式 <code>date1 = 1979-05-27T07:32:00Z </code></p>
+<h3 id="数组">数组</h3>
+<p>数组使用方括号包裹。空格会被忽略，包括换行符。元素使用逗号分隔。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75af00">arr1</span> <span style="color:#111">=</span> <span style="color:#111">[</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span> <span style="color:#111">]</span>
+<span style="color:#75af00">arr2</span> <span style="color:#111">=</span> <span style="color:#111">[</span> <span style="color:#d88200">&#34;red&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;yellow&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;green&#34;</span> <span style="color:#111">]</span>
+<span style="color:#75af00">arr3</span> <span style="color:#111">=</span> <span style="color:#111">[</span> <span style="color:#111">[</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span> <span style="color:#111">],</span> <span style="color:#111">[</span><span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">4</span><span style="color:#111">,</span> <span style="color:#ae81ff">5</span><span style="color:#111">]</span> <span style="color:#111">]</span>
+</code></pre></div><h3 id="表格注意概念">表格(注意概念)</h3>
+<p>表格叶称为哈希表或字典，用来存储键值对。表格名由方括号包裹，且自成一行。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#111">[</span><span style="color:#75af00">database</span><span style="color:#111">]</span>
+<span style="color:#75af00">server</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;192.168.1.1&#34;</span>
+<span style="color:#75af00">ports</span> <span style="color:#111">=</span> <span style="color:#111">[</span> <span style="color:#ae81ff">8001</span><span style="color:#111">,</span> <span style="color:#ae81ff">8001</span><span style="color:#111">,</span> <span style="color:#ae81ff">8002</span> <span style="color:#111">]</span>
+<span style="color:#75af00">connection_max</span> <span style="color:#111">=</span> <span style="color:#ae81ff">5000</span>
+<span style="color:#75af00">enabled</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span>
+
+<span style="color:#111">[</span><span style="color:#75af00">servers</span><span style="color:#111">]</span>
+  <span style="color:#75715e">#你可以使用空格、制表符进行缩进，或者根本不缩进。TOML不关心缩进。</span>
+  <span style="color:#111">[</span><span style="color:#75af00">servers</span><span style="color:#111">.</span><span style="color:#75af00">alpha</span><span style="color:#111">]</span>
+  <span style="color:#75af00">ip</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;10.0.0.1&#34;</span>
+  <span style="color:#75af00">dc</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;eqdc10&#34;</span>
+
+  <span style="color:#111">[</span><span style="color:#75af00">servers</span><span style="color:#111">.</span><span style="color:#75af00">beta</span><span style="color:#111">]</span>
+  <span style="color:#75af00">ip</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;10.0.0.2&#34;</span>
+  <span style="color:#75af00">dc</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;eqdc10&#34;</span>
+</code></pre></div>
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/july/net/" title="网络相关"><i class="fas fa-chevron-left p-1"></i>网络相关</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/booknote/" title="BookNote">BookNote<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

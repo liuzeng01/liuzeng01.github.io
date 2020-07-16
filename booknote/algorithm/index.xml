@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on iNote</title>
+    <link>https://liuzeng01.github.io/booknote/algorithm/</link>
+    <description>Recent content in algorithm on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/booknote/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>动态规划</title>
+      <link>https://liuzeng01.github.io/booknote/algorithm/dynamic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/booknote/algorithm/dynamic/</guid>
+      <description> 1.实例说明什么是动态规划 计算1到10的和 计算过程：1+2+3+4+5+6+7+8+9+10，得55
+上述如果口算，最快也要前后凑整10的相加，就是需要计算所有的值，才能得出结果。这时候，如果再加一个11，你肯定会脱口而出，得66，为什么直接能说出来呢，因为你记住了前面所求的得和，这一次得计算不需要关心前面这个55怎么来得，只关注这一步即可。
+引出定义：（有点难理解）在现实生活中，有一类活动的过程，由于它的特殊性，可将过程分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效果。因此各个阶段决策的选取不能任意确定，它依赖于当前面临的状态，又影响以后的发展。当各个阶段决策确定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线．这种把一个问题看作是一个前后关联具有链状结构的多阶段过程就称为多阶段决策过程，这种问题称为多阶段决策问题。在多阶段决策问题中，各个阶段采取的决策，一般来说是与时间有关的，决策依赖于当前状态，又随即引起状态的转移，一个决策序列就是在变化的状态中产生出来的，故有“动态”的含义，称这种解决多阶段决策最优化的过程为动态规划方法。
+优化理解：动态规划是把一个大问题拆解成一堆小问题，这个本身没什么问题，但是核心不是能拆分，而是取决于该问题拆分出的小问题是否能被特定的规律重复利用。  2. 实际问题解决例子：路径最小值问题 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点
+例如，给定三角形： [ [2], [3,4], [6,5,7], [4,1,8,3] ] 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+过程解析：自上而下计算时，只要每一步都记录路径上最小的值即可，因为路径上只能访问相邻的两个点，所以比较两个相邻点和本点数据的和，保存较小的一个值即可。不断向下类推，最后一组数据中最小的值就是i最小路径。
+func minimumTotal(triangle [][]int) int { for i, v := range triangle { if i == 0 {//第一层没有上一级，不用计算  continue } for idx, val := range v { if idx == len(v)-1 {//最后一个值,他的上一级比他小一位数,所以相邻点只有一个直接赋值  triangle[i][idx] = val + triangle[i-1][idx-1] continue } if idx == 0 {//第一位，相邻点也只有一个，直接赋值  triangle[i][idx] = val + triangle[i-1][idx] continue } if val+triangle[i-1][idx] &amp;gt; val+triangle[i-1][idx-1] {// 比较相邻点较小值，并记录  triangle[i][idx] = val + triangle[i-1][idx-1]// 不需要原来的值,直接赋值保存即可,因为只关心路径结果即可  } else { triangle[i][idx] = val + triangle[i-1][idx] } } } min := triangle[len(triangle)-1][0] for _, v := range triangle[len(triangle)-1] {//最后一组中最小值就是路径最小  if v &amp;lt; min { min = v } } return min }  Back</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -49,5 +49,15 @@
 多数分组交换机在链路的输入端使用存储转发传输（store-and-forward transmission）机制，在交换机输出该分组的第一个比特之前，必须接收到整个分组，这个等待的时间叫存储转发时延</description>
     </item>
     
+    <item>
+      <title>toml</title>
+      <link>https://liuzeng01.github.io/essay/july/toml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/toml/</guid>
+      <description>TOML是前GitHub CEO， Tom Preston-Werner，于2013年创建的语言，其目标是成为一个小规模的易于使用的语义化配置文件格式。TOML被设计为可以无二义性的转换为一个哈希表(Hash table)。TOML是大小写敏感的，必须是UTF-8编码。
+title = &amp;#34;TOML Example&amp;#34; [owner] name = &amp;#34;Lance Uppercut&amp;#34; dob = 1979-05-27T07:32:00-08:00 # 日期是一等公民 [database] server = &amp;#34;192.168.1.1&amp;#34; ports = [ 8001, 8001, 8002 ] connection_max = 5000 enabled = true [servers] #你可以使用空格、制表符进行缩进，或者根本不缩进。TOML不关心缩进。 [servers.alpha] ip = &amp;#34;10.0.0.1&amp;#34; dc = &amp;#34;eqdc10&amp;#34; [servers.beta] ip = &amp;#34;10.0.0.2&amp;#34; dc = &amp;#34;eqdc10&amp;#34; [clients] data = [ [&amp;#34;gamma&amp;#34;, &amp;#34;delta&amp;#34;], [1, 2] ] # 数组内可以混入换行符 hosts = [ &amp;#34;alpha&amp;#34;, &amp;#34;omega&amp;#34; ] 注释 注释使用#开头</description>
+    </item>
+    
   </channel>
 </rss>

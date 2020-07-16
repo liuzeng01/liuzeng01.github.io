@@ -11,6 +11,20 @@
     
     
     <item>
+      <title>viper</title>
+      <link>https://liuzeng01.github.io/programing/go/github.com/spf13/viper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/github.com/spf13/viper/</guid>
+      <description>1. 介绍  Viper是Go应用程序的完整配置解决方案，包括12-Factor应用程序。它旨在在应用程序中工作，并可以处理所有类型的配置需求和格式。它支持：
+ 设置默认值从JSON，TOML，YAML，HCL和Java属性配置文件中读取实时观看和重新读取配置文件（可选）从环境变量中读取从远程配置系统（etcd或Consul）读取，并观察变化从命令行标志读取从缓冲区读取设置显式值 Viper可以被认为是所有应用程序配置需求的注册表。
+在构建现代应用程序时，您不必担心配置文件格式; 你可以专注于构建出色的软件。 Viper 可以做如下工作：
+ 加载并解析JSON、TOML、YAML、HCL 或 Java properties 格式的配置文件可以为各种配置项设置默认值可以在命令行中指定配置项来覆盖配置值提供了别名系统，可以不破坏现有代码来实现参数重命名可以很容易地分辨出用户提供的命令行参数或配置文件与默认相同的区别 Viper读取配置信息的优先级顺序，从高到低，如下：
+ 显式调用Set函数命令行参数环境变量配置文件key/value 存储系统默认值 Viper 的配置项的key不区分大小写。
+2. 使用示例  1. 配置文件示例 internal.toml,配置数据库的连接信息 [DataBase] DBType = &amp;#34;mysql&amp;#34; Host = &amp;#34;127.0.0.1:3306&amp;#34; Username = &amp;#34;golang&amp;#34; Password = &amp;#34;golang&amp;#34; Charset = &amp;#34;utf8&amp;#34; 2. 声明数据库连接对象 type DBModel struct { Engine *sql.</description>
+    </item>
+    
+    <item>
       <title>routine</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/x-mod/routine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

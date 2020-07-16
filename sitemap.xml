@@ -3,6 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://liuzeng01.github.io/booknote/algorithm/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/corenet/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/programing/go/</loc>
   </url>
   
@@ -47,11 +59,39 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/programing/go/github.com/spf13/viper/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/booknote/algorithm/dynamic/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</loc>
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/zsmart/charging/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/charging/chargingcode/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/booknote/designpattern/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/linux/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/structrue/</loc>
   </url>
   
   <url>
@@ -71,7 +111,15 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/zsmart/charging/testcase/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/corenet/net/</loc>
   </url>
   
   <url>
@@ -95,11 +143,23 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/testcase/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/booknote/</loc>
   </url>
   
   <url>
     <loc>https://liuzeng01.github.io/programing/c/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/pcrfcode/</loc>
   </url>
   
   <url>
@@ -140,6 +200,14 @@
   
   <url>
     <loc>https://liuzeng01.github.io/programing/go/daily/mod/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/essay/july/toml/</loc>
   </url>
   
   <url>

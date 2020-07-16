@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PCRF Case on iNote</title>
+    <link>https://liuzeng01.github.io/zsmart/pcrf/testcase/</link>
+    <description>Recent content in PCRF Case on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/zsmart/pcrf/testcase/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Basic Gx Case</title>
+      <link>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</guid>
+      <description> 1. 基础配置 pcrf侧 ocs侧 2. 测试流程 开户流程 phub对接流程 发包流程 3. 日志流程 PDE日志 SyPro日志 4. 相关问题记录 SyPro未返回policy plan code PDE进行分拣时core退出问题  Back</description>
+    </item>
+    
+  </channel>
+</rss>
