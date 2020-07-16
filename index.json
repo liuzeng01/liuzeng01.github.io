@@ -11,7 +11,7 @@
 	"title": "Basic Gx Case",
 	"tags": [],
 	"description": "Basic Gx Case",
-	"content": " 1. 基础配置 pcrf侧 ocs侧 2. 测试流程 开户流程 phub对接流程 发包流程 3. 日志流程 PDE日志 SyPro日志 4. 相关问题记录 SyPro未返回policy plan code PDE进行分拣时core退出问题  Back\r\r"
+	"content": " 1. 基础配置 pcrf侧 ocs侧 2. 测试流程 开户流程 phub对接流程 发包流程 3. 日志流程 PDE日志 SyPro日志 4. 相关问题记录 SyPro未返回policy plan code PDE进行分拣时core退出问题 PDE Down掉后ZCM自动拉起PDE，建立同一局号链路问题  Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/zsmart/pcrf/corenet/",
@@ -21,18 +21,25 @@
 	"content": " Core net structrue \r\r\r Back\r\r"
 },
 {
+	"uri": "https://liuzeng01.github.io/linux/docker/dockerfile/command/",
+	"title": "dockerfile基础命令",
+	"tags": [],
+	"description": "dockerfile",
+	"content": " dockerfile 基础命令 FROM 指定基础镜像 FROM nginx\nRUN 执行命令 exec 格式: RUN [\u0026quot;可执行文件\u0026quot;, \u0026quot;参数1\u0026quot;, \u0026quot;参数2\u0026quot;]\rRUN apt-get update\rRUN apt-get install -y gcc libc6-dev make\rCOPY 复制文件 COPY [\u0026quot;\u0026lt;源路径1\u0026gt;\u0026quot;,... \u0026quot;\u0026lt;目标路径\u0026gt;\u0026quot;]\rCOPY package.json /usr/src/app/\rADD 更高级的复制文件 ADD [\u0026quot;\u0026lt;源路径1\u0026gt;\u0026quot;,... \u0026quot;\u0026lt;目标路径\u0026gt;\u0026quot;]\r源路径可以使是url,如果是压缩包,自动解压缩,不推荐使用\nFROM scratch\rADD ubuntu-xenial-core-cloudimg-amd64-root.tar.gz\rCMD 容器启动命令 shell 格式: CMD \u0026lt;命令\u0026gt;\rexec 格式: CMD [\u0026quot;可执行文件\u0026quot;, \u0026quot;参数1\u0026quot;, \u0026quot;参数2\u0026quot;...]\r在指定了 ENTRYPOINT 指令后，用 CMD 指 定具体的参数\nCMD [ \u0026quot;sh\u0026quot;, \u0026quot;-c\u0026quot;, \u0026quot;echo $HOME\u0026quot; ]\r#CMD echo $HOME\rENTRYPOINT 入口点 shell 格式: ENTRYPOINT \u0026lt;命令\u0026gt;\rexec 格式: ENTRYPOINT [\u0026quot;可执行文件\u0026quot;, \u0026quot;参数1\u0026quot;, \u0026quot;参数2\u0026quot;...]\rdocker run 的参数 \u0026ndash;entrypoint可以替换 在指定了 ENTRYPOINT 指令后，用 CMD 指 定具体的参数 ENTRYPOINT [ \u0026quot;curl\u0026quot;, \u0026quot;-s\u0026quot;, \u0026quot;http://ip.cn\u0026quot; ]\nENV 设置环境变量 ENV \u0026lt;key\u0026gt; \u0026lt;value\u0026gt;\rENV \u0026lt;key1\u0026gt;=\u0026lt;value1\u0026gt; \u0026lt;key2\u0026gt;=\u0026lt;value2\u0026gt;...\r构建时与容器运行时同时存在\nENV NODE_VERSION 7.2.0\rRUN curl -SLO \u0026quot;https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.ta r.xz\u0026quot;\rARG 构建参数 ARG \u0026lt;参数名\u0026gt;[=\u0026lt;默认值\u0026gt;]\r 构建时存在,运行时不存在 docker build 中用 \u0026ndash;build-arg \u0026lt;参数名\u0026gt;=\u0026lt;值\u0026gt; 可覆盖\nVOLUME 定义匿名卷 VOLUME [\u0026quot;\u0026lt;路径1\u0026gt;\u0026quot;, \u0026quot;\u0026lt;路径2\u0026gt;\u0026quot;...]\rVOLUME \u0026lt;路径\u0026gt;\r指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器存储层写入大量数据\nVOLUME /data\rEXPOSE 声明端口\rEXPOSE \u0026lt;端口1\u0026gt; [\u0026lt;端口2\u0026gt;...]\rdocker run -P 端口时，会自动随机映射 EXPOSE 的端口\nWORKDIR 指定工作目录 WORKDIR \u0026lt;工作目录路径\u0026gt;\rWORKDIR 指定工作目录(或称为当前目录);目录不存在，WORKDIR自动建立;改变以后各层的工作目录的位置\rWORKDIR /app\rUSER 指定当前用户 USER \u0026lt;用户名\u0026gt;\rRUN groupadd -r redis \u0026amp;\u0026amp; useradd -r -g redis redis USER redis\rRUN [ \u0026quot;redis-server\u0026quot; ]\rHEALTHCHECK 健康检查 HEALTHCHECK [选项] CMD \u0026lt;命令\u0026gt; :设置检查容器健康状况的命令\rHEALTHCHECK NONE :如果基础镜像有健康检查指令，使用这行可以屏蔽掉其健康检查指令\rFROM nginx\rRUN apt-get update \u0026amp;\u0026amp; apt-get install -y curl \u0026amp;\u0026amp; rm -rf /var/lib/apt/lists/* HEALTHCHECK --interval=5s --timeout=3s \\\rCMD curl -fs http://localhost/ || exit 1\rMAINTAINER 作者信息 MAINTAINER puanghu\n Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/docker/cmd/",
+	"title": "docker命令",
+	"tags": [],
+	"description": "docker",
+	"content": " \r Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/programing/go/",
 	"title": "Go",
 	"tags": [],
 	"description": "Golang",
-	"content": " Go Daily Note \r\rGo语言第三方库 \r\r\r Back\r\r"
-},
-{
-	"uri": "https://liuzeng01.github.io/programing/go/daily/",
-	"title": "Go Daily Note",
-	"tags": [],
-	"description": "Daily Note",
-	"content": " Json \r\rSort \r\rSSH \r\r文件操作 \r\rGolang 数据结构 \r\rIP \r\rmod \r\r\r Back\r\r"
+	"content": " Go语言第三方库 \r\rNote \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/github.com/",
@@ -49,7 +56,7 @@
 	"content": " 1. hugo 2. Ace Document   button The button shortcode allows you to add a button to the page. This button is a HTML anchor element and can thus be used to link to another page or website.\n\rButton\r\rButton\r\rButton\r\rButton\r\rButton\r\rButton\r\rButton\r\rUsage Place the following shortcode on the page Copy\r\r\r{{\u0026lt; button style=\u0026#34;STYLE\u0026#34; link=\u0026#34;https://yourwebsite.com\u0026#34; \u0026gt;}} [content] {{\u0026lt; /button \u0026gt;}} \r\r\rParameters style The style parameter is directly applied to the alert as a class in the format \u0026ldquo;btn-{STYLE}\u0026quot;. Bootstrap comes with a variety of styles that can be used with this:\n primary secondary danger warning success info  Each style can also be presented as an \u0026lsquo;outline\u0026rsquo; variant by prefixing the style with \u0026lsquo;outline-\u0026rsquo;.\nExample: style=\u0026quot;outline-primary\u0026quot;.\nlink The link parameter may consist of an URL leading to a page or other website. Simply use it by defining a URL for the button to link to.\nExample: link=\u0026quot;https://google.com\u0026quot;.\n  Alert The alerts shortcode allows you to let information stand out by means of an alert styled box. This can be used to indicate danger, warning, success or info.\n\rI\u0026rsquo;m a danger alert\r\rI\u0026rsquo;m a warning alert\r\rI\u0026rsquo;m a success alert\r\rI\u0026rsquo;m an info alert\r\rUsage Place the following shortcode on the page Copy\r\r\r{{\u0026lt; alert style=\u0026#34;STYLE\u0026#34; \u0026gt;}} [content] {{\u0026lt; /alert \u0026gt;}} \r\r\rParameters Style  danger warning success info     Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/json/",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/json/",
 	"title": "Json ",
 	"tags": [],
 	"description": "Daily Note",
@@ -63,6 +70,20 @@
 	"content": " hugo语法 \r\r网络相关 \r\rtoml \r\r\r Back\r\r"
 },
 {
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/",
+	"title": "July Note",
+	"tags": [],
+	"description": "Daily  Note",
+	"content": " Json \r\rSort \r\rSSH \r\r文件操作 \r\rGo数据结构 \r\rGo语言查询不定字段 \r\rIP \r\rmod \r\r\r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/note/",
+	"title": "Note",
+	"tags": [],
+	"description": "Daily  Note",
+	"content": " July Note \r\r\r Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/linux/shell/",
 	"title": "Shell",
 	"tags": [],
@@ -70,7 +91,7 @@
 	"content": " \r Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/sort/",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/sort/",
 	"title": "Sort",
 	"tags": [],
 	"description": "Daily Note",
@@ -91,7 +112,7 @@
 	"content": " \rSRE\r\rSRE是指Site Reliability Engineer (网站可靠性工程师)。他是软件工程师和系统管理员的结合，一个SRE工程师基本上需要掌握很多知识：算法，数据结构，编程能力，网络编程，分布式系统，可扩展架构，故障排除。\r\r\r\rSRE都干些什么？ SRE不是做底层硬件维护，而是负责各种服务的性能和稳定性。\r远离底层硬件，更多靠近软件基础架构层面，帮助企业客户打造强大的软件基础构架。\r\r Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/ssh/",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/ssh/",
 	"title": "SSH",
 	"tags": [],
 	"description": "Daily Note",
@@ -112,7 +133,7 @@
 	"content": " 1.实例说明什么是动态规划 计算1到10的和 计算过程：1+2+3+4+5+6+7+8+9+10，得55\n上述如果口算，最快也要前后凑整10的相加，就是需要计算所有的值，才能得出结果。这时候，如果再加一个11，你肯定会脱口而出，得66，为什么直接能说出来呢，因为你记住了前面所求的得和，这一次得计算不需要关心前面这个55怎么来得，只关注这一步即可。\n引出定义：（有点难理解）在现实生活中，有一类活动的过程，由于它的特殊性，可将过程分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效果。因此各个阶段决策的选取不能任意确定，它依赖于当前面临的状态，又影响以后的发展。当各个阶段决策确定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线．这种把一个问题看作是一个前后关联具有链状结构的多阶段过程就称为多阶段决策过程，这种问题称为多阶段决策问题。在多阶段决策问题中，各个阶段采取的决策，一般来说是与时间有关的，决策依赖于当前状态，又随即引起状态的转移，一个决策序列就是在变化的状态中产生出来的，故有“动态”的含义，称这种解决多阶段决策最优化的过程为动态规划方法。\n优化理解：动态规划是把一个大问题拆解成一堆小问题，这个本身没什么问题，但是核心不是能拆分，而是取决于该问题拆分出的小问题是否能被特定的规律重复利用。  2. 实际问题解决例子：路径最小值问题 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点\n例如，给定三角形： [ [2], [3,4], [6,5,7], [4,1,8,3] ] 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。\n过程解析：自上而下计算时，只要每一步都记录路径上最小的值即可，因为路径上只能访问相邻的两个点，所以比较两个相邻点和本点数据的和，保存较小的一个值即可。不断向下类推，最后一组数据中最小的值就是i最小路径。\nfunc minimumTotal(triangle [][]int) int { for i, v := range triangle { if i == 0 {//第一层没有上一级，不用计算  continue } for idx, val := range v { if idx == len(v)-1 {//最后一个值,他的上一级比他小一位数,所以相邻点只有一个直接赋值  triangle[i][idx] = val + triangle[i-1][idx-1] continue } if idx == 0 {//第一位，相邻点也只有一个，直接赋值  triangle[i][idx] = val + triangle[i-1][idx] continue } if val+triangle[i-1][idx] \u0026gt; val+triangle[i-1][idx-1] {// 比较相邻点较小值，并记录  triangle[i][idx] = val + triangle[i-1][idx-1]// 不需要原来的值,直接赋值保存即可,因为只关心路径结果即可  } else { triangle[i][idx] = val + triangle[i-1][idx] } } } min := triangle[len(triangle)-1][0] for _, v := range triangle[len(triangle)-1] {//最后一组中最小值就是路径最小  if v \u0026lt; min { min = v } } return min }  Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/",
 	"title": "文件操作",
 	"tags": [],
 	"description": "Note",
@@ -214,7 +235,7 @@
 	"title": "Docker",
 	"tags": [],
 	"description": "Docker",
-	"content": " \r Back\r\r"
+	"content": " docker命令 \r\rdockerfile构建镜像 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/essay/",
@@ -256,7 +277,21 @@
 	"title": "PCRF Case",
 	"tags": [],
 	"description": "PCRF Test Case Note",
-	"content": " Basic Gx Case \r\r\r Back\r\r"
+	"content": " Basic Gx Case \r\rRX流程调测 \r\r\r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/zsmart/pcrf/testcase/rxbasic/",
+	"title": "RX流程调测",
+	"tags": [],
+	"description": "PCRF Gx+Rx",
+	"content": "  Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/docker/dockerfile/godockerfile/",
+	"title": "分阶段构建减小go镜像体积",
+	"tags": [],
+	"description": "Golang，docker",
+	"content": " 分阶段构建\r\r主要思路 第一阶段 使用golang镜像构建出可执行文件 第二阶段 使用busybox:glibc小镜像作为基础镜像\r\r\r\r镜像文件 第一阶段 FROMgolang AS my_build_stageCOPY hello.go .RUN go build hello.go第二阶段 FROMbusybox:glibcCOPY --from=my_build_stage hello .// COPY --from=0 hello . 与COPY --from=my_build_stage hello .等效 0表示第一阶段CMD [\u0026#34;./hello\u0026#34;] Go项目应用的Dockerfile通常大概类似这样，但是每个项目的细节可能有所不同。\nFROM golang:alpine指定了开始阶段的基础映像（其中包含Go工具和库，用于构建程序），AS build是给这个阶段取名为build。 golang:alpine指定了Go基础映像的alpine版本， alpine是专门为容器设计的小型Linux发行版。这个Dockerfile中使用了两次FROM指令，第二条FROM scratch行，它告诉Docker从一个全新的，完全空的容器镜像重新开始，然后将上个阶段编译好的程序复制到其中。这个才是我们随后将用于运行的Go应用程序的容器镜像。\nscratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序的多阶段构建很常见，使用scratch镜像可以节省大量空间，因为我们实际上不需要Go工具或其他任何东西来运行我们的编译好的程序，这可能也是Go在容器时代的一个优势吧。\n Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/booknote/",
@@ -315,6 +350,13 @@
 	"content": " Go \r\rSQL \r\rJava \r\rC/C\u0026#43;\u0026#43; \r\rpython \r\rJavaScript \r\rFlutter \r\r\r Back\r\r"
 },
 {
+	"uri": "https://liuzeng01.github.io/linux/docker/dockerfile/",
+	"title": "dockerfile构建镜像",
+	"tags": [],
+	"description": "docker,golang",
+	"content": " dockerfile基础命令 \r\r分阶段构建减小go镜像体积 \r\r\r Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/programing/flutter/",
 	"title": "Flutter",
 	"tags": [],
@@ -322,14 +364,21 @@
 	"content": " \r Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/",
-	"title": "Golang 数据结构",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/",
+	"title": "Go数据结构",
 	"tags": [],
 	"description": "Daily Note",
 	"content": " golang本质是全局按照值传递的，也就是copy值，那么你必须知道你的内存对象是包含哪些内容，才能清楚掌握你在copy值的时候复制了哪些东西  num bool string array slice map channel interface  package main func main () { var n int64 = 11 //n就是一个8字节的数据块。 var b bool = true //是一个1字节的数据块。  var s string = \u0026#34;test-string-1\u0026#34; //x  var a [3]bool = [3]bool{true, false, true} var sl []int = []int{1,2,3,4} var m map[int]string var c chan int var in interface{} _, _, _, _, _, _, _, _ = n, b, s, a, sl, m, c , in } string类型 (gdb) pt s type = struct string { uint8 *str; int len; } //string类型在go里是一个复合类型，s变量是一个16字节的变量。其中str字段指向字符串存储的地方 //s就是代表了一个16字节的数据块。所以我们每次定义一个string变量，除了字符序列，s的本身结构是分配16个字节在栈上。 数组类型 //数组类型，就是在地址空间中连续的一段内存块，和c一样（旁白：和c一样，都是平坦的内存结构）。 (gdb) p \u0026amp;a $13 = ([3]bool *) 0xc00003070d (gdb) x/6bx 0xc00003070d 0xc00003070d: 0x01 0x00 0x01 0x0b 0x00 0x00 切片类型 // 是个复合类型，变量本身是一个管理结构（和string一样），这个管理结构管理着一段连续的内存 (gdb) pt sl type = struct []int { int *array; int len; int cap; } map 类型 和 channel 类型 map类型和channel类型特别提一点，变量本身本质上是一个指针类型。也就是说上面我们定义了两个变量m，c，从内存分配的角度来讲，只在栈上分配了一个指针变量，并且这个指针还是nil值，所以我们经常看到 go 的一个特殊说明：slice，map，channel 这三种类型必须使用make来创建，就是这个道理。因为如果仅仅定义了类型变量，那仅仅是代表了分配了这个变量本身的内存空间，并且初始化是nil，一旦你直接用，那么就会导致非法地址引用的问题。slice 的24个字节的管理空间，map和channel的一个指针8个字节的空间。那么如果是调用了make，其实就会把下面的结构分配并初始化出来。\n(gdb) pt m type = struct hash\u0026lt;int, string\u0026gt; { int count; uint8 flags; uint8 B; uint16 noverflow; uint32 hash0; struct bucket\u0026lt;int, string\u0026gt; *buckets; struct bucket\u0026lt;int, string\u0026gt; *oldbuckets; uintptr nevacuate; struct runtime.mapextra *extra; } * (gdb) pt c type = struct hchan\u0026lt;int\u0026gt; { uint qcount; uint dataqsiz; void *buf; uint16 elemsize; uint32 closed; runtime._type *elemtype; uint sendx; uint recvx; struct waitq\u0026lt;int\u0026gt; recvq; struct waitq\u0026lt;int\u0026gt; sendq; runtime.mutex lock; }  Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/ip/",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/sqlnodefine/",
+	"title": "Go语言查询不定字段",
+	"tags": [],
+	"description": "select * from xxx",
+	"content": "package main import ( \u0026#34;database/sql\u0026#34; \u0026#34;fmt\u0026#34; _ \u0026#34;github.com/go-sql-driver/mysql\u0026#34; ) func main() { //连接数据库 \tdb, err := sql.Open(\u0026#34;mysql\u0026#34;, \u0026#34;golang:golang@tcp(localhost:3306)/gostudy?charset=utf8\u0026#34;) if err != nil { fmt.Println(\u0026#34;连接数据库失败\u0026#34;, err.Error()) return } defer db.Close() //查询数据库 \tquery, err := db.Query(\u0026#34;select * from event_filelist\u0026#34;) if err != nil { fmt.Println(\u0026#34;查询数据库失败\u0026#34;, err.Error()) return } defer query.Close() //读出查询出的列字段名 \tcols, _ := query.Columns() //values是每个列的值，这里获取到byte里 \tvalues := make([][]byte, len(cols)) //query.Scan的参数，因为每次查询出来的列是不定长的，用len(cols)定住当次查询的长度 \tscans := make([]interface{}, len(cols)) //让每一行数据都填充到[][]byte里面 \tfor i := range values { scans[i] = \u0026amp;values[i] } //最后得到的map \tresults := make(map[int]map[string]string) i := 0 for query.Next() { //循环，让游标往下推 \tif err := query.Scan(scans...); err != nil { //query.Scan查询出来的不定长值放到scans[i] = \u0026amp;values[i],也就是每行都放在values里 \tfmt.Println(err) return } row := make(map[string]string) //每行数据  for k, v := range values { //每行数据是放在values里面，现在把它挪到row里 \tkey := cols[k] row[key] = string(v) } results[i] = row //装入结果集中 \ti++ } //查询出来的数组 \tfor k, v := range results { fmt.Println(k, v) } db.Close() //用完关闭 } "
+},
+{
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/ip/",
 	"title": "IP",
 	"tags": [],
 	"description": "Daily Note",
@@ -343,7 +392,7 @@
 	"content": " \r Back\r\r"
 },
 {
-	"uri": "https://liuzeng01.github.io/programing/go/daily/mod/",
+	"uri": "https://liuzeng01.github.io/programing/go/note/july/mod/",
 	"title": "mod",
 	"tags": [],
 	"description": "go modules 使用方法",

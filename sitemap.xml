@@ -15,11 +15,15 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/</loc>
+    <loc>https://liuzeng01.github.io/linux/docker/dockerfile/command/</loc>
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/</loc>
+    <loc>https://liuzeng01.github.io/linux/docker/cmd/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/programing/go/</loc>
   </url>
   
   <url>
@@ -31,7 +35,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/json/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/json/</loc>
   </url>
   
   <url>
@@ -39,11 +43,19 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/programing/go/note/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/linux/shell/</loc>
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/sort/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/sort/</loc>
   </url>
   
   <url>
@@ -55,7 +67,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/ssh/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/ssh/</loc>
   </url>
   
   <url>
@@ -67,7 +79,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</loc>
   </url>
   
   <url>
@@ -151,6 +163,14 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/zsmart/pcrf/testcase/rxbasic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/docker/dockerfile/godockerfile/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/booknote/</loc>
   </url>
   
@@ -183,15 +203,23 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/linux/docker/dockerfile/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/programing/flutter/</loc>
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/ip/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/sqlnodefine/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/ip/</loc>
   </url>
   
   <url>
@@ -199,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/programing/go/daily/mod/</loc>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/mod/</loc>
   </url>
   
   <url>

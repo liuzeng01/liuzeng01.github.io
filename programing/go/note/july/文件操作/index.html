@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
+
+    <title>
+        
+        文件操作 | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>PCRF Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1打开关闭文件">1.打开关闭文件</a></li>
+    <li><a href="#2文件读取">2.文件读取</a></li>
+    <li><a href="#file-read"><strong>file read</strong></a></li>
+    <li><a href="#func-f-file-readb-byte-n-int-err-error"><code>func (f *File) Read(b []byte) (n int, err error)</code></a></li>
+    <li><a href="#3使用for循环读取文件中的所有数据">3.使用for循环读取文件中的所有数据。</a></li>
+    <li><a href="#4bufio">4.bufio</a></li>
+    <li><a href="#5ioutil-读取整个文件">5.ioutil 读取整个文件</a></li>
+    <li><a href="#6文件写入操作">6.文件写入操作</a></li>
+    <li><a href="#osopenfile函数能够以指定模式打开文件从而实现文件写入相关功能">os.OpenFile()函数能够以指定模式打开文件，从而实现文件写入相关功能。</a></li>
+    <li><a href="#7write和writestring">7.Write和WriteString</a></li>
+    <li><a href="#8copyfile">8.copyFile</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>文件操作</h1>
+
+<hr>
+<h2 id="1打开关闭文件">1.打开关闭文件</h2>
+<p><strong>file open/close</strong></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75715e">// 只读方式打开当前目录下的main.go文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">file</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;./main.go&#34;</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open file failed!, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75715e">// 关闭文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="2文件读取">2.文件读取</h2>
+<h2 id="file-read"><strong>file read</strong></h2>
+<p>它接收一个字节切片，返回读取的字节数和可能的具体错误，读到文件末尾时会返回0和io.EOF</p>
+<h2 id="func-f-file-readb-byte-n-int-err-error"><code>func (f *File) Read(b []byte) (n int, err error)</code></h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75715e">// 只读方式打开当前目录下的main.go文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">file</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;./main.go&#34;</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open file failed!, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75715e">// 使用Read方法读取数据
+</span><span style="color:#75715e"></span>	<span style="color:#00a8c8">var</span> <span style="color:#75af00">tmp</span> <span style="color:#111">=</span> <span style="color:#111">make</span><span style="color:#111">([]</span><span style="color:#00a8c8">byte</span><span style="color:#111">,</span> <span style="color:#ae81ff">128</span><span style="color:#111">)</span>
+	<span style="color:#75af00">n</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Read</span><span style="color:#111">(</span><span style="color:#75af00">tmp</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">==</span> <span style="color:#75af00">io</span><span style="color:#111">.</span><span style="color:#75af00">EOF</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;文件读完了&#34;</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;read file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;读取了%d字节数据\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">n</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">tmp</span><span style="color:#111">[:</span><span style="color:#75af00">n</span><span style="color:#111">]))</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="3使用for循环读取文件中的所有数据">3.使用for循环读取文件中的所有数据。</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75715e">// 只读方式打开当前目录下的main.go文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">file</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;./main.go&#34;</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open file failed!, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75715e">// 循环读取文件
+</span><span style="color:#75715e"></span>	<span style="color:#00a8c8">var</span> <span style="color:#75af00">content</span> <span style="color:#111">[]</span><span style="color:#00a8c8">byte</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">tmp</span> <span style="color:#111">=</span> <span style="color:#111">make</span><span style="color:#111">([]</span><span style="color:#00a8c8">byte</span><span style="color:#111">,</span> <span style="color:#ae81ff">128</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">n</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Read</span><span style="color:#111">(</span><span style="color:#75af00">tmp</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">==</span> <span style="color:#75af00">io</span><span style="color:#111">.</span><span style="color:#75af00">EOF</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;文件读完了&#34;</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">break</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;read file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">return</span>
+		<span style="color:#111">}</span>
+		<span style="color:#75af00">content</span> <span style="color:#111">=</span> <span style="color:#111">append</span><span style="color:#111">(</span><span style="color:#75af00">content</span><span style="color:#111">,</span> <span style="color:#75af00">tmp</span><span style="color:#111">[:</span><span style="color:#75af00">n</span><span style="color:#111">]</span><span style="color:#f92672">...</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">content</span><span style="color:#111">))</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="4bufio">4.bufio</h2>
+<blockquote>
+<p><strong>可以用来配合channel使用读取大文件</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;bufio&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;io&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#75715e">// bufio按行读取示例
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">file</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;./xx.txt&#34;</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75af00">reader</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewReader</span><span style="color:#111">(</span><span style="color:#75af00">file</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">line</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">reader</span><span style="color:#111">.</span><span style="color:#75af00">ReadString</span><span style="color:#111">(</span><span style="color:#d88200">&#39;\n&#39;</span><span style="color:#111">)</span> <span style="color:#75715e">//注意是字符
+</span><span style="color:#75715e"></span>		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">==</span> <span style="color:#75af00">io</span><span style="color:#111">.</span><span style="color:#75af00">EOF</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">line</span><span style="color:#111">)</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">line</span><span style="color:#111">)</span>
+			<span style="color:#111">}</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;文件读完了&#34;</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">break</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;read file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">return</span>
+		<span style="color:#111">}</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Print</span><span style="color:#111">(</span><span style="color:#75af00">line</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="5ioutil-读取整个文件">5.ioutil 读取整个文件</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;io/ioutil&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#75715e">// ioutil.ReadFile读取整个文件
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">content</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">ioutil</span><span style="color:#111">.</span><span style="color:#75af00">ReadFile</span><span style="color:#111">(</span><span style="color:#d88200">&#34;./main.go&#34;</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;read file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">content</span><span style="color:#111">))</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="6文件写入操作">6.文件写入操作</h2>
+<hr>
+<h2 id="osopenfile函数能够以指定模式打开文件从而实现文件写入相关功能">os.OpenFile()函数能够以指定模式打开文件，从而实现文件写入相关功能。</h2>
+<p><code>func OpenFile(name string, flag int, perm FileMode) (*File, error) { ... }</code></p>
+<blockquote>
+<p>name：要打开的文件名 flag：打开文件的模式。 模式有以下几种：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th align="center">含义</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>os.O_WRONLY</td>
+<td align="center">只写</td>
+<td></td>
+</tr>
+<tr>
+<td>os.O_CREATE</td>
+<td align="center">创建文件</td>
+<td></td>
+</tr>
+<tr>
+<td>os.O_RDONLY</td>
+<td align="center">只读</td>
+<td></td>
+</tr>
+<tr>
+<td>os.O_RDWR</td>
+<td align="center">读写</td>
+<td></td>
+</tr>
+<tr>
+<td>os.O_TRUNC</td>
+<td align="center">清空</td>
+<td></td>
+</tr>
+<tr>
+<td>os.O_APPEND</td>
+<td align="center">追加</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>perm：文件权限，一个八进制数。r（读）04，w（写）02，x（执行）01。</p>
+</blockquote>
+<h2 id="7write和writestring">7.Write和WriteString</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">file</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">OpenFile</span><span style="color:#111">(</span><span style="color:#d88200">&#34;xx.txt&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_CREATE</span><span style="color:#111">|</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_TRUNC</span><span style="color:#111">|</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_WRONLY</span><span style="color:#111">,</span> <span style="color:#ae81ff">0666</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75af00">str</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;hello 沙河&#34;</span>
+	<span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Write</span><span style="color:#111">([]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#75af00">str</span><span style="color:#111">))</span>       <span style="color:#75715e">//写入字节切片数据
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">WriteString</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello 小王子&#34;</span><span style="color:#111">)</span> <span style="color:#75715e">//直接写入字符串数据
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><blockquote>
+<p>bufio.NewWriter</p>
+</blockquote>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">file</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">OpenFile</span><span style="color:#111">(</span><span style="color:#d88200">&#34;xx.txt&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_CREATE</span><span style="color:#111">|</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_TRUNC</span><span style="color:#111">|</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_WRONLY</span><span style="color:#111">,</span> <span style="color:#ae81ff">0666</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">file</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75af00">writer</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewWriter</span><span style="color:#111">(</span><span style="color:#75af00">file</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75af00">i</span> <span style="color:#111">&lt;</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#f92672">++</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">writer</span><span style="color:#111">.</span><span style="color:#75af00">WriteString</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello沙河\n&#34;</span><span style="color:#111">)</span> <span style="color:#75715e">//将数据先写入缓存
+</span><span style="color:#75715e"></span>	<span style="color:#111">}</span>
+	<span style="color:#75af00">writer</span><span style="color:#111">.</span><span style="color:#75af00">Flush</span><span style="color:#111">()</span> <span style="color:#75715e">//将缓存中的内容写入文件
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><blockquote>
+<p>ioutil.WriteFile</p>
+</blockquote>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">str</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;hello 沙河&#34;</span>
+	<span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">ioutil</span><span style="color:#111">.</span><span style="color:#75af00">WriteFile</span><span style="color:#111">(</span><span style="color:#d88200">&#34;./xx.txt&#34;</span><span style="color:#111">,</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#75af00">str</span><span style="color:#111">),</span> <span style="color:#ae81ff">0666</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;write file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="8copyfile">8.copyFile</h2>
+<p>借助io.Copy()实现一个拷贝文件函数。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// CopyFile 拷贝文件函数
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">CopyFile</span><span style="color:#111">(</span><span style="color:#75af00">dstName</span><span style="color:#111">,</span> <span style="color:#75af00">srcName</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">written</span> <span style="color:#00a8c8">int64</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#00a8c8">error</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#75715e">// 以读方式打开源文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">src</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#75af00">srcName</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open %s failed, err:%v.\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">srcName</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">src</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75715e">// 以写|创建的方式打开目标文件
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">dst</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">OpenFile</span><span style="color:#111">(</span><span style="color:#75af00">dstName</span><span style="color:#111">,</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_WRONLY</span><span style="color:#111">|</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">O_CREATE</span><span style="color:#111">,</span> <span style="color:#ae81ff">0644</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;open %s failed, err:%v.\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">dstName</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">dst</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">io</span><span style="color:#111">.</span><span style="color:#75af00">Copy</span><span style="color:#111">(</span><span style="color:#75af00">dst</span><span style="color:#111">,</span> <span style="color:#75af00">src</span><span style="color:#111">)</span> <span style="color:#75715e">//调用io.Copy()拷贝内容
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">CopyFile</span><span style="color:#111">(</span><span style="color:#d88200">&#34;dst.txt&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;src.txt&#34;</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;copy file failed, err:&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;copy done!&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><blockquote>
+<p>实现一个cat命令
+使用文件操作相关知识，模拟实现linux平台cat命令的功能。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;bufio&#34;</span>
+	<span style="color:#d88200">&#34;flag&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;io&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#75715e">// cat命令实现
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">cat</span><span style="color:#111">(</span><span style="color:#75af00">r</span> <span style="color:#f92672">*</span><span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">Reader</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">buf</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">r</span><span style="color:#111">.</span><span style="color:#75af00">ReadBytes</span><span style="color:#111">(</span><span style="color:#d88200">&#39;\n&#39;</span><span style="color:#111">)</span> <span style="color:#75715e">//注意是字符
+</span><span style="color:#75715e"></span>		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">==</span> <span style="color:#75af00">io</span><span style="color:#111">.</span><span style="color:#75af00">EOF</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">break</span>
+		<span style="color:#111">}</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Fprintf</span><span style="color:#111">(</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Stdout</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;%s&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">buf</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">flag</span><span style="color:#111">.</span><span style="color:#75af00">Parse</span><span style="color:#111">()</span> <span style="color:#75715e">// 解析命令行参数
+</span><span style="color:#75715e"></span>	<span style="color:#00a8c8">if</span> <span style="color:#75af00">flag</span><span style="color:#111">.</span><span style="color:#75af00">NArg</span><span style="color:#111">()</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span>
+		<span style="color:#75715e">// 如果没有参数默认从标准输入读取内容
+</span><span style="color:#75715e"></span>		<span style="color:#75af00">cat</span><span style="color:#111">(</span><span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewReader</span><span style="color:#111">(</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Stdin</span><span style="color:#111">))</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75715e">// 依次读取每个指定文件的内容并打印到终端
+</span><span style="color:#75715e"></span>	<span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75af00">i</span> <span style="color:#111">&lt;</span> <span style="color:#75af00">flag</span><span style="color:#111">.</span><span style="color:#75af00">NArg</span><span style="color:#111">();</span> <span style="color:#75af00">i</span><span style="color:#f92672">++</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">f</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Open</span><span style="color:#111">(</span><span style="color:#75af00">flag</span><span style="color:#111">.</span><span style="color:#75af00">Arg</span><span style="color:#111">(</span><span style="color:#75af00">i</span><span style="color:#111">))</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Fprintf</span><span style="color:#111">(</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Stdout</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;reading from %s failed, err:%v\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">flag</span><span style="color:#111">.</span><span style="color:#75af00">Arg</span><span style="color:#111">(</span><span style="color:#75af00">i</span><span style="color:#111">),</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">continue</span>
+		<span style="color:#111">}</span>
+		<span style="color:#75af00">cat</span><span style="color:#111">(</span><span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewReader</span><span style="color:#111">(</span><span style="color:#75af00">f</span><span style="color:#111">))</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/ssh/" title="SSH"><i class="fas fa-chevron-left p-1"></i>SSH</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="Go数据结构">Go数据结构<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

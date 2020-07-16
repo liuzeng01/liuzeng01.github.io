@@ -85,10 +85,36 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent active
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent active haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li data-nav-id="/linux/kernel/" class="nav-item my-1
         ">
@@ -144,37 +170,6 @@
         
         <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
-                
-                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
-                    动态规划
-                </a>
-        </li>
-        </ul>
-    </li>
-    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
-                
-                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
-                    SRE介绍
-                </a>
-        </li>
-        </ul>
-    </li>
-    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
-    </li>
         </ul>
     </li>
     <li data-nav-id="/programing/" class="nav-item my-1 haschildren
@@ -187,55 +182,6 @@
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/programing/go/daily/json/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/json/" class="nav-link p-0">
-                    Json 
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/daily/sort/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/sort/" class="nav-link p-0">
-                    Sort
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/daily/ssh/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/ssh/" class="nav-link p-0">
-                    SSH
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
-                    文件操作
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
-                    Golang 数据结构
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/daily/ip/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/ip/" class="nav-link p-0">
-                    IP
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/daily/mod/" class="nav-item my-1">
-                
-                 <a href="/programing/go/daily/mod/" class="nav-link p-0">
-                    mod
-                </a>
-        </li>
-        </ul>
-    </li>
     <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
         ">
         
@@ -277,6 +223,68 @@
                     tview
                 </a>
         </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
         </ul>
     </li>
         </ul>
@@ -383,6 +391,12 @@
                     Basic Gx Case
                 </a>
         </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
         </ul>
     </li>
     <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
@@ -414,6 +428,14 @@
 
 
 <ul class="docs-children list-unstyled">
+			<li class="h2 py-1">
+				<a href="/linux/docker/cmd/"> docker命令 </a>
+			</li>
+		
+			<li class="h2 py-1">
+				<a href="/linux/docker/dockerfile/"> dockerfile构建镜像 </a>
+			</li>
+		
 
 	
 </ul>
@@ -441,7 +463,7 @@
     <h4 class="text-white text-center">Read more</h4>
 
     <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/redis/" title="Redis"><i class="fas fa-chevron-left p-1"></i>Redis</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kernel/" title="Kernel">Kernel<i class="fas fa-chevron-right p-1"></i></a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/docker/cmd/" title="docker命令">docker命令<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

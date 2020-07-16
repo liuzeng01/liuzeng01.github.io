@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dockerfile构建镜像 on iNote</title>
+    <link>https://liuzeng01.github.io/linux/docker/dockerfile/</link>
+    <description>Recent content in dockerfile构建镜像 on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/linux/docker/dockerfile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>dockerfile基础命令</title>
+      <link>https://liuzeng01.github.io/linux/docker/dockerfile/command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/command/</guid>
+      <description>dockerfile 基础命令 FROM 指定基础镜像 FROM nginx
+RUN 执行命令 exec 格式: RUN [&amp;quot;可执行文件&amp;quot;, &amp;quot;参数1&amp;quot;, &amp;quot;参数2&amp;quot;]RUN apt-get updateRUN apt-get install -y gcc libc6-dev makeCOPY 复制文件 COPY [&amp;quot;&amp;lt;源路径1&amp;gt;&amp;quot;,... &amp;quot;&amp;lt;目标路径&amp;gt;&amp;quot;]COPY package.json /usr/src/app/ADD 更高级的复制文件 ADD [&amp;quot;&amp;lt;源路径1&amp;gt;&amp;quot;,... &amp;quot;&amp;lt;目标路径&amp;gt;&amp;quot;]源路径可以使是url,如果是压缩包,自动解压缩,不推荐使用
+FROM scratchADD ubuntu-xenial-core-cloudimg-amd64-root.tar.gzCMD 容器启动命令 shell 格式: CMD &amp;lt;命令&amp;gt;exec 格式: CMD [&amp;quot;可执行文件&amp;quot;, &amp;quot;参数1&amp;quot;, &amp;quot;参数2&amp;quot;...]在指定了 ENTRYPOINT 指令后，用 CMD 指 定具体的参数
+CMD [ &amp;quot;sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;echo $HOME&amp;quot; ]#CMD echo $HOMEENTRYPOINT 入口点 shell 格式: ENTRYPOINT &amp;lt;命令&amp;gt;exec 格式: ENTRYPOINT [&amp;quot;可执行文件&amp;quot;, &amp;quot;参数1&amp;quot;, &amp;quot;参数2&amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>分阶段构建减小go镜像体积</title>
+      <link>https://liuzeng01.github.io/linux/docker/dockerfile/godockerfile/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/godockerfile/</guid>
+      <description> 分阶段构建主要思路 第一阶段 使用golang镜像构建出可执行文件 第二阶段 使用busybox:glibc小镜像作为基础镜像镜像文件 第一阶段 FROMgolang AS my_build_stageCOPY hello.go .RUN go build hello.go第二阶段 FROMbusybox:glibcCOPY --from=my_build_stage hello .// COPY --from=0 hello . 与COPY --from=my_build_stage hello .等效 0表示第一阶段CMD [&amp;#34;./hello&amp;#34;] Go项目应用的Dockerfile通常大概类似这样，但是每个项目的细节可能有所不同。
+FROM golang:alpine指定了开始阶段的基础映像（其中包含Go工具和库，用于构建程序），AS build是给这个阶段取名为build。 golang:alpine指定了Go基础映像的alpine版本， alpine是专门为容器设计的小型Linux发行版。这个Dockerfile中使用了两次FROM指令，第二条FROM scratch行，它告诉Docker从一个全新的，完全空的容器镜像重新开始，然后将上个阶段编译好的程序复制到其中。这个才是我们随后将用于运行的Go应用程序的容器镜像。
+scratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序的多阶段构建很常见，使用scratch镜像可以节省大量空间，因为我们实际上不需要Go工具或其他任何东西来运行我们的编译好的程序，这可能也是Go在容器时代的一个优势吧。
+ Back</description>
+    </item>
+    
+  </channel>
+</rss>

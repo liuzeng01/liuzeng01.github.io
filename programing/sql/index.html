@@ -85,10 +85,36 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li data-nav-id="/linux/kernel/" class="nav-item my-1
         ">
@@ -182,93 +208,6 @@
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
-        <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/daily/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/programing/go/daily/"><h6>Go Daily Note</h6></a>
-        <ul class="list-unstyled ml-2">
-        </ul>
-    </li>
-    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
-                    viper
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
-                    routine
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
-                    cobra
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
-                    hugo
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
-                    nutsdb
-                </a>
-        </li>
-        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
-                
-                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
-                    tview
-                </a>
-        </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
-    <li data-nav-id="/programing/sql/" class="nav-item my-1 parent active
-        ">
-        
-        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
-    </li>
-    <li data-nav-id="/programing/java/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
-    </li>
-    <li data-nav-id="/programing/c/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
-    </li>
-    <li data-nav-id="/programing/python/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
-    </li>
-    <li data-nav-id="/programing/javascript/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
-    </li>
-    <li data-nav-id="/programing/flutter/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
-    </li>
         </ul>
     </li>
     <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
@@ -341,6 +280,12 @@
                     Basic Gx Case
                 </a>
         </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
         </ul>
     </li>
     <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
@@ -398,7 +343,7 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/github.com/rivo/tview/" title="tview"><i class="fas fa-chevron-left p-1"></i>tview</a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/mod/" title="mod"><i class="fas fa-chevron-left p-1"></i>mod</a>
         <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/java/" title="Java">Java<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
