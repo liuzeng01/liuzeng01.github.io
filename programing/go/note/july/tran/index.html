@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/tran/">
+
+    <title>
+        
+        tran | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>PCRF Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-入口模块">1. 入口模块</a>
+      <ul>
+        <li><a href="#maingo">main.go</a></li>
+        <li><a href="#cmdrootgo">cmd/root.go</a></li>
+        <li><a href="#subcommand">subcommand</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-逻辑模块">2. 逻辑模块</a>
+      <ul>
+        <li><a href="#构建请求url">构建请求url</a></li>
+        <li><a href="#结构体和全局变量">结构体和全局变量</a></li>
+        <li><a href="#进行get请求和response的解构">进行get请求和response的解构</a></li>
+        <li><a href="#结果输出">结果输出</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-子命令模块">3. 子命令模块</a>
+      <ul>
+        <li><a href="#interactive">interactive</a></li>
+        <li><a href="#tasks">tasks</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-效果">4. 效果</a>
+      <ul>
+        <li><a href="#tran">tran</a></li>
+        <li><a href="#tran--q--d">tran -q -d</a></li>
+        <li><a href="#tran-more--i">tran more -i</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>tran</h1>
+
+<hr>
+
+
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-primary rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-primary">
+            <h3>Tran工具</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            <ol>
+<li>使用了百度翻译的API，进行单词或者短句的翻译</li>
+<li>主要是为了方便自己平时写一些英文文档时，词穷的情况。所以设计成了命令行程序，随时使用。</li>
+</ol>
+
+        </div>
+    </div>
+</div>
+
+<hr>
+<h2 id="1-入口模块">1. 入口模块</h2>
+<p>利用了<strong>cobra</strong>来进行设计</p>
+<h3 id="maingo">main.go</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;tran/cmd&#34;</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">cmd</span><span style="color:#111">.</span><span style="color:#75af00">Execute</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">//执行入口
+</span></code></pre></div><h3 id="cmdrootgo">cmd/root.go</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">cmd</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;GoStudy/week17/tran/internal&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/cobra&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+
+	<span style="color:#75af00">homedir</span> <span style="color:#d88200">&#34;github.com/mitchellh/go-homedir&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/viper&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">cfgFile</span> <span style="color:#00a8c8">string</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">rootCmd</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">{</span>
+	<span style="color:#75af00">Use</span><span style="color:#111">:</span>   <span style="color:#d88200">&#34;tran&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Short</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;The applicaiton to help you translate the word in the terminal&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Long</span><span style="color:#111">:</span> <span style="color:#d88200">`The Manual method :
+</span><span style="color:#d88200">Input your query string ,and input your target language code,
+</span><span style="color:#d88200">E.g. Input : hello,zh 
+</span><span style="color:#d88200">And the output : hello --&gt; 你好 .
+</span><span style="color:#d88200">The support language As follow as:
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">			中文			zh
+</span><span style="color:#d88200">			英语			en
+</span><span style="color:#d88200">			粤语			yue
+</span><span style="color:#d88200">			文言文			wyw
+</span><span style="color:#d88200">			日语			jp
+</span><span style="color:#d88200">			韩语			kor
+</span><span style="color:#d88200">			法语			fra
+</span><span style="color:#d88200">			西班牙语		spa
+</span><span style="color:#d88200">			泰语			th
+</span><span style="color:#d88200">			阿拉伯语		ara
+</span><span style="color:#d88200">			俄语			ru
+</span><span style="color:#d88200">			葡萄牙语		pt
+</span><span style="color:#d88200">			德语			de
+</span><span style="color:#d88200">			意大利语		it
+</span><span style="color:#d88200">			希腊语			el
+</span><span style="color:#d88200">			荷兰语			nl
+</span><span style="color:#d88200">			波兰语			pl
+</span><span style="color:#d88200">			保加利亚语		bul
+</span><span style="color:#d88200">			爱沙尼亚语		est
+</span><span style="color:#d88200">			丹麦语			dan
+</span><span style="color:#d88200">			芬兰语  		fin
+</span><span style="color:#d88200">			捷克语			cs
+</span><span style="color:#d88200">			罗马尼亚语		rom
+</span><span style="color:#d88200">			斯洛文尼亚语		slo
+</span><span style="color:#d88200">			瑞典语			swe
+</span><span style="color:#d88200">			匈牙利语		hu
+</span><span style="color:#d88200">			繁体中文		cht
+</span><span style="color:#d88200">			越南语			vie
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">`</span><span style="color:#111">,</span>
+
+	<span style="color:#75af00">Run</span><span style="color:#111">:</span> <span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">cmd</span> <span style="color:#f92672">*</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">,</span> <span style="color:#75af00">args</span> <span style="color:#111">[]</span><span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span><span style="color:#111">)</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">cmd</span><span style="color:#111">.</span><span style="color:#75af00">Help</span><span style="color:#111">()</span>
+			<span style="color:#00a8c8">return</span>
+		<span style="color:#111">}</span>
+		<span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">TranString</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span><span style="color:#111">,</span> <span style="color:#75af00">tostr</span><span style="color:#111">)</span>
+
+	<span style="color:#111">},</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">Execute</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Execute</span><span style="color:#111">();</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Exit</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">querystr</span> <span style="color:#00a8c8">string</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">tostr</span> <span style="color:#00a8c8">string</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">OnInitialize</span><span style="color:#111">(</span><span style="color:#75af00">initConfig</span><span style="color:#111">)</span>
+
+
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">PersistentFlags</span><span style="color:#111">().</span><span style="color:#75af00">StringVar</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">cfgFile</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;config&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;config file (default is $HOME/.tran.yaml)&#34;</span><span style="color:#111">)</span>
+
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Flags</span><span style="color:#111">().</span><span style="color:#75af00">BoolP</span><span style="color:#111">(</span><span style="color:#d88200">&#34;toggle&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;t&#34;</span><span style="color:#111">,</span> <span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;Help message for toggle&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Flags</span><span style="color:#111">().</span><span style="color:#75af00">StringVarP</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">querystr</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;query&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;q&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;Please input your query string :&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">Flags</span><span style="color:#111">().</span><span style="color:#75af00">StringVarP</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">tostr</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;dst&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;d&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;en&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;Please input your destination languange to transform :&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">//这个文件也是命令行的入口，介绍主要用法，以及根据输入调用函数
+</span><span style="color:#75715e"></span>
+</code></pre></div><h3 id="subcommand">subcommand</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">cmd</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;GoStudy/week17/tran/internal&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;github.com/spf13/cobra&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">m</span> <span style="color:#00a8c8">bool</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">i</span> <span style="color:#00a8c8">bool</span>
+
+<span style="color:#75715e">// moreCmd represents the more command
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">moreCmd</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">{</span>
+	<span style="color:#75af00">Use</span><span style="color:#111">:</span>   <span style="color:#d88200">&#34;more&#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Short</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Sub Command &#34;</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Long</span><span style="color:#111">:</span>  <span style="color:#d88200">`This sub command is help you to translate in another way.`</span><span style="color:#111">,</span>
+	<span style="color:#75af00">Run</span><span style="color:#111">:</span> <span style="color:#00a8c8">func</span><span style="color:#111">(</span><span style="color:#75af00">cmd</span> <span style="color:#f92672">*</span><span style="color:#75af00">cobra</span><span style="color:#111">.</span><span style="color:#75af00">Command</span><span style="color:#111">,</span> <span style="color:#75af00">args</span> <span style="color:#111">[]</span><span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">m</span> <span style="color:#111">{</span>
+			<span style="color:#75715e">//internal.MoreTasks()
+</span><span style="color:#75715e"></span>			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Wait for support&#34;</span><span style="color:#111">)</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#75af00">i</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">Interactive</span><span style="color:#111">()</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Please select the function pattern !&#34;</span><span style="color:#111">)</span>
+		<span style="color:#111">}</span>
+	<span style="color:#111">},</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">rootCmd</span><span style="color:#111">.</span><span style="color:#75af00">AddCommand</span><span style="color:#111">(</span><span style="color:#75af00">moreCmd</span><span style="color:#111">)</span>
+
+	<span style="color:#75af00">moreCmd</span><span style="color:#111">.</span><span style="color:#75af00">Flags</span><span style="color:#111">().</span><span style="color:#75af00">BoolVarP</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">m</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;tasks&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;m&#34;</span><span style="color:#111">,</span> <span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;Use this command to translate a lot in one time &#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">moreCmd</span><span style="color:#111">.</span><span style="color:#75af00">Flags</span><span style="color:#111">().</span><span style="color:#75af00">BoolVarP</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">i</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;interactive&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;i&#34;</span><span style="color:#111">,</span> <span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;use this command to translate in a interactive line.&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">//子命令的设计，一个是交互命令行模式下进行翻译，这个我比较中意，比较方便，另一个是多任务翻译，开发的比较失败，回头再继续吧
+</span><span style="color:#75715e"></span>
+
+</code></pre></div><h2 id="2-逻辑模块">2. 逻辑模块</h2>
+<h3 id="构建请求url">构建请求url</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">buildurl</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span> <span style="color:#00a8c8">string</span><span style="color:#111">,</span> <span style="color:#75af00">tostr</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#00a8c8">string</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">md5Ctx</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">md5</span><span style="color:#111">.</span><span style="color:#75af00">New</span><span style="color:#111">()</span>
+	<span style="color:#75af00">rand</span><span style="color:#111">.</span><span style="color:#75af00">Seed</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">().</span><span style="color:#75af00">Unix</span><span style="color:#111">())</span>
+	<span style="color:#75af00">randnum</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">strconv</span><span style="color:#111">.</span><span style="color:#75af00">Itoa</span><span style="color:#111">(</span><span style="color:#75af00">rand</span><span style="color:#111">.</span><span style="color:#75af00">Int</span><span style="color:#111">())</span>
+	<span style="color:#75af00">signstr</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">appid</span> <span style="color:#f92672">+</span> <span style="color:#75af00">querystr</span> <span style="color:#f92672">+</span> <span style="color:#75af00">randnum</span> <span style="color:#f92672">+</span> <span style="color:#75af00">key</span>
+	<span style="color:#75af00">md5Ctx</span><span style="color:#111">.</span><span style="color:#75af00">Write</span><span style="color:#111">([]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#75af00">signstr</span><span style="color:#111">))</span>
+	<span style="color:#75af00">cipherStr</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">md5Ctx</span><span style="color:#111">.</span><span style="color:#75af00">Sum</span><span style="color:#111">(</span><span style="color:#00a8c8">nil</span><span style="color:#111">)</span>
+	<span style="color:#75af00">signresult</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">hex</span><span style="color:#111">.</span><span style="color:#75af00">EncodeToString</span><span style="color:#111">(</span><span style="color:#75af00">cipherStr</span><span style="color:#111">)</span>
+	<span style="color:#75af00">url</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Sprintf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s?q=%s&amp;from=auto&amp;to=%s&amp;appid=%s&amp;salt=%s&amp;sign=%s&#34;</span><span style="color:#111">,</span>
+		<span style="color:#75af00">baseurl</span><span style="color:#111">,</span>
+		<span style="color:#75af00">querystr</span><span style="color:#111">,</span>
+		<span style="color:#75af00">tostr</span><span style="color:#111">,</span>
+		<span style="color:#75af00">appid</span><span style="color:#111">,</span>
+		<span style="color:#75af00">randnum</span><span style="color:#111">,</span>
+		<span style="color:#75af00">signresult</span><span style="color:#111">,</span>
+	<span style="color:#111">)</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">url</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">//根据百度翻译API对接入的url的要求，进行了加密和拼接的步骤。中间用到了md5对称加密
+</span><span style="color:#75715e"></span>
+</code></pre></div><h3 id="结构体和全局变量">结构体和全局变量</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">internal</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Tran</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">From</span>        <span style="color:#00a8c8">string</span>       <span style="color:#d88200">`json:&#34;from&#34;`</span>
+	<span style="color:#75af00">To</span>          <span style="color:#00a8c8">string</span>       <span style="color:#d88200">`json:&#34;to&#34;`</span>
+	<span style="color:#75af00">TransResult</span> <span style="color:#111">[]</span><span style="color:#75af00">TranResult</span> <span style="color:#d88200">`json:&#34;trans_result&#34;`</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">TranResult</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Src</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;src&#34;`</span>
+	<span style="color:#75af00">Dst</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;dst&#34;`</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">appid</span> <span style="color:#00a8c8">string</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">key</span> <span style="color:#00a8c8">string</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">baseurl</span> <span style="color:#00a8c8">string</span>
+
+<span style="color:#75715e">//Tran 结构体用来解构百度翻译的返回Json
+</span><span style="color:#75715e">//appid和key是百度翻译的认证应用ID 
+</span><span style="color:#75715e">//baseurl是百度翻译API的网址
+</span></code></pre></div><h3 id="进行get请求和response的解构">进行get请求和response的解构</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">BaiduRequest</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span> <span style="color:#00a8c8">string</span><span style="color:#111">,</span> <span style="color:#75af00">tostr</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">Tran</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">url</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">buildurl</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span><span style="color:#111">,</span> <span style="color:#75af00">tostr</span><span style="color:#111">)</span>
+	<span style="color:#75af00">resp</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">http</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">(</span><span style="color:#75af00">url</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Please retry !&#34;</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">resp</span><span style="color:#111">.</span><span style="color:#75af00">Body</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
+	<span style="color:#75af00">res</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">ioutil</span><span style="color:#111">.</span><span style="color:#75af00">ReadAll</span><span style="color:#111">(</span><span style="color:#75af00">resp</span><span style="color:#111">.</span><span style="color:#75af00">Body</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Please retry !&#34;</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">tranresult</span> <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">Tran</span><span style="color:#111">)</span>
+	<span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Unmarshal</span><span style="color:#111">(</span><span style="color:#75af00">res</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">tranresult</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">tranresult</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">//中间要注意的问题：Json解码时要注意对应结构体的字段和类型相同
+</span><span style="color:#75715e">//注意close response的body，不然可能内存泄漏
+</span></code></pre></div><h3 id="结果输出">结果输出</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">TranString</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span> <span style="color:#00a8c8">string</span><span style="color:#111">,</span> <span style="color:#75af00">tostr</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">tran</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">BaiduRequest</span><span style="color:#111">(</span><span style="color:#75af00">querystr</span><span style="color:#111">,</span> <span style="color:#75af00">tostr</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">tran</span><span style="color:#111">.</span><span style="color:#75af00">TransResult</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">v</span><span style="color:#111">.</span><span style="color:#75af00">Src</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;--&gt;&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">v</span><span style="color:#111">.</span><span style="color:#75af00">Dst</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">//这个没什么可解释的
+</span></code></pre></div><h2 id="3-子命令模块">3. 子命令模块</h2>
+<h3 id="interactive">interactive</h3>
+<p>这个子模块其实也是调前面的函数，做了下其他的改造</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">Interactive</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Enter the Interactive pattern!&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">`Tips:
+</span><span style="color:#d88200">		1. Input your query string ,and input your dst language after &#34;,&#34;;
+</span><span style="color:#d88200">		2. If you dont input the dst language ,the default language is English.
+</span><span style="color:#d88200">		3. If you want to input two or more word in the command line ,
+</span><span style="color:#d88200">			please Capitalize the initial of word(especially English).
+</span><span style="color:#d88200">		4. After all done, input the &#34;q&#34; or &#34;quit&#34; to exit.
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">`</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Input Here : &#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">scanner</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewScanner</span><span style="color:#111">(</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Stdin</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">scanner</span><span style="color:#111">.</span><span style="color:#75af00">Scan</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">var</span> <span style="color:#75af00">transtruct</span> <span style="color:#111">[]</span><span style="color:#00a8c8">string</span>
+		<span style="color:#75af00">text</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">strings</span><span style="color:#111">.</span><span style="color:#75af00">Replace</span><span style="color:#111">(</span><span style="color:#75af00">scanner</span><span style="color:#111">.</span><span style="color:#75af00">Text</span><span style="color:#111">(),</span> <span style="color:#d88200">&#34;，&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+		<span style="color:#75af00">text</span> <span style="color:#111">=</span> <span style="color:#75af00">strings</span><span style="color:#111">.</span><span style="color:#75af00">Replace</span><span style="color:#111">(</span><span style="color:#75af00">text</span><span style="color:#111">,</span> <span style="color:#d88200">&#34; &#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+		<span style="color:#75af00">res</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">strings</span><span style="color:#111">.</span><span style="color:#75af00">Split</span><span style="color:#111">(</span><span style="color:#75af00">text</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">res</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">if</span> <span style="color:#75af00">v</span> <span style="color:#f92672">!=</span> <span style="color:#d88200">&#34;&#34;</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">transtruct</span> <span style="color:#111">=</span> <span style="color:#111">append</span><span style="color:#111">(</span><span style="color:#75af00">transtruct</span><span style="color:#111">,</span> <span style="color:#75af00">v</span><span style="color:#111">)</span>
+			<span style="color:#111">}</span>
+		<span style="color:#111">}</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">transtruct</span><span style="color:#111">)</span> <span style="color:#111">&gt;</span> <span style="color:#ae81ff">2</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Input error !Please Retry !&#34;</span><span style="color:#111">)</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Input Here : &#34;</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">continue</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">transtruct</span><span style="color:#111">)</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">if</span> <span style="color:#75af00">transtruct</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;q&#34;</span> <span style="color:#f92672">||</span> <span style="color:#75af00">transtruct</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;quit&#34;</span> <span style="color:#111">{</span>
+				<span style="color:#00a8c8">return</span>
+			<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">TranString</span><span style="color:#111">(</span><span style="color:#75af00">transtruct</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">],</span> <span style="color:#d88200">&#34;en&#34;</span><span style="color:#111">)</span>
+				<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Input Here : &#34;</span><span style="color:#111">)</span>
+				<span style="color:#00a8c8">continue</span>
+			<span style="color:#111">}</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">transtruct</span><span style="color:#111">)</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">TranString</span><span style="color:#111">(</span><span style="color:#75af00">transtruct</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">],</span> <span style="color:#75af00">transtruct</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">])</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Input Here : &#34;</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">continue</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Input Here : &#34;</span><span style="color:#111">)</span>
+			<span style="color:#00a8c8">continue</span>
+		<span style="color:#111">}</span>
+
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">//主要就是循环读取那边，在结束翻译后，重新进行输入的读取
+</span><span style="color:#75715e"></span>
+</code></pre></div><h3 id="tasks">tasks</h3>
+<p><em>本来设计的目标是多任务翻译。比如从文件中读取，但是还没做好，有一些问题。</em></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">wait</span> <span style="color:#00a8c8">for</span> <span style="color:#75af00">support</span> 
+</code></pre></div><h2 id="4-效果">4. 效果</h2>
+<h3 id="tran">tran</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">C:<span style="color:#8045ff">\U</span>sers<span style="color:#8045ff">\1</span>5996&gt;tran
+The Manual method :
+Input your query string ,and input your target language code,
+E.g. Input : hello,zh
+And the output : hello --&gt; 你好 .
+The support language As follow as:
+
+                        中文                    zh
+                        英语                    en
+                        粤语                    yue
+                        文言文                  wyw
+                        日语                    jp
+                        韩语                    kor
+                        法语                    fra
+                        西班牙语                spa
+                        泰语                    th
+                        阿拉伯语                ara
+                        俄语                    ru
+                        葡萄牙语                pt
+                        德语                    de
+                        意大利语                it
+                        希腊语                  el
+                        荷兰语                  nl
+                        波兰语                  pl
+                        保加利亚语              bul
+                        爱沙尼亚语              est
+                        丹麦语                  dan
+                        芬兰语                  fin
+                        捷克语                  cs
+                        罗马尼亚语              rom
+                        斯洛文尼亚语            slo
+                        瑞典语                  swe
+                        匈牙利语                hu
+                        繁体中文                cht
+                        越南语                  vie
+
+Usage:
+  tran <span style="color:#f92672">[</span>flags<span style="color:#f92672">]</span>
+  tran <span style="color:#f92672">[</span>command<span style="color:#f92672">]</span>
+
+Available Commands:
+  <span style="color:#111">help</span>        Help about any <span style="color:#111">command</span>
+  more        Sub Command
+
+Flags:
+      --config string   config file <span style="color:#f92672">(</span>default is <span style="color:#111">$HOME</span>/.tran.yaml<span style="color:#f92672">)</span>
+  -d, --dst string      Please input your destination languange to transform : <span style="color:#f92672">(</span>default <span style="color:#d88200">&#34;en&#34;</span><span style="color:#f92672">)</span>
+  -h, --help            <span style="color:#111">help</span> <span style="color:#00a8c8">for</span> tran
+  -q, --query string    Please input your query string :
+  -t, --toggle          Help message <span style="color:#00a8c8">for</span> toggle
+
+Use <span style="color:#d88200">&#34;tran [command] --help&#34;</span> <span style="color:#00a8c8">for</span> more information about a command.
+</code></pre></div><h3 id="tran--q--d">tran -q -d</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">C:<span style="color:#8045ff">\U</span>sers<span style="color:#8045ff">\1</span>5996&gt;tran -q hello -d ru
+hello --&gt; Здравствыйте
+</code></pre></div><h3 id="tran-more--i">tran more -i</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">C:<span style="color:#8045ff">\U</span>sers<span style="color:#8045ff">\1</span>5996&gt;tran more -i
+Enter the Interactive pattern!
+Tips:
+                1. Input your query string ,and input your dst language after <span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">;</span>
+                2. If you dont input the dst language ,the default language is English.
+                3. If you want to input two or more word in the <span style="color:#111">command</span> line ,
+                        please Capitalize the initial of word<span style="color:#f92672">(</span>especially English<span style="color:#f92672">)</span>.
+                4. After all <span style="color:#00a8c8">done</span>, input the <span style="color:#d88200">&#34;q&#34;</span> or <span style="color:#d88200">&#34;quit&#34;</span> to exit.
+
+
+Input Here :
+Input Here :
+Input Here : hello,ru
+hello --&gt; Здравствыйте
+Input Here : hello,wyw
+hello --&gt; 君
+Input Here : hello,jp
+hello --&gt; こんにちは
+Input Here : hello,cht
+hello --&gt; 你好
+Input Here : hello,vie
+hello --&gt; Alô.
+Input Here :
+</code></pre></div><hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="文件操作"><i class="fas fa-chevron-left p-1"></i>文件操作</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/scanner/" title="循环读取输入">循环读取输入<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

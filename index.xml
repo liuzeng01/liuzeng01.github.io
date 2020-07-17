@@ -225,6 +225,16 @@ go get -u -v github.com/spf13/hugo
     </item>
     
     <item>
+      <title>tran</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/tran/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/tran/</guid>
+      <description>Tran工具 使用了百度翻译的API，进行单词或者短句的翻译 主要是为了方便自己平时写一些英文文档时，词穷的情况。所以设计成了命令行程序，随时使用。   1. 入口模块 利用了cobra来进行设计
+main.go package main import &amp;#34;tran/cmd&amp;#34; func main() { cmd.Execute() } //执行入口 cmd/root.go package cmd import ( &amp;#34;GoStudy/week17/tran/internal&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/spf13/cobra&amp;#34; &amp;#34;os&amp;#34; homedir &amp;#34;github.com/mitchellh/go-homedir&amp;#34; &amp;#34;github.com/spf13/viper&amp;#34; ) var cfgFile string var rootCmd = &amp;amp;cobra.Command{ Use: &amp;#34;tran&amp;#34;, Short: &amp;#34;The applicaiton to help you translate the word in the terminal&amp;#34;, Long: `The Manual method : Input your query string ,and input your target language code, E.</description>
+    </item>
+    
+    <item>
       <title>分阶段构建减小go镜像体积</title>
       <link>https://liuzeng01.github.io/linux/docker/dockerfile/godockerfile/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -234,6 +244,15 @@ go get -u -v github.com/spf13/hugo
 FROM golang:alpine指定了开始阶段的基础映像（其中包含Go工具和库，用于构建程序），AS build是给这个阶段取名为build。 golang:alpine指定了Go基础映像的alpine版本， alpine是专门为容器设计的小型Linux发行版。这个Dockerfile中使用了两次FROM指令，第二条FROM scratch行，它告诉Docker从一个全新的，完全空的容器镜像重新开始，然后将上个阶段编译好的程序复制到其中。这个才是我们随后将用于运行的Go应用程序的容器镜像。
 scratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序的多阶段构建很常见，使用scratch镜像可以节省大量空间，因为我们实际上不需要Go工具或其他任何东西来运行我们的编译好的程序，这可能也是Go在容器时代的一个优势吧。
  Back</description>
+    </item>
+    
+    <item>
+      <title>循环读取输入</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/scanner/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/scanner/</guid>
+      <description> 循环读取用户输入 package main import ( &amp;#34;bufio&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; ) func main() { scanner() } func scanner() { fmt.Printf(&amp;#34;----&amp;gt;&amp;#34;) scanner := bufio.NewScanner(os.Stdin) for scanner.Scan() { fmt.Println(scanner.Text()) fmt.Printf(&amp;#34;----&amp;gt;&amp;#34;) } } </description>
     </item>
     
     <item>

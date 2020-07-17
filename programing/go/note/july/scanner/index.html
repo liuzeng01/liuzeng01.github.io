@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/essay/">
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/scanner/">
 
     <title>
         
-        Essay | iNote
+        循环读取输入 | iNote
         
     </title>
 
@@ -133,7 +133,7 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
@@ -203,12 +203,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -256,12 +256,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
@@ -296,7 +296,7 @@
                     tran
                 </a>
         </li>
-        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1 active">
                 
                  <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
                     循环读取输入
@@ -458,39 +458,43 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#循环读取用户输入">循环读取用户输入</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Essay</h1>
+<h1>循环读取输入</h1>
 
 <hr>
+<h2 id="循环读取用户输入">循环读取用户输入</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
 
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;bufio&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;os&#34;</span>
+<span style="color:#111">)</span>
 
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">scanner</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
 
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/essay/july/"> July </a>
-			</li>
-		
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">scanner</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;----&gt;&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">scanner</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewScanner</span><span style="color:#111">(</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Stdin</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">scanner</span><span style="color:#111">.</span><span style="color:#75af00">Scan</span><span style="color:#111">()</span> <span style="color:#111">{</span>
 
-	
-</ul>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">scanner</span><span style="color:#111">.</span><span style="color:#75af00">Text</span><span style="color:#111">())</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;----&gt;&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
 
-
-
-
-<hr>
-
-
-
-<a href="../" class="btn btn-info">
-    Back
-</a>
-
-
+</code></pre></div>
 
     
 
@@ -501,8 +505,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/" title="Kubernetes"><i class="fas fa-chevron-left p-1"></i>Kubernetes</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/" title="July">July<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/tran/" title="tran"><i class="fas fa-chevron-left p-1"></i>tran</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="Go数据结构">Go数据结构<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

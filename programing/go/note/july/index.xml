@@ -54,6 +54,25 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>tran</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/tran/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/tran/</guid>
+      <description>Tran工具 使用了百度翻译的API，进行单词或者短句的翻译 主要是为了方便自己平时写一些英文文档时，词穷的情况。所以设计成了命令行程序，随时使用。   1. 入口模块 利用了cobra来进行设计
+main.go package main import &amp;#34;tran/cmd&amp;#34; func main() { cmd.Execute() } //执行入口 cmd/root.go package cmd import ( &amp;#34;GoStudy/week17/tran/internal&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/spf13/cobra&amp;#34; &amp;#34;os&amp;#34; homedir &amp;#34;github.com/mitchellh/go-homedir&amp;#34; &amp;#34;github.com/spf13/viper&amp;#34; ) var cfgFile string var rootCmd = &amp;amp;cobra.Command{ Use: &amp;#34;tran&amp;#34;, Short: &amp;#34;The applicaiton to help you translate the word in the terminal&amp;#34;, Long: `The Manual method : Input your query string ,and input your target language code, E.</description>
+    </item>
+    
+    <item>
+      <title>循环读取输入</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/scanner/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/scanner/</guid>
+      <description> 循环读取用户输入 package main import ( &amp;#34;bufio&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; ) func main() { scanner() } func scanner() { fmt.Printf(&amp;#34;----&amp;gt;&amp;#34;) scanner := bufio.NewScanner(os.Stdin) for scanner.Scan() { fmt.Println(scanner.Text()) fmt.Printf(&amp;#34;----&amp;gt;&amp;#34;) } } </description>
+    </item>
+    
+    <item>
       <title>Go数据结构</title>
       <link>https://liuzeng01.github.io/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
