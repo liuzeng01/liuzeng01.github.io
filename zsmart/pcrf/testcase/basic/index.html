@@ -75,10 +75,18 @@
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/shell/" class="nav-item my-1
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        </ul>
     </li>
     <li data-nav-id="/linux/redis/" class="nav-item my-1
         ">
@@ -153,6 +161,12 @@
                 
                  <a href="/essay/july/net/" class="nav-link p-0">
                     网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
                 </a>
         </li>
         <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
@@ -290,6 +304,12 @@
                     文件操作
                 </a>
         </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
         <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
                 
                  <a href="/programing/go/note/july/tran/" class="nav-link p-0">
@@ -327,6 +347,18 @@
                 </a>
         </li>
         </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
     </li>
         </ul>
     </li>
@@ -426,7 +458,7 @@
     <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 parent haschildren
         ">
         
-        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>PCRF Case</h6></a>
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
         <ul class="list-unstyled ml-2">
         <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1 active">
                 
@@ -460,32 +492,20 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1-基础配置">1. 基础配置</a>
+    <li><a href="#1-pcrf-v9-融合模式基本结构">1. PCRF V9 融合模式基本结构</a></li>
+    <li><a href="#2-pcrf对接ocs配置流程">2. PCRF对接OCS配置流程</a></li>
+    <li><a href="#3-pcrf侧配置流程">3. PCRF侧配置流程</a>
       <ul>
-        <li><a href="#pcrf侧">pcrf侧</a></li>
-        <li><a href="#ocs侧">ocs侧</a></li>
+        <li><a href="#a-配置需要使用的静态属性">a 配置需要使用的静态属性</a></li>
+        <li><a href="#b-配置monitor-key">b 配置Monitor Key</a></li>
+        <li><a href="#c-配置一条qos策略">c 配置一条QoS策略</a></li>
+        <li><a href="#d-配置一条policy-rule">d 配置一条Policy Rule</a></li>
+        <li><a href="#e-配置一个新的event">e 配置一个新的event</a></li>
       </ul>
     </li>
-    <li><a href="#2-测试流程">2. 测试流程</a>
-      <ul>
-        <li><a href="#开户流程">开户流程</a></li>
-        <li><a href="#phub对接流程">phub对接流程</a></li>
-        <li><a href="#发包流程">发包流程</a></li>
-      </ul>
-    </li>
-    <li><a href="#3-日志流程">3. 日志流程</a>
-      <ul>
-        <li><a href="#pde日志">PDE日志</a></li>
-        <li><a href="#sypro日志">SyPro日志</a></li>
-      </ul>
-    </li>
-    <li><a href="#4-相关问题记录">4. 相关问题记录</a>
-      <ul>
-        <li><a href="#sypro未返回policy-plan-code">SyPro未返回policy plan code</a></li>
-        <li><a href="#pde进行分拣时core退出问题">PDE进行分拣时core退出问题</a></li>
-        <li><a href="#pde-down掉后zcm自动拉起pde建立同一局号链路问题">PDE Down掉后ZCM自动拉起PDE，建立同一局号链路问题</a></li>
-      </ul>
-    </li>
+    <li><a href="#4-ocs侧配置流程">4. OCS侧配置流程</a></li>
+    <li><a href="#5-发包及消息流程">5. 发包及消息流程</a></li>
+    <li><a href="#6-后台日志流程">6. 后台日志流程</a></li>
   </ul>
 </nav>
 </div>
@@ -496,20 +516,36 @@
 <h1>Basic Gx Case</h1>
 
 <hr>
-<h2 id="1-基础配置">1. 基础配置</h2>
-<h3 id="pcrf侧">pcrf侧</h3>
-<h3 id="ocs侧">ocs侧</h3>
-<h2 id="2-测试流程">2. 测试流程</h2>
-<h3 id="开户流程">开户流程</h3>
-<h3 id="phub对接流程">phub对接流程</h3>
-<h3 id="发包流程">发包流程</h3>
-<h2 id="3-日志流程">3. 日志流程</h2>
-<h3 id="pde日志">PDE日志</h3>
-<h3 id="sypro日志">SyPro日志</h3>
-<h2 id="4-相关问题记录">4. 相关问题记录</h2>
-<h3 id="sypro未返回policy-plan-code">SyPro未返回policy plan code</h3>
-<h3 id="pde进行分拣时core退出问题">PDE进行分拣时core退出问题</h3>
-<h3 id="pde-down掉后zcm自动拉起pde建立同一局号链路问题">PDE Down掉后ZCM自动拉起PDE，建立同一局号链路问题</h3>
+<h1 id="pcrf融合模式测试记录">PCRF融合模式测试记录</h1>
+<h2 id="1-pcrf-v9-融合模式基本结构">1. PCRF V9 融合模式基本结构</h2>
+<h2 id="2-pcrf对接ocs配置流程">2. PCRF对接OCS配置流程</h2>
+<h2 id="3-pcrf侧配置流程">3. PCRF侧配置流程</h2>
+<h3 id="a-配置需要使用的静态属性">a 配置需要使用的静态属性</h3>
+<pre><code>界面路径： PCRF center ---&gt; PCRF Common Data ---&gt; PCRF Attribute
+新增需要使用的各类静态属性及动态属性
+</code></pre>
+<p><img src="../../../image/zsmart/pcrf/staticattribute.jpg" alt=""></p>
+<h3 id="b-配置monitor-key">b 配置Monitor Key</h3>
+<pre><code>界面路径： PCRF center ---&gt; Policy Rule ---&gt; Usage Monitor 
+新增一个Monitor Key,并且为Monitor Key 新增一条 Reservation Rule
+</code></pre>
+<p><img src="../../../image/zsmart/pcrf/monitorkey.jpg" alt=""></p>
+<h3 id="c-配置一条qos策略">c 配置一条QoS策略</h3>
+<pre><code>界面路径： PCRF center ---&gt; Policy Rule ---&gt; QoS Rule
+首先先配置ARP(Allocation Retention Priority),资源抢占能力及优先级
+然后配置一条QoS策略，包含以下配置内容：QoS Policy name,QoS Policy Code,ARP,Upload Speed limit,Download Speed limit等
+</code></pre>
+<p><img src="../../../image/zsmart/pcrf/QoSRule.jpg" alt=""></p>
+<h3 id="d-配置一条policy-rule">d 配置一条Policy Rule</h3>
+<pre><code>界面路径:  PCRF center ---&gt; Policy Rule ---&gt; Policy Rule
+配置Policy Rule对应的Policy Name,Policy code,Policy rule Type,QoS Rule,Monitor Key等，基本的一条PolicyRule就配置结束了
+涉及到更加复杂的场景,还需要继续配置其他的policy rule
+</code></pre>
+<p><img src="../../../image/zsmart/pcrf/policyRule.jpg" alt=""></p>
+<h3 id="e-配置一个新的event">e 配置一个新的event</h3>
+<h2 id="4-ocs侧配置流程">4. OCS侧配置流程</h2>
+<h2 id="5-发包及消息流程">5. 发包及消息流程</h2>
+<h2 id="6-后台日志流程">6. 后台日志流程</h2>
 <hr>
 
 
@@ -529,7 +565,7 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/zsmart/pcrf/testcase/" title="PCRF Case"><i class="fas fa-chevron-left p-1"></i>PCRF Case</a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/zsmart/pcrf/testcase/" title="Test Case"><i class="fas fa-chevron-left p-1"></i>Test Case</a>
         <a class="p-1 ml-3 d-inline-block text-white text-right" href="/zsmart/pcrf/testcase/rxbasic/" title="RX流程调测">RX流程调测<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>

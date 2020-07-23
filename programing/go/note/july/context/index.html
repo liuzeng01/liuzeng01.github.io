@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/context/">
+
+    <title>
+        
+        Context | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#context源码阅读httpszhuanlanzhihucomp68792989"><a href="https://zhuanlan.zhihu.com/p/68792989">context源码阅读</a></a></li>
+    <li><a href="#1-什么是-context">1. 什么是 context</a></li>
+    <li><a href="#2-为什么有-context">2. 为什么有 context</a></li>
+    <li><a href="#3-context-底层实现原理">3. context 底层实现原理</a>
+      <ul>
+        <li><a href="#31-整体概览">3.1 整体概览</a></li>
+        <li><a href="#32-context接口">3.2 context接口</a></li>
+        <li><a href="#33-cancel接口">3.3 cancel接口</a></li>
+        <li><a href="#34-emptyctx实现">3.4 emptyCtx实现</a></li>
+        <li><a href="#35-cancelctx实现">3.5 cancelCtx实现</a></li>
+        <li><a href="#36-cancelctx具体实现">3.6 cancelCtx具体实现</a></li>
+        <li><a href="#37-timerctx实现">3.7 timerCtx实现</a></li>
+        <li><a href="#38-valuectx实现">3.8 valueCtx实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-具体使用">4. 具体使用</a>
+      <ul>
+        <li><a href="#41-withcancel使用">4.1 WithCancel使用</a></li>
+        <li><a href="#42-withtimeout">4.2 WithTimeOut</a></li>
+        <li><a href="#43-withdeadline">4.3 WithDeadline</a></li>
+        <li><a href="#44-withvalue">4.4 WithValue</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Context</h1>
+
+<hr>
+<h2 id="context源码阅读httpszhuanlanzhihucomp68792989"><a href="https://zhuanlan.zhihu.com/p/68792989">context源码阅读</a></h2>
+<h2 id="1-什么是-context">1. 什么是 context</h2>
+<p>Go 1.7 标准库引入 context，中文译作“上下文”，准确说它是 goroutine 的<strong>上下文</strong>，包含 goroutine 的运行状态、环境、现场等信息。</p>
+<p>context 主要用来在 goroutine 之间传递上下文信息，包括：取消信号、超时时间、截止时间、k-v 等。</p>
+<p>随着 context 包的引入，标准库中很多接口因此加上了 context 参数，例如 <strong>database/sql</strong> 包。context 几乎成为了<strong>并发控制</strong>和<strong>超时控制</strong>的标准做法。</p>
+<h2 id="2-为什么有-context">2. 为什么有 context</h2>
+<p>Go 常用来写后台服务，通常只需要几行代码，就可以搭建一个 http server。</p>
+<p>在 Go 的 server 里，通常每来一个请求都会启动若干个 goroutine 同时工作：有些去数据库拿数据，有些调用下游接口获取相关数据……
+这些 goroutine 需要共享这个请求的基本数据，例如登陆的 token，处理请求的最大超时时间（如果超过此值再返回数据，请求方因为超时接收不到）等等。当请求被取消或是处理时间太长，这有可能是使用者关闭了浏览器或是已经超过了请求方规定的超时时间，请求方直接放弃了这次请求结果。这时，所有正在为这个请求工作的 goroutine 需要快速退出，因为它们的“工作成果”不再被需要了。在相关联的 goroutine 都退出后，系统就可以回收相关的资源。</p>
+<p>再多说一点，Go 语言中的 server 实际上是一个“协程模型”，也就是说一个协程处理一个请求。例如在业务的高峰期，某个下游服务的响应变慢，而当前系统的请求又没有超时控制，或者超时时间设置地过大，那么等待下游服务返回数据的协程就会越来越多。而我们知道，协程是要消耗系统资源的，后果就是协程数激增，内存占用飙涨，甚至导致服务不可用。更严重的会导致雪崩效应，整个服务对外表现为不可用，这肯定是 P0 级别的事故。这时，肯定有人要背锅了。</p>
+<p>其实前面描述的 P0 级别事故，通过设置“允许下游最长处理时间”就可以避免。例如，给下游设置的 timeout 是 50 ms，如果超过这个值还没有接收到返回数据，就直接向客户端返回一个默认值或者错误。例如，返回商品的一个默认库存数量。注意，这里设置的超时时间和创建一个 http client 设置的读写超时时间不一样，这里不详细展开。</p>
+<p>context 包就是为了解决上面所说的这些问题而开发的：在 一组 goroutine 之间传递共享的值、取消信号、deadline…</p>
+<p>用简练一些的话来说，在Go 里，我们不能直接杀死协程，协程的关闭一般会用 channel+select 方式来控制。但是在某些场景下，例如处理一个请求衍生了很多协程，这些协程之间是相互关联的：需要共享一些全局变量、有共同的 deadline 等，而且可以同时被关闭。再用 channel+select 就会比较麻烦，这时就可以通过 context 来实现。</p>
+<p>一句话：context 用来解决 goroutine 之间退出通知、元数据传递的功能。</p>
+<h2 id="3-context-底层实现原理">3. context 底层实现原理</h2>
+<h3 id="31-整体概览">3.1 整体概览</h3>
+<h4 id="context包结构">context包结构</h4>
+<p><img src="https://picb.zhimg.com/80/v2-54f38964c6715b85d6c8785874514ad1_720w.jpg" alt=""></p>
+<h4 id="各个函数作用">各个函数作用</h4>
+<p><img src="https://pic3.zhimg.com/80/v2-6a27526f536505cea08a5813ccce05b2_720w.jpg" alt=""></p>
+<h3 id="32-context接口">3.2 context接口</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">Context</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+    <span style="color:#75715e">// 当 context 被取消或者到了 deadline，返回一个被关闭的 channel
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Done</span><span style="color:#111">()</span> <span style="color:#f92672">&lt;-</span><span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span>
+
+    <span style="color:#75715e">// 在 channel Done 关闭后，返回 context 取消原因
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Err</span><span style="color:#111">()</span> <span style="color:#00a8c8">error</span>
+
+    <span style="color:#75715e">// 返回 context 是否会被取消以及自动取消时间（即 deadline）
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Deadline</span><span style="color:#111">()</span> <span style="color:#111">(</span><span style="color:#75af00">deadline</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#00a8c8">bool</span><span style="color:#111">)</span>
+
+    <span style="color:#75715e">// 获取 key 对应的 value
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">Value</span><span style="color:#111">(</span><span style="color:#75af00">key</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{})</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Context 是一个接口，定义了 4 个方法，它们都是幂等的。也就是说连续多次调用同一个方法，得到的结果都是相同的。</p>
+<p>Done() 返回一个 channel，可以表示 context 被取消的信号：当这个 channel 被关闭时，说明 context 被取消了。注意，这是一个只读的channel。 我们又知道，读一个关闭的 channel 会读出相应类型的零值。并且源码里没有地方会向这个 channel 里面塞入值。换句话说，这是一个 receive-only 的 channel。因此在子协程里读这个 channel，除非被关闭，否则读不出来任何东西。也正是利用了这一点，子协程从 channel 里读出了值（零值）后，就可以做一些收尾工作，尽快退出。</p>
+<p>Err() 返回一个错误，表示 channel 被关闭的原因。例如是被取消，还是超时。</p>
+<p>Deadline() 返回 context 的截止时间，通过此时间，函数就可以决定是否进行接下来的操作，如果时间太短，就可以不往下做了，否则浪费系统资源。当然，也可以用这个 deadline 来设置一个 I/O 操作的超时时间。</p>
+<p>Value() 获取之前设置的 key 对应的 value。</p>
+<h3 id="33-cancel接口">3.3 cancel接口</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">canceler</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#75af00">removeFromParent</span> <span style="color:#00a8c8">bool</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#00a8c8">error</span><span style="color:#111">)</span>
+    <span style="color:#75af00">Done</span><span style="color:#111">()</span> <span style="color:#f92672">&lt;-</span><span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>实现了上面定义的两个方法的 Context，就表明该 Context 是可取消的。源码中有两个类型实现了 canceler 接口：*cancelCtx 和 *timerCtx。注意是加了 * 号的，是这两个结构体的指针实现了 canceler 接口。</p>
+<p><strong>Context 接口设计成这个样子的原因</strong>：</p>
+<ul>
+<li>
+<p>“取消”操作应该是建议性，而非强制性
+caller 不应该去关心、干涉 callee 的情况，决定如何以及何时 return 是 callee 的责任。caller 只需发送“取消”信息，callee 根据收到的信息来做进一步的决策，因此接口并没有定义 cancel 方法。</p>
+</li>
+<li>
+<p>“取消”操作应该可传递
+“取消”某个函数时，和它相关联的其他函数也应该“取消”。因此，Done() 方法返回一个只读的 channel，所有相关函数监听此 channel。一旦 channel 关闭，通过 channel 的“广播机制”，所有监听者都能收到。</p>
+</li>
+</ul>
+<h3 id="34-emptyctx实现">3.4 emptyCtx实现</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">emptyCtx</span> <span style="color:#00a8c8">int</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">emptyCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Deadline</span><span style="color:#111">()</span> <span style="color:#111">(</span><span style="color:#75af00">deadline</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#00a8c8">bool</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">emptyCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Done</span><span style="color:#111">()</span> <span style="color:#f92672">&lt;-</span><span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">emptyCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Err</span><span style="color:#111">()</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">emptyCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Value</span><span style="color:#111">(</span><span style="color:#75af00">key</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{})</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">//这实际上是一个空的 context，永远不会被 cancel，没有存储值，也没有 deadline。
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">var</span> <span style="color:#111">(</span>
+    <span style="color:#75af00">background</span> <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">emptyCtx</span><span style="color:#111">)</span>
+    <span style="color:#75af00">todo</span>       <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">emptyCtx</span><span style="color:#111">)</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">Background</span><span style="color:#111">()</span> <span style="color:#75af00">Context</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">background</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">TODO</span><span style="color:#111">()</span> <span style="color:#75af00">Context</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">todo</span>
+<span style="color:#111">}</span>
+
+
+
+</code></pre></div><h3 id="35-cancelctx实现">3.5 cancelCtx实现</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">cancelCtx</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">Context</span>
+
+    <span style="color:#75715e">// 保护之后的字段
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">mu</span>       <span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">Mutex</span>
+    <span style="color:#75af00">done</span>     <span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span>
+    <span style="color:#75af00">children</span> <span style="color:#00a8c8">map</span><span style="color:#111">[</span><span style="color:#75af00">canceler</span><span style="color:#111">]</span><span style="color:#00a8c8">struct</span><span style="color:#111">{}</span>
+    <span style="color:#75af00">err</span>      <span style="color:#00a8c8">error</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Done</span><span style="color:#111">()</span> <span style="color:#f92672">&lt;-</span><span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">done</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">done</span> <span style="color:#111">=</span> <span style="color:#111">make</span><span style="color:#111">(</span><span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{})</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75af00">d</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">done</span>
+    <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">d</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Err</span><span style="color:#111">()</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+	<span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">err</span>
+	<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">stringer</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">contextName</span><span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#00a8c8">string</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">s</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">c</span><span style="color:#111">.(</span><span style="color:#75af00">stringer</span><span style="color:#111">);</span> <span style="color:#75af00">ok</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">s</span><span style="color:#111">.</span><span style="color:#75af00">String</span><span style="color:#111">()</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">reflectlite</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">).</span><span style="color:#75af00">String</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">)</span> <span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">contextName</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;.WithCancel&#34;</span>
+<span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">closedchan</span> <span style="color:#111">=</span> <span style="color:#111">make</span><span style="color:#111">(</span><span style="color:#00a8c8">chan</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{})</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#111">close</span><span style="color:#111">(</span><span style="color:#75af00">closedchan</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">)</span> <span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#75af00">removeFromParent</span> <span style="color:#00a8c8">bool</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#00a8c8">error</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#75715e">// 必须要传 err
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#d88200">&#34;context: internal error: missing cancel error&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#75715e">// 已经被其他协程取消
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+    <span style="color:#75715e">// 给 err 字段赋值
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">err</span> <span style="color:#111">=</span> <span style="color:#75af00">err</span>
+    <span style="color:#75715e">// 关闭 channel，通知其他协程
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">if</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">done</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">done</span> <span style="color:#111">=</span> <span style="color:#75af00">closedchan</span>
+    <span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+        <span style="color:#111">close</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">done</span><span style="color:#111">)</span>
+    <span style="color:#111">}</span>
+
+    <span style="color:#75715e">// 遍历它的所有子节点
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">for</span> <span style="color:#75af00">child</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">children</span> <span style="color:#111">{</span>
+        <span style="color:#75715e">// 递归地取消所有子节点
+</span><span style="color:#75715e"></span>        <span style="color:#75af00">child</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75715e">// 将子节点置空
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">children</span> <span style="color:#111">=</span> <span style="color:#00a8c8">nil</span>
+    <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">removeFromParent</span> <span style="color:#111">{</span>
+        <span style="color:#75715e">// 从父节点中移除自己 
+</span><span style="color:#75715e"></span>        <span style="color:#75af00">removeChild</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">c</span><span style="color:#111">)</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>总体来看，cancel() 方法的功能就是关闭 channel：c.done；递归地取消它的所有子节点；从父节点从删除自己。达到的效果是通过关闭 channel，将取消信号传递给了它的所有子节点。goroutine 接收到取消信号的方式就是 select 语句中的读 c.done 被选中。</p>
+<h3 id="36-cancelctx具体实现">3.6 cancelCtx具体实现</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">Canceled</span> <span style="color:#111">=</span> <span style="color:#75af00">errors</span><span style="color:#111">.</span><span style="color:#75af00">New</span><span style="color:#111">(</span><span style="color:#d88200">&#34;context canceled&#34;</span><span style="color:#111">)</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">newCancelCtx</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#75af00">cancelCtx</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">cancelCtx</span><span style="color:#111">{</span><span style="color:#75af00">Context</span><span style="color:#111">:</span> <span style="color:#75af00">parent</span><span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithCancel</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">cancel</span> <span style="color:#75af00">CancelFunc</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">c</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">newCancelCtx</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">)</span>
+	<span style="color:#75af00">propagateCancel</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">c</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">c</span><span style="color:#111">,</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">,</span> <span style="color:#75af00">Canceled</span><span style="color:#111">)</span> <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">propagateCancel</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">child</span> <span style="color:#75af00">canceler</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">parent</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">()</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75715e">// parent is never canceled
+</span><span style="color:#75715e"></span>	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">p</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">parentCancelCtx</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">);</span> <span style="color:#75af00">ok</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+		<span style="color:#00a8c8">if</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+			<span style="color:#75715e">// parent has already been canceled
+</span><span style="color:#75715e"></span>			<span style="color:#75af00">child</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+		<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">if</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">children</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+				<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">children</span> <span style="color:#111">=</span> <span style="color:#111">make</span><span style="color:#111">(</span><span style="color:#00a8c8">map</span><span style="color:#111">[</span><span style="color:#75af00">canceler</span><span style="color:#111">]</span><span style="color:#00a8c8">struct</span><span style="color:#111">{})</span>
+			<span style="color:#111">}</span>
+			<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">children</span><span style="color:#111">[</span><span style="color:#75af00">child</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}{}</span>
+		<span style="color:#111">}</span>
+		<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+	<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">go</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">select</span> <span style="color:#111">{</span>
+			<span style="color:#00a8c8">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#75af00">parent</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">():</span>
+				<span style="color:#75af00">child</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#75af00">parent</span><span style="color:#111">.</span><span style="color:#75af00">Err</span><span style="color:#111">())</span>
+			<span style="color:#00a8c8">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#75af00">child</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">():</span>
+			<span style="color:#111">}</span>
+		<span style="color:#111">}()</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// parentCancelCtx follows a chain of parent references until it finds a
+</span><span style="color:#75715e">// *cancelCtx. This function understands how each of the concrete types in this
+</span><span style="color:#75715e">// package represents its parent.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">parentCancelCtx</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">,</span> <span style="color:#00a8c8">bool</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">switch</span> <span style="color:#75af00">c</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">parent</span><span style="color:#111">.(</span><span style="color:#00a8c8">type</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">case</span> <span style="color:#f92672">*</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">:</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#75af00">c</span><span style="color:#111">,</span> <span style="color:#00a8c8">true</span>
+		<span style="color:#00a8c8">case</span> <span style="color:#f92672">*</span><span style="color:#75af00">timerCtx</span><span style="color:#111">:</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">,</span> <span style="color:#00a8c8">true</span>
+		<span style="color:#00a8c8">case</span> <span style="color:#f92672">*</span><span style="color:#75af00">valueCtx</span><span style="color:#111">:</span>
+			<span style="color:#75af00">parent</span> <span style="color:#111">=</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">Context</span>
+		<span style="color:#00a8c8">default</span><span style="color:#111">:</span>
+			<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span><span style="color:#111">,</span> <span style="color:#00a8c8">false</span>
+		<span style="color:#111">}</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// removeChild removes a context from its parent.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">removeChild</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">child</span> <span style="color:#75af00">canceler</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">p</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">parentCancelCtx</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#111">!</span><span style="color:#75af00">ok</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">children</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#111">delete</span><span style="color:#111">(</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">children</span><span style="color:#111">,</span> <span style="color:#75af00">child</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+
+
+</code></pre></div><p>这是一个暴露给用户的方法，传入一个父 Context（这通常是一个 Background，作为根节点），返回新建的 context，新 context 的 done channel 是新建的（前文讲过）。</p>
+<p>当 WithCancel 函数返回的 CancelFunc 被调用或者是父节点的 done channel 被关闭（父节点的 CancelFunc 被调用），此 context（子节点） 的 done channel 也会被关闭。</p>
+<p>注意传给 WithCancel 方法的参数，前者是 true，也就是说取消的时候，需要将自己从父节点里删除。第二个参数则是一个固定的取消错误类型：</p>
+<h3 id="37-timerctx实现">3.7 timerCtx实现</h3>
+<p>timerCtx 基于 cancelCtx，只是多了一个 time.Timer 和一个 deadline。Timer 会在 deadline 到来时，自动取消 context。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">timerCtx</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">cancelCtx</span>
+	<span style="color:#75af00">timer</span> <span style="color:#f92672">*</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Timer</span> <span style="color:#75715e">// Under cancelCtx.mu.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75af00">deadline</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">timerCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Deadline</span><span style="color:#111">()</span> <span style="color:#111">(</span><span style="color:#75af00">deadline</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#00a8c8">bool</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">deadline</span><span style="color:#111">,</span> <span style="color:#00a8c8">true</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">timerCtx</span><span style="color:#111">)</span> <span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">contextName</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;.WithDeadline(&#34;</span> <span style="color:#f92672">+</span>
+		<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">deadline</span><span style="color:#111">.</span><span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34; [&#34;</span> <span style="color:#f92672">+</span>
+		<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Until</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">deadline</span><span style="color:#111">).</span><span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;])&#34;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">timerCtx</span><span style="color:#111">)</span> <span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#75af00">removeFromParent</span> <span style="color:#00a8c8">bool</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#00a8c8">error</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">removeFromParent</span> <span style="color:#111">{</span>
+		<span style="color:#75715e">// Remove this timerCtx from its parent cancelCtx&#39;s children.
+</span><span style="color:#75715e"></span>		<span style="color:#75af00">removeChild</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">c</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">timer</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">timer</span><span style="color:#111">.</span><span style="color:#75af00">Stop</span><span style="color:#111">()</span>
+		<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">timer</span> <span style="color:#111">=</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><h4 id="deadline或者timeout实现">Deadline或者TimeOut实现</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">DeadlineExceeded</span> <span style="color:#00a8c8">error</span> <span style="color:#111">=</span> <span style="color:#75af00">deadlineExceededError</span><span style="color:#111">{}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">deadlineExceededError</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">deadlineExceededError</span><span style="color:#111">)</span> <span style="color:#75af00">Error</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span>   <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;context deadline exceeded&#34;</span> <span style="color:#111">}</span>
+
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithDeadline</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">d</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">CancelFunc</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">cur</span><span style="color:#111">,</span> <span style="color:#75af00">ok</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">parent</span><span style="color:#111">.</span><span style="color:#75af00">Deadline</span><span style="color:#111">();</span> <span style="color:#75af00">ok</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#75af00">cur</span><span style="color:#111">.</span><span style="color:#75af00">Before</span><span style="color:#111">(</span><span style="color:#75af00">d</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#75715e">// The current deadline is already sooner than the new one.
+</span><span style="color:#75715e"></span>		<span style="color:#00a8c8">return</span> <span style="color:#75af00">WithCancel</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">c</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">timerCtx</span><span style="color:#111">{</span>
+		<span style="color:#75af00">cancelCtx</span><span style="color:#111">:</span> <span style="color:#75af00">newCancelCtx</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">),</span>
+		<span style="color:#75af00">deadline</span><span style="color:#111">:</span>  <span style="color:#75af00">d</span><span style="color:#111">,</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">propagateCancel</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">,</span> <span style="color:#75af00">c</span><span style="color:#111">)</span>
+	<span style="color:#75af00">dur</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Until</span><span style="color:#111">(</span><span style="color:#75af00">d</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">dur</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">,</span> <span style="color:#75af00">DeadlineExceeded</span><span style="color:#111">)</span> <span style="color:#75715e">// deadline has already passed
+</span><span style="color:#75715e"></span>		<span style="color:#00a8c8">return</span> <span style="color:#75af00">c</span><span style="color:#111">,</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">,</span> <span style="color:#75af00">Canceled</span><span style="color:#111">)</span> <span style="color:#111">}</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Lock</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">mu</span><span style="color:#111">.</span><span style="color:#75af00">Unlock</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">err</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">timer</span> <span style="color:#111">=</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">AfterFunc</span><span style="color:#111">(</span><span style="color:#75af00">dur</span><span style="color:#111">,</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+			<span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">,</span> <span style="color:#75af00">DeadlineExceeded</span><span style="color:#111">)</span>
+		<span style="color:#111">})</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">c</span><span style="color:#111">,</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">cancel</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">,</span> <span style="color:#75af00">Canceled</span><span style="color:#111">)</span> <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithTimeout</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">timeout</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Duration</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">CancelFunc</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">WithDeadline</span><span style="color:#111">(</span><span style="color:#75af00">parent</span><span style="color:#111">,</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">().</span><span style="color:#75af00">Add</span><span style="color:#111">(</span><span style="color:#75af00">timeout</span><span style="color:#111">))</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="38-valuectx实现">3.8 valueCtx实现</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#75715e">// A valueCtx carries a key-value pair. It implements Value for that key and
+</span><span style="color:#75715e">// delegates all other calls to the embedded Context.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">type</span> <span style="color:#75af00">valueCtx</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Context</span>
+	<span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// stringify tries a bit to stringify v, without using fmt, since we don&#39;t
+</span><span style="color:#75715e">// want context depending on the unicode tables. This is only used by
+</span><span style="color:#75715e">// *valueCtx.String().
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">stringify</span><span style="color:#111">(</span><span style="color:#75af00">v</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{})</span> <span style="color:#00a8c8">string</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">switch</span> <span style="color:#75af00">s</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">v</span><span style="color:#111">.(</span><span style="color:#00a8c8">type</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">case</span> <span style="color:#75af00">stringer</span><span style="color:#111">:</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">s</span><span style="color:#111">.</span><span style="color:#75af00">String</span><span style="color:#111">()</span>
+	<span style="color:#00a8c8">case</span> <span style="color:#00a8c8">string</span><span style="color:#111">:</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">s</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;&lt;not Stringer&gt;&#34;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">valueCtx</span><span style="color:#111">)</span> <span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">contextName</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;.WithValue(type &#34;</span> <span style="color:#f92672">+</span>
+		<span style="color:#75af00">reflectlite</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">key</span><span style="color:#111">).</span><span style="color:#75af00">String</span><span style="color:#111">()</span> <span style="color:#f92672">+</span>
+		<span style="color:#d88200">&#34;, val &#34;</span> <span style="color:#f92672">+</span> <span style="color:#75af00">stringify</span><span style="color:#111">(</span><span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">val</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;)&#34;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">c</span> <span style="color:#f92672">*</span><span style="color:#75af00">valueCtx</span><span style="color:#111">)</span> <span style="color:#75af00">Value</span><span style="color:#111">(</span><span style="color:#75af00">key</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{})</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">key</span> <span style="color:#f92672">==</span> <span style="color:#75af00">key</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">val</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">c</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">(</span><span style="color:#75af00">key</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithValue</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{})</span> <span style="color:#75af00">Context</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">key</span> <span style="color:#f92672">==</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+		<span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#d88200">&#34;nil key&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#111">!</span><span style="color:#75af00">reflectlite</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">key</span><span style="color:#111">).</span><span style="color:#75af00">Comparable</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+		<span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#d88200">&#34;key is not comparable&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">valueCtx</span><span style="color:#111">{</span><span style="color:#75af00">parent</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span><span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+
+
+</code></pre></div><h2 id="4-具体使用">4. 具体使用</h2>
+<p>context 使用起来非常方便。源码里对外提供了一个创建根节点 context 的函数：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">Background</span><span style="color:#111">()</span> <span style="color:#75af00">Context</span>
+</code></pre></div><p>background 是一个空的 context， 它不能被取消，没有值，也没有超时时间。</p>
+<p>有了根节点 context，又提供了四个函数创建子节点 context：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">WithCancel</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">cancel</span> <span style="color:#75af00">CancelFunc</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithDeadline</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">deadline</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">CancelFunc</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithTimeout</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">timeout</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Duration</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">CancelFunc</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">WithValue</span><span style="color:#111">(</span><span style="color:#75af00">parent</span> <span style="color:#75af00">Context</span><span style="color:#111">,</span> <span style="color:#75af00">key</span><span style="color:#111">,</span> <span style="color:#75af00">val</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{})</span> <span style="color:#75af00">Context</span>
+</code></pre></div><p>context 会在函数传递间传递。只需要在适当的时间调用 cancel 函数向 goroutines 发出取消信号或者调用 Value 函数取出 context 中的值。</p>
+<h3 id="41-withcancel使用">4.1 WithCancel使用</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;context&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;time&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Background</span><span style="color:#111">()</span>
+	<span style="color:#75af00">cancelCtx</span> <span style="color:#111">,</span><span style="color:#75af00">cancelFunc</span>  <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">WithCancel</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">go</span> <span style="color:#75af00">cancelTest</span><span style="color:#111">(</span><span style="color:#75af00">cancelCtx</span><span style="color:#111">)</span> <span style="color:#75715e">//注意要放到协程里运行
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+	<span style="color:#75af00">cancelFunc</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;end&#34;</span><span style="color:#111">)</span>
+
+
+<span style="color:#111">}</span>
+
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">cancelTest</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Pritln&gt;&gt;&gt;&gt;&#34;</span><span style="color:#111">)</span>
+		<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="42-withtimeout">4.2 WithTimeOut</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;context&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;time&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Background</span><span style="color:#111">()</span>
+	<span style="color:#75af00">timeoutCtx</span><span style="color:#111">,</span><span style="color:#75af00">_</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">WithTimeout</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">go</span> <span style="color:#75af00">cancelTest</span><span style="color:#111">(</span><span style="color:#75af00">timeoutCtx</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span><span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#111">&lt;</span><span style="color:#ae81ff">10</span><span style="color:#111">;</span><span style="color:#75af00">i</span><span style="color:#f92672">++</span><span style="color:#111">{</span>
+		<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Waiting ....&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">cancelTest</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Pritln&gt;&gt;&gt;&gt;&#34;</span><span style="color:#111">)</span>
+		<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">select</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#75af00">ctx</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">():</span>
+			<span style="color:#00a8c8">return</span>
+		<span style="color:#00a8c8">default</span><span style="color:#111">:</span>
+			
+
+		<span style="color:#111">}</span>
+	<span style="color:#111">}</span>
+
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="43-withdeadline">4.3 WithDeadline</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;context&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;time&#34;</span>
+
+	<span style="color:#d88200">&#34;github.com/jinzhu/now&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Background</span><span style="color:#111">()</span>
+	<span style="color:#75af00">deadline</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">now</span><span style="color:#111">.</span><span style="color:#75af00">EndOfMinute</span><span style="color:#111">()</span>
+
+	<span style="color:#75af00">deadlineCtx</span><span style="color:#111">,</span><span style="color:#75af00">_</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">WithDeadline</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span><span style="color:#111">,</span><span style="color:#75af00">deadline</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">go</span> <span style="color:#75af00">cancelTest</span><span style="color:#111">(</span><span style="color:#75af00">deadlineCtx</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span><span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#111">&lt;</span><span style="color:#ae81ff">60</span><span style="color:#111">;</span><span style="color:#75af00">i</span><span style="color:#f92672">++</span><span style="color:#111">{</span>
+		<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Waiting ....&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">cancelTest</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Pritln&gt;&gt;&gt;&gt;&#34;</span><span style="color:#111">)</span>
+		<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">select</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#75af00">ctx</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">():</span>
+			<span style="color:#00a8c8">return</span>
+		<span style="color:#00a8c8">default</span><span style="color:#111">:</span>
+		<span style="color:#111">}</span>
+	<span style="color:#111">}</span>
+
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="44-withvalue">4.4 WithValue</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;context&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;time&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">(){</span>
+	<span style="color:#75af00">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Background</span><span style="color:#111">()</span>
+	<span style="color:#75af00">timer</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">()</span>
+	<span style="color:#75af00">valueCtx</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">WithValue</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span><span style="color:#111">,</span><span style="color:#d88200">&#34;StartTime&#34;</span><span style="color:#111">,</span><span style="color:#75af00">timer</span><span style="color:#111">)</span>
+	<span style="color:#75af00">valueFunc</span><span style="color:#111">(</span><span style="color:#75af00">valueCtx</span><span style="color:#111">)</span>
+	<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+	<span style="color:#75af00">timer</span> <span style="color:#111">=</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">()</span>
+	<span style="color:#75af00">valueCtx2</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">WithValue</span><span style="color:#111">(</span><span style="color:#75af00">valueCtx</span><span style="color:#111">,</span><span style="color:#d88200">&#34;StartTime&#34;</span><span style="color:#111">,</span><span style="color:#75af00">timer</span><span style="color:#111">)</span>
+	<span style="color:#75af00">valueFunc</span><span style="color:#111">(</span><span style="color:#75af00">valueCtx</span><span style="color:#111">)</span>
+	<span style="color:#75af00">valueFunc</span><span style="color:#111">(</span><span style="color:#75af00">valueCtx2</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">valueFunc</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">){</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span><span style="color:#111">.</span><span style="color:#75af00">Value</span><span style="color:#111">(</span><span style="color:#d88200">&#34;StartTime&#34;</span><span style="color:#111">))</span>
+
+<span style="color:#111">}</span>
+<span style="color:#75715e">//注意子context的value和父context的value同时设置时，只会读取子context的key和value
+</span></code></pre></div><p><strong>运行结果</strong></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ae81ff">2020</span><span style="color:#f92672">-</span><span style="color:#ae81ff">07</span><span style="color:#f92672">-</span><span style="color:#ae81ff">23</span> <span style="color:#ae81ff">15</span><span style="color:#111">:</span><span style="color:#ae81ff">33</span><span style="color:#111">:</span><span style="color:#ae81ff">32.2033806</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span> <span style="color:#75af00">CST</span> <span style="color:#75af00">m</span><span style="color:#111">=</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0.003972601</span>
+<span style="color:#ae81ff">2020</span><span style="color:#f92672">-</span><span style="color:#ae81ff">07</span><span style="color:#f92672">-</span><span style="color:#ae81ff">23</span> <span style="color:#ae81ff">15</span><span style="color:#111">:</span><span style="color:#ae81ff">33</span><span style="color:#111">:</span><span style="color:#ae81ff">32.2033806</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span> <span style="color:#75af00">CST</span> <span style="color:#75af00">m</span><span style="color:#111">=</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0.003972601</span>
+<span style="color:#ae81ff">2020</span><span style="color:#f92672">-</span><span style="color:#ae81ff">07</span><span style="color:#f92672">-</span><span style="color:#ae81ff">23</span> <span style="color:#ae81ff">15</span><span style="color:#111">:</span><span style="color:#ae81ff">33</span><span style="color:#111">:</span><span style="color:#ae81ff">33.2211325</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span> <span style="color:#75af00">CST</span> <span style="color:#75af00">m</span><span style="color:#111">=</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1.021724501</span>
+</code></pre></div><hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="文件操作"><i class="fas fa-chevron-left p-1"></i>文件操作</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/tran/" title="tran">tran<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

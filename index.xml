@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</guid>
-      <description> 1. 基础配置 pcrf侧 ocs侧 2. 测试流程 开户流程 phub对接流程 发包流程 3. 日志流程 PDE日志 SyPro日志 4. 相关问题记录 SyPro未返回policy plan code PDE进行分拣时core退出问题 PDE Down掉后ZCM自动拉起PDE，建立同一局号链路问题  Back</description>
+      <description>PCRF融合模式测试记录 1. PCRF V9 融合模式基本结构 2. PCRF对接OCS配置流程 3. PCRF侧配置流程 a 配置需要使用的静态属性 界面路径： PCRF center ---&amp;gt; PCRF Common Data ---&amp;gt; PCRF Attribute新增需要使用的各类静态属性及动态属性 b 配置Monitor Key 界面路径： PCRF center ---&amp;gt; Policy Rule ---&amp;gt; Usage Monitor 新增一个Monitor Key,并且为Monitor Key 新增一条 Reservation Rule c 配置一条QoS策略 界面路径： PCRF center ---&amp;gt; Policy Rule ---&amp;gt; QoS Rule首先先配置ARP(Allocation Retention Priority),资源抢占能力及优先级然后配置一条QoS策略，包含以下配置内容：QoS Policy name,QoS Policy Code,ARP,Upload Speed limit,Download Speed limit等 d 配置一条Policy Rule 界面路径: PCRF center ---&amp;gt; Policy Rule ---&amp;gt; Policy Rule配置Policy Rule对应的Policy Name,Policy code,Policy rule Type,QoS Rule,Monitor Key等，基本的一条PolicyRule就配置结束了涉及到更加复杂的场景,还需要继续配置其他的policy rule e 配置一个新的event 4.</description>
     </item>
     
     <item>
@@ -145,6 +145,18 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Shell Case</title>
+      <link>https://liuzeng01.github.io/linux/shell/shellcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/shellcase/</guid>
+      <description>注意事项 开头加解释器：#!/bin/bash 语法缩进，使用四个空格；多加注释说明。 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用。 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域。 有两个命令能帮助我调试脚本：set -e 遇到执行非0时退出脚本，set-x 打印执行过程
+1.获取随机字符串或数字 获取随机8位字符串：
+方法1： # echo $RANDOM |md5sum |cut -c 1-8 471b94f2 方法2： # openssl rand -base64 4 vg3BEg== 方法3： # cat /proc/sys/kernel/random/uuid |cut -c 1-8 ed9e032c 获取随机8位数字：
+方法1： # echo $RANDOM |cksum |cut -c 1-8 23648321 方法2： # openssl rand -base64 4 |cksum |cut -c 1-8 38571131 方法3： # date +%N |cut -c 1-8 69024815 cksum：打印CRC效验和统计字节 2.定义一个颜色输出字符串函数 方法1： function echo_color() { if [ $1 == &amp;#34;green&amp;#34; ]; then echo -e &amp;#34;\033[32;40m$2\033[0m&amp;#34; elif [ $1 == &amp;#34;red&amp;#34; ]; then echo -e &amp;#34;\033[31;40m$2\033[0m&amp;#34; fi } ​ 方法2： function echo_color() { case $1 in green) echo -e &amp;#34;[32;40m$2[0m&amp;#34; ;; red) echo -e &amp;#34;[31;40m$2[0m&amp;#34; ;; *) echo &amp;#34;Example: echo_color red string&amp;#34; esac } 使用方法：echo_color green &amp;#34;test&amp;#34; function关键字定义一个函数，可加或不加。 3.</description>
+    </item>
+    
+    <item>
       <title>网络相关</title>
       <link>https://liuzeng01.github.io/essay/july/net/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -185,6 +197,23 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Context</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/context/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/context/</guid>
+      <description>context源码阅读 1. 什么是 context Go 1.7 标准库引入 context，中文译作“上下文”，准确说它是 goroutine 的上下文，包含 goroutine 的运行状态、环境、现场等信息。
+context 主要用来在 goroutine 之间传递上下文信息，包括：取消信号、超时时间、截止时间、k-v 等。
+随着 context 包的引入，标准库中很多接口因此加上了 context 参数，例如 database/sql 包。context 几乎成为了并发控制和超时控制的标准做法。
+2. 为什么有 context Go 常用来写后台服务，通常只需要几行代码，就可以搭建一个 http server。
+在 Go 的 server 里，通常每来一个请求都会启动若干个 goroutine 同时工作：有些去数据库拿数据，有些调用下游接口获取相关数据…… 这些 goroutine 需要共享这个请求的基本数据，例如登陆的 token，处理请求的最大超时时间（如果超过此值再返回数据，请求方因为超时接收不到）等等。当请求被取消或是处理时间太长，这有可能是使用者关闭了浏览器或是已经超过了请求方规定的超时时间，请求方直接放弃了这次请求结果。这时，所有正在为这个请求工作的 goroutine 需要快速退出，因为它们的“工作成果”不再被需要了。在相关联的 goroutine 都退出后，系统就可以回收相关的资源。
+再多说一点，Go 语言中的 server 实际上是一个“协程模型”，也就是说一个协程处理一个请求。例如在业务的高峰期，某个下游服务的响应变慢，而当前系统的请求又没有超时控制，或者超时时间设置地过大，那么等待下游服务返回数据的协程就会越来越多。而我们知道，协程是要消耗系统资源的，后果就是协程数激增，内存占用飙涨，甚至导致服务不可用。更严重的会导致雪崩效应，整个服务对外表现为不可用，这肯定是 P0 级别的事故。这时，肯定有人要背锅了。
+其实前面描述的 P0 级别事故，通过设置“允许下游最长处理时间”就可以避免。例如，给下游设置的 timeout 是 50 ms，如果超过这个值还没有接收到返回数据，就直接向客户端返回一个默认值或者错误。例如，返回商品的一个默认库存数量。注意，这里设置的超时时间和创建一个 http client 设置的读写超时时间不一样，这里不详细展开。
+context 包就是为了解决上面所说的这些问题而开发的：在 一组 goroutine 之间传递共享的值、取消信号、deadline…
+用简练一些的话来说，在Go 里，我们不能直接杀死协程，协程的关闭一般会用 channel+select 方式来控制。但是在某些场景下，例如处理一个请求衍生了很多协程，这些协程之间是相互关联的：需要共享一些全局变量、有共同的 deadline 等，而且可以同时被关闭。再用 channel+select 就会比较麻烦，这时就可以通过 context 来实现。</description>
+    </item>
+    
+    <item>
       <title>Core net structrue</title>
       <link>https://liuzeng01.github.io/zsmart/pcrf/corenet/net/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -213,6 +242,15 @@ go get -u -v github.com/spf13/hugo
       
       <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</guid>
       <description>  Back</description>
+    </item>
+    
+    <item>
+      <title>Powershell</title>
+      <link>https://liuzeng01.github.io/essay/july/powershell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/powershell/</guid>
+      <description> 1. 查看笔记本电脑电池信息 powercfg /batteryreport /output eport.html  Back</description>
     </item>
     
     <item>

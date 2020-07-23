@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>PCRF Case on iNote</title>
+    <title>Test Case on iNote</title>
     <link>https://liuzeng01.github.io/zsmart/pcrf/testcase/</link>
-    <description>Recent content in PCRF Case on iNote</description>
+    <description>Recent content in Test Case on iNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</guid>
-      <description> 1. 基础配置 pcrf侧 ocs侧 2. 测试流程 开户流程 phub对接流程 发包流程 3. 日志流程 PDE日志 SyPro日志 4. 相关问题记录 SyPro未返回policy plan code PDE进行分拣时core退出问题 PDE Down掉后ZCM自动拉起PDE，建立同一局号链路问题  Back</description>
+      <description>PCRF融合模式测试记录 1. PCRF V9 融合模式基本结构 2. PCRF对接OCS配置流程 3. PCRF侧配置流程 a 配置需要使用的静态属性 界面路径： PCRF center ---&amp;gt; PCRF Common Data ---&amp;gt; PCRF Attribute新增需要使用的各类静态属性及动态属性 b 配置Monitor Key 界面路径： PCRF center ---&amp;gt; Policy Rule ---&amp;gt; Usage Monitor 新增一个Monitor Key,并且为Monitor Key 新增一条 Reservation Rule c 配置一条QoS策略 界面路径： PCRF center ---&amp;gt; Policy Rule ---&amp;gt; QoS Rule首先先配置ARP(Allocation Retention Priority),资源抢占能力及优先级然后配置一条QoS策略，包含以下配置内容：QoS Policy name,QoS Policy Code,ARP,Upload Speed limit,Download Speed limit等 d 配置一条Policy Rule 界面路径: PCRF center ---&amp;gt; Policy Rule ---&amp;gt; Policy Rule配置Policy Rule对应的Policy Name,Policy code,Policy rule Type,QoS Rule,Monitor Key等，基本的一条PolicyRule就配置结束了涉及到更加复杂的场景,还需要继续配置其他的policy rule e 配置一个新的event 4.</description>
     </item>
     
     <item>

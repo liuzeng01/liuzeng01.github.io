@@ -10,5 +10,17 @@
 	<atom:link href="https://liuzeng01.github.io/linux/shell/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Shell Case</title>
+      <link>https://liuzeng01.github.io/linux/shell/shellcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/shellcase/</guid>
+      <description>注意事项 开头加解释器：#!/bin/bash 语法缩进，使用四个空格；多加注释说明。 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用。 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域。 有两个命令能帮助我调试脚本：set -e 遇到执行非0时退出脚本，set-x 打印执行过程
+1.获取随机字符串或数字 获取随机8位字符串：
+方法1： # echo $RANDOM |md5sum |cut -c 1-8 471b94f2 方法2： # openssl rand -base64 4 vg3BEg== 方法3： # cat /proc/sys/kernel/random/uuid |cut -c 1-8 ed9e032c 获取随机8位数字：
+方法1： # echo $RANDOM |cksum |cut -c 1-8 23648321 方法2： # openssl rand -base64 4 |cksum |cut -c 1-8 38571131 方法3： # date +%N |cut -c 1-8 69024815 cksum：打印CRC效验和统计字节 2.定义一个颜色输出字符串函数 方法1： function echo_color() { if [ $1 == &amp;#34;green&amp;#34; ]; then echo -e &amp;#34;\033[32;40m$2\033[0m&amp;#34; elif [ $1 == &amp;#34;red&amp;#34; ]; then echo -e &amp;#34;\033[31;40m$2\033[0m&amp;#34; fi } ​ 方法2： function echo_color() { case $1 in green) echo -e &amp;#34;[32;40m$2[0m&amp;#34; ;; red) echo -e &amp;#34;[31;40m$2[0m&amp;#34; ;; *) echo &amp;#34;Example: echo_color red string&amp;#34; esac } 使用方法：echo_color green &amp;#34;test&amp;#34; function关键字定义一个函数，可加或不加。 3.</description>
+    </item>
+    
   </channel>
 </rss>
