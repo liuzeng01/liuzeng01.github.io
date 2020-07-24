@@ -67,7 +67,7 @@
 	"title": "July",
 	"tags": [],
 	"description": "2020 07",
-	"content": " hugo语法 \r\r网络相关 \r\rPowershell \r\rtoml \r\r\r Back\r\r"
+	"content": " hugo语法 \r\r网络相关 \r\rGin \r\rPowershell \r\rtoml \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/note/july/",
@@ -259,6 +259,13 @@
 	"content": " July \r\r\r Back\r\r"
 },
 {
+	"uri": "https://liuzeng01.github.io/essay/july/gin/",
+	"title": "Gin",
+	"tags": [],
+	"description": "Golang",
+	"content": " 1. gin入门使用 package main import ( \u0026#34;github.com/gin-gonic/gin\u0026#34; \u0026#34;time\u0026#34; ) func main() { r := gin.Default() r.GET(\u0026#34;/\u0026#34;, func(ctx *gin.Context) { ctx.JSON(200,gin.H{ \u0026#34;Content\u0026#34;:\u0026#34;This is the gin demo\u0026#34;, \u0026#34;Time\u0026#34;:time.Now(), }) }) r.Run(\u0026#34;:8080\u0026#34;) } 输出日志\n[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.\r[GIN-debug] [WARNING] Running in \u0026quot;debug\u0026quot; mode. Switch to \u0026quot;release\u0026quot; mode in production.\r- using env:\texport GIN_MODE=release\r- using code:\tgin.SetMode(gin.ReleaseMode)\r[GIN-debug] GET / --\u0026gt; main.main.func1 (3 handlers)\r[GIN-debug] Listening and serving HTTP on :8080\r[GIN] 2020/07/23 - 18:10:06 | 200 | 17.9786ms | 127.0.0.1 | GET \u0026quot;/\u0026quot;\r[GIN] 2020/07/23 - 18:10:28 | 200 | 0s | 127.0.0.1 | GET \u0026quot;/\u0026quot;\r[GIN] 2020/07/23 - 18:10:28 | 404 | 0s | 127.0.0.1 | GET \u0026quot;/favicon.ico\u0026quot;\r1.1 Http方法 最开始的HTTP 0.9版本只有一个GET方法，也就是我们在浏览器中直接输入网址回车请求的方法，这是一个幂等方法，用于获取服务器上的资源。\n在HTTP 1.0的时候又增加了HEAD和POST方法，其中常用的就是POST方法，一般用于我们给服务端提交一个资源，导致服务器的资源发生变化。\n在HTTP1.1版本，也就是HTTP 1系列的最后一个版本中，也是我们当下比较常用的HTTP版本，增加了更多的HTTP 方法。比如OPTIONS, PUT, DELETE, TRACE和CONNECT，这样在HTTP 1.1 版本中，HTTP的方法达到了8个。\n下面我们看下这些方法被赋予的意义。\nGET\nGET方法请求一个指定资源的表示形式. 使用GET的请求应该只被用于获取数据.\nHEAD\nHEAD方法请求一个与GET请求的响应相同的响应，但没有响应体.\nPOST\nPOST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用.\nPUT\nPUT方法用请求有效载荷替换目标资源的所有当前表示。\nDELETE\nDELETE方法删除指定的资源。\nCONNECT\nCONNECT方法建立一个到由目标资源标识的服务器的隧道。\nOPTIONS\nOPTIONS方法用于描述目标资源的通信选项。\nTRACE\nTRACE方法沿着到目标资源的路径执行一个消息环回测试。\nPATCH\nPATCH方法用于对资源应用部分修改。\n1.2 RestFul API 我们开发的一个个Web应用服务或者程序，其实就是对服务器的资源的CRUD（创建、检索、更新和删除），所以 RESTful API 的规范建议我们使用特定的HTTP方法来对服务器上的资源进行操作。\n在 RESTful API 中，使用的主要是以下五种HTTP方法：\nGET，表示读取服务器上的资源\rPOST，表示在服务器上创建资源\rPUT,表示更新或者替换服务器上的资源\rDELETE，表示删除服务器上的资源\rPATCH，表示更新/修改资源的一部分\r 1.3 Gin RestFul r.GET(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) r.POST(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) r.PUT(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) r.HEAD(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) r.PATCH(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) r.DELETE(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) r.Any(\u0026#34;/\u0026#34;, func(ctx *gin.Context) {}) 1.4 Gin 路由匹配 Gin的路由采用的是httprouter，所以它的路由参数的定义和httprouter也是一样的。\n/users/:id 就是一种路由匹配模式，也是一个通配符，其中:id就是一个路由参数，我们可以通过c.Param(\u0026ldquo;id\u0026rdquo;)获取定义的路由参数的值，然后用来做事情，比如打印出来。\n/users/:id这种匹配模式是精确匹配的，只能匹配一个，我们举几个例子说明：\nPattern: /users/:id\n /users/123 匹配\r/users/哈哈 匹配\r/users/123/go 不匹配\r/users/ 不匹配\r 这里我故意写了/users/哈哈，并且是匹配的，意思就是对于Gin路径中的匹配都是字符串，它是不区分数字、字母和汉字的，都匹配。\n这里还需要说明的是，Gin的路由是单一的，不能有重复。\n星号路由参数 上面我们介绍的是:号的路由参数，这种路由参数最常用。还有一种不常用的就是*号类型的参数，表示匹配所有。\n以/users/*id为例：\nPattern: /users/*id\n/users/123 匹配 /users/哈哈 匹配 /users/123/go 匹配 /users/ 匹配 我们把上面的例子改下：\nfunc main() { r := gin.Default() r.GET(\u0026#34;/users/*id\u0026#34;, func(c *gin.Context) { id := c.Param(\u0026#34;id\u0026#34;) c.String(200, \u0026#34;The user id is %s\u0026#34;, id) }) r.Run(\u0026#34;:8080\u0026#34;) } 现在我们运行，浏览器里访问http://localhost:8080/users/123，会看到如下信息：\n The user id is /123\r 是否发现区别了，我们获取到的id不是123了，而是/123，多了一个/\n同样的你试试http://localhost:8080/users/123/go会发现显示的信息是：\n The user id is /123/go\r 是一个/开头的路径字符串。\n这里要特别说明一点的是，如果你用浏览器访问http://localhost:8080/users，会被重定向到http://localhost:8080/users/，然后显示的信息如下：\n The user id is /\r 重定向的根本原因在于/users没有匹配的路由，但是有匹配/users/的路由，所以就会被重定向到/users/。现在我们注册一个/users来验证下这个猜测：\nr.GET(\u0026quot;/users\u0026rdquo;, func(c gin.Context) { c.String(200, \u0026ldquo;这是真正的/users\u0026rdquo;) }) 现在再访问http://localhost:8080/users*，会看到显示的信息变成了：\n 这是真正的/users\r 这也间接证明了/users/*id和/users这两个路由是不冲突的，可以被Gin注册。\n以上自动重定向的原理，得益于gin.RedirectTrailingSlash 等于true的配置。如果我们把它改为false就不会自动重定向了。\n1.5 Query参数 在Gin中，为我们提供了简便的方法来获取查询参数的值，我们只需要知道查询参数的key（参数名）就可以了。\nfunc main() { r := gin.Default() r.GET(\u0026#34;/\u0026#34;, func(c *gin.Context) { c.String(200, c.Query(\u0026#34;wechat\u0026#34;)) }) r.Run(\u0026#34;:8080\u0026#34;) } 我们运行这段代码，打开浏览器访问http://localhost:8080/?wechat=flysnow_org,就可以看到flysnow_org文字。这表示我们通过**c.Query(\u0026ldquo;wechat\u0026rdquo;)**获取到了查询参数wechat的值是flysnow_org。\nQuery方法为我们提供了获取对应key的值的能力，如果该key不存在，则返回\u0026quot;\u0026ldquo;字符串。如果对于一些数字参数，比如id如果返回为空的话，我们进行字符串转数字的时候会报错，这时候，我们就可以通过DefaultQuery方法指定一个默认值：\nc.DefaultQuery(\u0026#34;wechat\u0026#34;, \u0026#34;flysnow_org\u0026#34;) c.DefaultQuery(\u0026#34;id\u0026#34;, \u0026#34;0\u0026#34;)  Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/",
 	"title": "hugo",
 	"tags": [],
@@ -278,6 +285,13 @@
 	"tags": [],
 	"description": "Kernel",
 	"content": " \r Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/kubernetes/natip/",
+	"title": "NAT网关配置虚拟机静态IP",
+	"tags": [],
+	"description": "Linux",
+	"content": " 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）\n2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=\u0026#34;static\u0026#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务\nsystemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了\n Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/zsmart/pcrf/structrue/process/",
@@ -438,7 +452,7 @@
 	"title": "Kubernetes",
 	"tags": [],
 	"description": "Kubernetes",
-	"content": " \r Back\r\r"
+	"content": " NAT网关配置虚拟机静态IP \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/note/july/mod/",

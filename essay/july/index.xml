@@ -50,6 +50,16 @@
     </item>
     
     <item>
+      <title>Gin</title>
+      <link>https://liuzeng01.github.io/essay/july/gin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/gin/</guid>
+      <description>1. gin入门使用 package main import ( &amp;#34;github.com/gin-gonic/gin&amp;#34; &amp;#34;time&amp;#34; ) func main() { r := gin.Default() r.GET(&amp;#34;/&amp;#34;, func(ctx *gin.Context) { ctx.JSON(200,gin.H{ &amp;#34;Content&amp;#34;:&amp;#34;This is the gin demo&amp;#34;, &amp;#34;Time&amp;#34;:time.Now(), }) }) r.Run(&amp;#34;:8080&amp;#34;) } 输出日志
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.[GIN-debug] [WARNING] Running in &amp;quot;debug&amp;quot; mode. Switch to &amp;quot;release&amp;quot; mode in production.- using env:	export GIN_MODE=release- using code:	gin.SetMode(gin.ReleaseMode)[GIN-debug] GET / --&amp;gt; main.</description>
+    </item>
+    
+    <item>
       <title>Powershell</title>
       <link>https://liuzeng01.github.io/essay/july/powershell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

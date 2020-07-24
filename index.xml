@@ -223,6 +223,16 @@ context 包就是为了解决上面所说的这些问题而开发的：在 一�
     </item>
     
     <item>
+      <title>Gin</title>
+      <link>https://liuzeng01.github.io/essay/july/gin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/gin/</guid>
+      <description>1. gin入门使用 package main import ( &amp;#34;github.com/gin-gonic/gin&amp;#34; &amp;#34;time&amp;#34; ) func main() { r := gin.Default() r.GET(&amp;#34;/&amp;#34;, func(ctx *gin.Context) { ctx.JSON(200,gin.H{ &amp;#34;Content&amp;#34;:&amp;#34;This is the gin demo&amp;#34;, &amp;#34;Time&amp;#34;:time.Now(), }) }) r.Run(&amp;#34;:8080&amp;#34;) } 输出日志
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.[GIN-debug] [WARNING] Running in &amp;quot;debug&amp;quot; mode. Switch to &amp;quot;release&amp;quot; mode in production.- using env:	export GIN_MODE=release- using code:	gin.SetMode(gin.ReleaseMode)[GIN-debug] GET / --&amp;gt; main.</description>
+    </item>
+    
+    <item>
       <title>hugo</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -233,6 +243,18 @@ context 包就是为了解决上面所说的这些问题而开发的：在 一�
   编译部署 熟悉Go语言的朋友可以试下这个方法，不过great wall的存在让依赖不太好下载。不过下载下之后可以自己进行魔改。geek们可以试下。
 go get -u -v github.com/spf13/hugo
   开始建立hugo project hugo new site mydocs 建立好之后的目录结构为</description>
+    </item>
+    
+    <item>
+      <title>NAT网关配置虚拟机静态IP</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/natip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/natip/</guid>
+      <description> 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）
+2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=&amp;#34;static&amp;#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务
+systemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了
+ Back</description>
     </item>
     
     <item>

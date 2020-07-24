@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/essay/july/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/natip/">
 
     <title>
         
-        July | iNote
+        NAT网关配置虚拟机静态IP | iNote
         
     </title>
 
@@ -70,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -134,12 +134,12 @@
         
         <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
     </li>
-    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/kubernetes/natip/" class="nav-item my-1">
+        <li data-nav-id="/linux/kubernetes/natip/" class="nav-item my-1 active">
                 
                  <a href="/linux/kubernetes/natip/" class="nav-link p-0">
                     NAT网关配置虚拟机静态IP
@@ -149,12 +149,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/essay/july/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
@@ -504,46 +504,40 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-编辑虚拟机nat网络配置">1. 编辑虚拟机NAT网络配置</a></li>
+    <li><a href="#2-新建虚拟机时选择nat网络模式">2. 新建虚拟机时选择NAT网络模式</a></li>
+    <li><a href="#3-编辑虚拟机网络配置文件">3. 编辑虚拟机网络配置文件</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>July</h1>
+<h1>NAT网关配置虚拟机静态IP</h1>
 
 <hr>
+<h2 id="1-编辑虚拟机nat网络配置">1. 编辑虚拟机NAT网络配置</h2>
+<p>选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）</p>
+<p><img src="../../../image/zsmart/pcrf/nat1.jpg" width = "640"  alt="NAT1" align=center />
+<img src="../../../image/zsmart/pcrf/nat2.jpg" width = "640"  alt="NAT2" align=center /></p>
+<h2 id="2-新建虚拟机时选择nat网络模式">2. 新建虚拟机时选择NAT网络模式</h2>
+<h2 id="3-编辑虚拟机网络配置文件">3. 编辑虚拟机网络配置文件</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vi /etc/sysconfig/network-scripts/ifcfg-ens33
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#先修改IP为静态</span>
+
+<span style="color:#111">BOOTPROTO</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;static&#34;</span><span style="color:#75715e"># 默认为DHCP</span>
 
 
-
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/essay/july/hugo/"> hugo语法 </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/essay/july/net/"> 网络相关 </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/essay/july/gin/"> Gin </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/essay/july/powershell/"> Powershell </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/essay/july/toml/"> toml </a>
-			</li>
-		
-
-	
-</ul>
-
-
-
-
+<span style="color:#75715e"># 再在末尾写上这几句</span>
+<span style="color:#111">IPADDR</span><span style="color:#f92672">=</span>192.168.24.131 <span style="color:#75715e">#这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行</span>
+<span style="color:#111">NETMASK</span><span style="color:#f92672">=</span>255.255.255.0
+<span style="color:#111">GATEWAY</span><span style="color:#f92672">=</span>192.168.24.2 <span style="color:#75715e">#这里对应上面ipconfig输出的默认网关</span>
+</code></pre></div><p>然后重启网络服务</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl restart network
+</code></pre></div><p>接下来虚拟机就可以和同网段的主机互相通信了</p>
 <hr>
 
 
@@ -563,8 +557,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/" title="Essay"><i class="fas fa-chevron-left p-1"></i>Essay</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/hugo/" title="hugo语法">hugo语法<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/" title="Kubernetes"><i class="fas fa-chevron-left p-1"></i>Kubernetes</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/" title="Essay">Essay<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

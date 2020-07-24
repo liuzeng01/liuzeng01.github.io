@@ -10,5 +10,17 @@
 	<atom:link href="https://liuzeng01.github.io/linux/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>NAT网关配置虚拟机静态IP</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/natip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/natip/</guid>
+      <description> 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）
+2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=&amp;#34;static&amp;#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务
+systemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了
+ Back</description>
+    </item>
+    
   </channel>
 </rss>
