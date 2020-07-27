@@ -71,6 +71,16 @@ context 包就是为了解决上面所说的这些问题而开发的：在 一�
     </item>
     
     <item>
+      <title>gRPC</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/grpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/grpc/</guid>
+      <description>1. gRPC  gRPC是一个高性能、开源和通用的RPC框架，面向移动和HTTP/2设计。目前提供C、Java和Go语言版本，分别是grpc、grpc-java、grpc-go。gRPC基于HTTP/2标准设计，带来诸如双向流、流控、头部压缩、单TCP连接上的多复用请求等特性。这些特性使得其在移动设备上表现更好，更省电和节省空间占用。gRPC由google开发，是一款语言中立、平台中立、开源的远程过程调用系统。 grpc具体是什么  在gRPC里客户端应用可以像调用本地对象一样直接调用另一台不同机器上服务端应用的方法，使得你能够更容易地创建分布式应用和服务。与许多RPC系统类似，gRPC也是基于以下理念：定义一个服务，指定其能够被远程调用的方法（包括参数和返回类型）。在服务端实现这个接口，并运行一个gRPC服务器来处理客户端调用。在客户端拥有一个存根能够像服务端一样的方法。gRPC客户端和服务端可以在多种环境中运行和交互，从google内部的服务器到你的笔记本，并且可以使用任何gRPC支持的语言编写。所以你可以很容易滴用Java创建一个gRPC服务端，用go、python、ruby来创建客户端。此外，google最新api将有gRPC版本的接口，使你很容易地将Google的功能集成到你的应用中。 2. protoc 与 protocol buffer  gRPC默认使用protocol buffers，这是google开源的一套成熟的结构数据序列化机制（当然也可以使用其他数据格式如JSON）可以用proto files创建gRPC服务，用protocol buffers消息类型来定义方法参数和返回类型。 3. 使用实例 3.1 Unary RPC proto syntax = &amp;#34;proto3&amp;#34;;package helloworld;service Greeter{ rpc sayhello(HelloRequest) returns (HelloReply){}}message HelloRequest{ string name = 1;}message HelloReply{ string message =1;}具体使用： 1. 第一行声明语法 2. 接下来定义RPC服务，入参与出参 3. 定义入参结构体，注意语法结构 4. 定义出参结构体
+ 支持的数据类型  基本类型： bool , string ,bytes([]byte),int32,int64,uint32,uint64,double(float64),float(float32) 嵌套类型： 相当于Go语言的结构体嵌套 oneof: 使用时只能定义其中的一个 enum： 使用时定义的类型需要为其中枚举的类型 map: 相当于go语言的map,定义方式为map&amp;lt;string,string&amp;gt; 声明消息体的时候，可以加上repeat字段，表示可以重复。相当于动态数组    接下来需要使用工具生成调用的文件</description>
+    </item>
+    
+    <item>
       <title>tran</title>
       <link>https://liuzeng01.github.io/programing/go/note/july/tran/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

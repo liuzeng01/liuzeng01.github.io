@@ -11,6 +11,17 @@
     
     
     <item>
+      <title>Kubernetes搭建</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</guid>
+      <description>K8sKubernetes作为容器编排工具，简化容器管理，提升工作效率而颇受青睐。很多新手部署Kubernetes由于“科学上网”问题举步维艰，本文以实战经验详解kubeadm不用“科学上网”部署Kubernetes的最简方法。Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。
+K8S集群中有管理节点与工作节点两种类型。管理节点主要负责K8S集群管理，集群中各节点间的信息交互、任务调度，还负责容器、Pod、NameSpaces、PV等生命周期的管理。工作节点主要为容器和Pod提供计算资源，Pod及容器全部运行在工作节点上，工作节点通过kubelet服务与管理节点通信以管理容器的生命周期，并与集群其他节点进行通信。
+1. 虚拟机部署 从centos的镜像开始生成，网络模式选择NAT NAT模式子网地址192.168.24.1，子网掩码 255.255.255.0 ，网关地址 192.168.24.2 ，子网区段 192.168.24.3-192.168.24.254 配置静态IP 192.168.24.131192.168.24.132192.168.24.133 设置主机名hostname，管理节点设置主机名为 master 。 hostnamectl set-hostname master # 需要设置其他主机名称时，可将 master 替换为正确的主机名node1、node2即可。 编辑 /etc/hosts 文件，添加域名解析 cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/hosts 10.10.10.10 master 10.10.10.11 node1 10.10.10.12 node2 EOF 关闭防火墙、selinux和swap。 systemctl stop firewalld systemctl disable firewalld setenforce 0 sed -i &amp;#34;s/^SELINUX=enforcing/SELINUX=disabled/g&amp;#34; /etc/selinux/config swapoff -a sed -i &amp;#39;s/.*swap.*/#&amp;amp;/&amp;#39; /etc/fstab 配置内核参数，将桥接的IPv4流量传递到iptables的链 cat &amp;gt; /etc/sysctl.d/k8s.conf &amp;lt;&amp;lt;EOF net.</description>
+    </item>
+    
+    <item>
       <title>NAT网关配置虚拟机静态IP</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/natip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -19,7 +30,7 @@
       <description> 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）
 2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=&amp;#34;static&amp;#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务
 systemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了
- Back</description>
+systemctl stop firewalld.service  Back</description>
     </item>
     
   </channel>

@@ -37,8 +37,9 @@ CMD [ &amp;quot;sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;echo $HOME&amp;q
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://liuzeng01.github.io/essay/july/hugo/</guid>
-      <description>1. hugo 2. Ace Document   button The button shortcode allows you to add a button to the page. This button is a HTML anchor element and can thus be used to link to another page or website.
-ButtonButtonButtonButtonButtonButtonButtonUsage Place the following shortcode on the page Copy{{&amp;lt; button style=&amp;#34;STYLE&amp;#34; link=&amp;#34;https://yourwebsite.com&amp;#34; &amp;gt;}} [content] {{&amp;lt; /button &amp;gt;}} Parameters style The style parameter is directly applied to the alert as a class in the format &amp;ldquo;btn-{STYLE}&amp;quot;.</description>
+      <description>1. hugo MarkDown : Insert Picture And Design the Dimensions
+&amp;lt;img src=&amp;#34;../../../image/zsmart/pcrf/nat1.jpg&amp;#34; width = &amp;#34;640&amp;#34; alt=&amp;#34;NAT1&amp;#34; align=center /&amp;gt; &amp;lt;img src=&amp;#34;../../../image/zsmart/pcrf/nat2.jpg&amp;#34; width = &amp;#34;640&amp;#34; alt=&amp;#34;NAT2&amp;#34; align=center /&amp;gt; 2. Ace Document   button The button shortcode allows you to add a button to the page. This button is a HTML anchor element and can thus be used to link to another page or website.
+ButtonButtonButtonButtonButtonButtonButtonUsage Place the following shortcode on the page Copy{{&amp;lt; button style=&amp;#34;STYLE&amp;#34; link=&amp;#34;https://yourwebsite.</description>
     </item>
     
     <item>
@@ -233,6 +234,16 @@ context 包就是为了解决上面所说的这些问题而开发的：在 一�
     </item>
     
     <item>
+      <title>gRPC</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/grpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/grpc/</guid>
+      <description>1. gRPC  gRPC是一个高性能、开源和通用的RPC框架，面向移动和HTTP/2设计。目前提供C、Java和Go语言版本，分别是grpc、grpc-java、grpc-go。gRPC基于HTTP/2标准设计，带来诸如双向流、流控、头部压缩、单TCP连接上的多复用请求等特性。这些特性使得其在移动设备上表现更好，更省电和节省空间占用。gRPC由google开发，是一款语言中立、平台中立、开源的远程过程调用系统。 grpc具体是什么  在gRPC里客户端应用可以像调用本地对象一样直接调用另一台不同机器上服务端应用的方法，使得你能够更容易地创建分布式应用和服务。与许多RPC系统类似，gRPC也是基于以下理念：定义一个服务，指定其能够被远程调用的方法（包括参数和返回类型）。在服务端实现这个接口，并运行一个gRPC服务器来处理客户端调用。在客户端拥有一个存根能够像服务端一样的方法。gRPC客户端和服务端可以在多种环境中运行和交互，从google内部的服务器到你的笔记本，并且可以使用任何gRPC支持的语言编写。所以你可以很容易滴用Java创建一个gRPC服务端，用go、python、ruby来创建客户端。此外，google最新api将有gRPC版本的接口，使你很容易地将Google的功能集成到你的应用中。 2. protoc 与 protocol buffer  gRPC默认使用protocol buffers，这是google开源的一套成熟的结构数据序列化机制（当然也可以使用其他数据格式如JSON）可以用proto files创建gRPC服务，用protocol buffers消息类型来定义方法参数和返回类型。 3. 使用实例 3.1 Unary RPC proto syntax = &amp;#34;proto3&amp;#34;;package helloworld;service Greeter{ rpc sayhello(HelloRequest) returns (HelloReply){}}message HelloRequest{ string name = 1;}message HelloReply{ string message =1;}具体使用： 1. 第一行声明语法 2. 接下来定义RPC服务，入参与出参 3. 定义入参结构体，注意语法结构 4. 定义出参结构体
+ 支持的数据类型  基本类型： bool , string ,bytes([]byte),int32,int64,uint32,uint64,double(float64),float(float32) 嵌套类型： 相当于Go语言的结构体嵌套 oneof: 使用时只能定义其中的一个 enum： 使用时定义的类型需要为其中枚举的类型 map: 相当于go语言的map,定义方式为map&amp;lt;string,string&amp;gt; 声明消息体的时候，可以加上repeat字段，表示可以重复。相当于动态数组    接下来需要使用工具生成调用的文件</description>
+    </item>
+    
+    <item>
       <title>hugo</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -246,6 +257,26 @@ go get -u -v github.com/spf13/hugo
     </item>
     
     <item>
+      <title>Kubernetes搭建</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</guid>
+      <description>K8sKubernetes作为容器编排工具，简化容器管理，提升工作效率而颇受青睐。很多新手部署Kubernetes由于“科学上网”问题举步维艰，本文以实战经验详解kubeadm不用“科学上网”部署Kubernetes的最简方法。Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。
+K8S集群中有管理节点与工作节点两种类型。管理节点主要负责K8S集群管理，集群中各节点间的信息交互、任务调度，还负责容器、Pod、NameSpaces、PV等生命周期的管理。工作节点主要为容器和Pod提供计算资源，Pod及容器全部运行在工作节点上，工作节点通过kubelet服务与管理节点通信以管理容器的生命周期，并与集群其他节点进行通信。
+1. 虚拟机部署 从centos的镜像开始生成，网络模式选择NAT NAT模式子网地址192.168.24.1，子网掩码 255.255.255.0 ，网关地址 192.168.24.2 ，子网区段 192.168.24.3-192.168.24.254 配置静态IP 192.168.24.131192.168.24.132192.168.24.133 设置主机名hostname，管理节点设置主机名为 master 。 hostnamectl set-hostname master # 需要设置其他主机名称时，可将 master 替换为正确的主机名node1、node2即可。 编辑 /etc/hosts 文件，添加域名解析 cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/hosts 10.10.10.10 master 10.10.10.11 node1 10.10.10.12 node2 EOF 关闭防火墙、selinux和swap。 systemctl stop firewalld systemctl disable firewalld setenforce 0 sed -i &amp;#34;s/^SELINUX=enforcing/SELINUX=disabled/g&amp;#34; /etc/selinux/config swapoff -a sed -i &amp;#39;s/.*swap.*/#&amp;amp;/&amp;#39; /etc/fstab 配置内核参数，将桥接的IPv4流量传递到iptables的链 cat &amp;gt; /etc/sysctl.d/k8s.conf &amp;lt;&amp;lt;EOF net.</description>
+    </item>
+    
+    <item>
+      <title>Makefile</title>
+      <link>https://liuzeng01.github.io/programing/c/makefile/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/c/makefile/</guid>
+      <description>  Back</description>
+    </item>
+    
+    <item>
       <title>NAT网关配置虚拟机静态IP</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/natip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -254,7 +285,7 @@ go get -u -v github.com/spf13/hugo
       <description> 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）
 2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=&amp;#34;static&amp;#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务
 systemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了
- Back</description>
+systemctl stop firewalld.service  Back</description>
     </item>
     
     <item>

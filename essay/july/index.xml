@@ -16,8 +16,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://liuzeng01.github.io/essay/july/hugo/</guid>
-      <description>1. hugo 2. Ace Document   button The button shortcode allows you to add a button to the page. This button is a HTML anchor element and can thus be used to link to another page or website.
-ButtonButtonButtonButtonButtonButtonButtonUsage Place the following shortcode on the page Copy{{&amp;lt; button style=&amp;#34;STYLE&amp;#34; link=&amp;#34;https://yourwebsite.com&amp;#34; &amp;gt;}} [content] {{&amp;lt; /button &amp;gt;}} Parameters style The style parameter is directly applied to the alert as a class in the format &amp;ldquo;btn-{STYLE}&amp;quot;.</description>
+      <description>1. hugo MarkDown : Insert Picture And Design the Dimensions
+&amp;lt;img src=&amp;#34;../../../image/zsmart/pcrf/nat1.jpg&amp;#34; width = &amp;#34;640&amp;#34; alt=&amp;#34;NAT1&amp;#34; align=center /&amp;gt; &amp;lt;img src=&amp;#34;../../../image/zsmart/pcrf/nat2.jpg&amp;#34; width = &amp;#34;640&amp;#34; alt=&amp;#34;NAT2&amp;#34; align=center /&amp;gt; 2. Ace Document   button The button shortcode allows you to add a button to the page. This button is a HTML anchor element and can thus be used to link to another page or website.
+ButtonButtonButtonButtonButtonButtonButtonUsage Place the following shortcode on the page Copy{{&amp;lt; button style=&amp;#34;STYLE&amp;#34; link=&amp;#34;https://yourwebsite.</description>
     </item>
     
     <item>

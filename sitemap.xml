@@ -155,6 +155,10 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/programing/go/note/july/grpc/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/programing/go/github.com/gohugoio/hugo/</loc>
   </url>
   
@@ -164,6 +168,14 @@
   
   <url>
     <loc>https://liuzeng01.github.io/linux/kernel/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/programing/c/makefile/</loc>
   </url>
   
   <url>
