@@ -336,6 +336,12 @@
                     gRPC
                 </a>
         </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
         <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
                 
                  <a href="/programing/go/note/july/tran/" class="nav-link p-0">
@@ -552,6 +558,7 @@
         <li><a href="#配置kubectl工具">配置kubectl工具</a></li>
         <li><a href="#部署flannel网络">部署flannel网络</a></li>
         <li><a href="#查看kubelet的状态如果发现有这种报错则需要修改下配置">查看Kubelet的状态，如果发现有这种报错，则需要修改下配置</a></li>
+        <li><a href="#使master节点也成为node节点">使master节点也成为node节点</a></li>
       </ul>
     </li>
     <li><a href="#4-部署node节点">4. 部署node节点</a>
@@ -714,7 +721,9 @@ Jul 27 00:30:41 k8s-node1 kubelet[2843]: E0727 00:30:41.323559    2843 kubelet.g
 <span style="color:#111">Environment</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;KUBELET_NETWORK_ARGS=--network-plugin=cni --cni-conf-dir=/etc/cni/ --cni-bin-dir=/opt/cni/bin&#34;</span>
 
 <span style="color:#75715e">### 然后重启kubelet</span>
-</code></pre></div><h2 id="4-部署node节点">4. 部署node节点</h2>
+</code></pre></div><h3 id="使master节点也成为node节点">使master节点也成为node节点</h3>
+<pre><code>kubectl taint nodes --all node-role.kubernetes.io/master
+</code></pre><h2 id="4-部署node节点">4. 部署node节点</h2>
 <h3 id="在所有node节点上进行如下操作"><strong>在所有node节点上进行如下操作</strong></h3>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubeadm join 192.168.24.131:6443 --token vs6pdy.2t9kvhq4babs2gu8 <span style="color:#8045ff">\
 </span><span style="color:#8045ff"></span>    --discovery-token-ca-cert-hash sha256:60e5986910f6d76166b747fbe2ed061c9b638aca33392807590abfd6bf818f02
@@ -776,7 +785,22 @@ roleRef:
 <pre><code>kubectl describe secret dashboard-admin-token-jgpsv -n kube-system
 </code></pre><h4 id="使用令牌登录">使用令牌登录</h4>
 <pre><code>eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4tdDlmcTUiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYjA4NTY4ZjQtY2ZkZi0xMWVhLTk5NzUtMDAwYzI5MGJkODc3Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRhc2hib2FyZC1hZG1pbiJ9.GKTkeGsJgRbx0rdor70HVAeJ02bjP3Z3wL9JumaCBy1f1yGXNJxh4RqZLdTvjV11JsSDgDXmvs9I3h5aSDK8FlBwTNI7K2KYVG6683pjlU1nvTnAQa7j6O32SWlHHY3UfnEFE1oa8HFLF-VZCNeHsD9oD-GtBWyh2THQJm78ZfjCNxJuf8Bu_gff1Rc0UcXgWNb70s002XfomRoFkoB5dJkRwxe1pIZy3diTvn7FxmXFA0SAInVUhsNdSqyk9s4Ov1Sa2RFTFNx6m0USujl8po6rEp2Jwsqt6gBIPF04KcNgm5VFMtc1BNw5gxnanBTd1AO3y7tXaDrtMtvh42Azcw
-</code></pre><hr>
+</code></pre><h4 id="解决dashboard在chrome里面无法打开的问题">解决dashboard在chrome里面无法打开的问题</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+mkdir key <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">cd</span> key
+<span style="color:#75715e">#生成证书</span>
+openssl genrsa -out dashboard.key <span style="color:#ae81ff">2048</span> 
+openssl req -new -out dashboard.csr -key dashboard.key -subj <span style="color:#d88200">&#39;/CN=192.168.246.200&#39;</span>
+openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt 
+<span style="color:#75715e">#删除原有的证书secret</span>
+kubectl delete secret kubernetes-dashboard-certs -n kube-system
+<span style="color:#75715e">#创建新的证书secret</span>
+kubectl create secret generic kubernetes-dashboard-certs --from-file<span style="color:#f92672">=</span>dashboard.key --from-file<span style="color:#f92672">=</span>dashboard.crt -n kube-system
+<span style="color:#75715e">#查看pod</span>
+kubectl get pod -n kube-system
+<span style="color:#75715e">#重启pod</span>
+kubectl delete pod &lt;pod name&gt; -n kube-system
+</code></pre></div><hr>
 
 
 

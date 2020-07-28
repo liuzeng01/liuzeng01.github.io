@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/booknote/algorithm/dynamic/">
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/tag/">
 
     <title>
         
-        动态规划 | iNote
+        Tag | iNote
         
     </title>
 
@@ -199,17 +199,17 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/booknote/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1 active">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
                 
                  <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
                     动态规划
@@ -237,12 +237,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -290,12 +290,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
@@ -336,7 +336,7 @@
                     gRPC
                 </a>
         </li>
-        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1 active">
                 
                  <a href="/programing/go/note/july/tag/" class="nav-link p-0">
                     Tag
@@ -532,12 +532,9 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1实例说明什么是动态规划">1.实例说明什么是动态规划</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#2-实际问题解决例子路径最小值问题">2. 实际问题解决例子：路径最小值问题</a></li>
+    <li><a href="#1-tag">1. tag</a></li>
+    <li><a href="#2-利用反射获取结构体字段">2. 利用反射获取结构体字段</a></li>
+    <li><a href="#3-利用tag与json">3. 利用tag与Json</a></li>
   </ul>
 </nav>
 </div>
@@ -545,55 +542,98 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>动态规划</h1>
+<h1>Tag</h1>
 
 <hr>
-<h2 id="1实例说明什么是动态规划">1.实例说明什么是动态规划</h2>
-<p><strong>计算1到10的和</strong>
-计算过程：1+2+3+4+5+6+7+8+9+10，得55</p>
-<p>上述如果口算，最快也要前后凑整10的相加，就是需要计算所有的值，才能得出结果。这时候，如果再加一个11，你肯定会脱口而出，得66，为什么直接能说出来呢，因为你记住了前面所求的得和，这一次得计算不需要关心前面这个55怎么来得，<strong>只关注这一步</strong>即可。</p>
-<p>引出定义：（有点难理解）在现实生活中，有一类活动的过程，由于它的特殊性，<strong>可将过程分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效果</strong>。因此各个阶段决策的选取不能任意确定，它依赖于当前面临的状态，又影响以后的发展。当各个阶段决策确定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线．这种把一个问题看作是一个前后关联具有链状结构的多阶段过程就称为<strong>多阶段决策过程</strong>，这种问题称为多阶段决策问题。在多阶段决策问题中，各个阶段采取的决策，一般来说是与时间有关的，决策依赖于当前状态，又随即引起状态的转移，<strong>一个决策序列就是在变化的状态中产生出来的，故有“动态”的含义</strong>，称这种解决多阶段决策最优化的过程为<strong>动态规划方法</strong>。</p>
-<h4 id="优化理解动态规划是把一个大问题拆解成一堆小问题这个本身没什么问题但是核心不是能拆分而是取决于该问题拆分出的小问题是否能被特定的规律重复利用">优化理解：动态规划是把一个大问题拆解成一堆小问题，这个本身没什么问题，但是核心不是能拆分，而是取决于该问题拆分出的小问题是否能被特定的规律重复利用。</h4>
-<hr>
-<h2 id="2-实际问题解决例子路径最小值问题">2. 实际问题解决例子：路径最小值问题</h2>
-<p><strong>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点</strong></p>
-<p>例如，给定三角形：
-[
-[2],
-[3,4],
-[6,5,7],
-[4,1,8,3]
-]
-自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。</p>
-<p>过程解析：自上而下计算时，只要每一步都记录路径上最小的值即可，因为路径上只能访问相邻的两个点，所以比较两个相邻点和本点数据的和，保存较小的一个值即可。不断向下类推，最后一组数据中最小的值就是i最小路径。</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">minimumTotal</span><span style="color:#111">(</span><span style="color:#75af00">triangle</span> <span style="color:#111">[][]</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#00a8c8">int</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span><span style="color:#111">,</span> <span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">triangle</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">if</span> <span style="color:#75af00">i</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span><span style="color:#75715e">//第一层没有上一级，不用计算
-</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">continue</span>
-        <span style="color:#111">}</span>
-        <span style="color:#00a8c8">for</span> <span style="color:#75af00">idx</span><span style="color:#111">,</span> <span style="color:#75af00">val</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">v</span> <span style="color:#111">{</span>
-            <span style="color:#00a8c8">if</span> <span style="color:#75af00">idx</span> <span style="color:#f92672">==</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">v</span><span style="color:#111">)</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#111">{</span><span style="color:#75715e">//最后一个值,他的上一级比他小一位数,所以相邻点只有一个直接赋值
-</span><span style="color:#75715e"></span>                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span>
-                <span style="color:#00a8c8">continue</span>
-            <span style="color:#111">}</span>
-            <span style="color:#00a8c8">if</span> <span style="color:#75af00">idx</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span><span style="color:#75715e">//第一位，相邻点也只有一个，直接赋值
-</span><span style="color:#75715e"></span>                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span>
-                <span style="color:#00a8c8">continue</span>
-            <span style="color:#111">}</span>
-            <span style="color:#00a8c8">if</span> <span style="color:#75af00">val</span><span style="color:#f92672">+</span><span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">&gt;</span> <span style="color:#75af00">val</span><span style="color:#f92672">+</span><span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#111">{</span><span style="color:#75715e">// 比较相邻点较小值，并记录
-</span><span style="color:#75715e"></span>                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span><span style="color:#75715e">// 不需要原来的值,直接赋值保存即可,因为只关心路径结果即可
-</span><span style="color:#75715e"></span>            <span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
-                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span>
-            <span style="color:#111">}</span>
-        <span style="color:#111">}</span>
+<h2 id="1-tag">1. tag</h2>
+<p>结构体字段上还可以额外添加属性，用反引号（Esc键下面的那个键）包含的字符串，称之为 Tag，也就是标签</p>
+<p>Tag 由反引号包含，由一对或几对的键值对组成，通过空格来分割键值。格式如下</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#d88200">`key01:&#34;value01&#34; key02:&#34;value02&#34; key03:&#34;value03&#34;`</span>
+</code></pre></div><h2 id="2-利用反射获取结构体字段">2. 利用反射获取结构体字段</h2>
+<p>获取 Tag 可以分为三个步骤：
+获取字段 field
+获取标签 tag
+获取键值对 key:value</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">field</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">reflect</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">obj</span><span style="color:#111">).</span><span style="color:#75af00">FieldByName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Name&#34;</span><span style="color:#111">)</span>
+<span style="color:#75715e">//field := reflect.ValueOf(obj).Type().Field(i)  // i 表示第几个字段
+</span><span style="color:#75715e">//field := reflect.ValueOf(&amp;obj).Elem().Type().Field(i)  // i 表示第几个字段
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 获取 Tag
+</span><span style="color:#75715e"></span><span style="color:#75af00">tag</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">field</span><span style="color:#111">.</span><span style="color:#75af00">Tag</span> 
+
+<span style="color:#75715e">// 获取键值对
+</span><span style="color:#75715e"></span><span style="color:#75af00">labelValue</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tag</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;label&#34;</span><span style="color:#111">)</span>
+<span style="color:#75af00">labelValue</span><span style="color:#111">,</span><span style="color:#75af00">ok</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tag</span><span style="color:#111">.</span><span style="color:#75af00">Lookup</span><span style="color:#111">(</span><span style="color:#d88200">&#34;label&#34;</span><span style="color:#111">)</span>
+
+
+</code></pre></div><p>示例：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;reflect&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">person</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`label:&#34;my name is&#34;`</span>
+	<span style="color:#75af00">Age</span> <span style="color:#00a8c8">int</span> <span style="color:#d88200">`label:&#34;my age is &#34;&#39;`</span>
+	<span style="color:#75af00">Addr</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`label:&#34;my address is &#34; default:&#34;unknown&#34;`</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">p</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">person</span><span style="color:#111">{</span>
+		<span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;liuzeng&#34;</span><span style="color:#111">,</span>
+		<span style="color:#75af00">Age</span><span style="color:#111">:</span>  <span style="color:#ae81ff">25</span><span style="color:#111">,</span>
+
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">field</span> <span style="color:#111">,</span><span style="color:#75af00">_</span><span style="color:#f92672">:=</span> <span style="color:#75af00">reflect</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">p</span><span style="color:#111">).</span><span style="color:#75af00">FieldByName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Addr&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">tag</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">field</span><span style="color:#111">.</span><span style="color:#75af00">Tag</span>
+	<span style="color:#75af00">labelValue</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tag</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;default&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">labelValue</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="3-利用tag与json">3. 利用tag与Json</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+    <span style="color:#d88200">&#34;encoding/json&#34;</span>
+    <span style="color:#d88200">&#34;fmt&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Person</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;name&#34;`</span>
+    <span style="color:#75af00">Age</span>  <span style="color:#00a8c8">int</span>    <span style="color:#d88200">`json:&#34;age&#34;`</span>
+    <span style="color:#75af00">Addr</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;addr,omitempty&#34;`</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">p1</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">Person</span><span style="color:#111">{</span>
+        <span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Jack&#34;</span><span style="color:#111">,</span>
+        <span style="color:#75af00">Age</span><span style="color:#111">:</span>  <span style="color:#ae81ff">22</span><span style="color:#111">,</span>
     <span style="color:#111">}</span>
-    <span style="color:#75af00">min</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">triangle</span><span style="color:#111">)</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span>
-    <span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">triangle</span><span style="color:#111">)</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#111">{</span><span style="color:#75715e">//最后一组中最小值就是路径最小
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">if</span> <span style="color:#75af00">v</span> <span style="color:#111">&lt;</span> <span style="color:#75af00">min</span> <span style="color:#111">{</span>
-            <span style="color:#75af00">min</span> <span style="color:#111">=</span> <span style="color:#75af00">v</span>
-        <span style="color:#111">}</span>
+
+    <span style="color:#75af00">data1</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Marshal</span><span style="color:#111">(</span><span style="color:#75af00">p1</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
     <span style="color:#111">}</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#75af00">min</span>
+
+    <span style="color:#75715e">// p1 没有 Addr，就不会打印了
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">data1</span><span style="color:#111">)</span>
+
+    <span style="color:#75715e">// ================
+</span><span style="color:#75715e"></span>
+    <span style="color:#75af00">p2</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">Person</span><span style="color:#111">{</span>
+        <span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Jack&#34;</span><span style="color:#111">,</span>
+        <span style="color:#75af00">Age</span><span style="color:#111">:</span>  <span style="color:#ae81ff">22</span><span style="color:#111">,</span>
+        <span style="color:#75af00">Addr</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;China&#34;</span><span style="color:#111">,</span>
+    <span style="color:#111">}</span>
+
+    <span style="color:#75af00">data2</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Marshal</span><span style="color:#111">(</span><span style="color:#75af00">p2</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
+    <span style="color:#111">}</span>
+
+    <span style="color:#75715e">// p2 则会打印所有
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">data2</span><span style="color:#111">)</span>
 <span style="color:#111">}</span>
 </code></pre></div><hr>
 
@@ -614,8 +654,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/booknote/algorithm/" title="algorithm"><i class="fas fa-chevron-left p-1"></i>algorithm</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/booknote/sre/" title="SRE">SRE<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/grpc/" title="gRPC"><i class="fas fa-chevron-left p-1"></i>gRPC</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/tran/" title="tran">tran<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

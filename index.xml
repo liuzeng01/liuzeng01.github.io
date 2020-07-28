@@ -316,6 +316,19 @@ systemctl stop firewalld.service  Back</description>
     </item>
     
     <item>
+      <title>Tag</title>
+      <link>https://liuzeng01.github.io/programing/go/note/july/tag/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/july/tag/</guid>
+      <description>1. tag 结构体字段上还可以额外添加属性，用反引号（Esc键下面的那个键）包含的字符串，称之为 Tag，也就是标签
+Tag 由反引号包含，由一对或几对的键值对组成，通过空格来分割键值。格式如下
+`key01:&amp;#34;value01&amp;#34; key02:&amp;#34;value02&amp;#34; key03:&amp;#34;value03&amp;#34;` 2. 利用反射获取结构体字段 获取 Tag 可以分为三个步骤： 获取字段 field 获取标签 tag 获取键值对 key:value
+field := reflect.TypeOf(obj).FieldByName(&amp;#34;Name&amp;#34;) //field := reflect.ValueOf(obj).Type().Field(i) // i 表示第几个字段 //field := reflect.ValueOf(&amp;amp;obj).Elem().Type().Field(i) // i 表示第几个字段  // 获取 Tag tag := field.Tag // 获取键值对 labelValue := tag.Get(&amp;#34;label&amp;#34;) labelValue,ok := tag.Lookup(&amp;#34;label&amp;#34;) 示例：
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) type person struct { Name string `label:&amp;#34;my name is&amp;#34;` Age int `label:&amp;#34;my age is &amp;#34;&amp;#39;` Addr string `label:&amp;#34;my address is &amp;#34; default:&amp;#34;unknown&amp;#34;` } func main() { p := person{ Name: &amp;#34;liuzeng&amp;#34;, Age: 25, } field ,_:= reflect.</description>
+    </item>
+    
+    <item>
       <title>tran</title>
       <link>https://liuzeng01.github.io/programing/go/note/july/tran/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
