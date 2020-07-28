@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/grpc/">
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/july/ssh/">
 
     <title>
         
-        gRPC | iNote
+        SSH免密登陆 | iNote
         
     </title>
 
@@ -163,12 +163,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/july/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
@@ -203,7 +203,7 @@
                     Powershell
                 </a>
         </li>
-        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1 active">
                 
                  <a href="/essay/july/ssh/" class="nav-link p-0">
                     SSH免密登陆
@@ -257,12 +257,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -310,12 +310,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
@@ -350,7 +350,7 @@
                     Context
                 </a>
         </li>
-        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1 active">
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
                 
                  <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
                     gRPC
@@ -552,20 +552,9 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1-grpc">1. gRPC</a>
-      <ul>
-        <li><a href="#grpc具体是什么">grpc具体是什么</a></li>
-      </ul>
-    </li>
-    <li><a href="#2-protoc-与-protocol-buffer">2. protoc 与 protocol buffer</a></li>
-    <li><a href="#3-使用实例">3. 使用实例</a>
-      <ul>
-        <li><a href="#31-unary-rpc">3.1 Unary RPC</a></li>
-        <li><a href="#32-服务端流式rpc">3.2 服务端流式RPC</a></li>
-        <li><a href="#33-客户端流式rpc">3.3 客户端流式RPC</a></li>
-        <li><a href="#34-双向流式rpc">3.4 双向流式RPC</a></li>
-      </ul>
-    </li>
+    <li><a href="#1-linux命令行配置方法">1. linux命令行配置方法</a></li>
+    <li><a href="#2-windows配置免密登陆">2. windows配置免密登陆</a></li>
+    <li><a href="#3-id_rsa权限问题">3. id_rsa权限问题</a></li>
   </ul>
 </nav>
 </div>
@@ -573,187 +562,35 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>gRPC</h1>
+<h1>SSH免密登陆</h1>
 
 <hr>
-<h2 id="1-grpc">1. gRPC</h2>
-<pre><code>    gRPC是一个高性能、开源和通用的RPC框架，面向移动和HTTP/2设计。
-    目前提供C、Java和Go语言版本，分别是grpc、grpc-java、grpc-go。
-    gRPC基于HTTP/2标准设计，带来诸如双向流、流控、头部压缩、单TCP连接上的多复用请求等特性。
-    这些特性使得其在移动设备上表现更好，更省电和节省空间占用。
-    gRPC由google开发，是一款语言中立、平台中立、开源的远程过程调用系统。
-</code></pre>
-<h3 id="grpc具体是什么">grpc具体是什么</h3>
-<pre><code>    在gRPC里客户端应用可以像调用本地对象一样直接调用另一台不同机器上服务端应用的方法，
-    使得你能够更容易地创建分布式应用和服务。与许多RPC系统类似，gRPC也是基于以下理念：
-    定义一个服务，指定其能够被远程调用的方法（包括参数和返回类型）。
-    在服务端实现这个接口，并运行一个gRPC服务器来处理客户端调用。
-    在客户端拥有一个存根能够像服务端一样的方法。
+<h2 id="1-linux命令行配置方法">1. linux命令行配置方法</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    ssh-keygen
+    ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.24.132
+    <span style="color:#75715e"># 如果给不同主机的不同用户分发的话，加上用户的名字</span>
+    ssh-copy-id -i ~/.ssh/id_rsa.pub liuzeng@192.168.24.132
 
-    gRPC客户端和服务端可以在多种环境中运行和交互，从google内部的服务器到你的笔记本，并且可以使用任何gRPC支持的语言编写。
-    所以你可以很容易滴用Java创建一个gRPC服务端，用go、python、ruby来创建客户端。
-    此外，google最新api将有gRPC版本的接口，使你很容易地将Google的功能集成到你的应用中。
-</code></pre>
-<h2 id="2-protoc-与-protocol-buffer">2. protoc 与 protocol buffer</h2>
-<pre><code>    gRPC默认使用protocol buffers，这是google开源的一套成熟的结构数据序列化机制（当然也可以使用其他数据格式如JSON）
-    可以用proto files创建gRPC服务，用protocol buffers消息类型来定义方法参数和返回类型。
-</code></pre>
-<h2 id="3-使用实例">3. 使用实例</h2>
-<h3 id="31-unary-rpc">3.1 Unary RPC</h3>
-<h4 id="proto">proto</h4>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#111">syntax</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;proto3&#34;</span><span style="color:#111">;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> <span style="color:#111">helloworld</span><span style="color:#111">;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">service</span> <span style="color:#111">Greeter</span><span style="color:#111">{</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#00a8c8">rpc</span> <span style="color:#111">sayhello</span><span style="color:#111">(</span><span style="color:#111">HelloRequest</span><span style="color:#111">)</span> <span style="color:#00a8c8">returns</span> <span style="color:#111">(</span><span style="color:#111">HelloReply</span><span style="color:#111">){}</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#111">}</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">message</span> <span style="color:#75af00">HelloRequest</span><span style="color:#111">{</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#00a8c8">string</span> <span style="color:#111">name</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#111">}</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">message</span> <span style="color:#75af00">HelloReply</span><span style="color:#111">{</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#00a8c8">string</span> <span style="color:#00a8c8">message</span> <span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#111">}</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>具体使用：
-1. 第一行声明语法
-2. 接下来定义RPC服务，入参与出参
-3. 定义入参结构体，注意语法结构
-4. 定义出参结构体</p>
-<ul>
-<li>支持的数据类型
-<ul>
-<li>基本类型： bool , string ,bytes([]byte),int32,int64,uint32,uint64,double(float64),float(float32)</li>
-<li>嵌套类型： 相当于Go语言的结构体嵌套</li>
-<li>oneof: 使用时只能定义其中的一个</li>
-<li>enum： 使用时定义的类型需要为其中枚举的类型</li>
-<li>map: 相当于go语言的map,定义方式为map&lt;string,string&gt;</li>
-<li>声明消息体的时候，可以加上repeat字段，表示可以重复。相当于动态数组</li>
-</ul>
-</li>
-</ul>
-<p>接下来需要使用工具生成调用的文件</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">protoc</span> <span style="color:#f92672">--</span><span style="color:#75af00">go_out</span><span style="color:#111">=</span><span style="color:#75af00">plugins</span><span style="color:#111">=</span><span style="color:#75af00">grpc</span><span style="color:#111">:.</span> <span style="color:#111">.</span><span style="color:#f92672">/</span><span style="color:#75af00">proto</span><span style="color:#f92672">/*</span><span style="color:#111">.</span><span style="color:#75af00">proto</span>
-</code></pre></div><ul>
-<li>这个命令的作用是，根据我们编写的Proto文件，生成Go语言类型的proto buffer文件，方便后面进行调用</li>
-</ul>
-<h4 id="client">client</h4>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+</code></pre></div><h2 id="2-windows配置免密登陆">2. windows配置免密登陆</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 在CMD里面运行ssh-keygen</span>
+<span style="color:#75715e"># 然后把id_rsa里面的内容复制到登陆主机用户的 authorized_keys 的后面</span>
+<span style="color:#75715e"># 接着ssh登陆一次就行了</span>
+</code></pre></div><h2 id="3-id_rsa权限问题">3. id_rsa权限问题</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># linux</span> 
+sudo chmod <span style="color:#ae81ff">600</span> ~/.ssh/id_rsa
+<span style="color:#75715e"># windows10</span>
+<span style="color:#75715e"># 对id_rsa文件：右击-属性-安全-高级,首先，点击窗口左下角的“禁用继承”，然后删除“权限条目”里自己以外的人,接着重新登陆就行了</span>
 
-<span style="color:#f92672">import</span> <span style="color:#111">(</span>
-	<span style="color:#75af00">pb</span> <span style="color:#d88200">&#34;GoStudy/week16/grpc/proto&#34;</span>
-	<span style="color:#d88200">&#34;context&#34;</span>
-	<span style="color:#d88200">&#34;google.golang.org/grpc&#34;</span>
-	<span style="color:#d88200">&#34;log&#34;</span>
-<span style="color:#111">)</span>
+---
 
-<span style="color:#00a8c8">func</span> <span style="color:#75af00">SayHello</span><span style="color:#111">(</span><span style="color:#75af00">client</span> <span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">GreeterClient</span><span style="color:#111">)</span><span style="color:#00a8c8">error</span><span style="color:#111">{</span>
-	<span style="color:#75af00">resp</span><span style="color:#111">,</span><span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">client</span><span style="color:#111">.</span><span style="color:#75af00">Sayhello</span><span style="color:#111">(</span><span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Background</span><span style="color:#111">(),</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">HelloRequest</span><span style="color:#111">{</span>
-		<span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Liuzeng&#34;</span><span style="color:#111">,</span>
-	<span style="color:#111">})</span>
-	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span><span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
-		<span style="color:#00a8c8">return</span> <span style="color:#75af00">err</span>
-	<span style="color:#111">}</span>
-	<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;clinet sayhello to server :&#34;</span><span style="color:#111">,</span><span style="color:#75af00">resp</span><span style="color:#111">.</span><span style="color:#75af00">Message</span><span style="color:#111">)</span>
-	<span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
-<span style="color:#111">}</span>
-
-
-
-<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-	<span style="color:#75af00">conn</span><span style="color:#111">,</span><span style="color:#75af00">_</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">grpc</span><span style="color:#111">.</span><span style="color:#75af00">Dial</span><span style="color:#111">(</span><span style="color:#d88200">&#34;:9000&#34;</span><span style="color:#111">,</span><span style="color:#75af00">grpc</span><span style="color:#111">.</span><span style="color:#75af00">WithInsecure</span><span style="color:#111">())</span>
-	<span style="color:#00a8c8">defer</span> <span style="color:#75af00">conn</span><span style="color:#111">.</span><span style="color:#75af00">Close</span><span style="color:#111">()</span>
-
-	<span style="color:#75af00">client</span> <span style="color:#f92672">:=</span><span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">NewGreeterClient</span><span style="color:#111">(</span><span style="color:#75af00">conn</span><span style="color:#111">)</span>
-	<span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">SayHello</span><span style="color:#111">(</span><span style="color:#75af00">client</span><span style="color:#111">)</span>
-	<span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
-		<span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
-	<span style="color:#111">}</span>
-
-
-<span style="color:#111">}</span>
-
-
-</code></pre></div><p><strong>使用方式</strong>：（在此处详细描述，后面不再展开）</p>
-<ol>
-<li>grpc.Dial，建立RPC连接</li>
-<li>创建client对象（直接调用生成的pb.go里面定义的工厂方法就行了）</li>
-<li>调用RPC函数
-<ol>
-<li>入参为client对象，出参为error（出参入参都可以自己定义，这个无所谓）</li>
-<li>调用pb.go里面给client对象生成的RPC方法，根据之前在Proto文件里面定义的调用方法，取出返回值来</li>
-<li>处理出错内容，返回</li>
-</ol>
-</li>
-<li>处理返回值</li>
-</ol>
-<h4 id="server">server</h4>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
-
-<span style="color:#f92672">import</span> <span style="color:#111">(</span>
-	<span style="color:#75af00">pb</span> <span style="color:#d88200">&#34;GoStudy/week16/grpc/proto&#34;</span>
-	<span style="color:#d88200">&#34;context&#34;</span>
-	<span style="color:#d88200">&#34;google.golang.org/grpc&#34;</span>
-	<span style="color:#d88200">&#34;net&#34;</span>
-<span style="color:#111">)</span>
-
-<span style="color:#00a8c8">type</span> <span style="color:#75af00">GreeterServer</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
-
-<span style="color:#111">}</span>
-<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">s</span> <span style="color:#f92672">*</span><span style="color:#75af00">GreeterServer</span><span style="color:#111">)</span><span style="color:#75af00">Sayhello</span><span style="color:#111">(</span><span style="color:#75af00">ctx</span> <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">Context</span><span style="color:#111">,</span><span style="color:#75af00">r</span> <span style="color:#f92672">*</span><span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">HelloRequest</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">HelloReply</span><span style="color:#111">,</span><span style="color:#00a8c8">error</span><span style="color:#111">){</span>
-	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">HelloReply</span><span style="color:#111">{</span>
-		<span style="color:#75af00">Message</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Hello&#34;</span> <span style="color:#f92672">+</span> <span style="color:#75af00">r</span><span style="color:#111">.</span><span style="color:#75af00">Name</span><span style="color:#111">,</span>
-	<span style="color:#111">},</span><span style="color:#00a8c8">nil</span>
-<span style="color:#111">}</span>
-
-<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">(){</span>
-	<span style="color:#75af00">server</span> <span style="color:#f92672">:=</span><span style="color:#75af00">grpc</span><span style="color:#111">.</span><span style="color:#75af00">NewServer</span><span style="color:#111">()</span>
-	<span style="color:#75af00">pb</span><span style="color:#111">.</span><span style="color:#75af00">RegisterGreeterServer</span><span style="color:#111">(</span><span style="color:#75af00">server</span><span style="color:#111">,</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">GreeterServer</span><span style="color:#111">{})</span>
-	<span style="color:#75af00">lis</span><span style="color:#111">,</span><span style="color:#75af00">_</span><span style="color:#f92672">:=</span> <span style="color:#75af00">net</span><span style="color:#111">.</span><span style="color:#75af00">Listen</span><span style="color:#111">(</span><span style="color:#d88200">&#34;tcp&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;:9000&#34;</span><span style="color:#111">)</span>
-	<span style="color:#75af00">server</span><span style="color:#111">.</span><span style="color:#75af00">Serve</span><span style="color:#111">(</span><span style="color:#75af00">lis</span><span style="color:#111">)</span>
-
-<span style="color:#111">}</span>
-
-
-</code></pre></div><p><strong>使用方法</strong>：</p>
-<ol>
-<li>声明一个RPC服务端</li>
-<li>声明一个服务端结构体，注册到pb.go里面的服务端注册服务上</li>
-<li>开始监听调用服务的端口</li>
-<li>提供RPC服务
-<ol>
-<li>给服务端结构体定义远程调用方法</li>
-<li>进行业务逻辑处理</li>
-<li>写入Reply返回体</li>
-</ol>
-</li>
-</ol>
-<h4 id="综上所述关键点就在于proto文件的定义这个相当于两方都共同遵守的一个规范client和server都是要按照proto文件里面定义的方法才能编写对应的服务">综上所述，关键点就在于proto文件的定义，这个相当于两方都共同遵守的一个规范。client和server都是要按照proto文件里面定义的方法，才能编写对应的服务</h4>
-<h3 id="32-服务端流式rpc">3.2 服务端流式RPC</h3>
-<p>服务端多次返回，客户端一次接受</p>
-<h4 id="proto-1">proto</h4>
-<h4 id="client-1">client</h4>
-<h4 id="server-1">server</h4>
-<h3 id="33-客户端流式rpc">3.3 客户端流式RPC</h3>
-<p>客户端多次请求，服务端一次接受</p>
-<h4 id="proto-2">proto</h4>
-<h4 id="client-2">client</h4>
-<h4 id="server-2">server</h4>
-<h3 id="34-双向流式rpc">3.4 双向流式RPC</h3>
-<p>交互式，客户端多次请求，服务端多次发送</p>
-<h4 id="proto-3">proto</h4>
-<h4 id="client-3">client</h4>
-<h4 id="server-3">server</h4>
-<hr>
 
 
 
 <a href="../" class="btn btn-info">
     Back
 </a>
-
-
+    
+</code></pre></div>
 
     
 
@@ -764,8 +601,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/context/" title="Context"><i class="fas fa-chevron-left p-1"></i>Context</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/tag/" title="Tag">Tag<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/july/powershell/" title="Powershell"><i class="fas fa-chevron-left p-1"></i>Powershell</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/toml/" title="toml">toml<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

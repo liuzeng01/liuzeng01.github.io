@@ -187,6 +187,15 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Aliyun Registry</title>
+      <link>https://liuzeng01.github.io/linux/docker/cmd/aliyunrepo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/cmd/aliyunrepo/</guid>
+      <description> 1. 登陆阿里云的registry sudo docker login --username=liuzeng_icloud registry.cn-hangzhou.aliyuncs.com 2. 从Registry中拉取镜像 sudo docker pull registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:[镜像版本号] 3. 将镜像推送到Registry sudo docker login --username=liuzeng_icloud registry.cn-hangzhou.aliyuncs.com sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:[镜像版本号] sudo docker push registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:[镜像版本号]  Back</description>
+    </item>
+    
+    <item>
       <title>cobra</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/spf13/cobra/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -231,6 +240,18 @@ context 包就是为了解决上面所说的这些问题而开发的：在 一�
       <guid>https://liuzeng01.github.io/essay/july/gin/</guid>
       <description>1. gin入门使用 package main import ( &amp;#34;github.com/gin-gonic/gin&amp;#34; &amp;#34;time&amp;#34; ) func main() { r := gin.Default() r.GET(&amp;#34;/&amp;#34;, func(ctx *gin.Context) { ctx.JSON(200,gin.H{ &amp;#34;Content&amp;#34;:&amp;#34;This is the gin demo&amp;#34;, &amp;#34;Time&amp;#34;:time.Now(), }) }) r.Run(&amp;#34;:8080&amp;#34;) } 输出日志
 [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.[GIN-debug] [WARNING] Running in &amp;quot;debug&amp;quot; mode. Switch to &amp;quot;release&amp;quot; mode in production.- using env:	export GIN_MODE=release- using code:	gin.SetMode(gin.ReleaseMode)[GIN-debug] GET / --&amp;gt; main.</description>
+    </item>
+    
+    <item>
+      <title>Golang面试题</title>
+      <link>https://liuzeng01.github.io/essay/july/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/golang/</guid>
+      <description>1. 面试题 golang面试题 2. 解答 1. 选择题 1. 属于关键字的是 func struct Go语言中的函数名、变量名、常量名、类型名、语句标号和包名等所有的命名，都遵循一个简单的命名规则：一个名字必须以一个字母（Unicode字母）或下划线开头，后面可以跟任意数量的字母、数字或下划线。大写字母和小写字母是不同的：heapSort和Heapsort是两个不同的名字。
+Go语言中类似if和switch的关键字有25个；关键字不能用于自定义名字，只能在特定语法结构中使用。
+break default func interface select case defer go map struct chan else goto package switch const fallthrough if range type continue for import return var 此外，还有大约30多个预定义的名字，比如int和true等，主要对应内建的常量、类型和函数。
+内建常量: true false iota nil 内建类型: int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64 uintptr float32 float64 complex128 complex64 bool byte rune string error 内建函数: make len cap new append copy close delete complex real imag panic recover 这些内部预先定义的名字并不是关键字，你可以在定义中重新使用它们。在一些特殊的场景中重新定义它们也是有意义的，但是也要注意避免过度而引起语义混乱。</description>
     </item>
     
     <item>
@@ -313,6 +334,15 @@ systemctl stop firewalld.service  Back</description>
       
       <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/rxbasic/</guid>
       <description>  Back</description>
+    </item>
+    
+    <item>
+      <title>SSH免密登陆</title>
+      <link>https://liuzeng01.github.io/essay/july/ssh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/july/ssh/</guid>
+      <description> 1. linux命令行配置方法 ssh-keygen ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.24.132 # 如果给不同主机的不同用户分发的话，加上用户的名字 ssh-copy-id -i ~/.ssh/id_rsa.pub liuzeng@192.168.24.132 2. windows配置免密登陆 # 在CMD里面运行ssh-keygen # 然后把id_rsa里面的内容复制到登陆主机用户的 authorized_keys 的后面 # 接着ssh登陆一次就行了 3. id_rsa权限问题 # linux sudo chmod 600 ~/.ssh/id_rsa # windows10 # 对id_rsa文件：右击-属性-安全-高级,首先，点击窗口左下角的“禁用继承”，然后删除“权限条目”里自己以外的人,接着重新登陆就行了 --- Back</description>
     </item>
     
     <item>

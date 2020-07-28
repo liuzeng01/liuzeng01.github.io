@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/tag/">
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/july/golang/">
 
     <title>
         
-        Tag | iNote
+        Golang面试题 | iNote
         
     </title>
 
@@ -163,12 +163,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/july/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
@@ -191,7 +191,7 @@
                     Gin
                 </a>
         </li>
-        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1 active">
                 
                  <a href="/essay/july/golang/" class="nav-link p-0">
                     Golang面试题
@@ -257,12 +257,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -310,12 +310,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
@@ -356,7 +356,7 @@
                     gRPC
                 </a>
         </li>
-        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1 active">
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
                 
                  <a href="/programing/go/note/july/tag/" class="nav-link p-0">
                     Tag
@@ -552,9 +552,13 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1-tag">1. tag</a></li>
-    <li><a href="#2-利用反射获取结构体字段">2. 利用反射获取结构体字段</a></li>
-    <li><a href="#3-利用tag与json">3. 利用tag与Json</a></li>
+    <li><a href="#1-面试题">1. 面试题</a></li>
+    <li><a href="#golang面试题imageessaygolang开发工程师笔试题pdf"><a href="../../../image/essay/Golang%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%AC%94%E8%AF%95%E9%A2%98.pdf">golang面试题</a></a></li>
+    <li><a href="#2-解答">2. 解答</a>
+      <ul>
+        <li><a href="#1-选择题">1. 选择题</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
@@ -562,100 +566,179 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Tag</h1>
+<h1>Golang面试题</h1>
 
 <hr>
-<h2 id="1-tag">1. tag</h2>
-<p>结构体字段上还可以额外添加属性，用反引号（Esc键下面的那个键）包含的字符串，称之为 Tag，也就是标签</p>
-<p>Tag 由反引号包含，由一对或几对的键值对组成，通过空格来分割键值。格式如下</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#d88200">`key01:&#34;value01&#34; key02:&#34;value02&#34; key03:&#34;value03&#34;`</span>
-</code></pre></div><h2 id="2-利用反射获取结构体字段">2. 利用反射获取结构体字段</h2>
-<p>获取 Tag 可以分为三个步骤：
-获取字段 field
-获取标签 tag
-获取键值对 key:value</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">field</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">reflect</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">obj</span><span style="color:#111">).</span><span style="color:#75af00">FieldByName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Name&#34;</span><span style="color:#111">)</span>
-<span style="color:#75715e">//field := reflect.ValueOf(obj).Type().Field(i)  // i 表示第几个字段
-</span><span style="color:#75715e">//field := reflect.ValueOf(&amp;obj).Elem().Type().Field(i)  // i 表示第几个字段
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// 获取 Tag
-</span><span style="color:#75715e"></span><span style="color:#75af00">tag</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">field</span><span style="color:#111">.</span><span style="color:#75af00">Tag</span> 
+<h2 id="1-面试题">1. 面试题</h2>
+<h2 id="golang面试题imageessaygolang开发工程师笔试题pdf"><a href="../../../image/essay/Golang%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%AC%94%E8%AF%95%E9%A2%98.pdf">golang面试题</a></h2>
+<h2 id="2-解答">2. 解答</h2>
+<h3 id="1-选择题">1. 选择题</h3>
+<h4 id="1-属于关键字的是-func-struct">1. 属于关键字的是 func struct</h4>
+<p>Go语言中的函数名、变量名、常量名、类型名、语句标号和包名等所有的命名，都遵循一个简单的命名规则：一个名字必须以一个字母（Unicode字母）或下划线开头，后面可以跟任意数量的字母、数字或下划线。大写字母和小写字母是不同的：heapSort和Heapsort是两个不同的名字。</p>
+<p>Go语言中类似if和switch的关键字有25个；关键字不能用于自定义名字，只能在特定语法结构中使用。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">break</span>      <span style="color:#00a8c8">default</span>       <span style="color:#00a8c8">func</span>     <span style="color:#00a8c8">interface</span>   <span style="color:#00a8c8">select</span>
+<span style="color:#00a8c8">case</span>       <span style="color:#00a8c8">defer</span>         <span style="color:#00a8c8">go</span>       <span style="color:#00a8c8">map</span>         <span style="color:#00a8c8">struct</span>
+<span style="color:#00a8c8">chan</span>       <span style="color:#00a8c8">else</span>          <span style="color:#00a8c8">goto</span>     <span style="color:#f92672">package</span>     <span style="color:#00a8c8">switch</span>
+<span style="color:#00a8c8">const</span>      <span style="color:#00a8c8">fallthrough</span>   <span style="color:#00a8c8">if</span>       <span style="color:#00a8c8">range</span>       <span style="color:#00a8c8">type</span>
+<span style="color:#00a8c8">continue</span>   <span style="color:#00a8c8">for</span>           <span style="color:#f92672">import</span>   <span style="color:#00a8c8">return</span>      <span style="color:#00a8c8">var</span>
+</code></pre></div><p>此外，还有大约30多个预定义的名字，比如int和true等，主要对应内建的常量、类型和函数。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">内建常量</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span> <span style="color:#00a8c8">false</span> <span style="color:#00a8c8">iota</span> <span style="color:#00a8c8">nil</span>
 
-<span style="color:#75715e">// 获取键值对
-</span><span style="color:#75715e"></span><span style="color:#75af00">labelValue</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tag</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;label&#34;</span><span style="color:#111">)</span>
-<span style="color:#75af00">labelValue</span><span style="color:#111">,</span><span style="color:#75af00">ok</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tag</span><span style="color:#111">.</span><span style="color:#75af00">Lookup</span><span style="color:#111">(</span><span style="color:#d88200">&#34;label&#34;</span><span style="color:#111">)</span>
+<span style="color:#75af00">内建类型</span><span style="color:#111">:</span> <span style="color:#00a8c8">int</span> <span style="color:#00a8c8">int8</span> <span style="color:#00a8c8">int16</span> <span style="color:#00a8c8">int32</span> <span style="color:#00a8c8">int64</span>
+          <span style="color:#00a8c8">uint</span> <span style="color:#00a8c8">uint8</span> <span style="color:#00a8c8">uint16</span> <span style="color:#00a8c8">uint32</span> <span style="color:#00a8c8">uint64</span> <span style="color:#00a8c8">uintptr</span>
+          <span style="color:#00a8c8">float32</span> <span style="color:#00a8c8">float64</span> <span style="color:#00a8c8">complex128</span> <span style="color:#00a8c8">complex64</span>
+          <span style="color:#00a8c8">bool</span> <span style="color:#00a8c8">byte</span> <span style="color:#00a8c8">rune</span> <span style="color:#00a8c8">string</span> <span style="color:#00a8c8">error</span>
 
-
-</code></pre></div><p>示例：</p>
+<span style="color:#75af00">内建函数</span><span style="color:#111">:</span> <span style="color:#75af00">make</span> <span style="color:#75af00">len</span> <span style="color:#75af00">cap</span> <span style="color:#75af00">new</span> <span style="color:#75af00">append</span> <span style="color:#75af00">copy</span> <span style="color:#75af00">close</span> <span style="color:#75af00">delete</span>
+          <span style="color:#75af00">complex</span> <span style="color:#75af00">real</span> <span style="color:#75af00">imag</span>
+          <span style="color:#75af00">panic</span> <span style="color:#75af00">recover</span>
+</code></pre></div><p>这些内部预先定义的名字并不是关键字，你可以在定义中重新使用它们。在一些特殊的场景中重新定义它们也是有意义的，但是也要注意避免过度而引起语义混乱。</p>
+<h4 id="2定义全局字符串变量--a-d">2.定义全局字符串变量  A D</h4>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
 
 <span style="color:#f92672">import</span> <span style="color:#111">(</span>
 	<span style="color:#d88200">&#34;fmt&#34;</span>
-	<span style="color:#d88200">&#34;reflect&#34;</span>
 <span style="color:#111">)</span>
 
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">name</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;name&#34;</span>
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">addr</span> <span style="color:#00a8c8">string</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">addr</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;nanjing&#34;</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">name</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">addr</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h4 id="3-通过指针变量p-访问其成员变量name">3. 通过指针变量p 访问其成员变量name</h4>
+<pre><code>p.name,(*p).name
+</code></pre>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;fmt&#34;</span>
+
 <span style="color:#00a8c8">type</span> <span style="color:#75af00">person</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
-	<span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`label:&#34;my name is&#34;`</span>
-	<span style="color:#75af00">Age</span> <span style="color:#00a8c8">int</span> <span style="color:#d88200">`label:&#34;my age is &#34;&#39;`</span>
-	<span style="color:#75af00">Addr</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`label:&#34;my address is &#34; default:&#34;unknown&#34;`</span>
+	<span style="color:#75af00">name</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">name1</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">name2</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">p</span> <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">person</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">name</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;name&#34;</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">name</span><span style="color:#111">)</span>
+	<span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#75af00">p</span><span style="color:#111">).</span><span style="color:#75af00">name1</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;name1&#34;</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">((</span><span style="color:#f92672">*</span><span style="color:#75af00">p</span><span style="color:#111">).</span><span style="color:#75af00">name1</span><span style="color:#111">)</span>
+	<span style="color:#75715e">//(&amp;p).name2 = &#34;name2&#34;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//fmt.Println((&amp;p).name2)
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">// \main.go:16:6: (&amp;p).name2 undefined (type **person has no field or method name2)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//.\main.go:17:18: (&amp;p).name2 undefined (type **person has no field or method name2)
+</span><span style="color:#75715e"></span>
+
 <span style="color:#111">}</span>
 
+</code></pre></div><h4 id="4-关于接口和类的说法-abd">4. 关于接口和类的说法 ABD</h4>
+<p><a href="https://books.studygolang.com/gopl-zh/ch7/ch7-03.html">接口实现的条件</a></p>
+<h4 id="5-关于字符串连接使用正确的是-bd">5. 关于字符串连接，使用正确的是 BD</h4>
+<h4 id="6-关于协程下面说法正确是-ad">6. 关于协程，下面说法正确是 AD</h4>
+<h4 id="7-关于init函数下面说法正确的是ab">7. 关于init函数，下面说法正确的是：AB</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;fmt&#34;</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">(){</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;init1&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">init</span><span style="color:#111">(){</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;init2&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
 <span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-	<span style="color:#75af00">p</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">person</span><span style="color:#111">{</span>
-		<span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;liuzeng&#34;</span><span style="color:#111">,</span>
-		<span style="color:#75af00">Age</span><span style="color:#111">:</span>  <span style="color:#ae81ff">25</span><span style="color:#111">,</span>
+	<span style="color:#75af00">str1</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Sprintf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;abc%d&#34;</span><span style="color:#111">,</span><span style="color:#ae81ff">123</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">str1</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><h4 id="8关于循环语句-c">8.关于循环语句 C</h4>
+<p><a href="https://books.studygolang.com/gopl-zh/ch1/ch1-02.html">for循环</a>
+Go语言只有for循环这一种循环语句</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">for</span> <span style="color:#75af00">initialization</span><span style="color:#111">;</span> <span style="color:#75af00">condition</span><span style="color:#111">;</span> <span style="color:#75af00">post</span> <span style="color:#111">{</span>
+    <span style="color:#75715e">// zero or more statements
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><p>for循环三个部分不需括号包围。大括号强制要求，左大括号必须和post语句在同一行。
+initialization语句是可选的，在循环开始前执行。initalization如果存在，必须是一条简单语句（simple statement），即，短变量声明、自增语句、赋值语句或函数调用。</p>
+<h4 id="9-对add函数调用正确的是-abd">9. 对add函数调用正确的是 ABD</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;fmt&#34;</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">add</span><span style="color:#111">(</span><span style="color:#75af00">args</span> <span style="color:#f92672">...</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span><span style="color:#00a8c8">int</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">sum</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span><span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">args</span><span style="color:#111">{</span>
+		<span style="color:#75af00">sum</span> <span style="color:#f92672">+=</span> <span style="color:#75af00">v</span>
 
 	<span style="color:#111">}</span>
-	<span style="color:#75af00">field</span> <span style="color:#111">,</span><span style="color:#75af00">_</span><span style="color:#f92672">:=</span> <span style="color:#75af00">reflect</span><span style="color:#111">.</span><span style="color:#75af00">TypeOf</span><span style="color:#111">(</span><span style="color:#75af00">p</span><span style="color:#111">).</span><span style="color:#75af00">FieldByName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Addr&#34;</span><span style="color:#111">)</span>
-	<span style="color:#75af00">tag</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">field</span><span style="color:#111">.</span><span style="color:#75af00">Tag</span>
-	<span style="color:#75af00">labelValue</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">tag</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;default&#34;</span><span style="color:#111">)</span>
-	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">labelValue</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">sum</span>
 <span style="color:#111">}</span>
-</code></pre></div><h2 id="3-利用tag与json">3. 利用tag与Json</h2>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span>  <span style="color:#111">{</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">add</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span><span style="color:#111">))</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">add</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">))</span>
+    <span style="color:#75715e">//fmt.Println(add([]int{1,2,3}))
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// cannot use []int literal (type []int) as type int in argument to add
+</span><span style="color:#75715e"></span>	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">add</span><span style="color:#111">([]</span><span style="color:#00a8c8">int</span><span style="color:#111">{</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#ae81ff">3</span><span style="color:#111">}</span><span style="color:#f92672">...</span><span style="color:#111">))</span>
+<span style="color:#111">}</span>
+</code></pre></div><h4 id="10关于类型转化下面语法正确的是-c">10.关于类型转化，下面语法正确的是 C</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;fmt&#34;</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span>  <span style="color:#111">{</span>
+	<span style="color:#00a8c8">type</span> <span style="color:#75af00">myint</span> <span style="color:#00a8c8">int</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">i</span> <span style="color:#00a8c8">int</span> <span style="color:#111">=</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">j</span>  <span style="color:#111">=</span> <span style="color:#75af00">myint</span><span style="color:#111">(</span><span style="color:#75af00">i</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">j</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+</code></pre></div><h4 id="11-关于局部变量的初始化使用正确的是-abc">11. 关于局部变量的初始化,使用正确的是 ABC</h4>
+<h4 id="12-关于const常量定义下面正确的使用方式是-abd">12. 关于const常量定义，下面正确的使用方式是 ABD</h4>
+<p><a href="https://books.studygolang.com/gopl-zh/ch3/ch3-06.html">常量</a></p>
+<h4 id="13-关于布尔变量b的赋值下面错误的用法是-bc">13. 关于布尔变量b的赋值，下面错误的用法是 BC</h4>
+<h4 id="14-下面的程序可能的运行结果是--c">14. 下面的程序可能的运行结果是  C</h4>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
 
 <span style="color:#f92672">import</span> <span style="color:#111">(</span>
-    <span style="color:#d88200">&#34;encoding/json&#34;</span>
-    <span style="color:#d88200">&#34;fmt&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
 <span style="color:#111">)</span>
 
-<span style="color:#00a8c8">type</span> <span style="color:#75af00">Person</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;name&#34;`</span>
-    <span style="color:#75af00">Age</span>  <span style="color:#00a8c8">int</span>    <span style="color:#d88200">`json:&#34;age&#34;`</span>
-    <span style="color:#75af00">Addr</span> <span style="color:#00a8c8">string</span> <span style="color:#d88200">`json:&#34;addr,omitempty&#34;`</span>
-<span style="color:#111">}</span>
-
 <span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">p1</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">Person</span><span style="color:#111">{</span>
-        <span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Jack&#34;</span><span style="color:#111">,</span>
-        <span style="color:#75af00">Age</span><span style="color:#111">:</span>  <span style="color:#ae81ff">22</span><span style="color:#111">,</span>
-    <span style="color:#111">}</span>
-
-    <span style="color:#75af00">data1</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Marshal</span><span style="color:#111">(</span><span style="color:#75af00">p1</span><span style="color:#111">)</span>
-    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
-        <span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
-    <span style="color:#111">}</span>
-
-    <span style="color:#75715e">// p1 没有 Addr，就不会打印了
-</span><span style="color:#75715e"></span>    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">data1</span><span style="color:#111">)</span>
-
-    <span style="color:#75715e">// ================
-</span><span style="color:#75715e"></span>
-    <span style="color:#75af00">p2</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">Person</span><span style="color:#111">{</span>
-        <span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Jack&#34;</span><span style="color:#111">,</span>
-        <span style="color:#75af00">Age</span><span style="color:#111">:</span>  <span style="color:#ae81ff">22</span><span style="color:#111">,</span>
-        <span style="color:#75af00">Addr</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;China&#34;</span><span style="color:#111">,</span>
-    <span style="color:#111">}</span>
-
-    <span style="color:#75af00">data2</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">json</span><span style="color:#111">.</span><span style="color:#75af00">Marshal</span><span style="color:#111">(</span><span style="color:#75af00">p2</span><span style="color:#111">)</span>
-    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
-        <span style="color:#111">panic</span><span style="color:#111">(</span><span style="color:#75af00">err</span><span style="color:#111">)</span>
-    <span style="color:#111">}</span>
-
-    <span style="color:#75715e">// p2 则会打印所有
-</span><span style="color:#75715e"></span>    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s\n&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">data2</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#00a8c8">true</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">defer</span> <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;1&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">defer</span> <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;2&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;3&#34;</span><span style="color:#111">)</span>
 <span style="color:#111">}</span>
-</code></pre></div><hr>
+<span style="color:#75715e">//31
+</span></code></pre></div><h4 id="15-关于switch语句下面说法正确的有-bd">15. 关于switch语句，下面说法正确的有 BD</h4>
+<p><a href="https://www.runoob.com/go/go-switch-statement.html">switch</a></p>
+<h4 id="16-golang中没有隐藏的this指针这句话的含义是httpswwwnowcodercomquestionterminalf0c4ae150abb46288f07c355a8215f3corderbyhotvalue1mutitagids809page1onlyreferencefalse-acd">16. <a href="https://www.nowcoder.com/questionTerminal/f0c4ae150abb46288f07c355a8215f3c?orderByHotValue=1&amp;mutiTagIds=809&amp;page=1&amp;onlyReference=false">golang中没有隐藏的this指针，这句话的含义是</a> ACD</h4>
+<pre><code>A 方法施加的对象显式传递，没有被隐藏起来
+B golang沿袭了传统面向对象编程中的诸多概念，比如继承、虚函数和构造函数
+C golang的面向对象表达更直观，对于面向过程只是换了一种语法形式来表达
+D 方法施加的对象不需要非得是指针，也不用非得叫this
+</code></pre>
+<h4 id="17-golang中的引用类型包括-abcd">17. golang中的引用类型包括 ABCD</h4>
+<p>值类型，引用类型都包括哪些</p>
+<ul>
+<li>基本的数据类型 int系列,float系列,bool,string, 数组和结构体struct</li>
+<li>引用类型包括指针,slice切片,map ,chan ,interface</li>
+</ul>
+<p>值类型和引用类型的<strong>使用特点</strong>
+<strong>值类型 直接存放值，内存通常在栈中分配</strong></p>
+<p>应用类型变量存储的地址（也就是<strong>通过指针访问类型里面的数据</strong>），通常真正的值在堆上分配。当没有变量引用这个地址的时候，该值会被gc回收。</p>
+<p><strong><a href="https://mp.weixin.qq.com/s?src=11&amp;timestamp=1595935091&amp;ver=2487&amp;signature=N3axiDA-0dc0YvLxjqgzs2BEW6sLCgLkzmLlk0LHoUc3mFbcsamiGSCAufHVwN1QhrF5htTjLyRPQC5OVSaWsvG31ToBKZsiL6bAn*x2ZRMA99KsLRQK5qRXvBvwtzTH&amp;new=1">引用类型与值类型</a></strong></p>
+<h4 id="18-golang中的指针运算包括-bc">18. golang中的指针运算包括 BC</h4>
+<h4 id="19-关于main函数可执行程序的执行起点下面说法正确的是abcd">19. 关于main函数（可执行程序的执行起点），下面说法正确的是：ABCD</h4>
+<h4 id="20-下面赋值正确的是-bd">20. 下面赋值正确的是 BD</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#00a8c8">var</span> <span style="color:#75af00">y</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span> <span style="color:#111">=</span> <span style="color:#00a8c8">nil</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">w</span> <span style="color:#00a8c8">error</span> <span style="color:#111">=</span> <span style="color:#00a8c8">nil</span>
+</code></pre></div><h4 id="21-关于整型切片的初始化正确的是-bcd">21. 关于整型切片的初始化正确的是 BCD</h4>
+<p>A中没有指定划拨的内存的大小</p>
+<h4 id="22-从切片中删除一个元素下面的算法实现正确的是">22. 从切片中删除一个元素，下面的算法实现正确的是</h4>
+<hr>
 
 
 
@@ -674,8 +757,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/grpc/" title="gRPC"><i class="fas fa-chevron-left p-1"></i>gRPC</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/tran/" title="tran">tran<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/july/gin/" title="Gin"><i class="fas fa-chevron-left p-1"></i>Gin</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/powershell/" title="Powershell">Powershell<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

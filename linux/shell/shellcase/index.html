@@ -98,10 +98,18 @@
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        </ul>
     </li>
     <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
         ">
@@ -183,10 +191,22 @@
                     Gin
                 </a>
         </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
         <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
                 
                  <a href="/essay/july/powershell/" class="nav-link p-0">
                     Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
                 </a>
         </li>
         <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
@@ -546,7 +566,11 @@
     <li><a href="#7监控cpu内存和硬盘利用率">7.监控CPU、内存和硬盘利用率</a></li>
     <li><a href="#8批量主机磁盘利用率监控">8.批量主机磁盘利用率监控</a></li>
     <li><a href="#9检查网站可用性">9.检查网站可用性</a></li>
-    <li><a href="#10检查mysql主从同步状态">10.检查MySQL主从同步状态</a></li>
+    <li><a href="#10检查mysql主从同步状态">10.检查MySQL主从同步状态</a>
+      <ul>
+        <li><a href="#11批量创建目录">11.批量创建目录</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
@@ -873,6 +897,33 @@ check_url_3<span style="color:#f92672">()</span> <span style="color:#f92672">{</
     <span style="color:#00a8c8">if</span> <span style="color:#f92672">[</span> <span style="color:#d88200">&#34;</span><span style="color:#111">$THREAD_STATUS</span><span style="color:#d88200">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#d88200">&#34;Yes&#34;</span> <span style="color:#f92672">]</span><span style="color:#111">;</span> <span style="color:#00a8c8">then</span>
         <span style="color:#111">echo</span> <span style="color:#d88200">&#34;Error: MySQL Master-Slave </span><span style="color:#111">$THREAD_STATUS_NAME</span><span style="color:#d88200"> status is </span><span style="color:#111">$THREAD_STATUS</span><span style="color:#d88200">!&#34;</span>
     <span style="color:#00a8c8">fi</span>
+<span style="color:#00a8c8">done</span>
+
+</code></pre></div><h3 id="11批量创建目录">11.批量创建目录</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#111">dir</span><span style="color:#f92672">=(</span>  
+/home/med/data/local_cdr/CC/post
+/home/med/data/local_cdr/CC/pre
+/home/med/data/local_cdr/CC/blacklist
+/home/med/data/local_cdr/SIC/eSIM
+/home/med/data/local_cdr/SIC/prepack
+/home/med/data/local_cdr/SIC/blank_USIM
+/home/med/data/local_cdr/SIC/LoyaltyVoucher
+/home/med/data/local_cdr/DSCM/dealerInfo
+/home/med/data/local_cdr/DSCM/distributorInfo
+/home/med/data/local_cdr/DSCM/salesHier
+/home/med/data/local_cdr/DSCM/salesPIC
+/home/med/data/local_cdr/DSCM/staffInformation
+/home/med/data/local_cdr/DSCM/subchannel
+/home/med/data/local_cdr/DSCM/salesPositionType
+/home/med/data/local_cdr/DSCM/dealerAddAddress
+/home/med/data/local_cdr/DSCM/distyUser
+/home/med/data/local_cdr/OC/error
+/home/med/data/local_cdr/OC/umobile
+/home/med/data/local_cdr/OC/SubsciberActivation
+<span style="color:#f92672">)</span>
+
+<span style="color:#00a8c8">for</span> imageName in <span style="color:#d88200">${</span><span style="color:#111">dir</span><span style="color:#111">[@]</span><span style="color:#d88200">}</span> <span style="color:#111">;</span> <span style="color:#00a8c8">do</span>
+    mkdir -p <span style="color:#111">$imageName</span>
 <span style="color:#00a8c8">done</span>
 
 </code></pre></div><hr>
