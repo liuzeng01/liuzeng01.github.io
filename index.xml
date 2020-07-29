@@ -289,15 +289,6 @@ K8S集群中有管理节点与工作节点两种类型。管理节点主要负�
     </item>
     
     <item>
-      <title>Linux NPM </title>
-      <link>https://liuzeng01.github.io/linux/docker/cmd/npm/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/linux/docker/cmd/npm/</guid>
-      <description>1. NPM 环境搭建 1.root 登录linux 2.cd /usr/loacl/node/ 没有目录就自己创建一个 3.wget https://npm.taobao.org/mirrors/node/v4.4.7/node-v4.4.7-linux-x64.tar.gz 4.tar -zxvf node-v4.4.7-linux-x64.tar.gz 5.rm -rf node-v4.4.7-linux-x64.tar.gz 6.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/npm /usr/local/bin/npm 7.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/node /usr/local/bin/node 8.npm -v 2. Vue项目初始化 1. 安装vue npm install -g vue 2. 安装vue脚手架 npm install -g @vue/cli 3. 直接使用 Vue 脚手架构建项目 vue create docker-demo 4. 安装下yarn yum install yarn/npm install -g yarn 5. 启动下项目 yarn serve 6. 项目打包 yarn build 3. 制作docker镜像 1. cd docker-demo &amp;amp;&amp;amp; touch Dockerfile 2.</description>
-    </item>
-    
-    <item>
       <title>Makefile</title>
       <link>https://liuzeng01.github.io/programing/c/makefile/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -375,6 +366,15 @@ package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) type per
       <guid>https://liuzeng01.github.io/programing/go/note/july/tran/</guid>
       <description>Tran工具 使用了百度翻译的API，进行单词或者短句的翻译 主要是为了方便自己平时写一些英文文档时，词穷的情况。所以设计成了命令行程序，随时使用。   1. 入口模块 利用了cobra来进行设计
 main.go package main import &amp;#34;tran/cmd&amp;#34; func main() { cmd.Execute() } //执行入口 cmd/root.go package cmd import ( &amp;#34;GoStudy/week17/tran/internal&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/spf13/cobra&amp;#34; &amp;#34;os&amp;#34; homedir &amp;#34;github.com/mitchellh/go-homedir&amp;#34; &amp;#34;github.com/spf13/viper&amp;#34; ) var cfgFile string var rootCmd = &amp;amp;cobra.Command{ Use: &amp;#34;tran&amp;#34;, Short: &amp;#34;The applicaiton to help you translate the word in the terminal&amp;#34;, Long: `The Manual method : Input your query string ,and input your target language code, E.</description>
+    </item>
+    
+    <item>
+      <title>vue &#43; docker</title>
+      <link>https://liuzeng01.github.io/linux/docker/cmd/npm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/cmd/npm/</guid>
+      <description>1. NPM 环境搭建 1.root 登录linux 2.cd /usr/loacl/node/ 没有目录就自己创建一个 3.wget https://npm.taobao.org/mirrors/node/v4.4.7/node-v4.4.7-linux-x64.tar.gz 4.tar -zxvf node-v4.4.7-linux-x64.tar.gz 5.rm -rf node-v4.4.7-linux-x64.tar.gz 6.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/npm /usr/local/bin/npm 7.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/node /usr/local/bin/node 8.npm -v 2. Vue项目初始化 1. 安装vue npm install -g vue 2. 安装vue脚手架 npm install -g @vue/cli 3. 直接使用 Vue 脚手架构建项目 vue create docker-demo 4. 安装下yarn yum install yarn/npm install -g yarn 5. 启动下项目 yarn serve 6. 项目打包 yarn build 3. 制作docker镜像 1. cd docker-demo &amp;amp;&amp;amp; touch Dockerfile 2.</description>
     </item>
     
     <item>

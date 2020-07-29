@@ -8,7 +8,7 @@
 
     <title>
         
-        Linux NPM  | iNote
+        vue &#43; docker | iNote
         
     </title>
 
@@ -112,7 +112,7 @@
         <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1 active">
                 
                  <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
-                    Linux NPM 
+                    vue &#43; docker
                 </a>
         </li>
         </ul>
@@ -561,6 +561,7 @@
     <li><a href="#1-npm-环境搭建">1. NPM 环境搭建</a></li>
     <li><a href="#2-vue项目初始化">2. Vue项目初始化</a></li>
     <li><a href="#3-制作docker镜像">3. 制作docker镜像</a></li>
+    <li><a href="#4-将项目跑到kubernetes集群上">4. 将项目跑到kubernetes集群上</a></li>
   </ul>
 </nav>
 </div>
@@ -568,7 +569,7 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Linux NPM </h1>
+<h1>vue &#43; docker</h1>
 
 <hr>
 <h2 id="1-npm-环境搭建">1. NPM 环境搭建</h2>
@@ -640,6 +641,63 @@ docker run -d -p 3000:80 --name docker-vue vue-docker-demo
 
 
 
+</code></pre></div><h2 id="4-将项目跑到kubernetes集群上">4. 将项目跑到kubernetes集群上</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">1. 推送镜像
+docker login --username<span style="color:#f92672">=</span>liuzeng_icloud registry.cn-hangzhou.aliyuncs.com
+docker tag vue-docker-demo  registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:v0.1
+docker push registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:v0.1
+2. 创建deployment文件
+vi vueapp.yml
+<span style="color:#75715e"># 输入下面的内容</span>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vue-app
+spec:
+  replicas: <span style="color:#ae81ff">1</span>
+  selector:
+    matchLabels:
+      app: vue-app
+  template:
+    metadata:
+      labels:
+        app: vue-app
+    spec:
+      containers:
+        - name: vue-app-container
+          image: registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:v0.1
+          resources:
+            limits:
+              memory: <span style="color:#d88200">&#34;128Mi&#34;</span>
+              cpu: <span style="color:#d88200">&#34;500m&#34;</span>
+          ports:
+            - containerPort: <span style="color:#ae81ff">80</span>
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vue-app-service
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: <span style="color:#ae81ff">80</span>
+      nodePort: <span style="color:#ae81ff">30002</span>
+  selector:
+    app: vue-app
+
+<span style="color:#75715e"># 分为两个部分，创建deployment对象，以及创建服务对象，用来给外面访问</span>
+3. 部署和删除服务的命令
+kubectl create -f vueapp.yml
+kubectl delete -f vueapp.yml
+
+4. 获取服务状态
+kubectl get pods
+kubectl get svc
+kubectl get pods -A
+netstat -an<span style="color:#111">|</span>grep <span style="color:#ae81ff">30002</span>
 </code></pre></div><hr>
 
 
