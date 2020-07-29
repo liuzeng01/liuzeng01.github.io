@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/kubectl/">
+
+    <title>
+        
+        kubectl命令用法 | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
+                    vue &#43; docker
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/kubectl/" class="nav-item my-1 active">
+                
+                 <a href="/linux/kubernetes/kubectl/" class="nav-link p-0">
+                    kubectl命令用法
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/k8sbuild/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/k8sbuild/" class="nav-link p-0">
+                    Kubernetes搭建
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/natip/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/natip/" class="nav-link p-0">
+                    NAT网关配置虚拟机静态IP
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/gin/" class="nav-item my-1">
+                
+                 <a href="/essay/july/gin/" class="nav-link p-0">
+                    Gin
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
+                    gRPC
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/c/makefile/" class="nav-item my-1">
+                
+                 <a href="/programing/c/makefile/" class="nav-link p-0">
+                    Makefile
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-基础命令">1. 基础命令：</a></li>
+        <li><a href="#2-设置命令">2. 设置命令</a></li>
+        <li><a href="#3-部署命令">3. 部署命令</a></li>
+        <li><a href="#3-集群管理命令">3. 集群管理命令</a></li>
+        <li><a href="#4-集群故障排查和调试命令">4. 集群故障排查和调试命令</a></li>
+        <li><a href="#5-其他命令">5. 其他命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>kubectl命令用法</h1>
+
+<hr>
+<h3 id="1-基础命令">1. 基础命令：</h3>
+<p><strong>create，delete，get，run，expose，set，explain，edit</strong></p>
+<h4 id="create-命令根据文件或者输入来创建资源">create 命令：根据文件或者输入来创建资源</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create -f demo-deployment.yaml
+kubectl create -f demo-service.yaml
+</code></pre></div><h4 id="delete-命令删除资源">delete 命令：删除资源</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 根据yaml文件删除对应的资源，但是yaml文件并不会被删除，这样更加高效</span>
+
+kubectl delete -f demo-deployment.yaml
+kubectl delete -f demo-service.yaml
+
+<span style="color:#75715e"># 也可以通过具体的资源名称来进行删除，使用这个删除资源，同时删除deployment和service资源</span>
+
+kubectl delete 具体的资源名称
+
+</code></pre></div><h4 id="get-命令-获得资源信息">get 命令 ：获得资源信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查看所有的资源信息</span>
+kubectl get all
+kubectl get --all-namespaces
+
+<span style="color:#75715e"># 查看pod列表</span>
+kubectl get pod
+
+<span style="color:#75715e"># 显示pod节点的标签信息</span>
+kubectl get pod --show-labels
+
+<span style="color:#75715e"># 根据指定标签匹配到具体的pod</span>
+kubectl get pods -l <span style="color:#111">app</span><span style="color:#f92672">=</span>example
+
+<span style="color:#75715e"># 查看node节点列表</span>
+kubectl get node
+
+<span style="color:#75715e"># 显示node节点的标签信息</span>
+kubectl get node --show-labels
+
+<span style="color:#75715e"># 查看pod详细信息，也就是可以查看pod具体运行在哪个节点上（ip地址信息）</span>
+kubectl get pod -o wide
+
+<span style="color:#75715e"># 查看服务的详细信息，显示了服务名称，类型，集群ip，端口，时间等信息</span>
+kubectl get svc
+kubectl get svc -n kube-system
+
+<span style="color:#75715e"># 查看命名空间</span>
+kubectl get ns
+kubectl get namespaces
+
+<span style="color:#75715e"># 查看所有pod所属的命名空间</span>
+kubectl get pod --all-namespaces
+
+<span style="color:#75715e"># 查看所有pod所属的命名空间并且查看都在哪些节点上运行</span>
+kubectl get pod --all-namespaces  -o wide
+
+<span style="color:#75715e"># 查看目前所有的replica set，显示了所有的pod的副本数，以及他们的可用数量以及状态等信息</span>
+kubectl get rs
+
+<span style="color:#75715e"># 查看已经部署了的所有应用，可以看到容器，以及容器所用的镜像，标签等信息</span>
+kubectl get deploy -o wide
+kubectl get deployments -o wide
+</code></pre></div><h4 id="run-命令在集群中创建并运行一个或多个容器镜像">run 命令：在集群中创建并运行一个或多个容器镜像</h4>
+<ul>
+<li>语法：run NAME &ndash;image=image [&ndash;env=&quot;key=value&rdquo;] [&ndash;port=port] [&ndash;replicas=replicas] [&ndash;dry-run=bool] [&ndash;overrides=inline-json] [&ndash;command] &ndash; [COMMAND] [args&hellip;]</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 示例，运行一个名称为nginx，副本数为3，标签为app=example，镜像为nginx:1.10，端口为80的容器实例</span>
+
+kubectl run nginx --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --labels<span style="color:#f92672">=</span><span style="color:#d88200">&#34;app=example&#34;</span> --image<span style="color:#f92672">=</span>nginx:1.10 --port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+<span style="color:#75715e"># 示例，运行一个名称为nginx，副本数为3，标签为app=example，镜像为nginx:1.10，端口为80的容器实例，并绑定到k8s</span>
+kubectl run nginx --image<span style="color:#f92672">=</span>nginx:1.10 --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --labels<span style="color:#f92672">=</span><span style="color:#d88200">&#34;app=example&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> --overrides<span style="color:#f92672">=</span><span style="color:#d88200">&#39;{&#34;apiVersion&#34;:&#34;apps/v1&#34;,&#34;spec&#34;:{&#34;template&#34;:{&#34;spec&#34;:{&#34;nodeSelector&#34;:{&#34;kubernetes.io/hostname&#34;:&#34;k8s-node1&#34;}}}}}&#39;</span>
+</code></pre></div><h4 id="expose-命令创建一个service服务并且暴露端口让外部可以访问">expose 命令：创建一个service服务，并且暴露端口让外部可以访问</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 创建一个nginx服务并且暴露端口让外界可以访问</span>
+
+kubectl expose deployment nginx --port<span style="color:#f92672">=</span><span style="color:#ae81ff">88</span> --type<span style="color:#f92672">=</span>NodePort --target-port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> --name<span style="color:#f92672">=</span>nginx-service
+</code></pre></div><h4 id="set-命令配置应用的一些特定资源也可以修改应用已有的资源">set 命令：配置应用的一些特定资源，也可以修改应用已有的资源</h4>
+<ul>
+<li>使用 kubectl set &ndash;help查看，它的子命令，env，image，resources，selector，serviceaccount，subject。</li>
+<li>语法：resources (-f FILENAME | TYPE NAME) ([&ndash;limits=LIMITS &amp; &ndash;requests=REQUESTS]</li>
+</ul>
+<h5 id="kubectl-set-resources-命令">kubectl set resources 命令</h5>
+<ul>
+<li>
+<p>这个命令用于设置资源的一些范围限制。</p>
+</li>
+<li>
+<p>资源对象中的Pod可以指定计算资源需求（CPU-单位m、内存-单位Mi），即使用的最小资源请求（Requests），限制（Limits）的最大资源需求，Pod将保证使用在设置的资源数量范围。</p>
+</li>
+<li>
+<p>对于每个Pod资源，如果指定了Limits（限制）值，并省略了Requests（请求），则Requests默认为Limits的值。</p>
+</li>
+<li>
+<p>可用资源对象包括(支持大小写)：replicationcontroller、deployment、daemonset、job、replicaset。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 将deployment的nginx容器cpu限制为“200m”，将内存设置为“512Mi”</span>
+kubectl <span style="color:#111">set</span> resources deployment nginx -c<span style="color:#f92672">=</span>nginx --limits<span style="color:#f92672">=</span><span style="color:#111">cpu</span><span style="color:#f92672">=</span>200m,memory<span style="color:#f92672">=</span>512Mi
+
+<span style="color:#75715e"># 设置所有nginx容器中 Requests和Limits</span>
+kubectl <span style="color:#111">set</span> resources deployment nginx --limits<span style="color:#f92672">=</span><span style="color:#111">cpu</span><span style="color:#f92672">=</span>200m,memory<span style="color:#f92672">=</span>512Mi --requests<span style="color:#f92672">=</span><span style="color:#111">cpu</span><span style="color:#f92672">=</span>100m,memory<span style="color:#f92672">=</span>256Mi
+
+<span style="color:#75715e"># 删除nginx中容器的计算资源值</span>
+kubectl <span style="color:#111">set</span> resources deployment nginx --limits<span style="color:#f92672">=</span><span style="color:#111">cpu</span><span style="color:#f92672">=</span>0,memory<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> --requests<span style="color:#f92672">=</span><span style="color:#111">cpu</span><span style="color:#f92672">=</span>0,memory<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</code></pre></div><h5 id="kubectl-set-selector-命令">kubectl set selector 命令</h5>
+<ul>
+<li>
+<p>设置资源的 selector（选择器）。如果在调用&quot;set selector&quot;命令之前已经存在选择器，则新创建的选择器将覆盖原来的选择器。</p>
+</li>
+<li>
+<p>selector必须以字母或数字开头，最多包含63个字符，可使用：字母、数字、连字符&rdquo; - &quot; 、点&rdquo;.&ldquo;和下划线&rdquo; _ &ldquo;。如果指定了&ndash;resource-version，则更新将使用此资源版本，否则将使用现有的资源版本。</p>
+</li>
+<li>
+<p>注意：目前selector命令只能用于Service对象。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">语法：selector <span style="color:#f92672">(</span>-f FILENAME <span style="color:#111">|</span> TYPE NAME<span style="color:#f92672">)</span> EXPRESSIONS <span style="color:#f92672">[</span>--resource-version<span style="color:#f92672">=</span>version<span style="color:#f92672">]</span>
+</code></pre></div><h5 id="kubectl-set-image-命令">kubectl set image 命令</h5>
+<ul>
+<li>
+<p>用于更新现有资源的容器镜像。</p>
+</li>
+<li>
+<p>可用资源对象包括：pod (po)、replicationcontroller (rc)、deployment (deploy)、daemonset (ds)、job、replicaset (rs)。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 将deployment中的nginx容器镜像设置为“nginx：1.9.1”</span>
+kubectl <span style="color:#111">set</span> image deployment/nginx <span style="color:#111">busybox</span><span style="color:#f92672">=</span>busybox <span style="color:#111">nginx</span><span style="color:#f92672">=</span>nginx:1.9.1
+
+<span style="color:#75715e"># 所有deployment和rc的nginx容器镜像更新为“nginx：1.9.1”</span>
+kubectl <span style="color:#111">set</span> image deployments,rc <span style="color:#111">nginx</span><span style="color:#f92672">=</span>nginx:1.9.1 --all
+
+<span style="color:#75715e"># 将daemonset abc的所有容器镜像更新为“nginx：1.9.1”</span>
+kubectl <span style="color:#111">set</span> image daemonset abc *<span style="color:#f92672">=</span>nginx:1.9.1
+
+<span style="color:#75715e"># 从本地文件中更新nginx容器镜像</span>
+kubectl <span style="color:#111">set</span> image -f path/to/file.yaml <span style="color:#111">nginx</span><span style="color:#f92672">=</span>nginx:1.9.1 --local -o yaml
+</code></pre></div><h4 id="explain-命令用于显示资源文档信息">explain 命令：用于显示资源文档信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl explain rs
+</code></pre></div><h4 id="edit-命令-用于编辑资源信息">edit 命令: 用于编辑资源信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 编辑Deployment nginx的一些信息</span>
+kubectl edit deployment nginx
+
+<span style="color:#75715e"># 编辑service类型的nginx的一些信息</span>
+kubectl edit service/nginx
+</code></pre></div><hr>
+<h3 id="2-设置命令">2. 设置命令</h3>
+<p><strong>label，annotate，completion</strong></p>
+<h4 id="label命令-用于更新增加修改或删除资源上的-label标签">label命令: 用于更新（增加、修改或删除）资源上的 label（标签）</h4>
+<ul>
+<li>label 必须以字母或数字开头，可以使用字母、数字、连字符、点和下划线，最长63个字符。</li>
+<li>如果 &ndash;overwrite 为 true，则可以覆盖已有的label，否则尝试覆盖label将会报错。</li>
+<li>如果指定了&ndash;resource-version，则更新将使用此资源版本，否则将使用现有的资源版本。</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 给名为foo的Pod添加label unhealthy=true</span>
+kubectl label pods foo <span style="color:#111">unhealthy</span><span style="color:#f92672">=</span><span style="color:#111">true</span>
+
+<span style="color:#75715e"># 给名为foo的Pod修改label 为 &#39;status&#39; / value &#39;unhealthy&#39;，且覆盖现有的value</span>
+kubectl label --overwrite pods foo <span style="color:#111">status</span><span style="color:#f92672">=</span>unhealthy
+
+<span style="color:#75715e"># 给 namespace 中的所有 pod 添加 label</span>
+kubectl label  pods --all <span style="color:#111">status</span><span style="color:#f92672">=</span>unhealthy
+
+<span style="color:#75715e"># 仅当resource-version=1时才更新 名为foo的Pod上的label</span>
+kubectl label pods foo <span style="color:#111">status</span><span style="color:#f92672">=</span>unhealthy --resource-version<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># 删除名为“bar”的label 。（使用“ - ”减号相连）</span>
+kubectl label pods foo bar-
+</code></pre></div><h4 id="annotate命令更新一个或多个资源的annotations信息也就是注解信息可以方便的查看做了哪些操作">annotate命令：更新一个或多个资源的Annotations信息。也就是注解信息，可以方便的查看做了哪些操作。</h4>
+<ul>
+<li>Annotations由key/value组成。</li>
+<li>Annotations的目的是存储辅助数据，特别是通过工具和系统扩展操作的数据，更多介绍在这里。</li>
+<li>如果&ndash;overwrite为true，现有的annotations可以被覆盖，否则试图覆盖annotations将会报错。</li>
+<li>如果设置了&ndash;resource-version，则更新将使用此resource version，否则将使用原有的resource version。</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 更新Pod“foo”，设置annotation “description”的value “my frontend”，如果同一个annotation多次设置，则只使用最后设置的value值</span>
+kubectl annotate pods foo <span style="color:#111">description</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;my frontend&#39;</span>
+
+<span style="color:#75715e"># 根据“pod.json”中的type和name更新pod的annotation</span>
+kubectl annotate -f pod.json <span style="color:#111">description</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;my frontend&#39;</span>
+
+<span style="color:#75715e"># 更新Pod&#34;foo&#34;，设置annotation“description”的value“my frontend running nginx”，覆盖现有的值</span>
+kubectl annotate --overwrite pods foo <span style="color:#111">description</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;my frontend running nginx&#39;</span>
+
+<span style="color:#75715e"># 更新 namespace中的所有pod</span>
+kubectl annotate pods --all <span style="color:#111">description</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;my frontend running nginx&#39;</span>
+
+<span style="color:#75715e"># 只有当resource-version为1时，才更新pod &#39;foo&#39;</span>
+kubectl annotate pods foo <span style="color:#111">description</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;my frontend running nginx&#39;</span> --resource-version<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># 通过删除名为“description”的annotations来更新pod &#39;foo&#39;。</span>
+<span style="color:#75715e"># 不需要 -overwrite flag。</span>
+kubectl annotate pods foo description-
+</code></pre></div><h4 id="completion命令用于设置-kubectl-命令自动补全">completion命令：用于设置 kubectl 命令自动补全</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 在 bash 中设置当前 shell 的自动补全，要先安装 bash-completion 包</span>
+<span style="color:#111">source</span> &lt;<span style="color:#f92672">(</span>kubectl completion bash<span style="color:#f92672">)</span>
+
+<span style="color:#75715e"># 在您的 bash shell 中永久的添加自动补全</span>
+<span style="color:#111">echo</span> <span style="color:#d88200">&#34;source &lt;(kubectl completion bash)&#34;</span> &gt;&gt; ~/.bashrc
+
+</code></pre></div><hr>
+<h3 id="3-部署命令">3. 部署命令</h3>
+<p><strong>rollout，rolling-update，scale，autoscale</strong></p>
+<h4 id="rollout-命令-用于对资源进行管理">rollout 命令: 用于对资源进行管理</h4>
+<p>可用资源包括：deployments，daemonsets。
+子命令：
+history（查看历史版本）
+pause（暂停资源）
+resume（恢复暂停资源）
+status（查看资源状态）
+undo（回滚版本）</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 语法</span>
+$ kubectl rollout SUBCOMMAND
+
+<span style="color:#75715e"># 回滚到之前的deployment</span>
+$ kubectl rollout undo deployment/abc
+
+<span style="color:#75715e"># 查看daemonet的状态</span>
+$ kubectl rollout status daemonset/foo
+</code></pre></div><h4 id="rolling-update命令-执行指定replicationcontroller的滚动更新">rolling-update命令: 执行指定ReplicationController的滚动更新</h4>
+<p>该命令创建了一个新的RC， 然后一次更新一个pod方式逐步使用新的PodTemplate，最终实现Pod滚动更新，new-controller.json需要与之前RC在相同的namespace下</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 使用frontend-v2.json中的新RC数据更新frontend-v1的pod</span>
+$ kubectl rolling-update frontend-v1 -f frontend-v2.json
+
+<span style="color:#75715e"># 使用JSON数据更新frontend-v1的pod</span>
+$ cat frontend-v2.json <span style="color:#111">|</span> kubectl rolling-update frontend-v1 -f -
+
+<span style="color:#75715e"># 其他的一些滚动更新</span>
+$ kubectl rolling-update frontend-v1 frontend-v2 --image<span style="color:#f92672">=</span>image:v2
+
+$ kubectl rolling-update frontend --image<span style="color:#f92672">=</span>image:v2
+
+$ kubectl rolling-update frontend-v1 frontend-v2 --rollback
+</code></pre></div><h4 id="scale命令扩容或缩容-deploymentreplicasetreplication-controller或-job-中pod数量">scale命令：扩容或缩容 Deployment、ReplicaSet、Replication Controller或 Job 中Pod数量</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 将名为foo中的pod副本数设置为3。</span>
+$ kubectl scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> rs/foo
+kubectl scale deploy/nginx --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+
+<span style="color:#75715e"># 将由“foo.yaml”配置文件中指定的资源对象和名称标识的Pod资源副本设为3</span>
+$ kubectl scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> -f foo.yaml
+
+<span style="color:#75715e"># 如果当前副本数为2，则将其扩展至3。</span>
+$ kubectl scale --current-replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> deployment/mysql
+
+<span style="color:#75715e"># 设置多个RC中Pod副本数量</span>
+$ kubectl scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> rc/foo rc/bar rc/baz
+</code></pre></div><h4 id="autoscale命令这个比scale更加强大也是弹性伸缩策略-它是根据流量的多少来自动进行扩展或者缩容">autoscale命令：这个比scale更加强大，也是弹性伸缩策略 ，它是根据流量的多少来自动进行扩展或者缩容。</h4>
+<ul>
+<li>指定Deployment、ReplicaSet或ReplicationController，并创建已经定义好资源的自动伸缩器。使用自动伸缩器可以根据需要自动增加或减少系统中部署的pod数量。</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 使用 Deployment “foo”设定，使用默认的自动伸缩策略，指定目标CPU使用率，使其Pod数量在2到10之间</span>
+$ kubectl autoscale deployment foo --min<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> --max<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+
+<span style="color:#75715e"># 使用RC“foo”设定，使其Pod的数量介于1和5之间，CPU使用率维持在80％</span>
+$ kubectl autoscale rc foo --max<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> --cpu-percent<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+</code></pre></div><hr>
+<h3 id="3-集群管理命令">3. 集群管理命令</h3>
+<p><strong>certificate，cluster-info，top，cordon，uncordon，drain，taint</strong></p>
+<h4 id="certificate命令用于证书资源管理授权等">certificate命令：用于证书资源管理，授权等</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 例如，当有node节点要向master请求，那么是需要master节点授权的</span>
+$ kubectl certificate approve node-csr-81F5uBehyEyLWco5qavBsxc1GzFcZk3aFM3XW5rT3mw node-csr-Ed0kbFhc_q7qx14H3QpqLIUs0uKo036O2SnFpIheM18
+</code></pre></div><h4 id="cluster-info-命令显示集群信息">cluster-info 命令：显示集群信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ kubectl cluster-info
+</code></pre></div><h4 id="top-命令用于查看资源的cpu内存磁盘等资源的使用率">top 命令：用于查看资源的cpu，内存磁盘等资源的使用率</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 以前需要heapster，后替换为metrics-server</span>
+$ kubectl top pod --all-namespaces
+</code></pre></div><h4 id="cordon命令用于标记某个节点不可调度">cordon命令：用于标记某个节点不可调度</h4>
+<h4 id="uncordon命令用于标签节点可以调度">uncordon命令：用于标签节点可以调度</h4>
+<h4 id="drain命令用于在维护期间排除节点">drain命令：用于在维护期间排除节点。</h4>
+<h4 id="taint命令用于给某个node节点设置污点">taint命令：用于给某个Node节点设置污点</h4>
+<hr>
+<h3 id="4-集群故障排查和调试命令">4. 集群故障排查和调试命令</h3>
+<p><strong>describe，logs，exec，attach，port-foward，proxy，cp，auth</strong></p>
+<h4 id="describe命令显示特定资源的详细信息">describe命令：显示特定资源的详细信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查看my-nginx pod的详细状态</span>
+$ kubectl describe po my-nginx
+</code></pre></div><h4 id="logs命令用于在一个pod中打印一个容器的日志如果pod中只有一个容器可以省略容器名">logs命令：用于在一个pod中打印一个容器的日志，如果pod中只有一个容器，可以省略容器名</h4>
+<ul>
+<li>语法：kubectl logs [-f] [-p] POD [-c CONTAINER]</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 返回仅包含一个容器的pod nginx的日志快照</span>
+$ kubectl logs nginx
+
+<span style="color:#75715e"># 返回pod ruby中已经停止的容器web-1的日志快照</span>
+$ kubectl logs -p -c ruby web-1
+
+<span style="color:#75715e"># 持续输出pod ruby中的容器web-1的日志</span>
+$ kubectl logs -f -c ruby web-1
+
+<span style="color:#75715e"># 仅输出pod nginx中最近的20条日志</span>
+$ kubectl logs --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span> nginx
+
+<span style="color:#75715e"># 输出pod nginx中最近一小时内产生的所有日志</span>
+$ kubectl logs --since<span style="color:#f92672">=</span>1h nginx
+</code></pre></div><p>参数选项：</p>
+<pre><code>-c, --container=&quot;&quot;: 容器名。
+-f, --follow[=false]: 指定是否持续输出日志（实时日志）。
+--interactive[=true]: 如果为true，当需要时提示用户进行输入。默认为true。
+--limit-bytes=0: 输出日志的最大字节数。默认无限制。
+-p, --previous[=false]: 如果为true，输出pod中曾经运行过，但目前已终止的容器的日志。
+--since=0: 仅返回相对时间范围，如5s、2m或3h，之内的日志。默认返回所有日志。只能同时使用since和since-time中的一种。
+--since-time=&quot;&quot;: 仅返回指定时间（RFC3339格式）之后的日志。默认返回所有日志。只能同时使用since和since-time中的一种。
+--tail=-1: 要显示的最新的日志条数。默认为-1，显示所有的日志。
+--timestamps[=false]: 在日志中包含时间戳。
+</code></pre>
+<h4 id="exec命令进入容器进行交互在容器中执行命令">exec命令：进入容器进行交互，在容器中执行命令</h4>
+<ul>
+<li>语法：kubectl exec POD [-c CONTAINER] &ndash; COMMAND [args&hellip;]</li>
+</ul>
+<p>命令选项：</p>
+<pre><code>-c, --container=&quot;&quot;: 容器名。如果未指定，使用pod中的一个容器。
+-p, --pod=&quot;&quot;: Pod名。
+-i, --stdin[=false]: 将控制台输入发送到容器。
+-t, --tty[=false]: 将标准输入控制台作为容器的控制台输入。
+</code></pre>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 进入nginx容器，执行一些命令操作</span>
+$ kubectl <span style="color:#111">exec</span> -it nginx-deployment-58d6d6ccb8-lc5fp bash
+</code></pre></div><h4 id="attach命令连接到一个正在运行的容器">attach命令：连接到一个正在运行的容器。</h4>
+<ul>
+<li>语法：kubectl attach POD -c CONTAINER</li>
+</ul>
+<p>参数选项：</p>
+<pre><code>-c, --container=&quot;&quot;: 容器名。如果省略，则默认选择第一个 pod。
+-i, --stdin[=false]: 将控制台输入发送到容器。
+-t, --tty[=false]: 将标准输入控制台作为容器的控制台输入。
+</code></pre>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 获取正在运行中的pod 123456-7890的输出，默认连接到第一个容器</span>
+$ kubectl attach 123456-7890
+
+<span style="color:#75715e"># 获取pod 123456-7890中ruby-container的输出</span>
+$ kubectl attach 123456-7890 -c ruby-container
+
+<span style="color:#75715e"># 切换到终端模式，将控制台输入发送到pod 123456-7890的ruby-container的“bash”命令，并将其输出到控制台/</span>
+<span style="color:#75715e"># 错误控制台的信息发送回客户端。</span>
+$ kubectl attach 123456-7890 -c ruby-container -i -t
+</code></pre></div><h4 id="cp命令拷贝文件或者目录到pod容器中">cp命令：拷贝文件或者目录到pod容器中</h4>
+<ul>
+<li>用于pod和外部的文件交换,类似于docker 的cp，就是将容器中的内容和外部的内容进行交换。</li>
+</ul>
+<hr>
+<h3 id="5-其他命令">5. 其他命令</h3>
+<p><strong>api-servions，config，help，plugin，version</strong></p>
+<h4 id="api-servions命令打印受支持的api版本信息">api-servions命令：打印受支持的api版本信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 打印当前集群支持的api版本</span>
+$ kubectl api-versions
+</code></pre></div><h4 id="help命令用于查看命令帮助">help命令：用于查看命令帮助</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 显示全部的命令帮助提示</span>
+$ kubectl --help
+
+<span style="color:#75715e"># 具体的子命令帮助，例如</span>
+$ kubectl create --help
+config 命令: 用于修改kubeconfig配置文件（用于访问api，例如配置认证信息）
+
+设置 kubectl 与哪个 Kubernetes 集群进行通信并修改配置信息。查看 使用 kubeconfig 跨集群授权访问 文档获取详情配置文件信息。
+
+<span style="color:#75715e"># 显示合并的 kubeconfig 配置</span>
+$ kubectl config view
+
+<span style="color:#75715e"># 同时使用多个 kubeconfig 文件并查看合并的配置</span>
+$ <span style="color:#111">KUBECONFIG</span><span style="color:#f92672">=</span>~/.kube/config:~/.kube/kubconfig2 kubectl config view
+
+<span style="color:#75715e"># 获取 e2e 用户的密码</span>
+$ kubectl config view -o <span style="color:#111">jsonpath</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;{.users[?(@.name == &#34;e2e&#34;)].user.password}&#39;</span>
+
+<span style="color:#75715e"># 展示当前所处的上下文</span>
+$ kubectl config current-context
+
+<span style="color:#75715e"># 设置默认的上下文为 my-cluster-name</span>
+$ kubectl config use-context my-cluster-name
+
+<span style="color:#75715e"># 添加新的集群配置到 kubeconf 中，使用 basic auth 进行鉴权</span>
+$ kubectl config set-credentials kubeuser/foo.kubernetes.com --username<span style="color:#f92672">=</span>kubeuser --password<span style="color:#f92672">=</span>kubepassword
+
+<span style="color:#75715e"># 使用特定的用户名和命名空间设置上下文。</span>
+$ kubectl config set-context gce --user<span style="color:#f92672">=</span>cluster-admin --namespace<span style="color:#f92672">=</span>foo <span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span>  <span style="color:#f92672">&amp;&amp;</span> kubectl config use-context gce
+</code></pre></div><h4 id="version-命令打印客户端和服务端版本信息">version 命令：打印客户端和服务端版本信息</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 打印客户端和服务端版本信息</span>
+$ kubectl version
+</code></pre></div><h5 id="plugin-命令运行一个命令行插件">plugin 命令：运行一个命令行插件</h5>
+<hr>
+<p><a href="https://mp.weixin.qq.com/s?src=11&amp;timestamp=1596001465&amp;ver=2489&amp;signature=PIy50kbXWmUXkPwsPkBFSkcmaugKVwtv7s2w3e1eGyjUxqQ9e7*t4VTW3MYJ9EG*K5LW3NhiD-u5khtlEUJkxyiiOw1AD9gC59bXPbotc9U4lRA3GHt74OIS0Gr*jQir&amp;new=1">Kubectl命令使用</a></p>
+<hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/" title="Kubernetes"><i class="fas fa-chevron-left p-1"></i>Kubernetes</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kubernetes/k8sbuild/" title="Kubernetes搭建">Kubernetes搭建<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

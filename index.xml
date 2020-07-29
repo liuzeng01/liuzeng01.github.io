@@ -278,6 +278,16 @@ go get -u -v github.com/spf13/hugo
     </item>
     
     <item>
+      <title>kubectl命令用法</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/kubectl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/kubectl/</guid>
+      <description>1. 基础命令： create，delete，get，run，expose，set，explain，edit
+create 命令：根据文件或者输入来创建资源 kubectl create -f demo-deployment.yaml kubectl create -f demo-service.yaml delete 命令：删除资源 # 根据yaml文件删除对应的资源，但是yaml文件并不会被删除，这样更加高效 kubectl delete -f demo-deployment.yaml kubectl delete -f demo-service.yaml # 也可以通过具体的资源名称来进行删除，使用这个删除资源，同时删除deployment和service资源 kubectl delete 具体的资源名称 get 命令 ：获得资源信息 # 查看所有的资源信息 kubectl get all kubectl get --all-namespaces # 查看pod列表 kubectl get pod # 显示pod节点的标签信息 kubectl get pod --show-labels # 根据指定标签匹配到具体的pod kubectl get pods -l app=example # 查看node节点列表 kubectl get node # 显示node节点的标签信息 kubectl get node --show-labels # 查看pod详细信息，也就是可以查看pod具体运行在哪个节点上（ip地址信息） kubectl get pod -o wide # 查看服务的详细信息，显示了服务名称，类型，集群ip，端口，时间等信息 kubectl get svc kubectl get svc -n kube-system # 查看命名空间 kubectl get ns kubectl get namespaces # 查看所有pod所属的命名空间 kubectl get pod --all-namespaces # 查看所有pod所属的命名空间并且查看都在哪些节点上运行 kubectl get pod --all-namespaces -o wide # 查看目前所有的replica set，显示了所有的pod的副本数，以及他们的可用数量以及状态等信息 kubectl get rs # 查看已经部署了的所有应用，可以看到容器，以及容器所用的镜像，标签等信息 kubectl get deploy -o wide kubectl get deployments -o wide run 命令：在集群中创建并运行一个或多个容器镜像  语法：run NAME &amp;ndash;image=image [&amp;ndash;env=&amp;quot;key=value&amp;rdquo;] [&amp;ndash;port=port] [&amp;ndash;replicas=replicas] [&amp;ndash;dry-run=bool] [&amp;ndash;overrides=inline-json] [&amp;ndash;command] &amp;ndash; [COMMAND] [args&amp;hellip;]  # 示例，运行一个名称为nginx，副本数为3，标签为app=example，镜像为nginx:1.</description>
+    </item>
+    
+    <item>
       <title>Kubernetes搭建</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
