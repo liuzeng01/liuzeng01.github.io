@@ -19,5 +19,14 @@
       <description> 1. 登陆阿里云的registry sudo docker login --username=liuzeng_icloud registry.cn-hangzhou.aliyuncs.com 2. 从Registry中拉取镜像 sudo docker pull registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:[镜像版本号] 3. 将镜像推送到Registry sudo docker login --username=liuzeng_icloud registry.cn-hangzhou.aliyuncs.com sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:[镜像版本号] sudo docker push registry.cn-hangzhou.aliyuncs.com/liuzeng01/myrepo:[镜像版本号]  Back</description>
     </item>
     
+    <item>
+      <title>Linux NPM </title>
+      <link>https://liuzeng01.github.io/linux/docker/cmd/npm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/cmd/npm/</guid>
+      <description>1. NPM 环境搭建 1.root 登录linux 2.cd /usr/loacl/node/ 没有目录就自己创建一个 3.wget https://npm.taobao.org/mirrors/node/v4.4.7/node-v4.4.7-linux-x64.tar.gz 4.tar -zxvf node-v4.4.7-linux-x64.tar.gz 5.rm -rf node-v4.4.7-linux-x64.tar.gz 6.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/npm /usr/local/bin/npm 7.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/node /usr/local/bin/node 8.npm -v 2. Vue项目初始化 1. 安装vue npm install -g vue 2. 安装vue脚手架 npm install -g @vue/cli 3. 直接使用 Vue 脚手架构建项目 vue create docker-demo 4. 安装下yarn yum install yarn/npm install -g yarn 5. 启动下项目 yarn serve 6. 项目打包 yarn build 3. 制作docker镜像 1. cd docker-demo &amp;amp;&amp;amp; touch Dockerfile 2.</description>
+    </item>
+    
   </channel>
 </rss>

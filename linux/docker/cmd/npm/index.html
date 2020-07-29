@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/july/scanner/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/docker/cmd/npm/">
 
     <title>
         
-        循环读取输入 | iNote
+        Linux NPM  | iNote
         
     </title>
 
@@ -70,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -93,12 +93,12 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
@@ -109,7 +109,7 @@
                     Aliyun Registry
                 </a>
         </li>
-        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1 active">
                 
                  <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
                     Linux NPM 
@@ -263,12 +263,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -316,12 +316,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
@@ -374,7 +374,7 @@
                     tran
                 </a>
         </li>
-        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1 active">
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
                 
                  <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
                     循环读取输入
@@ -558,7 +558,9 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#循环读取用户输入">循环读取用户输入</a></li>
+    <li><a href="#1-npm-环境搭建">1. NPM 环境搭建</a></li>
+    <li><a href="#2-vue项目初始化">2. Vue项目初始化</a></li>
+    <li><a href="#3-制作docker镜像">3. 制作docker镜像</a></li>
   </ul>
 </nav>
 </div>
@@ -566,33 +568,87 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>循环读取输入</h1>
+<h1>Linux NPM </h1>
 
 <hr>
-<h2 id="循环读取用户输入">循环读取用户输入</h2>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+<h2 id="1-npm-环境搭建">1. NPM 环境搭建</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">1.root 登录linux
 
-<span style="color:#f92672">import</span> <span style="color:#111">(</span>
-	<span style="color:#d88200">&#34;bufio&#34;</span>
-	<span style="color:#d88200">&#34;fmt&#34;</span>
-	<span style="color:#d88200">&#34;os&#34;</span>
-<span style="color:#111">)</span>
+2.cd  /usr/loacl/node/   没有目录就自己创建一个
 
-<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-	<span style="color:#75af00">scanner</span><span style="color:#111">()</span>
-<span style="color:#111">}</span>
+3.wget https://npm.taobao.org/mirrors/node/v4.4.7/node-v4.4.7-linux-x64.tar.gz
 
-<span style="color:#00a8c8">func</span> <span style="color:#75af00">scanner</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;----&gt;&#34;</span><span style="color:#111">)</span>
-	<span style="color:#75af00">scanner</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">bufio</span><span style="color:#111">.</span><span style="color:#75af00">NewScanner</span><span style="color:#111">(</span><span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Stdin</span><span style="color:#111">)</span>
-	<span style="color:#00a8c8">for</span> <span style="color:#75af00">scanner</span><span style="color:#111">.</span><span style="color:#75af00">Scan</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+4.tar -zxvf node-v4.4.7-linux-x64.tar.gz
 
-		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">scanner</span><span style="color:#111">.</span><span style="color:#75af00">Text</span><span style="color:#111">())</span>
-		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;----&gt;&#34;</span><span style="color:#111">)</span>
-	<span style="color:#111">}</span>
-<span style="color:#111">}</span>
+5.rm -rf node-v4.4.7-linux-x64.tar.gz
 
-</code></pre></div>
+6.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/npm /usr/local/bin/npm
+
+7.ln -s /usr/local/node/node-v4.4.7-linux-x64/bin/node /usr/local/bin/node
+
+8.npm -v
+
+</code></pre></div><h2 id="2-vue项目初始化">2. Vue项目初始化</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">1. 安装vue
+npm install -g vue
+2. 安装vue脚手架
+npm install -g @vue/cli
+3. 直接使用 Vue 脚手架构建项目
+vue create docker-demo
+4. 安装下yarn
+yum install yarn/npm install -g yarn 
+5. 启动下项目
+yarn serve
+6. 项目打包
+yarn build
+</code></pre></div><h2 id="3-制作docker镜像">3. 制作docker镜像</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">1. <span style="color:#111">cd</span> docker-demo <span style="color:#f92672">&amp;&amp;</span> touch Dockerfile
+2. docker pull nginx
+3. touch default.conf
+4. vi default.conf
+<span style="color:#75715e">## 写入</span>
+server <span style="color:#f92672">{</span>
+    listen       80<span style="color:#111">;</span>
+    server_name  localhost<span style="color:#111">;</span>
+
+    <span style="color:#75715e">#charset koi8-r;</span>
+    access_log  /var/log/nginx/host.access.log  main<span style="color:#111">;</span>
+    error_log  /var/log/nginx/error.log  error<span style="color:#111">;</span>
+
+    location / <span style="color:#f92672">{</span>
+        root   /usr/share/nginx/html<span style="color:#111">;</span>
+        index  index.html index.htm<span style="color:#111">;</span>
+    <span style="color:#f92672">}</span>
+
+    error_page   <span style="color:#ae81ff">500</span> <span style="color:#ae81ff">502</span> <span style="color:#ae81ff">503</span> <span style="color:#ae81ff">504</span>  /50x.html<span style="color:#111">;</span>
+    <span style="color:#111">location</span> <span style="color:#f92672">=</span> /50x.html <span style="color:#f92672">{</span>
+        root   /usr/share/nginx/html<span style="color:#111">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+5. vi Dockerfile
+<span style="color:#75715e"># 写入</span>
+FROM nginx
+COPY dist/ /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
+6. 制作镜像
+docker build -t vue-docker-demo .
+-t 参数给镜像命名 vue-docker-demo
+. 是基于当前目录的 Dockerfile 来构建镜像
+7. docker image ls <span style="color:#111">|</span> grep vue-docker-demo
+8. 运行容器
+docker run -d -p 3000:80 --name docker-vue vue-docker-demo
+
+
+
+</code></pre></div><hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
 
     
 
@@ -603,8 +659,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/july/tran/" title="tran"><i class="fas fa-chevron-left p-1"></i>tran</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="Go数据结构">Go数据结构<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/docker/cmd/aliyunrepo/" title="Aliyun Registry"><i class="fas fa-chevron-left p-1"></i>Aliyun Registry</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/docker/dockerfile/" title="dockerfile构建镜像">dockerfile构建镜像<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
