@@ -88,7 +88,7 @@
 	"title": "Shell",
 	"tags": [],
 	"description": "Shell",
-	"content": " Shell Case \r\r\r Back\r\r"
+	"content": " Shell Case \r\rScript命令 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/note/july/sort/",
@@ -355,6 +355,13 @@
 	"tags": [],
 	"description": "PCRF Gx+Rx",
 	"content": "  Back\r\r"
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/shell/script/",
+	"title": "Script命令",
+	"tags": [],
+	"description": "Linux",
+	"content": " 1. script 初级用法 [root@master script]# script -h Usage: script [options] [file] Options: -a, --append append the output # 追加输出 -c, --command \u0026lt;command\u0026gt; run command rather than interactive shell # 只记录执行命令的这一条的记录 -e, --return return exit code of the child process # -f, --flush run flush after each write # 每次写入都刷新 --force use output file even when it is a link -q, --quiet be quiet # 后台执行 -t, --timing[=\u0026lt;file\u0026gt;] output timing data to stderr (or to FILE) # 记录时序数据，从stderr -V, --version output version information and exit # 版本 -h, --help display this help and exit # 帮助 执行记录\n[liuzeng01@master ~]$ script script.txt Script started, file is script.txt [liuzeng01@master ~]$ ls Desktop Documents Downloads Music Pictures Public script.txt Templates Videos [liuzeng01@master ~]$ ps PID TTY TIME CMD 89603 pts/2 00:00:00 bash 89713 pts/2 00:00:00 ps [liuzeng01@master ~]$ time real 0m0.000s user 0m0.000s sys 0m0.000s [liuzeng01@master ~]$ exit exit Script done, file is script.txt 查看输出文件\n[liuzeng01@master ~]$ cat script.txt Script started on Thu 30 Jul 2020 03:49:27 AM PDT [liuzeng01@master ~]$ ls Desktop Documents Downloads Music Pictures Public script.txt Templates Videos [liuzeng01@master ~]$ ps PID TTY TIME CMD 89603 pts/2 00:00:00 bash 89713 pts/2 00:00:00 ps [liuzeng01@master ~]$ time real 0m0.000s user 0m0.000s sys 0m0.000s [liuzeng01@master ~]$ exit exit Script done on Thu 30 Jul 2020 03:49:50 AM PDT 高级用法 服务器安全审计 直接操作线上的服务器有很大隐患，所以一般都是通过登录跳板机，然后连接线上服务器，跳板机可以访问控制和安全审计，查看记录每个人对线上服务器的操作 用户家目录下,修改环境变量，使得用户登录就会触发录像\nvi ~/.profile script -t -f -q 2\u0026gt;/wow/$USER-$UID-`date +%Y%m%d%H%M%S`.time -a /wow/$USER-$UID-`date +%Y%m%d%H%M%S`.his 这样搞完后，发现有一个问题是每次退出，我习惯Ctrl+D，然后按第一遍停止录像，第二遍才能用户退出，如何解决在后面添加\nif [ \u0026#34;$SHLVL\u0026#34; = 1 ]; then exit fi 这样就可以一遍Ctrl+D停止录像（exit）和退出用户\n2. scriptplay 基本用法 [root@master script]# scriptreplay -h Usage: scriptreplay [-t] timingfile [typescript] [divisor] Options: -t, --timing \u0026lt;file\u0026gt; script timing output file # 记录的时序文件 -s, --typescript \u0026lt;file\u0026gt; script terminal session output file -d, --divisor \u0026lt;num\u0026gt; speed up or slow down execution with time divisor # 加速或者减速 -V, --version output version information and exit # 版本信息 -h, --help display this help and exit # 帮助 安装方法\nyum install util-linux 使用方法\nscript -t 2\u0026gt; test.time -a test.txt scriptreplay test.time test.txt 高级用法 vi ~/.profile script -t -f -q 2\u0026gt;$USER.time -a $USER.his # 记录用户登陆后的操作，可以回放显示 实时共享  第一个命令框 mkfifo scriptfifo cat scriptfifo 其他命令框 script -f scriptfifo 可以实现实时同步演示  Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/essay/july/ssh/",

@@ -347,6 +347,15 @@ systemctl stop firewalld.service  Back</description>
     </item>
     
     <item>
+      <title>Script命令</title>
+      <link>https://liuzeng01.github.io/linux/shell/script/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/script/</guid>
+      <description>1. script 初级用法 [root@master script]# script -h Usage: script [options] [file] Options: -a, --append append the output # 追加输出 -c, --command &amp;lt;command&amp;gt; run command rather than interactive shell # 只记录执行命令的这一条的记录 -e, --return return exit code of the child process # -f, --flush run flush after each write # 每次写入都刷新 --force use output file even when it is a link -q, --quiet be quiet # 后台执行 -t, --timing[=&amp;lt;file&amp;gt;] output timing data to stderr (or to FILE) # 记录时序数据，从stderr -V, --version output version information and exit # 版本 -h, --help display this help and exit # 帮助 执行记录</description>
+    </item>
+    
+    <item>
       <title>SSH免密登陆</title>
       <link>https://liuzeng01.github.io/essay/july/ssh/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

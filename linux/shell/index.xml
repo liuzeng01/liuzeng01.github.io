@@ -22,5 +22,14 @@
 方法1： # echo $RANDOM |cksum |cut -c 1-8 23648321 方法2： # openssl rand -base64 4 |cksum |cut -c 1-8 38571131 方法3： # date +%N |cut -c 1-8 69024815 cksum：打印CRC效验和统计字节 2.定义一个颜色输出字符串函数 方法1： function echo_color() { if [ $1 == &amp;#34;green&amp;#34; ]; then echo -e &amp;#34;\033[32;40m$2\033[0m&amp;#34; elif [ $1 == &amp;#34;red&amp;#34; ]; then echo -e &amp;#34;\033[31;40m$2\033[0m&amp;#34; fi } ​ 方法2： function echo_color() { case $1 in green) echo -e &amp;#34;[32;40m$2[0m&amp;#34; ;; red) echo -e &amp;#34;[31;40m$2[0m&amp;#34; ;; *) echo &amp;#34;Example: echo_color red string&amp;#34; esac } 使用方法：echo_color green &amp;#34;test&amp;#34; function关键字定义一个函数，可加或不加。 3.</description>
     </item>
     
+    <item>
+      <title>Script命令</title>
+      <link>https://liuzeng01.github.io/linux/shell/script/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/script/</guid>
+      <description>1. script 初级用法 [root@master script]# script -h Usage: script [options] [file] Options: -a, --append append the output # 追加输出 -c, --command &amp;lt;command&amp;gt; run command rather than interactive shell # 只记录执行命令的这一条的记录 -e, --return return exit code of the child process # -f, --flush run flush after each write # 每次写入都刷新 --force use output file even when it is a link -q, --quiet be quiet # 后台执行 -t, --timing[=&amp;lt;file&amp;gt;] output timing data to stderr (or to FILE) # 记录时序数据，从stderr -V, --version output version information and exit # 版本 -h, --help display this help and exit # 帮助 执行记录</description>
+    </item>
+    
   </channel>
 </rss>

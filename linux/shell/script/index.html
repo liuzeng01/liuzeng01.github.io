@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/booknote/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/shell/script/">
 
     <title>
         
-        BookNote | iNote
+        Script命令 | iNote
         
     </title>
 
@@ -70,12 +70,12 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
@@ -86,7 +86,7 @@
                     Shell Case
                 </a>
         </li>
-        <li data-nav-id="/linux/shell/script/" class="nav-item my-1">
+        <li data-nav-id="/linux/shell/script/" class="nav-item my-1 active">
                 
                  <a href="/linux/shell/script/" class="nav-link p-0">
                     Script命令
@@ -237,7 +237,7 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/booknote/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
@@ -568,39 +568,127 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-script">1. script</a>
+      <ul>
+        <li><a href="#初级用法">初级用法</a></li>
+        <li><a href="#高级用法">高级用法</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-scriptplay">2. scriptplay</a>
+      <ul>
+        <li><a href="#基本用法">基本用法</a></li>
+        <li><a href="#高级用法-1">高级用法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>BookNote</h1>
+<h1>Script命令</h1>
 
 <hr>
+<h2 id="1-script">1. script</h2>
+<h3 id="初级用法">初级用法</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+<span style="color:#f92672">[</span>root@master script<span style="color:#f92672">]</span><span style="color:#75715e"># script -h</span>
+
+Usage:
+ script <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>file<span style="color:#f92672">]</span>
+
+Options:
+ -a, --append            append the output <span style="color:#75715e"># 追加输出</span>
+ -c, --command &lt;command&gt; run <span style="color:#111">command</span> rather than interactive shell <span style="color:#75715e"># 只记录执行命令的这一条的记录</span>
+ -e, --return            <span style="color:#00a8c8">return</span> <span style="color:#111">exit</span> code of the child process #
+ -f, --flush             run flush after each write <span style="color:#75715e"># 每次写入都刷新</span>
+     --force             use output file even when it is a link
+ -q, --quiet             be quiet <span style="color:#75715e"># 后台执行</span>
+ -t, --timing<span style="color:#f92672">[=</span>&lt;file&gt;<span style="color:#f92672">]</span>   output timing data to stderr <span style="color:#f92672">(</span>or to FILE<span style="color:#f92672">)</span> <span style="color:#75715e"># 记录时序数据，从stderr</span>
+ -V, --version           output version information and <span style="color:#111">exit</span> <span style="color:#75715e"># 版本</span>
+ -h, --help              display this <span style="color:#111">help</span> and <span style="color:#111">exit</span> <span style="color:#75715e"># 帮助</span>
+</code></pre></div><p>执行记录</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ script script.txt
+Script started, file is script.txt
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  script.txt  Templates  Videos
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ ps
+   PID TTY          TIME CMD
+ <span style="color:#ae81ff">89603</span> pts/2    00:00:00 bash
+ <span style="color:#ae81ff">89713</span> pts/2    00:00:00 ps
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ <span style="color:#111">time</span>
+
+real    0m0.000s
+user    0m0.000s
+sys     0m0.000s
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ <span style="color:#111">exit</span>
+<span style="color:#111">exit</span>
+Script <span style="color:#00a8c8">done</span>, file is script.txt
+</code></pre></div><p>查看输出文件</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ cat script.txt
+Script started on Thu <span style="color:#ae81ff">30</span> Jul <span style="color:#ae81ff">2020</span> 03:49:27 AM PDT
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  script.txt  Templates  Videos
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ ps
+   PID TTY          TIME CMD
+ <span style="color:#ae81ff">89603</span> pts/2    00:00:00 bash
+ <span style="color:#ae81ff">89713</span> pts/2    00:00:00 ps
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ <span style="color:#111">time</span>
+
+real    0m0.000s
+user    0m0.000s
+sys     0m0.000s
+<span style="color:#f92672">[</span>liuzeng01@master ~<span style="color:#f92672">]</span>$ <span style="color:#111">exit</span>
+<span style="color:#111">exit</span>
+
+Script <span style="color:#00a8c8">done</span> on Thu <span style="color:#ae81ff">30</span> Jul <span style="color:#ae81ff">2020</span> 03:49:50 AM PDT
+
+</code></pre></div><h3 id="高级用法">高级用法</h3>
+<h4 id="服务器安全审计">服务器安全审计</h4>
+<p>直接操作线上的服务器有很大隐患，所以一般都是通过登录跳板机，然后连接线上服务器，跳板机可以访问控制和安全审计，查看记录每个人对线上服务器的操作
+用户家目录下,修改环境变量，使得用户登录就会触发录像</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vi ~/.profile 
+script -t -f -q 2&gt;/wow/<span style="color:#111">$USER</span>-<span style="color:#111">$UID</span>-<span style="color:#d88200">`</span>date +%Y%m%d%H%M%S<span style="color:#d88200">`</span>.time -a /wow/<span style="color:#111">$USER</span>-<span style="color:#111">$UID</span>-<span style="color:#d88200">`</span>date +%Y%m%d%H%M%S<span style="color:#d88200">`</span>.his
+</code></pre></div><p>这样搞完后，发现有一个问题是每次退出，我习惯Ctrl+D，然后按第一遍停止录像，第二遍才能用户退出，如何解决在后面添加</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#00a8c8">if</span> <span style="color:#f92672">[</span> <span style="color:#d88200">&#34;</span><span style="color:#111">$SHLVL</span><span style="color:#d88200">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span><span style="color:#111">;</span> <span style="color:#00a8c8">then</span> 　　　　
+        <span style="color:#111">exit</span> 
+<span style="color:#00a8c8">fi</span>
+</code></pre></div><p>这样就可以一遍Ctrl+D停止录像（exit）和退出用户</p>
+<h2 id="2-scriptplay">2. scriptplay</h2>
+<h3 id="基本用法">基本用法</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@master script<span style="color:#f92672">]</span><span style="color:#75715e"># scriptreplay -h</span>
+
+Usage:
+ scriptreplay <span style="color:#f92672">[</span>-t<span style="color:#f92672">]</span> timingfile <span style="color:#f92672">[</span>typescript<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>divisor<span style="color:#f92672">]</span>
+
+Options:
+ -t, --timing &lt;file&gt;     script timing output file <span style="color:#75715e"># 记录的时序文件</span>
+ -s, --typescript &lt;file&gt; script terminal session output file
+ -d, --divisor &lt;num&gt;     speed up or slow down execution with <span style="color:#111">time</span> divisor <span style="color:#75715e"># 加速或者减速</span>
+ -V, --version           output version information and <span style="color:#111">exit</span> <span style="color:#75715e"># 版本信息</span> 
+ -h, --help              display this <span style="color:#111">help</span> and <span style="color:#111">exit</span> <span style="color:#75715e"># 帮助</span>
 
 
-
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/booknote/algorithm/"> algorithm </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/booknote/sre/"> SRE </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/booknote/designpattern/"> Design Pattern </a>
-			</li>
-		
-
-	
-</ul>
-
-
-
-
-<hr>
+</code></pre></div><p>安装方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install util-linux
+</code></pre></div><p>使用方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">script -t 2&gt; test.time -a test.txt
+scriptreplay test.time test.txt
+</code></pre></div><h3 id="高级用法-1">高级用法</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vi ~/.profile script -t -f -q 2&gt;<span style="color:#111">$USER</span>.time -a <span style="color:#111">$USER</span>.his <span style="color:#75715e"># 记录用户登陆后的操作，可以回放显示</span>
+</code></pre></div><ol start="2">
+<li>实时共享</li>
+</ol>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">第一个命令框
+ mkfifo scriptfifo
+ cat scriptfifo
+其他命令框
+script -f scriptfifo
+可以实现实时同步演示
+</code></pre></div><hr>
 
 
 
@@ -619,8 +707,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/july/toml/" title="toml"><i class="fas fa-chevron-left p-1"></i>toml</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/booknote/algorithm/" title="algorithm">algorithm<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/shell/shellcase/" title="Shell Case"><i class="fas fa-chevron-left p-1"></i>Shell Case</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/redis/" title="Redis">Redis<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
