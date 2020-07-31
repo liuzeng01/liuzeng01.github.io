@@ -31,5 +31,19 @@
       <description>1. script 初级用法 [root@master script]# script -h Usage: script [options] [file] Options: -a, --append append the output # 追加输出 -c, --command &amp;lt;command&amp;gt; run command rather than interactive shell # 只记录执行命令的这一条的记录 -e, --return return exit code of the child process # -f, --flush run flush after each write # 每次写入都刷新 --force use output file even when it is a link -q, --quiet be quiet # 后台执行 -t, --timing[=&amp;lt;file&amp;gt;] output timing data to stderr (or to FILE) # 记录时序数据，从stderr -V, --version output version information and exit # 版本 -h, --help display this help and exit # 帮助 执行记录</description>
     </item>
     
+    <item>
+      <title>Supervisor</title>
+      <link>https://liuzeng01.github.io/linux/shell/supervisor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/supervisor/</guid>
+      <description>进程管理工具Supervisor是一个进程管理工具，当进程中断的时候Supervisor能自动重新启动它。可以运行在各种类unix的机器上，supervisor就是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。1. 基本介绍   supervisord
+运行 Supervisor 时会启动一个进程 supervisord，它负责启动所管理的进程，并将所管理的进程作为自己的子进程来启动，而且可以在所管理的进程出现崩溃时自动重启。
+  supervisorctl
+是命令行管理工具，可以用来执行 stop、start、restart 等命令，来对这些子进程进行管理。
+supervisor是所有进程的父进程，管理着启动的子进展，supervisor以子进程的PID来管理子进程，当子进程异常退出时supervisor可以收到相应的信号量。
+  2. 安装方法及配置 1. 安装 yum instal supervisor # 查看安装是否成功 echo_supervisord_conf 2. 配置 # 创建目录，初始化配置文件 mkdir /usr/supervisor echo_supervisord_conf &amp;gt; /usr/supervisor/supervisord.conf # 新增配置信息文件夹 mkdir /usr/supervisor/supervisord.d/ # 修改系统配置文件 vim /usr/supervisor/supervisord.conf # 添加配置文件路径 [include] files = /usr/supervisor/supervisord.d/*.conf files = /usr/supervisor/supervisord.d/*.ini # [inet_http_server] port=127.0.0.1:9001 ;IP按需配置 username=user password=123 # 启动supervisord supervisord -c /usr/supervisor/supervisord.</description>
+    </item>
+    
   </channel>
 </rss>

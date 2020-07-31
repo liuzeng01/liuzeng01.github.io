@@ -124,6 +124,15 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Golang of linux </title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/golang/</guid>
+      <description> 1. 安装包 # 安装bai mercurial包 yum install mercurial -y # 安装git包 yum install git -y # 安装gcc 主要是Cgo yum install gcc -y # wget 下载golang的压缩包 # 可以去代理网站下载 https://golang.google.cn/dl/ wget https://golang.google.cn/dl/go1.14.6.linux-amd64.tar.gz tar -zxvf *tar.gz # 打开系统环境变量声明文件添加环境变量 vi /etc/profile export GOROOT= export PATH= export GOPATH= # 使我们添加的环境变量即使生效 source /etc/profile # 验证一下是否安装成功 go version  </description>
+    </item>
+    
+    <item>
       <title>PCRF Application </title>
       <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -415,6 +424,20 @@ scratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序�
       
       <guid>https://liuzeng01.github.io/programing/go/note/july/scanner/</guid>
       <description> 循环读取用户输入 package main import ( &amp;#34;bufio&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; ) func main() { scanner() } func scanner() { fmt.Printf(&amp;#34;----&amp;gt;&amp;#34;) scanner := bufio.NewScanner(os.Stdin) for scanner.Scan() { fmt.Println(scanner.Text()) fmt.Printf(&amp;#34;----&amp;gt;&amp;#34;) } } </description>
+    </item>
+    
+    <item>
+      <title>Supervisor</title>
+      <link>https://liuzeng01.github.io/linux/shell/supervisor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/supervisor/</guid>
+      <description>进程管理工具Supervisor是一个进程管理工具，当进程中断的时候Supervisor能自动重新启动它。可以运行在各种类unix的机器上，supervisor就是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。1. 基本介绍   supervisord
+运行 Supervisor 时会启动一个进程 supervisord，它负责启动所管理的进程，并将所管理的进程作为自己的子进程来启动，而且可以在所管理的进程出现崩溃时自动重启。
+  supervisorctl
+是命令行管理工具，可以用来执行 stop、start、restart 等命令，来对这些子进程进行管理。
+supervisor是所有进程的父进程，管理着启动的子进展，supervisor以子进程的PID来管理子进程，当子进程异常退出时supervisor可以收到相应的信号量。
+  2. 安装方法及配置 1. 安装 yum instal supervisor # 查看安装是否成功 echo_supervisord_conf 2. 配置 # 创建目录，初始化配置文件 mkdir /usr/supervisor echo_supervisord_conf &amp;gt; /usr/supervisor/supervisord.conf # 新增配置信息文件夹 mkdir /usr/supervisor/supervisord.d/ # 修改系统配置文件 vim /usr/supervisor/supervisord.conf # 添加配置文件路径 [include] files = /usr/supervisor/supervisord.d/*.conf files = /usr/supervisor/supervisord.d/*.ini # [inet_http_server] port=127.0.0.1:9001 ;IP按需配置 username=user password=123 # 启动supervisord supervisord -c /usr/supervisor/supervisord.</description>
     </item>
     
     <item>

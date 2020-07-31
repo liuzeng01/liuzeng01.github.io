@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Golang of linux </title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/golang/</guid>
+      <description> 1. 安装包 # 安装bai mercurial包 yum install mercurial -y # 安装git包 yum install git -y # 安装gcc 主要是Cgo yum install gcc -y # wget 下载golang的压缩包 # 可以去代理网站下载 https://golang.google.cn/dl/ wget https://golang.google.cn/dl/go1.14.6.linux-amd64.tar.gz tar -zxvf *tar.gz # 打开系统环境变量声明文件添加环境变量 vi /etc/profile export GOROOT= export PATH= export GOPATH= # 使我们添加的环境变量即使生效 source /etc/profile # 验证一下是否安装成功 go version  </description>
+    </item>
+    
+    <item>
       <title>kubectl命令用法</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/kubectl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
