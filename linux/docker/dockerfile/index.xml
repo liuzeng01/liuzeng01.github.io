@@ -23,6 +23,17 @@ CMD [ &amp;quot;sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;echo $HOME&amp;q
     </item>
     
     <item>
+      <title>Go项目分阶段构建实践</title>
+      <link>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</guid>
+      <description>1. main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;path/filepath&amp;#34; ) func main() { p, _ := filepath.Abs(filepath.Dir(&amp;#34;dist/&amp;#34;)) http.Handle(&amp;#34;/&amp;#34;, http.FileServer(http.Dir(p))) err := http.ListenAndServe(&amp;#34;:80&amp;#34;, nil) if err != nil { fmt.Println(err) } } 一个很简单的静态文件服务器，可以将dist下面的静态网页展示出去。没有用到第三方库
+2. Dockerfile FROMgolang:alpine AS build-envADD . /srcRUN cd /src &amp;amp;&amp;amp; go build -o app# final stageMAINTAINERliuzeng01FROMalpineWORKDIR/appRUN mkdir distCOPY --from=build-env /src/app /appENTRYPOINT ./app分两个阶段构建，第一个阶段编译Go程序，第二个阶段将编译好的执行性文件拷贝到运行目录下。 执行下构建
+[root@master hugosite]# docker build -t staticsite . Sending build context to Docker daemon 12.6MB Step 1/9 : FROM golang:alpine AS build-env ---&amp;gt; 30df784d6206 Step 2/9 : ADD .</description>
+    </item>
+    
+    <item>
       <title>分阶段构建减小go镜像体积</title>
       <link>https://liuzeng01.github.io/linux/docker/dockerfile/godockerfile/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
