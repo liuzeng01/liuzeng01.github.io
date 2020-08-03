@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/essay/july/net/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/docker/cmd/harbor/">
 
     <title>
         
-        网络相关 | iNote
+        Harbor 部署 | iNote
         
     </title>
 
@@ -70,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -105,17 +105,17 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1 active">
                 
                  <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
                     Harbor 部署
@@ -199,12 +199,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/essay/july/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
@@ -215,7 +215,7 @@
                     hugo语法
                 </a>
         </li>
-        <li data-nav-id="/essay/july/net/" class="nav-item my-1 active">
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
                 
                  <a href="/essay/july/net/" class="nav-link p-0">
                     网络相关
@@ -588,13 +588,23 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1-网络结构">1. 网络结构</a></li>
-    <li><a href="#2-网络协议">2. 网络协议</a>
+    <li><a href="#1-介绍">1. 介绍</a></li>
+    <li><a href="#2-组成">2. 组成</a>
       <ul>
-        <li><a href="#七层协议">七层协议</a></li>
+        <li><a href="#1-组成harbor的容器">1 组成Harbor的容器</a></li>
+        <li><a href="#2-harbor依赖的外部组件">2. Harbor依赖的外部组件</a></li>
+        <li><a href="#3-harbor自有组件">3. Harbor自有组件</a></li>
       </ul>
     </li>
-    <li><a href="#补充链接">补充链接</a></li>
+    <li><a href="#3-部署">3. 部署</a>
+      <ul>
+        <li><a href="#1-安装docker">1. 安装docker</a></li>
+        <li><a href="#2-安装docker-compose">2. 安装docker-compose</a></li>
+        <li><a href="#3-安装harbor">3. 安装harbor</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-推送镜像">4. 推送镜像</a></li>
+    <li><a href="#todo-需要补充https的部分添加自签证书什么的">TODO: 需要补充https的部分，添加自签证书什么的</a></li>
   </ul>
 </nav>
 </div>
@@ -602,83 +612,126 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>网络相关</h1>
+<h1>Harbor 部署</h1>
 
 <hr>
-<hr>
-<h2 id="1-网络结构">1. 网络结构</h2>
-<p><strong>因特网服务提供商</strong> ISP（Internet Service Provider）
-不同的ISP根据其规模大小被拆分为不同层次，覆盖面积最广的就是主干ISP，通常为国家级范围，其次是地区，借助一个或多个主干并联，最后是本地ISP，可以直接连主干，也可以连地区，也就是我们最常用的（比如公司内网私有云、学校、公有云厂商）</p>
-<p>任何一个ISP(除了顶层)都可以和多个ISP互联，成为他们的下级，也就是多宿（multi-home）, 这时候即使提供商之一出现问题，他仍然不会断网</p>
-<p>用户那么多，主干ISP就那么几个，肯定要涵盖超大的网络数据流量，就算他有最大的带宽，可以完成流量交换，但是距离越远传输速度越慢是亘古不变的真理，如果先把相邻地区流量转发到千里之外再转发回来，是一种对网络资源的浪费</p>
-<p>为了避免这种浪费，一种更有效快速的转发方式出现了，那就是<strong>因特网交换点</strong> IXP （Internet Exchange Point）</p>
-<p>这个时候BAT在干嘛呢？BAT 严格意义上来说不属于ISP，他们是提供内容的，所以被叫做<strong>因特网内容提供商</strong> ICP（Internet Content Provider），内容供应商有内容，他们的数据中心需要和运营商网络互联互通，才能被他们的用户访问。</p>
-<p>一般是拉通了专线<strong>边界网关协议</strong> BGP（Border Gateway Protocol），简单来说你向BAT发消息，他们就近原则回消息，根据你访问的源地址，判断消息从哪里过来的，如果是电信，就走电信的线路回去。如果是联通，就走联通的线路回去。</p>
-<p>以前<strong>互联网数据中心</strong> IDC（Internet Data Center）都是运营商的，为了让自己的服务跑的更快，现在是 BAT都自建数据中心，也就是云，多余的计算资源也向外提供，把计算放到云上，这就是云计算.</p>
-<p>再结合一个叫<strong>软件定义网络</strong> SDN（Software Defined Network）的东西，特别是可编程路由，使得路由可以根据业务需求，流量需求，怎么省钱怎么来，用他来充当IXP的角色，成本比路由器还要便宜，而且可以按需调度，可以支持<strong>复杂流量工程</strong>，以实现<strong>分布式拒绝服务</strong>（DDOS）防止被攻击。</p>
-<h2 id="2-网络协议">2. 网络协议</h2>
-<p>网络协议类似于人类协议，只不过把对话的人换成了某些硬件和软件设备（例如计算机、手机、路由器），他们之间使用的都是同一种语言（byte 流，最终解析成电信号），严格受协议的制约。</p>
+<h2 id="1-介绍">1. 介绍</h2>
+<p>Harbor是一个用于存储和分发Docker镜像的企业级Registry服务器，通过添加一些企业必须的功能特性，例如安全、标识和管理等，扩展了开源Docker Distribution。作为一个企业级私有Registry服务器，Harbor提供了更好的性能和安全。提升用户 使用Registry构建和运行环境传输镜像的效率。Harbor支持安装在多个Registry节点的镜像资源复制，镜像全部保存在私有Registry中，确保数据和知识产权在公司内部网络中管控。另外，Harbor也提供了高级的安全特性，诸如用户管理，访问控制和活动审计等</p>
+<h2 id="2-组成">2. 组成</h2>
+<h3 id="1-组成harbor的容器">1 组成Harbor的容器</h3>
+<pre><code>Harbor大概需要以下几个容器组成：
+ui：Harbor的核心服务
+log：运行着rsyslog的容器，进行日志收集
+mysql：由官方mysql镜像构成的数据库容器
+nginx：使用nginx做反向代理
+registry：官方的Docker registry
+adminserver：Harbor的配置数据管理器
+jobservice：Harbor的任务管理服务
+redis：用于存储session
+</code></pre>
+<h3 id="2-harbor依赖的外部组件">2. Harbor依赖的外部组件</h3>
 <ul>
 <li>
-<p>硬件直接通过网线互联，通过协议控制网卡之间的比特流</p>
+<p>Nginx（即proxy代理层）：Nginx前端代理，主要用于分发前端页面ui访问和镜像上传和下载流量。Harbor的registry,UI,token等服务，通过一个前置的反向代理统一接收浏览器、Docker客户端的请求，并将强求转发给后端不同的服务。</p>
 </li>
 <li>
-<p>端系统通过阻塞控制协议，控制收发包过程中分组发送速率</p>
+<p>Registry v2：镜像仓库，负责存储镜像文件。Docker官方镜像仓库，负责存储Docker镜像，并处理docker push/pull命令。由于我们对用户进行访问控制，即不同的用户对Docker image有不同的读写权限，Registry会指向同一个token服务，强制用户的每次docker pull/push请求都要携带一个合法的token，Registry会通过公钥对token进行解密验证。</p>
 </li>
 <li>
-<p>路由器协议，控制分组从源到目的地之间的路径</p>
+<p>Database（Mysql或者Postgresql）：为core services提供数据库服务，负责存储用户权限、审计日志、Docker image分组信息等数据。</p>
 </li>
 </ul>
-<h3 id="七层协议">七层协议</h3>
-<p>从第七层到第一层，分别对应了不同的一个数据包（报文）在不同解决的不同处理办法（协议），每个报文在传输出去的时候会经历打包的过程，套七层外套，在接收和传递的时候会经历拆包的过程，脱下七层衣服。</p>
-<p>每一层都会携带一些关键信息给对应的设备识别，为了保证输出包顺利的投递，在传输过程中会经历很多设备，也会经历很多次拆包打包。</p>
-<p>交换机和路由器的区别就是，路由器在网络层，可以处理TCP/IP协议，可以把一个IP分配给多个主机而交换机不能，交换机在链路层是根据MAC寻址，可以提供防火墙功能而路由器不能。路由器主要用来连接多个网络，交换机主要用来使局域网连接更多计算机。</p>
-<p>常见家用交换机是指二层交换机，现在有三层及三层以上的交换机可基于网络层甚至传输层工作。</p>
-<p>没有提到会话层和表示层，我个人的理解这两层从来没有独立实现过，都是和应用层在一起实现。一般的程序员都是在应用层编程，应用层主要加入了会话保持、断点下载能力，表示层主要是做数据加密解密压缩以及转码（虚拟终端协议 VTP，定义了统一的字符集、终端命令、格式控制符等等）的工作，比如大部分主机使用ASCII码，IBM 主机使用 EBCDIC 编码</p>
-<p>有一个安全加密层，很多人都使用过，只是一直没有人想去划分层次结构，它的名字叫SSL/TLS，有了安全层提供的服务，位于应用层的HTTP/SMTP/FTP，都可以在其名字后加一个S（Security），比如HTTPS，其实这个世界压根不存在HTTPS协议，只有HTTP协议，加上 S 的后缀只是告诉大家HTTP使用的是六层结构，有了SSL/TLS的安全保护。</p>
-<h4 id="网络延迟丢包">网络延迟丢包</h4>
-<p>为什么高峰期就会卡，不应该是我独享的宽带吗？事实上是共享的，在介绍为什么共享之前，先介绍下传输过程中产生的速度损耗。</p>
-<p>还是让我们回到最常用的分组交换，分组交换我们说过，他把报文切片，变成一个一个的数据包进行传输，在传输给分组交换机的时候，交换机本身会进行一些包检查，这里浪费的时间叫节点处理时延（nodal processing delay）</p>
-<p>多数分组交换机在链路的输入端使用存储转发传输（store-and-forward transmission）机制，在交换机输出该分组的第一个比特之前，必须接收到整个分组，这个等待的时间叫存储转发时延</p>
-<p>在分组交换机接收完毕整个分组数据以后，肯定要继续传输到目标主机上，每个分组交换机上都连接了很多链路（主机），每条链路都有一个输出队列（output queue,也称输出缓存）</p>
-<p>假如某个分组需要传输到某个链路上的主机，而这条链路被另一个分组传输占用了，那么这个分组就必须在输出队列里排队等待,这个等待的时间叫排队时延(queuing delay)，类比收费站排队等待过关时浪费的时间。</p>
-<p>但是输出队列的缓存空间是有限的，如果他被撑爆了，将会出现数据丢失，这又被称为分组丢失（packet loss），俗语叫丢包</p>
-<p>收费站收钱，然后给卡的过程浪费的时间，叫传输时延（transmission delay），也就是分组交换机发出去那一瞬间浪费的时间，一般极短。</p>
-<p>传输出去以后，数据在路上跑，跑到下一个交换机之前，在路上浪费的时间叫传播时延（propagation delay）</p>
-<p>在整个过程中，端系统经过一个一个的路由器/交换机，最终到达目的端系统浪费的总时间叫端到端时延，也可以用第五节提供的跟踪工具可以看到三次握手分别浪费的时间，是不是很酷。</p>
-<p>一根100M带宽，如果全部跑满，他的峰值吞吐量（throughput）就是12Mbps,吞吐量就是单位时间内成功地传送数据的数量（以比特、字节、分组等测量）</p>
-<p>我们的家庭网络一般都是使用局域网（LAN）接入，其实也是带宽共享的一种。一般来说，整个小区是一个局域网，与电信骨干网相连接的带宽总出口如果有100M，也就是说，如果小区内有一百人同时在线，那么就是有一百人在共享这100M的带宽，因此，共享带宽下的宽带接入，在上网用户稍多时可能速度会有所降低。</p>
-<p>在宽带较不普及的小区，共享带宽会有很高的性价比，因为共享带宽比较便宜，又正好没人和你抢带宽；但如果在宽带较普及的小区，可以用ADSL（全称为 Asymmetric Digital Subscriber Line，非对称数字用户线路），每个用户的网络终端都有单独的一条线路与ADSL局域端相连，可以保证所有带宽是由每一用户独享的，即使用户激增，其速度也不会减慢。</p>
-<p>但是现在都到21世界20年代了，ADSL是用电话线上网，最大理论上行速率可达到 1Mbps，下行速率可达 8Mbps，早被淘汰了，老老实实用LAN，办大一点的宽带才是王道</p>
-<h2 id="补充链接">补充链接</h2>
+<h3 id="3-harbor自有组件">3. Harbor自有组件</h3>
+<p>Core services（Admin Server）：这是Harbor的核心功能，主要提供以下服务：</p>
+<ul>
+<li>UI：提供图形化界面，帮助用户管理registry上的镜像（image），并对用户进行授权。</li>
+<li>webhook：为了及时获取registry上image状态变化的情况，在Registry上配置webhook，把状态传递给UI模块。</li>
+<li>Auth服务：负责根据用户权限给每个docker push/pull命令签发token。Docker客户端向Registry服务发起的请求，如果不包含token，会被重定向到这里，获得token后再重新向Registry进行请求。</li>
+<li>API：提供Harbor RESTful API。</li>
+</ul>
+<h2 id="3-部署">3. 部署</h2>
+<h3 id="1-安装docker">1. 安装docker</h3>
+<h3 id="2-安装docker-compose">2. 安装docker-compose</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-<span style="color:#d88200">`</span>uname -s<span style="color:#d88200">`</span>-<span style="color:#d88200">`</span>uname -m<span style="color:#d88200">`</span> -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+docker-compose --version <span style="color:#75715e"># 查看是否安装成功</span>
+</code></pre></div><h3 id="3-安装harbor">3. 安装harbor</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 这里采用在线安装的方式，也可以采用离线安装的方式</span>
+wget https://github.com/goharbor/harbor/releases/download/v1.10.4/harbor-online-installer-v1.10.4.tgz
+tar xvf harbor-online-installer-v1.10.4.tgz
+
+<span style="color:#75715e"># 接下来修改下配置文件harbor.yaml</span>
+<span style="color:#75715e"># hostname: 192.168.24.131 (自己本机地址)</span>
+<span style="color:#75715e"># port: 5000 （自己定义端口号，记得不要使用80端口）</span>
+<span style="color:#75715e"># harbor_admin_password: Harbor12345 （admin进入密码）</span>
+<span style="color:#75715e"># 然后将https那几行注释掉。虚拟机内部的docker仓库，可以先使用http</span>
+
+
+<span style="color:#75715e"># 启动准备文件</span>
+./prepare.sh
+
+<span style="color:#75715e"># 启动安装文件</span>
+./install.sh
+
+<span style="color:#75715e"># 在浏览器里面登陆控制台</span>
+192.168.24.131:5000
+
+<span style="color:#75715e"># 修改默认密码</span>
+
+<span style="color:#75715e"># 新建项目</span>
+
+<span style="color:#75715e"># 因为使用的是http建立的仓库，所以还需要配置下insecure参数</span>
+
+
+</code></pre></div><h2 id="4-推送镜像">4. 推送镜像</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vim /usr/lib/systemd/system/docker.service
+<span style="color:#75715e"># 给启动配置添加参数</span>
+<span style="color:#111">ExecStart</span><span style="color:#f92672">=</span>/usr/bin/dockerd  --insecure-registry 192.168.24.131:5000
+<span style="color:#75715e"># 重启docker</span>
+systemctl daemon-reload
+systemctl restart docker
+<span style="color:#75715e"># 拉取一个测试镜像</span>
+docker pull hello-world
+docker images 
+<span style="color:#75715e"># 修改下镜像的tag，进行推送</span>
+docker tag hello-world 192.168.24.131:5000/public/hello-world <span style="color:#75715e"># pubilc 是之前harbor新增的项目</span>
+docker login 192.168.24.131:5000
+docker push 192.168.24.131:5000/public/hello-world
+
+<span style="color:#75715e"># 登陆控制台查看结果</span>
+
+
+<span style="color:#75715e"># 现在查看下后台镜像仓库存储位置的信息</span>
+<span style="color:#111">cd</span> /usr/harbor/data/registry/docker/registry/v2/repositories/public/hello-world
+
+<span style="color:#f92672">[</span>root@master hello-world<span style="color:#f92672">]</span><span style="color:#75715e"># ls -lrta</span>
+    total <span style="color:#ae81ff">0</span>
+    drwxr-xr-x <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">25</span> Aug  <span style="color:#ae81ff">2</span> 20:32 ..
+    drwxr-xr-x <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">20</span> Aug  <span style="color:#ae81ff">2</span> 20:32 _layers
+    drwxr-xr-x <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span>  <span style="color:#ae81ff">6</span> Aug  <span style="color:#ae81ff">2</span> 20:32 _uploads
+    drwxr-xr-x <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">55</span> Aug  <span style="color:#ae81ff">2</span> 20:32 .
+    drwxr-xr-x <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">35</span> Aug  <span style="color:#ae81ff">2</span> 20:32 _manifests
+<span style="color:#75715e"># 可以看到，已经成功的推送镜像到镜像仓库了。</span>
+
+<span style="color:#75715e"># 同理，可以通过别的主机来拉取镜像 ，只需要添加--insecure-registry参数就行</span>
+<span style="color:#f92672">[</span>root@k8s-node1 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker pull 192.168.24.131:5000/public/hello-world:v1</span>
+    v1: Pulling from public/hello-world
+    0e03bdcc26d7: Pull <span style="color:#111">complete</span>
+    Digest: sha256:90659bf80b44ce6be8234e6ff90a1ac34acbeb826903b02cfa0da11c82cbc042
+    Status: Downloaded newer image <span style="color:#00a8c8">for</span> 192.168.24.131:5000/public/hello-world:v1
+
+</code></pre></div><h2 id="todo-需要补充https的部分添加自签证书什么的">TODO: 需要补充https的部分，添加自签证书什么的</h2>
 <hr>
-<p><a href="https://coding3min.com/go/1241/">对 IXP 的一些思考 </a></p>
-<p><a href="https://coding3min.com/go/1240/">ICP 百度百科 </a></p>
-<p><a href="https://www.zhihu.com/question/266549604">阿里云说的多线 BGP 接入到底指的是什么东西？ </a></p>
-<p><a href="https://coding3min.com/go/1239/">BGP 维基百科 </a></p>
-<p><a href="https://coding3min.com/go/1235/">IDC 百度百科 </a></p>
-<p><a href="https://www.cnblogs.com/pullself/p/10806054.html">SDN 与 IXP </a></p>
-<p><a href="https://coding3min.com/go/1236/">网络协议 百度百科 </a></p>
-<p><a href="https://coding3min.com/go/1237/">对等网络-百度百科 </a></p>
-<p><a href="https://coding3min.com/go/1238/">路由选择协议-百度百科 </a></p>
-<p><a href="https://www.pianshen.com/article/4615873688/">学习笔记-计算机网络 </a></p>
-<p><a href="https://blog.csdn.net/qq_39326472/article/details/88089747">计算机网络（自顶向下方法）学习笔记 </a></p>
-<p><a href="https://coding3min.com/go/1245/">宽带中的 ADSL 与 LAN 有什么区别？ </a></p>
-<p><a href="https://coding3min.com/go/1242/">什么是共享带宽？ </a></p>
-<p><a href="https://coding3min.com/go/1243/">交换机和路由器有什么区别 </a></p>
-<p><a href="https://coding3min.com/go/1244/">为什么说交换机工作在数据链路层？ </a></p>
-<p><a href="https://www.zhihu.com/question/58798786">表示层（ presentation layer）和会话层（session layer）为什么会被弃用？ </a></p>
-<p><a href="https://blog.csdn.net/weixin_41738417/article/details/92796077">应用层、表示层、会话层、传输层、网络层、数据链路层、物理层 </a></p>
-<p><a href="https://www.jianshu.com/p/801e650850b7">OSI 七层模型的学习-会话层、表示层和应用层 </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/50235996">网络安全攻击分类分析 </a></p>
-<p><a href="https://mp.weixin.qq.com/s/sqrs5KFss53etBylEBPeBg">网络灵魂九问</a></p>
-<hr>
 
 
 
-<a href="../" class="btn btn-info">
-    Back
-</a>
+<ul class="docs-children list-unstyled">
+
+	
+</ul>
+
+
+
 
 
 
@@ -691,8 +744,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/july/hugo/" title="hugo语法"><i class="fas fa-chevron-left p-1"></i>hugo语法</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/gin/" title="Gin">Gin<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/docker/cmd/" title="docker命令"><i class="fas fa-chevron-left p-1"></i>docker命令</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/docker/cmd/aliyunrepo/" title="Aliyun Registry">Aliyun Registry<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

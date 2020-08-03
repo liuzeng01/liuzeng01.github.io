@@ -133,6 +133,20 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Harbor 部署</title>
+      <link>https://liuzeng01.github.io/linux/docker/cmd/harbor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/cmd/harbor/</guid>
+      <description>1. 介绍 Harbor是一个用于存储和分发Docker镜像的企业级Registry服务器，通过添加一些企业必须的功能特性，例如安全、标识和管理等，扩展了开源Docker Distribution。作为一个企业级私有Registry服务器，Harbor提供了更好的性能和安全。提升用户 使用Registry构建和运行环境传输镜像的效率。Harbor支持安装在多个Registry节点的镜像资源复制，镜像全部保存在私有Registry中，确保数据和知识产权在公司内部网络中管控。另外，Harbor也提供了高级的安全特性，诸如用户管理，访问控制和活动审计等
+2. 组成 1 组成Harbor的容器 Harbor大概需要以下几个容器组成：ui：Harbor的核心服务log：运行着rsyslog的容器，进行日志收集mysql：由官方mysql镜像构成的数据库容器nginx：使用nginx做反向代理registry：官方的Docker registryadminserver：Harbor的配置数据管理器jobservice：Harbor的任务管理服务redis：用于存储session 2. Harbor依赖的外部组件   Nginx（即proxy代理层）：Nginx前端代理，主要用于分发前端页面ui访问和镜像上传和下载流量。Harbor的registry,UI,token等服务，通过一个前置的反向代理统一接收浏览器、Docker客户端的请求，并将强求转发给后端不同的服务。
+  Registry v2：镜像仓库，负责存储镜像文件。Docker官方镜像仓库，负责存储Docker镜像，并处理docker push/pull命令。由于我们对用户进行访问控制，即不同的用户对Docker image有不同的读写权限，Registry会指向同一个token服务，强制用户的每次docker pull/push请求都要携带一个合法的token，Registry会通过公钥对token进行解密验证。
+  Database（Mysql或者Postgresql）：为core services提供数据库服务，负责存储用户权限、审计日志、Docker image分组信息等数据。
+  3. Harbor自有组件 Core services（Admin Server）：这是Harbor的核心功能，主要提供以下服务：
+ UI：提供图形化界面，帮助用户管理registry上的镜像（image），并对用户进行授权。 webhook：为了及时获取registry上image状态变化的情况，在Registry上配置webhook，把状态传递给UI模块。 Auth服务：负责根据用户权限给每个docker push/pull命令签发token。Docker客户端向Registry服务发起的请求，如果不包含token，会被重定向到这里，获得token后再重新向Registry进行请求。 API：提供Harbor RESTful API。  3. 部署 1. 安装docker 2. 安装docker-compose curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose chmod +x /usr/local/bin/docker-compose docker-compose --version # 查看是否安装成功 3.</description>
+    </item>
+    
+    <item>
       <title>PCRF Application </title>
       <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

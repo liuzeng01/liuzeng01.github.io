@@ -115,6 +115,12 @@
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
         <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
         <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
                 
                  <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
@@ -751,7 +757,12 @@ stop xxx: 停止某一个进程<span style="color:#f92672">(</span>xxx<span styl
 stop groupworker: 重启所有属于名为groupworker这个分组的进程<span style="color:#f92672">(</span>start,restart同理<span style="color:#f92672">)</span>
 stop all，停止全部进程，注：start、restart、stop都不会载入最新的配置文
 reread，当一个服务由自动启动修改为手动启动时执行一下就ok
-</code></pre></div><hr>
+</code></pre></div><p>tips:</p>
+<ol>
+<li>注意配置文件中的supervisor.sock,supervisor.pid,以及logfile的配置</li>
+<li>注意include里面配置文件的路径不能配置多条</li>
+</ol>
+<hr>
 
 
 

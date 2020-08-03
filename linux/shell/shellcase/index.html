@@ -115,6 +115,12 @@
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
         <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
         <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
                 
                  <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
@@ -599,6 +605,7 @@
     <li><a href="#10检查mysql主从同步状态">10.检查MySQL主从同步状态</a>
       <ul>
         <li><a href="#11批量创建目录">11.批量创建目录</a></li>
+        <li><a href="#12-创建文件链接">12. 创建文件链接</a></li>
       </ul>
     </li>
   </ul>
@@ -956,6 +963,28 @@ check_url_3<span style="color:#f92672">()</span> <span style="color:#f92672">{</
     mkdir -p <span style="color:#111">$imageName</span>
 <span style="color:#00a8c8">done</span>
 
+</code></pre></div><h3 id="12-创建文件链接">12. 创建文件链接</h3>
+<p><strong>软链接</strong></p>
+<pre><code>1.软链接，以路径的形式存在。类似于Windows操作系统中的快捷方式
+2.软链接可以 跨文件系统 ，硬链接不可以
+3.软链接可以对一个不存在的文件名进行链接
+4.软链接可以对目录进行链接
+</code></pre>
+<p><strong>硬链接：</strong></p>
+<pre><code>1.硬链接，以文件副本的形式存在。但不占用实际空间。
+2.不允许给目录创建硬链接
+3.硬链接只有在同一个文件系统中才能创建
+</code></pre>
+<p>命令参数
+-b 删除，覆盖以前建立的链接
+-d 允许超级用户制作目录的硬链接
+-f 强制执行
+-i 交互模式，文件存在则提示用户是否覆盖
+-n 把符号链接视为一般目录
+-s 软链接(符号链接)
+-v 显示详细的处理过程</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ln -s log2013.log link2013 <span style="color:#75715e"># 给文件创建软链接，为log2013.log文件创建软链接link2013，如果log2013.log丢失，link2013将失效</span>
+ln -sn harbor-v1.10.4/ harbor/ <span style="color:#75715e"># 川建目录到目录的链接</span>
 </code></pre></div><hr>
 
 
