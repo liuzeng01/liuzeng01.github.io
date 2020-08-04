@@ -605,6 +605,14 @@
     <li><a href="#部署">部署</a></li>
     <li><a href="#调优">调优</a></li>
     <li><a href="#运维">运维</a></li>
+    <li><a href="#kubernetes中使用glusterfs文件系统">kubernetes中使用glusterfs文件系统</a>
+      <ul>
+        <li><a href="#1-将glusterfs的存储节点声明为endpoint">1. 将GlusterFS的存储节点声明为endpoint</a></li>
+        <li><a href="#2-在endpoint的基础上声明一个pv资源获取到我们之前创建的分布式存储">2. 在endpoint的基础上，声明一个PV资源,获取到我们之前创建的分布式存储</a></li>
+        <li><a href="#3-声明一个pvc资源将上一步获取到的pv资源提供一个可直接供pod使用的路径">3. 声明一个pvc资源,将上一步获取到的PV资源提供一个可直接供pod使用的路径</a></li>
+        <li><a href="#4-在应用的yaml文件中引用这个盘">4. 在应用的yaml文件中引用这个盘</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
@@ -794,7 +802,102 @@ gluster volume models start
 gluster volume models startforce
 gluster volume models status
 gluster volume models stop
-</code></pre></div><hr>
+</code></pre></div><h2 id="kubernetes中使用glusterfs文件系统">kubernetes中使用glusterfs文件系统</h2>
+<h3 id="1-将glusterfs的存储节点声明为endpoint">1. 将GlusterFS的存储节点声明为endpoint</h3>
+<h4 id="编写glusterfs-endpointjson">编写glusterfs-endpoint.json</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#111">{</span>
+    <span style="color:#f92672">&#34;kind&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Endpoints&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;apiVersion&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;v1&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;metadata&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+        <span style="color:#f92672">&#34;name&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;glusterfs-cluster&#34;</span><span style="color:#111">,</span>
+        <span style="color:#f92672">&#34;namespace&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;default&#34;</span>
+    <span style="color:#111">},</span>
+    <span style="color:#f92672">&#34;subsets&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+            <span style="color:#f92672">&#34;addresses&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;ip&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;192.168.24.131&#34;</span>
+            <span style="color:#111">}],</span>
+            <span style="color:#f92672">&#34;ports&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">9200</span>
+            <span style="color:#111">}]</span>
+        <span style="color:#111">},</span>
+        <span style="color:#111">{</span>
+            <span style="color:#f92672">&#34;addresses&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;ip&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;192.168.24.132&#34;</span>
+            <span style="color:#111">}],</span>
+            <span style="color:#f92672">&#34;ports&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">9200</span>
+            <span style="color:#111">}]</span>
+        <span style="color:#111">},</span>
+        <span style="color:#111">{</span>
+            <span style="color:#f92672">&#34;addresses&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;ip&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;192.168.24.133&#34;</span>
+            <span style="color:#111">}],</span>
+            <span style="color:#f92672">&#34;ports&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">9200</span>
+            <span style="color:#111">}]</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">]</span>
+<span style="color:#111">}</span>
+
+
+</code></pre></div><p>然后声明这个endpoint</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl creat -f glusterfs-endpoint.json
+</code></pre></div><h3 id="2-在endpoint的基础上声明一个pv资源获取到我们之前创建的分布式存储">2. 在endpoint的基础上，声明一个PV资源,获取到我们之前创建的分布式存储</h3>
+<h4 id="编写一个glusterfs-pvyaml">编写一个glusterfs-pv.yaml</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> PersistentVolume
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> pv001
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">capacity</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">storage</span><span style="color:#111">:</span> 2Gi
+  <span style="color:#00a8c8">accessModes</span><span style="color:#111">:</span>
+    - ReadWriteMany
+  <span style="color:#00a8c8">glusterfs</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">endpoints</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;glusterfs-cluster&#34;</span>
+    <span style="color:#00a8c8">path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;models&#34;</span>
+    <span style="color:#00a8c8">readOnly</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span>
+
+</code></pre></div><p>然后声明并使用这个PV资源</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create -f glusterfs-pv.yaml
+</code></pre></div><h3 id="3-声明一个pvc资源将上一步获取到的pv资源提供一个可直接供pod使用的路径">3. 声明一个pvc资源,将上一步获取到的PV资源提供一个可直接供pod使用的路径</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> PersistentVolumeClaim
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> pvc001
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">accessModes</span><span style="color:#111">:</span>
+    - ReadWriteMany
+  <span style="color:#00a8c8">resources</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">requests</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">storage</span><span style="color:#111">:</span> 1Gi
+</code></pre></div><h3 id="4-在应用的yaml文件中引用这个盘">4. 在应用的yaml文件中引用这个盘</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> extensions/v1beta1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> hugosite
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> hugosite
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> hugosite
+          <span style="color:#00a8c8">image</span><span style="color:#111">:</span> <span style="color:#ae81ff">192.168.24.131</span><span style="color:#111">:</span><span style="color:#ae81ff">5000</span>/public/staticsite<span style="color:#111">:</span>v0<span style="color:#ae81ff">.1</span>
+          <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+            - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">80</span>
+          <span style="color:#00a8c8">volumeMounts</span><span style="color:#111">:</span>
+            - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> storage001
+              <span style="color:#00a8c8">mountPath</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/app/dist&#34;</span>
+      <span style="color:#00a8c8">volumes</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> storage001
+        <span style="color:#00a8c8">persistentVolumeClaim</span><span style="color:#111">:</span>
+          <span style="color:#00a8c8">claimName</span><span style="color:#111">:</span> pvc001
+</code></pre></div><p>中间碰到个小小的问题，就是所有node节点都需要去配置私有仓库的insecure参数。
+然后切入到pod中查看状态，发现已经同步了进来。</p>
+<hr>
 
 
 
