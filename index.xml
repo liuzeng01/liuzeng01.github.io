@@ -455,6 +455,16 @@ supervisor是所有进程的父进程，管理着启动的子进展，supervisor
     </item>
     
     <item>
+      <title>GlusterFS</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/glusterfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/glusterfs/</guid>
+      <description>简介Glusterfs是一个开源分布式文件系统，具有强大的横向扩展能力，可支持数PB存储容量和数千客户端，通过Infiniband RDMA 或Tcp/Ip 方式将许多廉价的x86 主机，通过网络互联成一个并行的网络文件系统。具有可扩展性、高性能、高可用性等特点glusterfs堆栈式结构 Glusterfs是根据fuse提供的接口实现的一个用户态的文件系统，主要包括gluster、glusterd、glusterfs和glusterfsd四大模块组成：
+ gluster：是cli命令执行工具，主要功能是解析命令行参数，然后把命令发送给glusterd模块执行。 glusterd:是一个管理模块，处理gluster发过来的命令，处理集群管理、存储池管理、brick管理、负载均衡、快照管理等。集群信息、存储池信息和快照信息等都是以配置文件的形式存放在服务器中，当客户端挂载存储时，glusterd会把存储池的配置文件发送给客户端。 glusterfsd：是服务端模块，存储池中的每个brick都会启动一个glusterfsd进程。此模块主要是处理客户端的读写请求，从关联的brick所在磁盘中读写数据，然后返回给客户端。 glusterfs：是客户端模块，负责通过mount挂载集群中某台服务器的存储池，以目录的形式呈现给用户。当用户从此目录读写数据时，客户端根据从glusterd模块获取的存储池的配置文件信息，通过DHT算法计算文件所在服务器的brick位置，然后通过Infiniband RDMA 或Tcp/Ip 方式把数据发送给brick，等brick处理完，给用户返回结果。存储池的副本、条带、hash、EC等逻辑都在客户端处理。  glusterfs几种volume模式  一、 默认模式，既DHT, 也叫 分布卷: 将文件已hash算法随机分布到 一台服务器节点中存储。 gluster volume create test-volume server1:/exp1 server2:/exp2 二、 复制模式，既AFR, 创建volume 时带 replica x 数量: 将文件复制到 replica x 个节点中。 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2 三、 条带模式，既Striped, 创建volume 时带 stripe x 数量： 将文件切割成数据块，分别存储到 stripe x 个节点中 ( 类似raid 0 )。 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 四、 分布式条带模式（组合型），最少需要4台服务器才能创建。 创建volume 时 stripe 2 server = 4 个节点： 是DHT 与 Striped 的组合型。 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 五、 分布式复制模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 replica 2 server = 4 个节点：是DHT 与 AFR 的组合型。 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2　server3:/exp3 server4:/exp4 六、 条带复制卷模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 stripe 2 replica 2 server = 4 个节点： 是 Striped 与 AFR 的组合型。 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 七、 三种模式混合, 至少需要8台 服务器才能创建。 stripe 2 replica 2 , 每4个节点 组成一个 组。 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 server5:/exp5 server6:/exp6 server7:/exp7 server8:/exp8  部署 # 主机信息 三节点 192.</description>
+    </item>
+    
+    <item>
       <title>Go项目分阶段构建实践</title>
       <link>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
