@@ -146,16 +146,16 @@
                     dockerfile基础命令
                 </a>
         </li>
-        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
-                
-                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
-                    Go项目分阶段构建实践
-                </a>
-        </li>
         <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
                 
                  <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
                     分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
                 </a>
         </li>
         </ul>
@@ -610,6 +610,7 @@
       </ul>
     </li>
     <li><a href="#4-推送镜像">4. 推送镜像</a></li>
+    <li><a href="#5harbor停止与启动命令">5.Harbor停止与启动命令</a></li>
     <li><a href="#todo-需要补充https的部分添加自签证书什么的">TODO: 需要补充https的部分，添加自签证书什么的</a></li>
   </ul>
 </nav>
@@ -726,6 +727,11 @@ docker push 192.168.24.131:5000/public/hello-world
     Digest: sha256:90659bf80b44ce6be8234e6ff90a1ac34acbeb826903b02cfa0da11c82cbc042
     Status: Downloaded newer image <span style="color:#00a8c8">for</span> 192.168.24.131:5000/public/hello-world:v1
 
+</code></pre></div><h2 id="5harbor停止与启动命令">5.Harbor停止与启动命令</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 停止</span>
+docker-compose -f docker-compose.yaml down -v
+<span style="color:#75715e"># 启动</span>
+docker-compose -f docker-compose.yaml up -d 
 </code></pre></div><h2 id="todo-需要补充https的部分添加自签证书什么的">TODO: 需要补充https的部分，添加自签证书什么的</h2>
 <hr>
 

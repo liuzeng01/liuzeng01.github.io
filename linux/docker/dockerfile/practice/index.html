@@ -146,16 +146,16 @@
                     dockerfile基础命令
                 </a>
         </li>
-        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1 active">
-                
-                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
-                    Go项目分阶段构建实践
-                </a>
-        </li>
         <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
                 
                  <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
                     分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1 active">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
                 </a>
         </li>
         </ul>
@@ -592,7 +592,19 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-maingo">1. main.go</a></li>
+    <li><a href="#2-dockerfile">2. Dockerfile</a>
+      <ul>
+        <li><a href="#补充构建镜像时区存在问题如何解决">补充：构建镜像时区存在问题如何解决</a></li>
+        <li><a href="#补充清理退出的容器">补充：清理退出的容器</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-推送到私有仓库">3. 推送到私有仓库</a></li>
+    <li><a href="#4挂载应用到kubernetes上配置定时任务等">4.挂载应用到kubernetes上，配置定时任务等</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
@@ -601,7 +613,7 @@
 <h1>Go项目分阶段构建实践</h1>
 
 <hr>
-<h1 id="1-maingo">1. main.go</h1>
+<h2 id="1-maingo">1. main.go</h2>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
 
 <span style="color:#f92672">import</span> <span style="color:#111">(</span>
@@ -619,7 +631,7 @@
         <span style="color:#111">}</span>
 <span style="color:#111">}</span>
 </code></pre></div><p>一个很简单的静态文件服务器，可以将dist下面的静态网页展示出去。没有用到第三方库</p>
-<h1 id="2-dockerfile">2. Dockerfile</h1>
+<h2 id="2-dockerfile">2. Dockerfile</h2>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#00a8c8">FROM</span><span style="color:#d88200"> golang:alpine AS build-env</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ADD</span> . /src<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">RUN</span> <span style="color:#111">cd</span> /src <span style="color:#f92672">&amp;&amp;</span> go build -o app<span style="color:#960050;background-color:#1e0010">
@@ -676,7 +688,18 @@ drwxr-xr-x   <span style="color:#ae81ff">16</span> root     root         <span s
 -rwxr-xr-x    <span style="color:#ae81ff">1</span> root     root        7.2M Aug  <span style="color:#ae81ff">3</span> 07:11 app
 /app <span style="color:#75715e"># exit</span> 
 <span style="color:#75715e"># 编译后的程序就有7.2M，说明基础镜像只有6M左右</span>
-</code></pre></div><h1 id="3-推送到私有仓库">3. 推送到私有仓库</h1>
+</code></pre></div><h3 id="补充构建镜像时区存在问题如何解决">补充：构建镜像时区存在问题如何解决</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#00a8c8">COPY</span> --from<span style="color:#f92672">=</span>build /usr/share/zoneinfo /usr/share/zoneinfo<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ENV</span> <span style="color:#111">TZ</span><span style="color:#f92672">=</span>Asia/Shanghai<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加这两行,可以读取构建的主机上的时区</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h3 id="补充清理退出的容器">补充：清理退出的容器</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 停止所有 Exited 的容器</span>
+docker ps -a <span style="color:#111">|</span> grep <span style="color:#d88200">&#34;Exited&#34;</span> <span style="color:#111">|</span> awk <span style="color:#d88200">&#39;{print $1 }&#39;</span><span style="color:#111">|</span>xargs docker stop
+ 
+<span style="color:#75715e"># 删除所有 Exited 的容器</span>
+docker ps -a <span style="color:#111">|</span> grep <span style="color:#d88200">&#34;Exited&#34;</span> <span style="color:#111">|</span> awk <span style="color:#d88200">&#39;{print $1 }&#39;</span><span style="color:#111">|</span>xargs docker rm
+
+</code></pre></div><h2 id="3-推送到私有仓库">3. 推送到私有仓库</h2>
 <p>搭建私有harbor的方法，<a href="https://liuzeng01.github.io/linux/docker/cmd/harbor/">点这里</a></p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@master hugosite<span style="color:#f92672">]</span><span style="color:#75715e"># docker tag staticsite:latest 192.168.24.131:5000/public/staticsite:v0.1</span>
 <span style="color:#f92672">[</span>root@master hugosite<span style="color:#f92672">]</span><span style="color:#75715e"># docker login 192.168.24.131:5000</span>
@@ -693,11 +716,8 @@ The push refers to repository <span style="color:#f92672">[</span>192.168.24.131
 17dae035bf4c: Pushed
 50644c29ef5a: Pushed
 v0.1: digest: sha256:9d2ab4d7e0f9ebb4ee8e032822151e0497699943851ab045c9134aacaf3e49ab size: <span style="color:#ae81ff">1153</span>
-</code></pre></div><h1 id="4-补充构建镜像时时区存在问题如何解决">4. 补充：构建镜像时时区存在问题如何解决</h1>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#00a8c8">COPY</span> --from<span style="color:#f92672">=</span>build /usr/share/zoneinfo /usr/share/zoneinfo<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ENV</span> <span style="color:#111">TZ</span><span style="color:#f92672">=</span>Asia/Shanghai<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加这两行,可以读取构建的主机上的时区</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><hr>
+</code></pre></div><h2 id="4挂载应用到kubernetes上配置定时任务等">4.挂载应用到kubernetes上，配置定时任务等</h2>
+<hr>
 
 
 
@@ -720,8 +740,8 @@ v0.1: digest: sha256:9d2ab4d7e0f9ebb4ee8e032822151e0497699943851ab045c9134aacaf3
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/docker/dockerfile/command/" title="dockerfile基础命令"><i class="fas fa-chevron-left p-1"></i>dockerfile基础命令</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/docker/dockerfile/godockerfile/" title="分阶段构建减小go镜像体积">分阶段构建减小go镜像体积<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/docker/dockerfile/godockerfile/" title="分阶段构建减小go镜像体积"><i class="fas fa-chevron-left p-1"></i>分阶段构建减小go镜像体积</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kernel/" title="Kernel">Kernel<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

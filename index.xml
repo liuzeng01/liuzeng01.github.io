@@ -133,17 +133,6 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
-      <title>Go项目分阶段构建实践</title>
-      <link>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</guid>
-      <description>1. main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;path/filepath&amp;#34; ) func main() { p, _ := filepath.Abs(filepath.Dir(&amp;#34;dist/&amp;#34;)) http.Handle(&amp;#34;/&amp;#34;, http.FileServer(http.Dir(p))) err := http.ListenAndServe(&amp;#34;:80&amp;#34;, nil) if err != nil { fmt.Println(err) } } 一个很简单的静态文件服务器，可以将dist下面的静态网页展示出去。没有用到第三方库
-2. Dockerfile FROMgolang:alpine AS build-envADD . /srcRUN cd /src &amp;amp;&amp;amp; go build -o app# final stageMAINTAINERliuzeng01FROMalpineWORKDIR/appRUN mkdir distCOPY --from=build-env /src/app /appENTRYPOINT ./app分两个阶段构建，第一个阶段编译Go程序，第二个阶段将编译好的执行性文件拷贝到运行目录下。 执行下构建
-[root@master hugosite]# docker build -t staticsite . Sending build context to Docker daemon 12.6MB Step 1/9 : FROM golang:alpine AS build-env ---&amp;gt; 30df784d6206 Step 2/9 : ADD .</description>
-    </item>
-    
-    <item>
       <title>Harbor 部署</title>
       <link>https://liuzeng01.github.io/linux/docker/cmd/harbor/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -463,6 +452,17 @@ scratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序�
 是命令行管理工具，可以用来执行 stop、start、restart 等命令，来对这些子进程进行管理。
 supervisor是所有进程的父进程，管理着启动的子进展，supervisor以子进程的PID来管理子进程，当子进程异常退出时supervisor可以收到相应的信号量。
   2. 安装方法及配置 1. 安装 yum instal supervisor # 查看安装是否成功 echo_supervisord_conf 2. 配置 # 创建目录，初始化配置文件 mkdir /usr/supervisor echo_supervisord_conf &amp;gt; /usr/supervisor/supervisord.conf # 新增配置信息文件夹 mkdir /usr/supervisor/supervisord.d/ # 修改系统配置文件 vim /usr/supervisor/supervisord.conf # 添加配置文件路径 [include] files = /usr/supervisor/supervisord.d/*.conf files = /usr/supervisor/supervisord.d/*.ini # [inet_http_server] port=127.0.0.1:9001 ;IP按需配置 username=user password=123 # 启动supervisord supervisord -c /usr/supervisor/supervisord.</description>
+    </item>
+    
+    <item>
+      <title>Go项目分阶段构建实践</title>
+      <link>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/practice/</guid>
+      <description>1. main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;path/filepath&amp;#34; ) func main() { p, _ := filepath.Abs(filepath.Dir(&amp;#34;dist/&amp;#34;)) http.Handle(&amp;#34;/&amp;#34;, http.FileServer(http.Dir(p))) err := http.ListenAndServe(&amp;#34;:80&amp;#34;, nil) if err != nil { fmt.Println(err) } } 一个很简单的静态文件服务器，可以将dist下面的静态网页展示出去。没有用到第三方库
+2. Dockerfile FROMgolang:alpine AS build-envADD . /srcRUN cd /src &amp;amp;&amp;amp; go build -o app# final stageMAINTAINERliuzeng01FROMalpineWORKDIR/appRUN mkdir distCOPY --from=build-env /src/app /appENTRYPOINT ./app分两个阶段构建，第一个阶段编译Go程序，第二个阶段将编译好的执行性文件拷贝到运行目录下。 执行下构建
+[root@master hugosite]# docker build -t staticsite . Sending build context to Docker daemon 12.6MB Step 1/9 : FROM golang:alpine AS build-env ---&amp;gt; 30df784d6206 Step 2/9 : ADD .</description>
     </item>
     
     <item>

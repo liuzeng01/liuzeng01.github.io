@@ -146,16 +146,16 @@
                     dockerfile基础命令
                 </a>
         </li>
-        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
-                
-                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
-                    Go项目分阶段构建实践
-                </a>
-        </li>
         <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
                 
                  <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
                     分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
                 </a>
         </li>
         </ul>
@@ -612,6 +612,8 @@
       <ul>
         <li><a href="#11批量创建目录">11.批量创建目录</a></li>
         <li><a href="#12-创建文件链接">12. 创建文件链接</a></li>
+        <li><a href="#13-scp">13. scp</a></li>
+        <li><a href="#14-systemctl设置开机自动启动">14. systemctl设置开机自动启动</a></li>
       </ul>
     </li>
   </ul>
@@ -991,6 +993,112 @@ check_url_3<span style="color:#f92672">()</span> <span style="color:#f92672">{</
 -v 显示详细的处理过程</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ln -s log2013.log link2013 <span style="color:#75715e"># 给文件创建软链接，为log2013.log文件创建软链接link2013，如果log2013.log丢失，link2013将失效</span>
 ln -sn harbor-v1.10.4/ harbor/ <span style="color:#75715e"># 川建目录到目录的链接</span>
+</code></pre></div><h3 id="13-scp">13. scp</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># scp</span>
+usage: scp <span style="color:#f92672">[</span>-12346BCpqrv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-c cipher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-F ssh_config<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-i identity_file<span style="color:#f92672">]</span>
+           <span style="color:#f92672">[</span>-l limit<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-o ssh_option<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-P port<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-S program<span style="color:#f92672">]</span>
+           <span style="color:#f92672">[[</span>user@<span style="color:#f92672">]</span>host1:<span style="color:#f92672">]</span>file1 ... <span style="color:#f92672">[[</span>user@<span style="color:#f92672">]</span>host2:<span style="color:#f92672">]</span>file2
+
+</code></pre></div><p>scp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。</p>
+<p>有时我们需要获得远程服务器上的某个文件，该服务器既没有配置ftp服务器，也没有做共享，无法通过常规途径获得文件时，只需要通过简单的scp命令便可达到目的。</p>
+<p>用法：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 拷贝文件到远程主机</span>
+scp /home/dist/app root@192.168.24.132:/root/data/
+<span style="color:#75715e"># 从远程主机拷贝文件</span>
+scp root@192.168.24.132:/root/data/ /home/dist/app
+<span style="color:#75715e"># 拷贝文件夹到远程主机</span>
+scp -r /home/dist/app/ root@192.168.24.132:/root/data/
+<span style="color:#75715e"># 从远程主机拷贝文件夹</span>
+scp -r root@192.168.24.132:/root/data/ /home/dist/app/
+<span style="color:#75715e"># 从远程主机拷贝文件夹里的所有文件，但不拷贝文件夹</span>
+scp  root@192.168.24.132:/root/data/* /home/dist/app/
+</code></pre></div><h3 id="14-systemctl设置开机自动启动">14. systemctl设置开机自动启动</h3>
+<p>要自定义一个服务，需要在 /usr/lib/systemd/system/ 下添加一个配置文件：<software-name>.service</p>
+<h4 id="配置文件的内容说明">配置文件的内容说明</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>: 服务的启动顺序与依赖关系
+Description: 当前服务的简单描述
+After: 当前服务（&lt;software-name&gt;.service）需要在这些服务启动后，才启动
+Before: 和 After 相反，当前服务需要在这些服务启动前，先启动
+Wants：表示当前服务<span style="color:#d88200">&#34;弱依赖&#34;</span>于这些服务。即当前服务依赖于它们，但是没有它们，当前服务也能正常运行。
+Requires: 表示<span style="color:#d88200">&#34;强依赖&#34;</span>关系，即如果该服务启动失败或异常退出，那么当前服务也必须退出。
+
+
+<span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span> 服务运行参数的设置
+<span style="color:#111">Type</span><span style="color:#f92672">=</span>forking  后台运行的形式
+<span style="color:#111">PIDFile</span><span style="color:#f92672">=</span>/software-name/pid   pid文件路径
+<span style="color:#111">EnvironmentFile</span><span style="color:#f92672">=</span>/xxx/prod.env  通过文件设定环境变量
+<span style="color:#111">WorkingDirectory</span><span style="color:#f92672">=</span>/xxx/xxx    工作目录
+ExecStartPre  启动前要做什么（为启动做准备）
+ExecStart  服务的具体运行命令（对非 workingdirectory 的文件，必须用绝对路径！因为 systemd 不使用 shell，也就不查找 PATH）
+ExecReload  重载命令
+ExecStop  停止命令
+ExecStartPre：启动服务之前执行的命令
+ExecStartPost：启动服务之后执行的命令
+ExecStopPost：停止服务之后执行的命令
+<span style="color:#111">RuntimeDirectory</span><span style="color:#f92672">=</span>xxxx
+<span style="color:#111">RuntimeDirectoryMode</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0775</span>
+<span style="color:#111">PrivateTmp</span><span style="color:#f92672">=</span>True  表示给服务分配独立的临时空间
+RestartSec  自动重启当前服务间隔的秒数
+Restart  定义何种情况 Systemd 会自动重启当前服务，可能的值包括always（总是重启）、on-success、on-failure 等
+<span style="color:#75715e"># 程序的 user 和 group</span>
+<span style="color:#111">User</span><span style="color:#f92672">=</span>ryan
+<span style="color:#111">Group</span><span style="color:#f92672">=</span>ryan
+
+
+注意：启动、重载、停止命令全部要求使用绝对路径
+
+<span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span> 定义如何安装这个配置文件，即怎样做到开机启动。
+<span style="color:#75715e"># Target的含义是服务组，表示一组服务。</span>
+<span style="color:#111">WantedBy</span><span style="color:#f92672">=</span>multi-user.target
+</code></pre></div><p>Type 说明</p>
+<ul>
+<li>
+<p>Type=simple（默认值）：systemd认为该服务将立即启动。服务进程不会fork。如果该服务要启动其他服务，不要使用此类型启动，除非该服务是socket激活型。</p>
+</li>
+<li>
+<p>Type=forking：systemd认为当该服务进程fork，且父进程退出后服务启动成功。对于常规的守护进程（daemon），除非你确定此启动方式无法满足需求，使用此类型启动即可。使用此启动类型应同时指定 PIDFile=，以便systemd能够跟踪服务的主进程。</p>
+</li>
+<li>
+<p>Type=oneshot：这一选项适用于只执行一项任务、随后立即退出的服务。可能需要同时设置 RemainAfterExit=yes使得systemd在服务进程退出之后仍然认为服务处于激活状态</p>
+</li>
+<li>
+<p>Type=notify：与 Type=simple相同，但约定服务会在就绪后向systemd发送一个信号。这一通知的实现由 libsystemd-daemon.so提供。</p>
+</li>
+<li>
+<p>Type=dbus：若以此方式启动，当指定的 BusName 出现在DBus系统总线上时，systemd认为服务就绪。</p>
+</li>
+</ul>
+<h4 id="配置举例">配置举例</h4>
+<pre><code class="language-conf" data-lang="conf">[Unit]
+Description=Harbor
+After=docker.service systemd-networkd.service systemd-resolved.service
+Requires=docker.service
+Documentation=http://github.com/vmware/harbor
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5
+ExecStart=/usr/local/bin/docker-compose -f  /usr/local/harbor/docker-compose.yml up -d
+ExecStop=/usr/local/bin/docker-compose -f /usr/local/harbor/docker-compose.yml down -v
+
+[Install]
+WantedBy=multi-user.target
+
+</code></pre><h4 id="systemctl的一些常用命令">systemctl的一些常用命令</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl <span style="color:#111">enable</span> ss-server.service  <span style="color:#75715e"># 启用服务，即开机自动启动</span>
+systemctl disable ss-server.service  <span style="color:#75715e"># 取消服务，取消开机启动</span>
+
+systemctl start ss-server.service   <span style="color:#75715e"># 启动服务</span>
+systemctl stop ss-server.service   <span style="color:#75715e"># 停止服务</span>
+
+systemctl restart ss-server.service   <span style="color:#75715e"># 重启服务(stop + start)</span>
+systemctl reload ss-server.service   <span style="color:#75715e"># 服务不 stop，直接加载配置更新等（对应 ExecReload）</span>
+
+<span style="color:#75715e"># 检查状态</span>
+systemctl status ss-server.service -l
+
+systemctl list-units --type<span style="color:#f92672">=</span>service  <span style="color:#75715e"># 查看所有服务</span>
 </code></pre></div><hr>
 
 
