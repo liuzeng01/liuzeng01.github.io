@@ -871,7 +871,9 @@ gluster volume models stop
   <span style="color:#00a8c8">resources</span><span style="color:#111">:</span>
     <span style="color:#00a8c8">requests</span><span style="color:#111">:</span>
       <span style="color:#00a8c8">storage</span><span style="color:#111">:</span> 1Gi
-</code></pre></div><h3 id="4-在应用的yaml文件中引用这个盘">4. 在应用的yaml文件中引用这个盘</h3>
+</code></pre></div><p>同样，声明使用</p>
+<pre><code>kubectl create -f glusterfs-pvc.yaml
+</code></pre><h3 id="4-在应用的yaml文件中引用这个盘">4. 在应用的yaml文件中引用这个盘</h3>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> extensions/v1beta1
 <span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
 <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
@@ -891,12 +893,16 @@ gluster volume models stop
           <span style="color:#00a8c8">volumeMounts</span><span style="color:#111">:</span>
             - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> storage001
               <span style="color:#00a8c8">mountPath</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/app/dist&#34;</span>
+              <span style="color:#00a8c8">subPath</span><span style="color:#111">:</span> dist 
       <span style="color:#00a8c8">volumes</span><span style="color:#111">:</span>
       - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> storage001
         <span style="color:#00a8c8">persistentVolumeClaim</span><span style="color:#111">:</span>
           <span style="color:#00a8c8">claimName</span><span style="color:#111">:</span> pvc001
-</code></pre></div><p>中间碰到个小小的问题，就是所有node节点都需要去配置私有仓库的insecure参数。
-然后切入到pod中查看状态，发现已经同步了进来。</p>
+</code></pre></div><p>声明使用</p>
+<pre><code>kubectl create -f hugosite.yaml
+</code></pre><p>中间碰到个小小的问题，就是所有node节点都需要去配置私有仓库的insecure参数。
+然后切入到pod中查看状态，发现已经同步了进来。
+可以用subPath这个来指定使用挂载云盘的一个子路径</p>
 <hr>
 
 

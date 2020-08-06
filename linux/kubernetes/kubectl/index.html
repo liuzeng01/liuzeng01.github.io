@@ -815,6 +815,15 @@ kubectl annotate pods foo description-
 <span style="color:#75715e"># 在您的 bash shell 中永久的添加自动补全</span>
 <span style="color:#111">echo</span> <span style="color:#d88200">&#34;source &lt;(kubectl completion bash)&#34;</span> &gt;&gt; ~/.bashrc
 
+</code></pre></div><h5 id="配置completion时出现的问题">配置completion时出现的问题：</h5>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@master bin<span style="color:#f92672">]</span><span style="color:#75715e"># kubectl c-bash: _get_comp_words_by_ref: command not found</span>
+loud-controller-man^C
+<span style="color:#75715e"># 原因：未安装bash-completion,或者安装没生效</span>
+</code></pre></div><h5 id="解决方法">解决方法：</h5>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+<span style="color:#f92672">[</span>root@master bin<span style="color:#f92672">]</span><span style="color:#75715e"># yum install bash-completion -y</span>
+<span style="color:#f92672">[</span>root@master bin<span style="color:#f92672">]</span><span style="color:#75715e"># source /usr/share/bash-completion/bash_completion</span>
+<span style="color:#f92672">[</span>root@master bin<span style="color:#f92672">]</span><span style="color:#75715e"># source &lt;(kubectl completion bash)</span>
 </code></pre></div><hr>
 <h3 id="3-部署命令">3. 部署命令</h3>
 <p><strong>rollout，rolling-update，scale，autoscale</strong></p>
