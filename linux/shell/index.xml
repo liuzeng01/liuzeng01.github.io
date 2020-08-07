@@ -45,5 +45,14 @@ supervisor是所有进程的父进程，管理着启动的子进展，supervisor
   2. 安装方法及配置 1. 安装 yum instal supervisor # 查看安装是否成功 echo_supervisord_conf 2. 配置 # 创建目录，初始化配置文件 mkdir /usr/supervisor echo_supervisord_conf &amp;gt; /usr/supervisor/supervisord.conf # 新增配置信息文件夹 mkdir /usr/supervisor/supervisord.d/ # 修改系统配置文件 vim /usr/supervisor/supervisord.conf # 添加配置文件路径 [include] files = /usr/supervisor/supervisord.d/*.conf files = /usr/supervisor/supervisord.d/*.ini # [inet_http_server] port=127.0.0.1:9001 ;IP按需配置 username=user password=123 # 启动supervisord supervisord -c /usr/supervisor/supervisord.</description>
     </item>
     
+    <item>
+      <title>Vim快捷键</title>
+      <link>https://liuzeng01.github.io/linux/shell/vi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/vi/</guid>
+      <description>1. 基本操作  i ：插入 ：命令行模式 esc :退出到普通模式  2. 方向快捷键  j 向上一行 k 向下一行 h 向左一个字节 l 向右一个字节 0 跳转到行头 $ 跳转行尾 w 向后一个词 b 向前一个词 G 移动到文件末尾 gg 移动到文件开头  3. 文本快捷键  ( 跳转到上一句 ) 跳转到下一句 [[ 跳转到上一部分 ]] 跳转到下一部分 [] 上一部分的末尾 ][ 上一部分的开头  4. 插入文本快捷键  a 光标后插入 A 行末插入 i 光标前插入 o 下方新开一行 O 上方新开一行  5. 特殊插入  :r [filename] 在光标后方插入文件filename的内容 :r !</description>
+    </item>
+    
   </channel>
 </rss>

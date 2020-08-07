@@ -88,7 +88,7 @@
 	"title": "Shell",
 	"tags": [],
 	"description": "Shell",
-	"content": " Shell Case \r\rScript命令 \r\rSupervisor \r\r\r Back\r\r"
+	"content": " Shell Case \r\rScript命令 \r\rSupervisor \r\rVim快捷键 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/programing/go/note/july/sort/",
@@ -586,6 +586,13 @@
 	"tags": [],
 	"description": "github.com/rivo/tview",
 	"content": " github.com/rivo/tview 1. 常用的控件    TextView: A scrollable window that display multi-colored text. Text may also be highlighted. Table: A scrollable display of tabular data. Table cells, rows, or columns may also be highlighted. TreeView: A scrollable display for hierarchical data. Tree nodes can be highlighted, collapsed, expanded, and more. List: A navigable text list with optional keyboard shortcuts. InputField: One-line input fields to enter text. DropDown: Drop-down selection fields. Checkbox: Selectable checkbox for boolean values. Button: Buttons which get activated when the user selects them. Form: Forms composed of input fields, drop down selections, checkboxes, and buttons. Modal: A centered window with a text message and one or more buttons. Grid: A grid based layout manager. Flex: A Flexbox based layout manager. Pages: A page based layout manager.  "
+},
+{
+	"uri": "https://liuzeng01.github.io/linux/shell/vi/",
+	"title": "Vim快捷键",
+	"tags": [],
+	"description": "Shell",
+	"content": " 1. 基本操作  i ：插入 ：命令行模式 esc :退出到普通模式  2. 方向快捷键  j 向上一行 k 向下一行 h 向左一个字节 l 向右一个字节 0 跳转到行头 $ 跳转行尾 w 向后一个词 b 向前一个词 G 移动到文件末尾 gg 移动到文件开头  3. 文本快捷键  ( 跳转到上一句 ) 跳转到下一句 [[ 跳转到上一部分 ]] 跳转到下一部分 [] 上一部分的末尾 ][ 上一部分的开头  4. 插入文本快捷键  a 光标后插入 A 行末插入 i 光标前插入 o 下方新开一行 O 上方新开一行  5. 特殊插入  :r [filename] 在光标后方插入文件filename的内容 :r ![command] 执行命令 [command] ，并将输出插入至光标下方  6. 删除文本  dd 删除一行 d0 删至行首 d$ 删至行尾 3dd 删除三行 dgg 删至开头 dG 删至末尾 dw 删除一个词 R 进入复写模式  7. 撤销操作  u 撤销上一步操作 ctrl + r 取消撤销 yy 复制一行  8. 搜索操作  /search 在之后的文本搜索 ?search 在之前的文本搜索 n 移动到下一个搜索结果 N 移动到前一个搜索结果 :%s/original/replacement/g 检索并将所有的 “original” 替换为 “replacement” :%s/original/replacement\t检索第一个 “original” 字符串并将其替换成 “replacement” :%s/original/replacement/gc 检索出所有的 “original” 字符串，但在替换成 “replacement” 前，先询问是否替换  9. 书签操作  m {a-zA-Z} 在当前光标位置设置书签，书签名可用一个大小写字母（{a-zA-Z}） :marks 列出所有书签 {a-zA-Z} 跳转到书签  10. 退出命令  :q\t退出 Vim，如果文件已被修改，将退出失败 :w\t保存文件 :w new_name\t用 new_name 作为文件名保存文件 :wq\t保存文件并退出 Vim :q!\t退出 Vim，不保存文件改动 ZZ\t退出 Vim，如果文件被改动过，保存改动内容 ZQ\t与 :q! 相同，退出 Vim，不保存文件改动   Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/zsmart/",
