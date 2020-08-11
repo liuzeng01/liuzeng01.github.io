@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/">
+
+    <title>
+        
+        GlusterFS | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/script/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/script/" class="nav-link p-0">
+                    Script命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/supervisor/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/supervisor/" class="nav-link p-0">
+                    Supervisor
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/vi/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/vi/" class="nav-link p-0">
+                    Vim快捷键
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
+                    vue &#43; docker
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/tips/"><h6>K8S使用技巧</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/tips/kubectl/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubectl/" class="nav-link p-0">
+                    kubectl命令用法
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/tips/kubeapi/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubeapi/" class="nav-link p-0">
+                    kubectl 使用技巧
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/deploy/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/deploy/"><h6>K8S环境配置记录</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/deploy/golang/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/golang/" class="nav-link p-0">
+                    Golang of linux 
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/k8sbuild/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/k8sbuild/" class="nav-link p-0">
+                    Kubernetes搭建
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/natip/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/natip/" class="nav-link p-0">
+                    NAT网关配置虚拟机静态IP
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/glusterfs/" class="nav-item my-1 active">
+                
+                 <a href="/linux/kubernetes/deploy/glusterfs/" class="nav-link p-0">
+                    GlusterFS
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/gitlab/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/gitlab/" class="nav-link p-0">
+                    Gitlab&#43;kubernetes
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/gin/" class="nav-item my-1">
+                
+                 <a href="/essay/july/gin/" class="nav-link p-0">
+                    Gin
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
+                    gRPC
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/august/qrcode/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/qrcode/" class="nav-link p-0">
+                    二维码生成
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/c/makefile/" class="nav-item my-1">
+                
+                 <a href="/programing/c/makefile/" class="nav-link p-0">
+                    Makefile
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#glusterfs堆栈式结构">glusterfs堆栈式结构</a></li>
+    <li><a href="#glusterfs几种volume模式">glusterfs几种volume模式</a></li>
+    <li><a href="#部署">部署</a></li>
+    <li><a href="#调优">调优</a></li>
+    <li><a href="#运维">运维</a></li>
+    <li><a href="#kubernetes中使用glusterfs文件系统">kubernetes中使用glusterfs文件系统</a>
+      <ul>
+        <li><a href="#1-将glusterfs的存储节点声明为endpoint">1. 将GlusterFS的存储节点声明为endpoint</a></li>
+        <li><a href="#2-在endpoint的基础上声明一个pv资源获取到我们之前创建的分布式存储">2. 在endpoint的基础上，声明一个PV资源,获取到我们之前创建的分布式存储</a></li>
+        <li><a href="#3-声明一个pvc资源将上一步获取到的pv资源提供一个可直接供pod使用的路径">3. 声明一个pvc资源,将上一步获取到的PV资源提供一个可直接供pod使用的路径</a></li>
+        <li><a href="#4-在应用的yaml文件中引用这个盘">4. 在应用的yaml文件中引用这个盘</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>GlusterFS</h1>
+
+<hr>
+
+
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-primary rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-primary">
+            <h3>简介</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            Glusterfs是一个开源分布式文件系统，具有强大的横向扩展能力，可支持数PB存储容量和数千客户端，通过Infiniband RDMA 或Tcp/Ip 方式将许多廉价的x86 主机，通过网络互联成一个并行的网络文件系统。具有可扩展性、高性能、高可用性等特点
+        </div>
+    </div>
+</div>
+
+<h2 id="glusterfs堆栈式结构">glusterfs堆栈式结构</h2>
+<p>Glusterfs是根据fuse提供的接口实现的一个用户态的文件系统，主要包括gluster、glusterd、glusterfs和glusterfsd四大模块组成：</p>
+<ul>
+<li>gluster：是cli命令执行工具，主要功能是解析命令行参数，然后把命令发送给glusterd模块执行。</li>
+<li>glusterd:是一个管理模块，处理gluster发过来的命令，处理集群管理、存储池管理、brick管理、负载均衡、快照管理等。集群信息、存储池信息和快照信息等都是以配置文件的形式存放在服务器中，当客户端挂载存储时，glusterd会把存储池的配置文件发送给客户端。</li>
+<li>glusterfsd：是服务端模块，存储池中的每个brick都会启动一个glusterfsd进程。此模块主要是处理客户端的读写请求，从关联的brick所在磁盘中读写数据，然后返回给客户端。</li>
+<li>glusterfs：是客户端模块，负责通过mount挂载集群中某台服务器的存储池，以目录的形式呈现给用户。当用户从此目录读写数据时，客户端根据从glusterd模块获取的存储池的配置文件信息，通过DHT算法计算文件所在服务器的brick位置，然后通过Infiniband RDMA 或Tcp/Ip 方式把数据发送给brick，等brick处理完，给用户返回结果。存储池的副本、条带、hash、EC等逻辑都在客户端处理。</li>
+</ul>
+<h2 id="glusterfs几种volume模式">glusterfs几种volume模式</h2>
+<ul>
+<li>一、 默认模式，既DHT, 也叫 分布卷: 将文件已hash算法随机分布到 一台服务器节点中存储。
+<code>gluster volume create test-volume server1:/exp1 server2:/exp2</code></li>
+<li>二、 复制模式，既AFR, 创建volume 时带 replica x 数量: 将文件复制到 replica x 个节点中。
+<code>gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2</code></li>
+<li>三、 条带模式，既Striped, 创建volume 时带 stripe x 数量： 将文件切割成数据块，分别存储到 stripe x 个节点中 ( 类似raid 0 )。
+<code>gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2</code></li>
+<li>四、 分布式条带模式（组合型），最少需要4台服务器才能创建。 创建volume 时 stripe 2 server = 4 个节点： 是DHT 与 Striped 的组合型。
+<code>gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4</code></li>
+<li>五、 分布式复制模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 replica 2 server = 4 个节点：是DHT 与 AFR 的组合型。
+<code>gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2　server3:/exp3 server4:/exp4</code></li>
+<li>六、 条带复制卷模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 stripe 2 replica 2 server = 4 个节点： 是 Striped 与 AFR 的组合型。
+<code>gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4</code></li>
+<li>七、 三种模式混合, 至少需要8台 服务器才能创建。 stripe 2 replica 2 , 每4个节点 组成一个 组。
+<code>gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 server5:/exp5 server6:/exp6 server7:/exp7 server8:/exp8</code></li>
+</ul>
+<h2 id="部署">部署</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 主机信息 三节点</span>
+192.168.24.131 <span style="color:#75715e"># master</span>
+192.168.24.132 <span style="color:#75715e"># k8s-node1</span>
+192.168.24.133 <span style="color:#75715e"># k8s-node2</span>
+
+<span style="color:#75715e"># 在三个节点都安装glusterfs</span>
+yum install centos-release-gluster
+
+yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma
+
+
+<span style="color:#75715e"># 配置 GlusterFS 集群：</span>
+
+<span style="color:#75715e"># 启动 glusterFS</span>
+systemctl <span style="color:#111">enable</span> glusterd.service
+systemctl start glusterd.service
+<span style="color:#75715e"># 在master节点上配置加入节点</span>
+gluster peer probe k8s-node1
+gluster peer probe k8s-node2
+<span style="color:#75715e"># 结果</span>
+        <span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># gluster peer probe k8s-node1</span>
+        peer probe: success.
+        <span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># gluster peer probe k8s-node2</span>
+        peer probe: success.
+        <span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># gluster peer status</span>
+        Number of Peers: <span style="color:#ae81ff">2</span>
+
+        Hostname: k8s-node1
+        Uuid: 7cad5fd9-91e9-4d34-b0c7-bfc30790460f
+        State: Peer in Cluster <span style="color:#f92672">(</span>Connected<span style="color:#f92672">)</span>
+
+        Hostname: k8s-node2
+        Uuid: 50224007-889f-4f50-bfb1-3cccef052fa6
+        State: Peer in Cluster <span style="color:#f92672">(</span>Connected<span style="color:#f92672">)</span>
+
+<span style="color:#75715e"># 在三个节点上都创建挂载目录</span>
+mkdir -p /opt/gluster/data
+<span style="color:#75715e"># 创建gluster磁盘</span>
+gluster volume create models replica <span style="color:#ae81ff">3</span> master:/opt/gluster/data k8s-node1:/opt/gluster/data k8s-node2:/opt/gluster/data force
+<span style="color:#75715e"># 三个节点上都可以执行</span>
+
+<span style="color:#75715e"># 接下来启动models</span>
+gluster volume start models
+
+<span style="color:#75715e"># 接下来挂载一个路径，挂载到云盘上</span>
+mkdir -p /opt/gfsmnt
+mount -t glusterfs swarm-manager:models /opt/gfsmnt/
+<span style="color:#75715e"># 向上述的路径写入文件的时候，可以发现已经可以同步了</span>
+</code></pre></div><h2 id="调优">调优</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+<span style="color:#75715e"># 开启 指定 volume 的配额： (models 为 volume 名称)</span>
+gluster volume quota models <span style="color:#111">enable</span>
+
+<span style="color:#75715e"># 限制 models 中 / (既总目录) 最大使用 80GB 空间</span>
+gluster volume quota models limit-usage / 80GB
+
+<span style="color:#75715e"># 设置 cache 4GB</span>
+gluster volume <span style="color:#111">set</span> models performance.cache-size 4GB
+
+<span style="color:#75715e"># 开启 异步 ， 后台操作</span>
+gluster volume <span style="color:#111">set</span> models performance.flush-behind on
+
+<span style="color:#75715e"># 设置 io 线程 32</span>
+gluster volume <span style="color:#111">set</span> models performance.io-thread-count <span style="color:#ae81ff">32</span>
+
+<span style="color:#75715e"># 设置 回写 (写数据时间，先写入缓存内，再写入硬盘)</span>
+gluster volume <span style="color:#111">set</span> models performance.write-behind on
+</code></pre></div><h2 id="运维">运维</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查看GlusterFS中所有的volume:</span>
+gluster volume list
+
+<span style="color:#75715e"># 删除GlusterFS磁盘：</span>
+gluster volume stop models <span style="color:#75715e">#停止名字为 models 的磁盘</span>
+gluster volume delete models <span style="color:#75715e">#删除名字为 models 的磁盘</span>
+ 
+
+注： 删除 磁盘 以后，必须删除 磁盘<span style="color:#f92672">(</span> /opt/gluster/data <span style="color:#f92672">)</span> 中的 （ .glusterfs/ .trashcan/ ）目录。
+否则创建新 volume 相同的 磁盘 会出现文件 不分布，或者 类型 错乱 的问题。
+<span style="color:#75715e"># 卸载某个节点GlusterFS磁盘</span>
+gluster peer detach k8s-node2
+
+
+<span style="color:#75715e"># 设置访问限制,按照每个volume 来限制</span>
+gluster volume <span style="color:#111">set</span> models auth.allow 10.6.0.*,10.7.0.*
+
+
+<span style="color:#75715e"># 添加GlusterFS节点：</span>
+gluster peer probe k8s-node1
+gluster volume add-brick models k8s-node1:/opt/gluster/data
+注：如果是复制卷或者条带卷，则每次添加的Brick数必须是replica或者stripe的整数倍
+
+<span style="color:#75715e"># 配置卷</span>
+ gluster volume <span style="color:#111">set</span>
+
+
+<span style="color:#75715e"># 缩容volume:</span>
+
+<span style="color:#75715e"># 先将数据迁移到其它可用的Brick，迁移结束后才将该Brick移除：</span>
+gluster volume remove-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data start
+
+<span style="color:#75715e"># 在执行了start之后，可以使用status命令查看移除进度：</span>
+gluster volume remove-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data status
+
+<span style="color:#75715e"># 不进行数据迁移，直接删除该Brick：</span>
+gluster volume remove-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data commit
+<span style="color:#75715e"># 注意，如果是复制卷或者条带卷，则每次移除的Brick数必须是replica或者stripe的整数倍。</span>
+ 
+
+ 
+
+<span style="color:#75715e"># 扩容：</span>
+
+gluster volume add-brick models k8s-node2:/opt/gluster/data 
+
+
+
+<span style="color:#75715e"># 修复命令:</span>
+gluster volume replace-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data commit -force
+
+
+<span style="color:#75715e"># 迁移volume:</span>
+gluster volume replace-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data start
+<span style="color:#75715e"># pause 为暂停迁移</span>
+gluster volume replace-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data pause
+<span style="color:#75715e"># abort 为终止迁移</span>
+gluster volume replace-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data abort
+<span style="color:#75715e"># status 查看迁移状态</span>
+gluster volume replace-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data status
+<span style="color:#75715e"># 迁移结束后使用commit 来生效</span>
+gluster volume replace-brick models k8s-node2:/opt/gluster/data k8s-node1:/opt/gluster/data commit
+
+
+<span style="color:#75715e"># 均衡volume:</span>
+gluster volume models lay-outstart
+gluster volume models start
+gluster volume models startforce
+gluster volume models status
+gluster volume models stop
+</code></pre></div><h2 id="kubernetes中使用glusterfs文件系统">kubernetes中使用glusterfs文件系统</h2>
+<h3 id="1-将glusterfs的存储节点声明为endpoint">1. 将GlusterFS的存储节点声明为endpoint</h3>
+<h4 id="编写glusterfs-endpointjson">编写glusterfs-endpoint.json</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#111">{</span>
+    <span style="color:#f92672">&#34;kind&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Endpoints&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;apiVersion&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;v1&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;metadata&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+        <span style="color:#f92672">&#34;name&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;glusterfs-cluster&#34;</span><span style="color:#111">,</span>
+        <span style="color:#f92672">&#34;namespace&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;default&#34;</span>
+    <span style="color:#111">},</span>
+    <span style="color:#f92672">&#34;subsets&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+            <span style="color:#f92672">&#34;addresses&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;ip&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;192.168.24.131&#34;</span>
+            <span style="color:#111">}],</span>
+            <span style="color:#f92672">&#34;ports&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">9200</span>
+            <span style="color:#111">}]</span>
+        <span style="color:#111">},</span>
+        <span style="color:#111">{</span>
+            <span style="color:#f92672">&#34;addresses&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;ip&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;192.168.24.132&#34;</span>
+            <span style="color:#111">}],</span>
+            <span style="color:#f92672">&#34;ports&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">9200</span>
+            <span style="color:#111">}]</span>
+        <span style="color:#111">},</span>
+        <span style="color:#111">{</span>
+            <span style="color:#f92672">&#34;addresses&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;ip&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;192.168.24.133&#34;</span>
+            <span style="color:#111">}],</span>
+            <span style="color:#f92672">&#34;ports&#34;</span><span style="color:#111">:</span> <span style="color:#111">[{</span>
+                <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">9200</span>
+            <span style="color:#111">}]</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">]</span>
+<span style="color:#111">}</span>
+
+
+</code></pre></div><p>然后声明这个endpoint</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl creat -f glusterfs-endpoint.json
+</code></pre></div><h3 id="2-在endpoint的基础上声明一个pv资源获取到我们之前创建的分布式存储">2. 在endpoint的基础上，声明一个PV资源,获取到我们之前创建的分布式存储</h3>
+<h4 id="编写一个glusterfs-pvyaml">编写一个glusterfs-pv.yaml</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> PersistentVolume
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> pv001
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">capacity</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">storage</span><span style="color:#111">:</span> 2Gi
+  <span style="color:#00a8c8">accessModes</span><span style="color:#111">:</span>
+    - ReadWriteMany
+  <span style="color:#00a8c8">glusterfs</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">endpoints</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;glusterfs-cluster&#34;</span>
+    <span style="color:#00a8c8">path</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;models&#34;</span>
+    <span style="color:#00a8c8">readOnly</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span>
+
+</code></pre></div><p>然后声明并使用这个PV资源</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create -f glusterfs-pv.yaml
+</code></pre></div><h3 id="3-声明一个pvc资源将上一步获取到的pv资源提供一个可直接供pod使用的路径">3. 声明一个pvc资源,将上一步获取到的PV资源提供一个可直接供pod使用的路径</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> PersistentVolumeClaim
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> pvc001
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">accessModes</span><span style="color:#111">:</span>
+    - ReadWriteMany
+  <span style="color:#00a8c8">resources</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">requests</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">storage</span><span style="color:#111">:</span> 1Gi
+</code></pre></div><p>同样，声明使用</p>
+<pre><code>kubectl create -f glusterfs-pvc.yaml
+</code></pre><h3 id="4-在应用的yaml文件中引用这个盘">4. 在应用的yaml文件中引用这个盘</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> extensions/v1beta1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> hugosite
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> hugosite
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> hugosite
+          <span style="color:#00a8c8">image</span><span style="color:#111">:</span> <span style="color:#ae81ff">192.168.24.131</span><span style="color:#111">:</span><span style="color:#ae81ff">5000</span>/public/staticsite<span style="color:#111">:</span>v0<span style="color:#ae81ff">.1</span>
+          <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+            - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">80</span>
+          <span style="color:#00a8c8">volumeMounts</span><span style="color:#111">:</span>
+            - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> storage001
+              <span style="color:#00a8c8">mountPath</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;/app/dist&#34;</span>
+              <span style="color:#00a8c8">subPath</span><span style="color:#111">:</span> dist 
+      <span style="color:#00a8c8">volumes</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> storage001
+        <span style="color:#00a8c8">persistentVolumeClaim</span><span style="color:#111">:</span>
+          <span style="color:#00a8c8">claimName</span><span style="color:#111">:</span> pvc001
+</code></pre></div><p>声明使用</p>
+<pre><code>kubectl create -f hugosite.yaml
+</code></pre><p>中间碰到个小小的问题，就是所有node节点都需要去配置私有仓库的insecure参数。
+然后切入到pod中查看状态，发现已经同步了进来。
+可以用subPath这个来指定使用挂载云盘的一个子路径</p>
+<hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/deploy/natip/" title="NAT网关配置虚拟机静态IP"><i class="fas fa-chevron-left p-1"></i>NAT网关配置虚拟机静态IP</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kubernetes/deploy/gitlab/" title="Gitlab&#43;kubernetes">Gitlab&#43;kubernetes<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

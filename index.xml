@@ -125,10 +125,10 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     
     <item>
       <title>Golang of linux </title>
-      <link>https://liuzeng01.github.io/linux/kubernetes/golang/</link>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/golang/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://liuzeng01.github.io/linux/kubernetes/golang/</guid>
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/golang/</guid>
       <description> 1. 安装包 # 安装bai mercurial包 yum install mercurial -y # 安装git包 yum install git -y # 安装gcc 主要是Cgo yum install gcc -y # wget 下载golang的压缩包 # 可以去代理网站下载 https://golang.google.cn/dl/ wget https://golang.google.cn/dl/go1.14.6.linux-amd64.tar.gz tar -zxvf *tar.gz # 打开系统环境变量声明文件添加环境变量 vi /etc/profile export GOROOT= export PATH= export GOPATH= # 使我们添加的环境变量即使生效 source /etc/profile # 验证一下是否安装成功 go version  </description>
     </item>
     
@@ -178,6 +178,23 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
 1.获取随机字符串或数字 获取随机8位字符串：
 方法1： # echo $RANDOM |md5sum |cut -c 1-8 471b94f2 方法2： # openssl rand -base64 4 vg3BEg== 方法3： # cat /proc/sys/kernel/random/uuid |cut -c 1-8 ed9e032c 获取随机8位数字：
 方法1： # echo $RANDOM |cksum |cut -c 1-8 23648321 方法2： # openssl rand -base64 4 |cksum |cut -c 1-8 38571131 方法3： # date +%N |cut -c 1-8 69024815 cksum：打印CRC效验和统计字节 2.定义一个颜色输出字符串函数 方法1： function echo_color() { if [ $1 == &amp;#34;green&amp;#34; ]; then echo -e &amp;#34;\033[32;40m$2\033[0m&amp;#34; elif [ $1 == &amp;#34;red&amp;#34; ]; then echo -e &amp;#34;\033[31;40m$2\033[0m&amp;#34; fi } ​ 方法2： function echo_color() { case $1 in green) echo -e &amp;#34;[32;40m$2[0m&amp;#34; ;; red) echo -e &amp;#34;[31;40m$2[0m&amp;#34; ;; *) echo &amp;#34;Example: echo_color red string&amp;#34; esac } 使用方法：echo_color green &amp;#34;test&amp;#34; function关键字定义一个函数，可加或不加。 3.</description>
+    </item>
+    
+    <item>
+      <title>二维码生成</title>
+      <link>https://liuzeng01.github.io/programing/go/note/august/qrcode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/august/qrcode/</guid>
+      <description>使用Go语言编程时，生成任意内容的二维码是非常方便的，因为我们有go-qrcode这个库。该库的源代码托管在github上，大家可以下载使用 https://github.com/skip2/go-qrcode。 使用如下函数生成一个二维码图片
+func WriteFile(content string, level RecoveryLevel, size int, filename string) error WriteFile函数的原型定义如上，它有几个参数，大概意思如下：
+content表示要生成二维码的内容，可以是任意字符串。
+level表示二维码的容错级别，取值有Low、Medium、High、Highest。
+size表示生成图片的width和height，像素单位。
+filename表示生成的文件名路径。
+RecoveryLevel类型其实是个int,它的定义和常量如下。
+type RecoveryLevel int const ( // Level L: 7% error recovery.  Low RecoveryLevel = iota // Level M: 15% error recovery. Good default choice.  Medium // Level Q: 25% error recovery.  High // Level H: 30% error recovery.  Highest ) RecoveryLevel越高，二维码的容错能力越好。
+package main import &amp;#34;github.com/skip2/go-qrcode&amp;#34; func main() { qrcode.</description>
     </item>
     
     <item>
@@ -302,20 +319,20 @@ go get -u -v github.com/spf13/hugo
     
     <item>
       <title>kubectl命令用法</title>
-      <link>https://liuzeng01.github.io/linux/kubernetes/kubectl/</link>
+      <link>https://liuzeng01.github.io/linux/kubernetes/tips/kubectl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://liuzeng01.github.io/linux/kubernetes/kubectl/</guid>
+      <guid>https://liuzeng01.github.io/linux/kubernetes/tips/kubectl/</guid>
       <description>1. 基础命令： create，delete，get，run，expose，set，explain，edit
 create 命令：根据文件或者输入来创建资源 kubectl create -f demo-deployment.yaml kubectl create -f demo-service.yaml delete 命令：删除资源 # 根据yaml文件删除对应的资源，但是yaml文件并不会被删除，这样更加高效 kubectl delete -f demo-deployment.yaml kubectl delete -f demo-service.yaml # 也可以通过具体的资源名称来进行删除，使用这个删除资源，同时删除deployment和service资源 kubectl delete 具体的资源名称 get 命令 ：获得资源信息 # 查看所有的资源信息 kubectl get all kubectl get --all-namespaces # 查看pod列表 kubectl get pod # 显示pod节点的标签信息 kubectl get pod --show-labels # 根据指定标签匹配到具体的pod kubectl get pods -l app=example # 查看node节点列表 kubectl get node # 显示node节点的标签信息 kubectl get node --show-labels # 查看pod详细信息，也就是可以查看pod具体运行在哪个节点上（ip地址信息） kubectl get pod -o wide # 查看服务的详细信息，显示了服务名称，类型，集群ip，端口，时间等信息 kubectl get svc kubectl get svc -n kube-system # 查看命名空间 kubectl get ns kubectl get namespaces # 查看所有pod所属的命名空间 kubectl get pod --all-namespaces # 查看所有pod所属的命名空间并且查看都在哪些节点上运行 kubectl get pod --all-namespaces -o wide # 查看目前所有的replica set，显示了所有的pod的副本数，以及他们的可用数量以及状态等信息 kubectl get rs # 查看已经部署了的所有应用，可以看到容器，以及容器所用的镜像，标签等信息 kubectl get deploy -o wide kubectl get deployments -o wide run 命令：在集群中创建并运行一个或多个容器镜像  语法：run NAME &amp;ndash;image=image [&amp;ndash;env=&amp;quot;key=value&amp;rdquo;] [&amp;ndash;port=port] [&amp;ndash;replicas=replicas] [&amp;ndash;dry-run=bool] [&amp;ndash;overrides=inline-json] [&amp;ndash;command] &amp;ndash; [COMMAND] [args&amp;hellip;]  # 示例，运行一个名称为nginx，副本数为3，标签为app=example，镜像为nginx:1.</description>
     </item>
     
     <item>
       <title>Kubernetes搭建</title>
-      <link>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</link>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/k8sbuild/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</guid>
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/k8sbuild/</guid>
       <description>K8sKubernetes作为容器编排工具，简化容器管理，提升工作效率而颇受青睐。很多新手部署Kubernetes由于“科学上网”问题举步维艰，本文以实战经验详解kubeadm不用“科学上网”部署Kubernetes的最简方法。Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。
 K8S集群中有管理节点与工作节点两种类型。管理节点主要负责K8S集群管理，集群中各节点间的信息交互、任务调度，还负责容器、Pod、NameSpaces、PV等生命周期的管理。工作节点主要为容器和Pod提供计算资源，Pod及容器全部运行在工作节点上，工作节点通过kubelet服务与管理节点通信以管理容器的生命周期，并与集群其他节点进行通信。
 1. 虚拟机部署 从centos的镜像开始生成，网络模式选择NAT NAT模式子网地址192.168.24.1，子网掩码 255.255.255.0 ，网关地址 192.168.24.2 ，子网区段 192.168.24.3-192.168.24.254 配置静态IP 192.168.24.131192.168.24.132192.168.24.133 设置主机名hostname，管理节点设置主机名为 master 。 hostnamectl set-hostname master # 需要设置其他主机名称时，可将 master 替换为正确的主机名node1、node2即可。 编辑 /etc/hosts 文件，添加域名解析 cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/hosts 10.10.10.10 master 10.10.10.11 node1 10.10.10.12 node2 EOF 关闭防火墙、selinux和swap。 systemctl stop firewalld systemctl disable firewalld setenforce 0 sed -i &amp;#34;s/^SELINUX=enforcing/SELINUX=disabled/g&amp;#34; /etc/selinux/config swapoff -a sed -i &amp;#39;s/.*swap.*/#&amp;amp;/&amp;#39; /etc/fstab 配置内核参数，将桥接的IPv4流量传递到iptables的链 cat &amp;gt; /etc/sysctl.d/k8s.conf &amp;lt;&amp;lt;EOF net.</description>
@@ -332,10 +349,10 @@ K8S集群中有管理节点与工作节点两种类型。管理节点主要负�
     
     <item>
       <title>NAT网关配置虚拟机静态IP</title>
-      <link>https://liuzeng01.github.io/linux/kubernetes/natip/</link>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/natip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://liuzeng01.github.io/linux/kubernetes/natip/</guid>
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/natip/</guid>
       <description> 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）
 2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=&amp;#34;static&amp;#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务
 systemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了
@@ -456,10 +473,10 @@ supervisor是所有进程的父进程，管理着启动的子进展，supervisor
     
     <item>
       <title>GlusterFS</title>
-      <link>https://liuzeng01.github.io/linux/kubernetes/glusterfs/</link>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://liuzeng01.github.io/linux/kubernetes/glusterfs/</guid>
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/</guid>
       <description>简介Glusterfs是一个开源分布式文件系统，具有强大的横向扩展能力，可支持数PB存储容量和数千客户端，通过Infiniband RDMA 或Tcp/Ip 方式将许多廉价的x86 主机，通过网络互联成一个并行的网络文件系统。具有可扩展性、高性能、高可用性等特点glusterfs堆栈式结构 Glusterfs是根据fuse提供的接口实现的一个用户态的文件系统，主要包括gluster、glusterd、glusterfs和glusterfsd四大模块组成：
  gluster：是cli命令执行工具，主要功能是解析命令行参数，然后把命令发送给glusterd模块执行。 glusterd:是一个管理模块，处理gluster发过来的命令，处理集群管理、存储池管理、brick管理、负载均衡、快照管理等。集群信息、存储池信息和快照信息等都是以配置文件的形式存放在服务器中，当客户端挂载存储时，glusterd会把存储池的配置文件发送给客户端。 glusterfsd：是服务端模块，存储池中的每个brick都会启动一个glusterfsd进程。此模块主要是处理客户端的读写请求，从关联的brick所在磁盘中读写数据，然后返回给客户端。 glusterfs：是客户端模块，负责通过mount挂载集群中某台服务器的存储池，以目录的形式呈现给用户。当用户从此目录读写数据时，客户端根据从glusterd模块获取的存储池的配置文件信息，通过DHT算法计算文件所在服务器的brick位置，然后通过Infiniband RDMA 或Tcp/Ip 方式把数据发送给brick，等brick处理完，给用户返回结果。存储池的副本、条带、hash、EC等逻辑都在客户端处理。  glusterfs几种volume模式  一、 默认模式，既DHT, 也叫 分布卷: 将文件已hash算法随机分布到 一台服务器节点中存储。 gluster volume create test-volume server1:/exp1 server2:/exp2 二、 复制模式，既AFR, 创建volume 时带 replica x 数量: 将文件复制到 replica x 个节点中。 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2 三、 条带模式，既Striped, 创建volume 时带 stripe x 数量： 将文件切割成数据块，分别存储到 stripe x 个节点中 ( 类似raid 0 )。 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 四、 分布式条带模式（组合型），最少需要4台服务器才能创建。 创建volume 时 stripe 2 server = 4 个节点： 是DHT 与 Striped 的组合型。 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 五、 分布式复制模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 replica 2 server = 4 个节点：是DHT 与 AFR 的组合型。 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2　server3:/exp3 server4:/exp4 六、 条带复制卷模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 stripe 2 replica 2 server = 4 个节点： 是 Striped 与 AFR 的组合型。 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 七、 三种模式混合, 至少需要8台 服务器才能创建。 stripe 2 replica 2 , 每4个节点 组成一个 组。 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 server5:/exp5 server6:/exp6 server7:/exp7 server8:/exp8  部署 # 主机信息 三节点 192.</description>
     </item>
@@ -489,6 +506,15 @@ var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxM
     </item>
     
     <item>
+      <title>Gitlab&#43;kubernetes</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/gitlab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/gitlab/</guid>
+      <description> 1. 在kubernetes集群中部署Gitlab 2. 在kubernetes集群中部署Jenkins 3. 利用Jenkins配置Gitlab的CICD流程 4. 持续部署镜像应用到Kubernetes  Back</description>
+    </item>
+    
+    <item>
       <title>Go数据结构</title>
       <link>https://liuzeng01.github.io/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -513,6 +539,23 @@ var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxM
       
       <guid>https://liuzeng01.github.io/programing/go/note/july/ip/</guid>
       <description>在cobra里面写了一个IP地址转16进制的脚本，用到了net包 package internal import ( &amp;#34;encoding/hex&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strings&amp;#34; ) func ParseIPV4(ipaddr string){ if len(ipaddr) == 0 { return } hexaddr := strings.ToUpper(hex.EncodeToString(net.ParseIP(ipaddr).To4())) fmt.Println(hexaddr) } func ParseIPV6(ipaddr string){ if len(ipaddr) == 0 { return } hexaddr := strings.ToUpper(hex.EncodeToString(net.ParseIP(ipaddr).To16())) fmt.Println(hexaddr) } //光有转16进制是不行的，还需要从16进制转回ip地址 func ParseHexToIpv4(hexstring string) { if len(hexstring) == 0 { return } var ip net.IP ip, err := hex.DecodeString(hexstring) if err != nil { fmt.Println(err) return } fmt.Println(ip.To4()) } func ParseHexToIpv6(hexstring string) { if len(hexstring) == 0 { return } var ip net.</description>
+    </item>
+    
+    <item>
+      <title>kubectl 使用技巧</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/tips/kubeapi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/tips/kubeapi/</guid>
+      <description>1. kubectl 工作原理 从技术角度上看，kubectl是Kubernetes API的客户端。Kubernetes API是一个 HTTP REST API。这个API是真正的Kubernetes用户界面。Kubernetes完全受这个API控制，这意味着每个Kubernetes操作都作为API端点公开，并且可以由对此端点的HTTP请求执行。因此，kubectl的主要工作是执行对Kubernetes API的HTTP请求 Kubernetes是一个完全以资源为中心的系统。这意味着，Kubernetes维护资源的内部状态并且所有的Kubernetes操作都是针对这些资源的CRUD（增加、读取、更新、删除）操作。你完全可以通过操控这些资源（Kubernetes会根据资源的当前状态找出解决方案）来控制Kubernetes。因此，Kubernetes API reference主要是资源类型及其相关操作的列表。
+Kubernetes API对于内部组件和外部用户的重复操作是Kubernetes的基本设计概念。现在，我们来总结一下Kubernetes如何工作的：
+ 存储后端存储（如，资源）Kubernetes的状态 API server以Kubernetes API的形式提供到存储后端的接口 所有其他Kubernetes的组件和用户通过Kubernetes API读取、监视以及操控Kubernetes的状态（如资源）。  2. 配置bash补全 sudo apt-get install bash-completion # or yum install bash-completion kubectl completion bash bash-completion安装完成之后，你需要进行一些设置，以便在所有的shell会话中获得kubectl补全脚本。一种方法是将以下命令行添加到~/.bashrc文件中：
+source &amp;lt;(kubectl completion bash) 另一种可能性是将kubectl补充脚本添加到/etc/bash_completion.d目录中（如果不存在，则需要先创建它）：
+kubectl completion bash &amp;gt;/etc/bash_completion.d/kubectl # /etc/bash_completion.d目录中的所有补全脚本均由bash-completion自动提供。 以上两种方法都是一样的效果。重新加载shell后，kubectl命令补全就能正常工作啦！
+3. 查看API规范 当你创建YAML资源定义时，你需要知道字段以及这些资源的意义。kubectl提供了kubectl explain命令，它能在你的terminal中正确地输入所有资源规范。
+kubectl explain resource[.field]... # 该命令输出所请求资源或字段的规范。kubectl explain所显示的信息与API reference中的信息相同。默认情况下，kubectl explain仅显示单个级别的字段。你可以使用--recursive标志来显示所有级别的字段： 4. 使用自定义列输出格式 自定义列输出选项的用法如下：
+-o custom-columns=&amp;lt;header&amp;gt;:&amp;lt;jsonpath&amp;gt;[,&amp;lt;header&amp;gt;:&amp;lt;jsonpath&amp;gt;]... 你必须将每个输出列定义为：对：
+是列的名称，你可以选择任何所需的内容。是一个选择资源字段的表达式示例： # Select all elements of a list kubectl get pods -o custom-columns=&amp;#39;DATA:spec.</description>
     </item>
     
     <item>

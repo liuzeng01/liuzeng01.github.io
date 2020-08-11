@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/tips/kubeapi/">
+
+    <title>
+        
+        kubectl 使用技巧 | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/script/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/script/" class="nav-link p-0">
+                    Script命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/supervisor/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/supervisor/" class="nav-link p-0">
+                    Supervisor
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/vi/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/vi/" class="nav-link p-0">
+                    Vim快捷键
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
+                    vue &#43; docker
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/tips/"><h6>K8S使用技巧</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/tips/kubectl/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubectl/" class="nav-link p-0">
+                    kubectl命令用法
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/tips/kubeapi/" class="nav-item my-1 active">
+                
+                 <a href="/linux/kubernetes/tips/kubeapi/" class="nav-link p-0">
+                    kubectl 使用技巧
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/deploy/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/deploy/"><h6>K8S环境配置记录</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/deploy/golang/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/golang/" class="nav-link p-0">
+                    Golang of linux 
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/k8sbuild/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/k8sbuild/" class="nav-link p-0">
+                    Kubernetes搭建
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/natip/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/natip/" class="nav-link p-0">
+                    NAT网关配置虚拟机静态IP
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/glusterfs/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/glusterfs/" class="nav-link p-0">
+                    GlusterFS
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/gitlab/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/gitlab/" class="nav-link p-0">
+                    Gitlab&#43;kubernetes
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/gin/" class="nav-item my-1">
+                
+                 <a href="/essay/july/gin/" class="nav-link p-0">
+                    Gin
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
+                    gRPC
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/august/qrcode/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/qrcode/" class="nav-link p-0">
+                    二维码生成
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/c/makefile/" class="nav-item my-1">
+                
+                 <a href="/programing/c/makefile/" class="nav-link p-0">
+                    Makefile
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-kubectl-工作原理">1. kubectl 工作原理</a></li>
+    <li><a href="#2-配置bash补全">2. 配置bash补全</a></li>
+    <li><a href="#3-查看api规范">3. 查看API规范</a></li>
+    <li><a href="#4-使用自定义列输出格式">4. 使用自定义列输出格式</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#3-利用kubectl切换命名空间">3. 利用kubectl切换命名空间</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>kubectl 使用技巧</h1>
+
+<hr>
+<h2 id="1-kubectl-工作原理">1. kubectl 工作原理</h2>
+<p>从技术角度上看，kubectl是<strong>Kubernetes API的客户端</strong>。Kubernetes API是一个 HTTP REST API。这个API是真正的Kubernetes用户界面。Kubernetes完全受这个API控制，这意味着每个Kubernetes操作都作为API端点公开，并且可以由对此端点的HTTP请求执行。因此，kubectl的主要工作是执行对Kubernetes API的HTTP请求
+Kubernetes是一个完全<strong>以资源为中心</strong>的系统。这意味着，Kubernetes维护资源的内部状态并且所有的Kubernetes操作都是针对这些资源的CRUD（增加、读取、更新、删除）操作。你完全可以通过操控这些资源（Kubernetes会根据资源的当前状态找出解决方案）来控制Kubernetes。因此，Kubernetes API reference主要是资源类型及其相关操作的列表。</p>
+<p>Kubernetes API对于<strong>内部组件和外部用户的重复操作</strong>是Kubernetes的基本设计概念。现在，我们来总结一下Kubernetes如何工作的：</p>
+<ul>
+<li>存储后端存储（如，资源）Kubernetes的状态</li>
+<li>API server以Kubernetes API的形式提供到存储后端的接口</li>
+<li>所有其他Kubernetes的组件和用户通过Kubernetes API读取、监视以及操控Kubernetes的状态（如资源）。</li>
+</ul>
+<h2 id="2-配置bash补全">2. 配置bash补全</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+sudo apt-get install bash-completion
+<span style="color:#75715e"># or</span>
+yum install bash-completion
+
+
+kubectl completion bash
+</code></pre></div><p>bash-completion安装完成之后，你需要进行一些设置，以便在所有的shell会话中获得kubectl补全脚本。一种方法是将以下命令行添加到~/.bashrc文件中：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#111">source</span> &lt;<span style="color:#f92672">(</span>kubectl completion bash<span style="color:#f92672">)</span>
+</code></pre></div><p>另一种可能性是将kubectl补充脚本添加到/etc/bash_completion.d目录中（如果不存在，则需要先创建它）：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl completion bash &gt;/etc/bash_completion.d/kubectl
+<span style="color:#75715e"># /etc/bash_completion.d目录中的所有补全脚本均由bash-completion自动提供。</span>
+</code></pre></div><p>以上两种方法都是一样的效果。重新加载shell后，kubectl命令补全就能正常工作啦！</p>
+<h2 id="3-查看api规范">3. 查看API规范</h2>
+<p>当你创建YAML资源定义时，你需要知道字段以及这些资源的意义。kubectl提供了kubectl explain命令，它能在你的terminal中正确地输入所有资源规范。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl explain resource<span style="color:#f92672">[</span>.field<span style="color:#f92672">]</span>...
+<span style="color:#75715e"># 该命令输出所请求资源或字段的规范。kubectl explain所显示的信息与API reference中的信息相同。默认情况下，kubectl explain仅显示单个级别的字段。你可以使用--recursive标志来显示所有级别的字段：</span>
+</code></pre></div><h2 id="4-使用自定义列输出格式">4. 使用自定义列输出格式</h2>
+<p>自定义列输出选项的用法如下：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">-o custom-columns<span style="color:#f92672">=</span>&lt;header&gt;:&lt;jsonpath&gt;<span style="color:#f92672">[</span>,&lt;header&gt;:&lt;jsonpath&gt;<span style="color:#f92672">]</span>...
+</code></pre></div><p>你必须将每个输出列定义为<header>：<jsonpath>对：</p>
+<header>是列的名称，你可以选择任何所需的内容。
+<jsonpath>是一个选择资源字段的表达式
+<h4 id="示例">示例：</h4>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+<span style="color:#75715e"># Select all elements of a list</span>
+kubectl get pods -o custom-columns<span style="color:#f92672">=</span><span style="color:#d88200">&#39;DATA:spec.containers[*].image&#39;</span>
+
+<span style="color:#75715e"># Select a specific element of a list</span>
+kubectl get pods -o custom-columns<span style="color:#f92672">=</span><span style="color:#d88200">&#39;DATA:spec.containers[0].image&#39;</span>
+
+<span style="color:#75715e"># Select those elements of a list that match a filter expression</span>
+kubectl get pods -o custom-columns<span style="color:#f92672">=</span><span style="color:#d88200">&#39;DATA:spec.containers[?(@.image!=&#34;nginx&#34;)].image&#39;</span>
+
+<span style="color:#75715e"># Select all fields under a specific location, regardless of their name</span>
+kubectl get pods -o custom-columns<span style="color:#f92672">=</span><span style="color:#d88200">&#39;DATA:metadata.*&#39;</span>
+
+<span style="color:#75715e"># Select all fields with a specific name, regardless of their location</span>
+kubectl get pods -o custom-columns<span style="color:#f92672">=</span><span style="color:#d88200">&#39;DATA:..image&#39;</span>
+
+
+kubectl get po -o custom-columns<span style="color:#f92672">=</span><span style="color:#d88200">&#39;name:metadata.name,image:spec.containers[0].image&#39;</span>
+
+
+kubectl get nodes -o yaml
+<span style="color:#75715e"># or</span>
+kubectl get nodes -o json
+</code></pre></div><h2 id="3-利用kubectl切换命名空间">3. 利用kubectl切换命名空间</h2>
+<p>当kubectl必须向Kubernetes API发出请求时，它将读取系统上的所谓kubeconfig文件，以获取它需要访问的所有连接参数并向API服务器发出请求。</p>
+<p>默认的kubeconfig文件是<code>~/.kube/config</code>。该文件通常是通过某些命令自动创建或更新的.</p>
+<p>使用多个集群时，在kubeconfig文件中配置了多个集群的连接参数。这意味着，你需要一种方法来告诉kubectl要将其连接到哪些集群中。</p>
+<p>在集群中，您可以设置多个命名空间（命名空间是物理集群中的一种“虚拟”集群）。Kubectl还可确定kubeconfig文件中用于请求的命名空间。因此，你需要一种方法来告诉kubectl你要使用哪个命名空间。</p>
+<p>请注意，您还可以通过在KUBECONFIG环境变量中列出它们，以拥有多个kubeconfig文件。在这种情况下，所有这些文件将在执行时合并为一个有效的配置。你还可以为每个kubectl命令使用**&ndash;kubeconfig**选项覆盖默认的kubeconfig文件。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 这里面大部分要使用到fzf。当然也可以不使用，直接写就OK</span>
+
+<span style="color:#75715e"># Get current context</span>
+<span style="color:#111">alias</span> <span style="color:#111">krc</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl config current-context&#39;</span>
+<span style="color:#75715e"># List all contexts</span>
+<span style="color:#111">alias</span> <span style="color:#111">klc</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl config get-contexts -o name | sed &#34;s/^/  /;\|^  $(krc)$|s/ /*/&#34;&#39;</span>
+<span style="color:#75715e"># Change current context</span>
+<span style="color:#111">alias</span> <span style="color:#111">kcc</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl config use-context &#34;$(klc | fzf -e | sed &#34;s/^..//&#34;)&#34;&#39;</span>
+
+<span style="color:#75715e"># Get current namespace</span>
+<span style="color:#111">alias</span> <span style="color:#111">krn</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl config get-contexts --no-headers &#34;$(krc)&#34; | awk &#34;{print \$5}&#34; | sed &#34;s/^$/default/&#34;&#39;</span>
+<span style="color:#75715e"># List all namespaces</span>
+<span style="color:#111">alias</span> <span style="color:#111">kln</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl get -o name ns | sed &#34;s|^.*/|  |;\|^  $(krn)$|s/ /*/&#34;&#39;</span>
+<span style="color:#75715e"># Change current namespace</span>
+<span style="color:#111">alias</span> <span style="color:#111">kcn</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl config set-context --current --namespace &#34;$(kln | fzf -e | sed &#34;s/^..//&#34;)&#34;&#39;</span>
+
+
+<span style="color:#75715e">## 要想快速切换到不同的命名空间，可以设置以下别名：</span>
+<span style="color:#111">alias</span> <span style="color:#111">kcd</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;kubectl config set-context $(kubectl config current-context)--namespace&#39;</span>
+<span style="color:#75715e"># 然后，可以使用kcd some-namespace在命名空间之间进行切换。</span>
+</code></pre></div><hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/tips/kubectl/" title="kubectl命令用法"><i class="fas fa-chevron-left p-1"></i>kubectl命令用法</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kubernetes/service/" title="K8S概念">K8S概念<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

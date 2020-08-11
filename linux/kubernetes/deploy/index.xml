@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8S环境配置记录 on iNote</title>
+    <link>https://liuzeng01.github.io/linux/kubernetes/deploy/</link>
+    <description>Recent content in K8S环境配置记录 on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/linux/kubernetes/deploy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang of linux </title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/golang/</guid>
+      <description> 1. 安装包 # 安装bai mercurial包 yum install mercurial -y # 安装git包 yum install git -y # 安装gcc 主要是Cgo yum install gcc -y # wget 下载golang的压缩包 # 可以去代理网站下载 https://golang.google.cn/dl/ wget https://golang.google.cn/dl/go1.14.6.linux-amd64.tar.gz tar -zxvf *tar.gz # 打开系统环境变量声明文件添加环境变量 vi /etc/profile export GOROOT= export PATH= export GOPATH= # 使我们添加的环境变量即使生效 source /etc/profile # 验证一下是否安装成功 go version  </description>
+    </item>
+    
+    <item>
+      <title>Kubernetes搭建</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/k8sbuild/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/k8sbuild/</guid>
+      <description>K8sKubernetes作为容器编排工具，简化容器管理，提升工作效率而颇受青睐。很多新手部署Kubernetes由于“科学上网”问题举步维艰，本文以实战经验详解kubeadm不用“科学上网”部署Kubernetes的最简方法。Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。
+K8S集群中有管理节点与工作节点两种类型。管理节点主要负责K8S集群管理，集群中各节点间的信息交互、任务调度，还负责容器、Pod、NameSpaces、PV等生命周期的管理。工作节点主要为容器和Pod提供计算资源，Pod及容器全部运行在工作节点上，工作节点通过kubelet服务与管理节点通信以管理容器的生命周期，并与集群其他节点进行通信。
+1. 虚拟机部署 从centos的镜像开始生成，网络模式选择NAT NAT模式子网地址192.168.24.1，子网掩码 255.255.255.0 ，网关地址 192.168.24.2 ，子网区段 192.168.24.3-192.168.24.254 配置静态IP 192.168.24.131192.168.24.132192.168.24.133 设置主机名hostname，管理节点设置主机名为 master 。 hostnamectl set-hostname master # 需要设置其他主机名称时，可将 master 替换为正确的主机名node1、node2即可。 编辑 /etc/hosts 文件，添加域名解析 cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/hosts 10.10.10.10 master 10.10.10.11 node1 10.10.10.12 node2 EOF 关闭防火墙、selinux和swap。 systemctl stop firewalld systemctl disable firewalld setenforce 0 sed -i &amp;#34;s/^SELINUX=enforcing/SELINUX=disabled/g&amp;#34; /etc/selinux/config swapoff -a sed -i &amp;#39;s/.*swap.*/#&amp;amp;/&amp;#39; /etc/fstab 配置内核参数，将桥接的IPv4流量传递到iptables的链 cat &amp;gt; /etc/sysctl.d/k8s.conf &amp;lt;&amp;lt;EOF net.</description>
+    </item>
+    
+    <item>
+      <title>NAT网关配置虚拟机静态IP</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/natip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/natip/</guid>
+      <description> 1. 编辑虚拟机NAT网络配置 选择NAT模式，编辑Nat模式下子网地址，网关以及子网掩码的配置（关闭DHCP）
+2. 新建虚拟机时选择NAT网络模式 3. 编辑虚拟机网络配置文件 vi /etc/sysconfig/network-scripts/ifcfg-ens33 #先修改IP为静态 BOOTPROTO=&amp;#34;static&amp;#34;# 默认为DHCP # 再在末尾写上这几句 IPADDR=192.168.24.131 #这里对应上面ipconfig输出的网段192.168.24.3 ~ 192.168.24.254范围随便选一个即可，但不要跟主机相同就行 NETMASK=255.255.255.0 GATEWAY=192.168.24.2 #这里对应上面ipconfig输出的默认网关 然后重启网络服务
+systemctl restart network 接下来虚拟机就可以和同网段的主机互相通信了
+systemctl stop firewalld.service  Back</description>
+    </item>
+    
+    <item>
+      <title>GlusterFS</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/</guid>
+      <description>简介Glusterfs是一个开源分布式文件系统，具有强大的横向扩展能力，可支持数PB存储容量和数千客户端，通过Infiniband RDMA 或Tcp/Ip 方式将许多廉价的x86 主机，通过网络互联成一个并行的网络文件系统。具有可扩展性、高性能、高可用性等特点glusterfs堆栈式结构 Glusterfs是根据fuse提供的接口实现的一个用户态的文件系统，主要包括gluster、glusterd、glusterfs和glusterfsd四大模块组成：
+ gluster：是cli命令执行工具，主要功能是解析命令行参数，然后把命令发送给glusterd模块执行。 glusterd:是一个管理模块，处理gluster发过来的命令，处理集群管理、存储池管理、brick管理、负载均衡、快照管理等。集群信息、存储池信息和快照信息等都是以配置文件的形式存放在服务器中，当客户端挂载存储时，glusterd会把存储池的配置文件发送给客户端。 glusterfsd：是服务端模块，存储池中的每个brick都会启动一个glusterfsd进程。此模块主要是处理客户端的读写请求，从关联的brick所在磁盘中读写数据，然后返回给客户端。 glusterfs：是客户端模块，负责通过mount挂载集群中某台服务器的存储池，以目录的形式呈现给用户。当用户从此目录读写数据时，客户端根据从glusterd模块获取的存储池的配置文件信息，通过DHT算法计算文件所在服务器的brick位置，然后通过Infiniband RDMA 或Tcp/Ip 方式把数据发送给brick，等brick处理完，给用户返回结果。存储池的副本、条带、hash、EC等逻辑都在客户端处理。  glusterfs几种volume模式  一、 默认模式，既DHT, 也叫 分布卷: 将文件已hash算法随机分布到 一台服务器节点中存储。 gluster volume create test-volume server1:/exp1 server2:/exp2 二、 复制模式，既AFR, 创建volume 时带 replica x 数量: 将文件复制到 replica x 个节点中。 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2 三、 条带模式，既Striped, 创建volume 时带 stripe x 数量： 将文件切割成数据块，分别存储到 stripe x 个节点中 ( 类似raid 0 )。 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 四、 分布式条带模式（组合型），最少需要4台服务器才能创建。 创建volume 时 stripe 2 server = 4 个节点： 是DHT 与 Striped 的组合型。 gluster volume create test-volume stripe 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 五、 分布式复制模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 replica 2 server = 4 个节点：是DHT 与 AFR 的组合型。 gluster volume create test-volume replica 2 transport tcp server1:/exp1 server2:/exp2　server3:/exp3 server4:/exp4 六、 条带复制卷模式（组合型）, 最少需要4台服务器才能创建。 创建volume 时 stripe 2 replica 2 server = 4 个节点： 是 Striped 与 AFR 的组合型。 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 七、 三种模式混合, 至少需要8台 服务器才能创建。 stripe 2 replica 2 , 每4个节点 组成一个 组。 gluster volume create test-volume stripe 2 replica 2 transport tcp server1:/exp1 server2:/exp2 server3:/exp3 server4:/exp4 server5:/exp5 server6:/exp6 server7:/exp7 server8:/exp8  部署 # 主机信息 三节点 192.</description>
+    </item>
+    
+    <item>
+      <title>Gitlab&#43;kubernetes</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/deploy/gitlab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/deploy/gitlab/</guid>
+      <description> 1. 在kubernetes集群中部署Gitlab 2. 在kubernetes集群中部署Jenkins 3. 利用Jenkins配置Gitlab的CICD流程 4. 持续部署镜像应用到Kubernetes  Back</description>
+    </item>
+    
+  </channel>
+</rss>

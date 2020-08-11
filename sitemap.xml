@@ -83,6 +83,10 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/programing/go/note/august/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/zsmart/charging/</loc>
   </url>
   
@@ -95,7 +99,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/linux/kubernetes/golang/</loc>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/deploy/golang/</loc>
   </url>
   
   <url>
@@ -128,6 +132,10 @@
   
   <url>
     <loc>https://liuzeng01.github.io/programing/sql/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/programing/go/note/august/qrcode/</loc>
   </url>
   
   <url>
@@ -187,11 +195,11 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/linux/kubernetes/kubectl/</loc>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/tips/kubectl/</loc>
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/linux/kubernetes/k8sbuild/</loc>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/deploy/k8sbuild/</loc>
   </url>
   
   <url>
@@ -199,7 +207,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/linux/kubernetes/natip/</loc>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/deploy/natip/</loc>
   </url>
   
   <url>
@@ -283,7 +291,7 @@
   </url>
   
   <url>
-    <loc>https://liuzeng01.github.io/linux/kubernetes/glusterfs/</loc>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/</loc>
   </url>
   
   <url>
@@ -307,6 +315,10 @@
   </url>
   
   <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/deploy/gitlab/</loc>
+  </url>
+  
+  <url>
     <loc>https://liuzeng01.github.io/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
   </url>
   
@@ -316,6 +328,26 @@
   
   <url>
     <loc>https://liuzeng01.github.io/programing/go/note/july/ip/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/tips/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/service/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/deploy/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/template/</loc>
+  </url>
+  
+  <url>
+    <loc>https://liuzeng01.github.io/linux/kubernetes/tips/kubeapi/</loc>
   </url>
   
   <url>

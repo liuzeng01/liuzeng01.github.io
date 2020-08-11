@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>August on iNote</title>
+    <link>https://liuzeng01.github.io/programing/go/note/august/</link>
+    <description>Recent content in August on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/programing/go/note/august/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>二维码生成</title>
+      <link>https://liuzeng01.github.io/programing/go/note/august/qrcode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/august/qrcode/</guid>
+      <description>使用Go语言编程时，生成任意内容的二维码是非常方便的，因为我们有go-qrcode这个库。该库的源代码托管在github上，大家可以下载使用 https://github.com/skip2/go-qrcode。 使用如下函数生成一个二维码图片
+func WriteFile(content string, level RecoveryLevel, size int, filename string) error WriteFile函数的原型定义如上，它有几个参数，大概意思如下：
+content表示要生成二维码的内容，可以是任意字符串。
+level表示二维码的容错级别，取值有Low、Medium、High、Highest。
+size表示生成图片的width和height，像素单位。
+filename表示生成的文件名路径。
+RecoveryLevel类型其实是个int,它的定义和常量如下。
+type RecoveryLevel int const ( // Level L: 7% error recovery.  Low RecoveryLevel = iota // Level M: 15% error recovery. Good default choice.  Medium // Level Q: 25% error recovery.  High // Level H: 30% error recovery.  Highest ) RecoveryLevel越高，二维码的容错能力越好。
+package main import &amp;#34;github.com/skip2/go-qrcode&amp;#34; func main() { qrcode.</description>
+    </item>
+    
+  </channel>
+</rss>

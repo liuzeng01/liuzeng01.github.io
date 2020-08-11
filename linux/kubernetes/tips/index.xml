@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8S使用技巧 on iNote</title>
+    <link>https://liuzeng01.github.io/linux/kubernetes/tips/</link>
+    <description>Recent content in K8S使用技巧 on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/linux/kubernetes/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>kubectl命令用法</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/tips/kubectl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/tips/kubectl/</guid>
+      <description>1. 基础命令： create，delete，get，run，expose，set，explain，edit
+create 命令：根据文件或者输入来创建资源 kubectl create -f demo-deployment.yaml kubectl create -f demo-service.yaml delete 命令：删除资源 # 根据yaml文件删除对应的资源，但是yaml文件并不会被删除，这样更加高效 kubectl delete -f demo-deployment.yaml kubectl delete -f demo-service.yaml # 也可以通过具体的资源名称来进行删除，使用这个删除资源，同时删除deployment和service资源 kubectl delete 具体的资源名称 get 命令 ：获得资源信息 # 查看所有的资源信息 kubectl get all kubectl get --all-namespaces # 查看pod列表 kubectl get pod # 显示pod节点的标签信息 kubectl get pod --show-labels # 根据指定标签匹配到具体的pod kubectl get pods -l app=example # 查看node节点列表 kubectl get node # 显示node节点的标签信息 kubectl get node --show-labels # 查看pod详细信息，也就是可以查看pod具体运行在哪个节点上（ip地址信息） kubectl get pod -o wide # 查看服务的详细信息，显示了服务名称，类型，集群ip，端口，时间等信息 kubectl get svc kubectl get svc -n kube-system # 查看命名空间 kubectl get ns kubectl get namespaces # 查看所有pod所属的命名空间 kubectl get pod --all-namespaces # 查看所有pod所属的命名空间并且查看都在哪些节点上运行 kubectl get pod --all-namespaces -o wide # 查看目前所有的replica set，显示了所有的pod的副本数，以及他们的可用数量以及状态等信息 kubectl get rs # 查看已经部署了的所有应用，可以看到容器，以及容器所用的镜像，标签等信息 kubectl get deploy -o wide kubectl get deployments -o wide run 命令：在集群中创建并运行一个或多个容器镜像  语法：run NAME &amp;ndash;image=image [&amp;ndash;env=&amp;quot;key=value&amp;rdquo;] [&amp;ndash;port=port] [&amp;ndash;replicas=replicas] [&amp;ndash;dry-run=bool] [&amp;ndash;overrides=inline-json] [&amp;ndash;command] &amp;ndash; [COMMAND] [args&amp;hellip;]  # 示例，运行一个名称为nginx，副本数为3，标签为app=example，镜像为nginx:1.</description>
+    </item>
+    
+    <item>
+      <title>kubectl 使用技巧</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/tips/kubeapi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/tips/kubeapi/</guid>
+      <description>1. kubectl 工作原理 从技术角度上看，kubectl是Kubernetes API的客户端。Kubernetes API是一个 HTTP REST API。这个API是真正的Kubernetes用户界面。Kubernetes完全受这个API控制，这意味着每个Kubernetes操作都作为API端点公开，并且可以由对此端点的HTTP请求执行。因此，kubectl的主要工作是执行对Kubernetes API的HTTP请求 Kubernetes是一个完全以资源为中心的系统。这意味着，Kubernetes维护资源的内部状态并且所有的Kubernetes操作都是针对这些资源的CRUD（增加、读取、更新、删除）操作。你完全可以通过操控这些资源（Kubernetes会根据资源的当前状态找出解决方案）来控制Kubernetes。因此，Kubernetes API reference主要是资源类型及其相关操作的列表。
+Kubernetes API对于内部组件和外部用户的重复操作是Kubernetes的基本设计概念。现在，我们来总结一下Kubernetes如何工作的：
+ 存储后端存储（如，资源）Kubernetes的状态 API server以Kubernetes API的形式提供到存储后端的接口 所有其他Kubernetes的组件和用户通过Kubernetes API读取、监视以及操控Kubernetes的状态（如资源）。  2. 配置bash补全 sudo apt-get install bash-completion # or yum install bash-completion kubectl completion bash bash-completion安装完成之后，你需要进行一些设置，以便在所有的shell会话中获得kubectl补全脚本。一种方法是将以下命令行添加到~/.bashrc文件中：
+source &amp;lt;(kubectl completion bash) 另一种可能性是将kubectl补充脚本添加到/etc/bash_completion.d目录中（如果不存在，则需要先创建它）：
+kubectl completion bash &amp;gt;/etc/bash_completion.d/kubectl # /etc/bash_completion.d目录中的所有补全脚本均由bash-completion自动提供。 以上两种方法都是一样的效果。重新加载shell后，kubectl命令补全就能正常工作啦！
+3. 查看API规范 当你创建YAML资源定义时，你需要知道字段以及这些资源的意义。kubectl提供了kubectl explain命令，它能在你的terminal中正确地输入所有资源规范。
+kubectl explain resource[.field]... # 该命令输出所请求资源或字段的规范。kubectl explain所显示的信息与API reference中的信息相同。默认情况下，kubectl explain仅显示单个级别的字段。你可以使用--recursive标志来显示所有级别的字段： 4. 使用自定义列输出格式 自定义列输出选项的用法如下：
+-o custom-columns=&amp;lt;header&amp;gt;:&amp;lt;jsonpath&amp;gt;[,&amp;lt;header&amp;gt;:&amp;lt;jsonpath&amp;gt;]... 你必须将每个输出列定义为：对：
+是列的名称，你可以选择任何所需的内容。是一个选择资源字段的表达式示例： # Select all elements of a list kubectl get pods -o custom-columns=&amp;#39;DATA:spec.</description>
+    </item>
+    
+  </channel>
+</rss>
