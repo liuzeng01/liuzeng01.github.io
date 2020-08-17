@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>Got下载工具</title>
+      <link>https://liuzeng01.github.io/programing/go/note/august/got/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/august/got/</guid>
+      <description> 1.安装 go get github.com/melbahja/got/cmd/got 或者直接下载release包也可以
+2. 命令行使用方法 got https://example.com/file.mp4 got --out /path/to/save https://example.com/file.mp4 3. 代码中引用 package main import &amp;#34;log&amp;#34; import &amp;#34;github.com/melbahja/got&amp;#34; func main() { dl, err := got.New(&amp;#34;https://golang.google.cn/dl/go1.14.7.windows-amd64.zip&amp;#34;, &amp;#34;go.zip&amp;#34;) if err != nil { log.Fatal(err) } // Start the download 	err = dl.Start() } //可以包装到携程里面  Back</description>
+    </item>
+    
+    <item>
       <title>二维码生成</title>
       <link>https://liuzeng01.github.io/programing/go/note/august/qrcode/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

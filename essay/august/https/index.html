@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/august/https/">
+
+    <title>
+        
+        HTTPS | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/shellexample/"><h6>Shell 范例</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellexample/basic/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellexample/basic/" class="nav-link p-0">
+                    Shell 范例 1 
+                </a>
+        </li>
+        </ul>
+    </li>
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/script/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/script/" class="nav-link p-0">
+                    Script命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/supervisor/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/supervisor/" class="nav-link p-0">
+                    Supervisor
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/vi/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/vi/" class="nav-link p-0">
+                    Vim快捷键
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
+                    vue &#43; docker
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/tips/"><h6>K8S使用技巧</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/tips/kubectl/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubectl/" class="nav-link p-0">
+                    kubectl命令用法
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/tips/kubeapi/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubeapi/" class="nav-link p-0">
+                    kubectl 使用技巧
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/deploy/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/deploy/"><h6>K8S环境配置记录</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/deploy/golang/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/golang/" class="nav-link p-0">
+                    Golang of linux 
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/k8sbuild/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/k8sbuild/" class="nav-link p-0">
+                    Kubernetes搭建
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/natip/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/natip/" class="nav-link p-0">
+                    NAT网关配置虚拟机静态IP
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/glusterfs/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/glusterfs/" class="nav-link p-0">
+                    GlusterFS
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/gitlab/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/gitlab/" class="nav-link p-0">
+                    Gitlab&#43;kubernetes
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/august/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/august/https/" class="nav-item my-1 active">
+                
+                 <a href="/essay/august/https/" class="nav-link p-0">
+                    HTTPS
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/gin/" class="nav-item my-1">
+                
+                 <a href="/essay/july/gin/" class="nav-link p-0">
+                    Gin
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
+                    gRPC
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/august/got/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/got/" class="nav-link p-0">
+                    Got下载工具
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/august/qrcode/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/qrcode/" class="nav-link p-0">
+                    二维码生成
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/c/makefile/" class="nav-item my-1">
+                
+                 <a href="/programing/c/makefile/" class="nav-link p-0">
+                    Makefile
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/javascript/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/javascript/august/nodejs/" class="nav-item my-1">
+                
+                 <a href="/programing/javascript/august/nodejs/" class="nav-link p-0">
+                    Node JS
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-加密的大致种类">1. 加密的大致种类：</a></li>
+    <li><a href="#2-如何加密">2. 如何加密</a>
+      <ul>
+        <li><a href="#用不可逆加密可行吗">用不可逆加密可行吗？</a></li>
+        <li><a href="#用对称加密可行吗">用对称加密可行吗？</a></li>
+        <li><a href="#用非对称加密rsa可行吗">用非对称加密（rsa）可行吗？</a></li>
+        <li><a href="#用非对称加密--对称加密可行吗">用<strong>非对称加密 + 对称加密</strong>可行吗？</a></li>
+        <li><a href="#如何保证浏览器收到的公钥一定是该网站的公钥">如何保证浏览器收到的公钥一定是该网站的公钥</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>HTTPS</h1>
+
+<hr>
+<h2 id="1-加密的大致种类">1. 加密的大致种类：</h2>
+<p>1、不可逆加密。比如 MD5、SHA、HMAC
+典型用途：</p>
+<pre><code>密码总不能明文存到数据库吧，所以一般加密存起来，只要用户的输入经过同样的加密算法 对比一下就知道密码是否正确了，所以没必要可逆。
+</code></pre>
+<p>2、可逆加密。</p>
+<p>对称加密。比如：AES、DES、3DES、IDEA、RC4、RC5、RC6
+典型用途：</p>
+<pre><code>用同一个密码加密和解密，太常见了，我用密码加密文件发给你，你只能用我的密码才能解开。
+</code></pre>
+<p>非对称加密（就是公私钥）。比如：RSA、DSA、ECC</p>
+<pre><code>典型用途： 
+加密（保证数据安全性）使用公钥加密，需使用私钥解密。 
+
+认证（用于身份判断）使用私钥签名，需使用公钥验证签名。
+</code></pre>
+<h2 id="2-如何加密">2. 如何加密</h2>
+<h3 id="用不可逆加密可行吗">用不可逆加密可行吗？</h3>
+<p>首先不可逆加密的是不是可以直接排除了，不知道为啥的，可以想一想自己的目的是什么哈。</p>
+<h3 id="用对称加密可行吗">用对称加密可行吗？</h3>
+<p>如果通信双方都各自持有同一个密钥，且没有别人知道，这两方的通信安全当然是可以被保证的,然而最大的问题就是这个密钥怎么让传输的双方知晓，同时不被别人知道,想一想：是不是不管怎么传，中间都有可能被截获，密钥都被截获了，其他的安全是不是也就无从谈起了。看来纯粹的对称加密不能解决http的安全问题。</p>
+<h3 id="用非对称加密rsa可行吗">用非对称加密（rsa）可行吗？</h3>
+<p>试想一下：如果服务器生成公私钥，然后把公钥明文给客户端（有问题，下面说），那客户端以后传数据用公钥加密，服务端用私钥解密就行了，这貌似能保证浏览器到服务端的通道是安全的，那服务端到浏览器的通道如何保证安全呢？</p>
+<p>那既然一对公私钥能保证，那如果浏览器本身也生成一对公私钥匙，然后把公钥明文发给服务端，抛开明文传递公钥的问题，那以后是不是可以安全通信了，的确可以！但https本身却不是这样做的，最主要的原因是非对称加密非常耗时，特别是加密解密一些较大数据的时候有些力不从心，当然还有其他原因。既然非对称加密非常耗时，那只能再考虑对称加密了。</p>
+<h3 id="用非对称加密--对称加密可行吗">用<strong>非对称加密 + 对称加密</strong>可行吗？</h3>
+<p>上面提到浏览器拥有服务器的公钥，那浏览器生成一个密钥，用服务器的公钥加密传给服务端，然后服务端和浏览器以后拿这个密钥以对称加密的方式通信不就好了！完美！
+所以接下来说一下上面遗留的一个问题：服务端的公钥是明文传过去的，<strong>有可能导致什么问题</strong>呢？
+如果服务端在把明文公钥传递给浏览器的时候，被黑客截获下来，然后把数据包中的公钥替换成自己伪造的公钥（当然他自己有自己的私钥），浏览器本身是不知道公钥真假的，所以浏览器还是傻傻的按照之前的步骤，生成对称密钥，然后用假的公钥加密传递给服务端，这个时候，黑客截获到报文，然后用自己的私钥解密，拿到其中的对称密钥，然后再传给服务端，就这样神不知鬼不觉的，对称密钥被黑客截取，那以后的通信其实就是也就全都暴露给黑客了。</p>
+<p>上面的流程到底哪里存在问题，以致使黑客可以任意冒充服务端的公钥！
+其实根本原因就是<strong>浏览器无法确认自己收到的公钥是不是网站自己的</strong>。</p>
+<h3 id="如何保证浏览器收到的公钥一定是该网站的公钥">如何保证浏览器收到的公钥一定是该网站的公钥</h3>
+<p>现实生活中，如果想证明某身份证号一定是小明的，怎么办？看身份证。这里国家机构起到了“公信”的作用，身份证是由它颁发的，它本身的权威可以对一个人的身份信息作出证明。互联网中能不能搞这么个公信机构呢？给网站颁发一个“身份证”？当然可以，这就是平时经常说的<strong>数字证书</strong>。</p>
+<p><strong>什么是数字证书?证书都包含什么?</strong>
+身份证之所以可信，是因为背后是国家，那数字证书如何才可信呢？这个时候找<strong>CA（Certificate Authority）机构</strong>。办身份证需要填写自己的各种信息，去CA机构申请证书需要什么呢？至少应该有以下几项吧：</p>
+<pre><code>1、网站域名 
+
+2、证书持有者 
+
+3、证书有效期 
+
+4、证书颁发机构 
+
+5、服务器公钥（最主要） 
+
+6、接下来要说的签名时用的hash算法
+</code></pre><p>那证书如何安全的送达给浏览器，如何防止被篡改呢？给证书盖个章（防伪标记）不就好了？这就又引出另外一个概念：数字签名。
+什么是数字签名？签名的过程是什么
+签名的过程其实也很简单：</p>
+<pre><code>1、CA机构拥有非对称加密的私钥和公钥。
+
+2、CA对证书明文信息进行hash。
+
+3、对hash后的值用私钥加密，得到数字签名。
+</code></pre><p>所以呢，总结一下：CA机构颁发的证书包含（证书内容的明文+签名）。
+浏览器收到服务下发的证书之后，拿到证书明文和签名，怎么验证是否篡改了呢？
+大家知道，私钥签名，公钥验签。证书里面的签名是CA机构用私钥签名的，所以我只要用CA机构的公钥验证一下签名不就好了，怎么验证呢？
+还记得证书里面的明文包含什么吧，不记得的话看看上面的内容。</p>
+<pre><code>1、拿到证书里面明文的hash算法并对明文内容进行hash运算，得到A 。
+
+2、用CA的公钥解密签名得到B 。
+
+3、比较A 和 B，如果相等，说明没有被篡改，否则浏览器提示证书不可信。
+</code></pre><p>有没有发现一个问题？CA的公钥从哪里获取呢？</p>
+<ul>
+<li>这个简单，CA权威机构本来也没多少个，所以，浏览器内部都内置了各大CA机构的公钥信息。
+简单总结一下：
+如果证书被篡改，浏览器就提示不可信，终止通信，如果验证通过，说明公钥没问题，一定没被篡改。</li>
+</ul>
+<p>公钥没被篡改，那浏览器生成的对称加密用的密钥用公钥加密发送给服务端，也只有服务端的私钥能解开，所以保证了 对称密钥不可能被截获，对称密钥没被截获，那双方的通信就一定是安全的。</p>
+<p>黑客依然可以截获数据包，但是全都是经过对称加密的密钥加密的，他也可以篡改，只是没有任何意义了,黑客也不会做吃力不讨好的事了</p>
+<hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/august/" title="August"><i class="fas fa-chevron-left p-1"></i>August</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/" title="July">July<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

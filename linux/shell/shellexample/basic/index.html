@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/shell/shellexample/basic/">
+
+    <title>
+        
+        Shell 范例 1  | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/shellexample/"><h6>Shell 范例</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellexample/basic/" class="nav-item my-1 active">
+                
+                 <a href="/linux/shell/shellexample/basic/" class="nav-link p-0">
+                    Shell 范例 1 
+                </a>
+        </li>
+        </ul>
+    </li>
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/script/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/script/" class="nav-link p-0">
+                    Script命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/supervisor/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/supervisor/" class="nav-link p-0">
+                    Supervisor
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/vi/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/vi/" class="nav-link p-0">
+                    Vim快捷键
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
+                    vue &#43; docker
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/tips/"><h6>K8S使用技巧</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/tips/kubectl/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubectl/" class="nav-link p-0">
+                    kubectl命令用法
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/tips/kubeapi/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubeapi/" class="nav-link p-0">
+                    kubectl 使用技巧
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/deploy/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/deploy/"><h6>K8S环境配置记录</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/deploy/golang/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/golang/" class="nav-link p-0">
+                    Golang of linux 
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/k8sbuild/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/k8sbuild/" class="nav-link p-0">
+                    Kubernetes搭建
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/natip/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/natip/" class="nav-link p-0">
+                    NAT网关配置虚拟机静态IP
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/glusterfs/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/glusterfs/" class="nav-link p-0">
+                    GlusterFS
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/gitlab/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/gitlab/" class="nav-link p-0">
+                    Gitlab&#43;kubernetes
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/august/https/" class="nav-item my-1">
+                
+                 <a href="/essay/august/https/" class="nav-link p-0">
+                    HTTPS
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/gin/" class="nav-item my-1">
+                
+                 <a href="/essay/july/gin/" class="nav-link p-0">
+                    Gin
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
+                    gRPC
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/august/got/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/got/" class="nav-link p-0">
+                    Got下载工具
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/august/qrcode/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/qrcode/" class="nav-link p-0">
+                    二维码生成
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/c/makefile/" class="nav-item my-1">
+                
+                 <a href="/programing/c/makefile/" class="nav-link p-0">
+                    Makefile
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/javascript/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/javascript/august/nodejs/" class="nav-item my-1">
+                
+                 <a href="/programing/javascript/august/nodejs/" class="nav-link p-0">
+                    Node JS
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-数值操作">1. 数值操作</a></li>
+    <li><a href="#2-逻辑语句">2. 逻辑语句</a>
+      <ul>
+        <li><a href="#while">while</a></li>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Shell 范例 1 </h1>
+
+<hr>
+<h2 id="1-数值操作">1. 数值操作</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 赋值，递增</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># i=1</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># let i++</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># echo $i</span>
+<span style="color:#ae81ff">2</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span>#
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># ((i++))</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># echo $i</span>
+<span style="color:#ae81ff">3</span>
+<span style="color:#75715e">## 运算</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># expr $i *  5</span>
+<span style="color:#ae81ff">15</span>
+
+<span style="color:#75715e">## 求幂</span>
+<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># let $i=2**2</span>
+<span style="color:#ae81ff">4</span>
+<span style="color:#75715e">## 进制转换 obase:目标进制 ，ibase：当前进制；转换数值</span>
+<span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># echo &#34;obase=10;ibase=8;11&#34;| bc -l</span>
+<span style="color:#ae81ff">9</span>
+<span style="color:#75715e">## 产生一系列数值</span>
+<span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># seq 1 10</span>
+<span style="color:#ae81ff">1</span>
+<span style="color:#ae81ff">2</span>
+<span style="color:#ae81ff">3</span>
+<span style="color:#ae81ff">4</span>
+<span style="color:#ae81ff">5</span>
+<span style="color:#ae81ff">6</span>
+<span style="color:#ae81ff">7</span>
+<span style="color:#ae81ff">8</span>
+<span style="color:#ae81ff">9</span>
+<span style="color:#ae81ff">10</span>
+<span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># seq 1 2 10</span>
+<span style="color:#ae81ff">1</span>
+<span style="color:#ae81ff">3</span>
+<span style="color:#ae81ff">5</span>
+<span style="color:#ae81ff">7</span>
+<span style="color:#ae81ff">9</span>
+
+
+
+
+</code></pre></div><h2 id="2-逻辑语句">2. 逻辑语句</h2>
+<h3 id="while">while</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+<span style="color:#00a8c8">while</span> <span style="color:#f92672">[</span> <span style="color:#111">$i</span> -lt <span style="color:#ae81ff">10000</span> <span style="color:#f92672">]</span> <span style="color:#75715e"># lt 小于</span>
+<span style="color:#00a8c8">do</span>
+        <span style="color:#f92672">((</span>i++<span style="color:#f92672">))</span>
+<span style="color:#00a8c8">done</span>
+<span style="color:#111">echo</span> <span style="color:#111">$i</span>
+</code></pre></div><h3 id="heading"></h3>
+<hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/shell/shellexample/" title="Shell 范例"><i class="fas fa-chevron-left p-1"></i>Shell 范例</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/shell/shellcase/" title="Shell Case">Shell Case<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

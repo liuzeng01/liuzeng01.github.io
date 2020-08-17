@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell 范例 on iNote</title>
+    <link>https://liuzeng01.github.io/linux/shell/shellexample/</link>
+    <description>Recent content in Shell 范例 on iNote</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://liuzeng01.github.io/linux/shell/shellexample/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shell 范例 1 </title>
+      <link>https://liuzeng01.github.io/linux/shell/shellexample/basic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/shellexample/basic/</guid>
+      <description>1. 数值操作 # 赋值，递增 [root@master week1]# i=1 [root@master week1]# let i++ [root@master week1]# echo $i 2 [root@master week1]# [root@master week1]# ((i++)) [root@master week1]# echo $i 3 ## 运算 [root@master week1]# expr $i * 5 15 ## 求幂 [root@master week1]# let $i=2**2 4 ## 进制转换 obase:目标进制 ，ibase：当前进制；转换数值 [root@master ~]# echo &amp;#34;obase=10;ibase=8;11&amp;#34;| bc -l 9 ## 产生一系列数值 [root@master ~]# seq 1 10 1 2 3 4 5 6 7 8 9 10 [root@master ~]# seq 1 2 10 1 3 5 7 9 2.</description>
+    </item>
+    
+  </channel>
+</rss>
