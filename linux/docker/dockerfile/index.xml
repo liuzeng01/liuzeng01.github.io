@@ -45,5 +45,17 @@ scratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序�
 [root@master hugosite]# docker build -t staticsite . Sending build context to Docker daemon 12.6MB Step 1/9 : FROM golang:alpine AS build-env ---&amp;gt; 30df784d6206 Step 2/9 : ADD .</description>
     </item>
     
+    <item>
+      <title>dockerfile使用注意事项</title>
+      <link>https://liuzeng01.github.io/linux/docker/dockerfile/tips/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/tips/</guid>
+      <description> 1. 使用官方镜像 官方镜像往往更加稳定，安全
+2. From合适的镜像 注意alpine ，runtime ，sdk等等镜像的区别。尽量使用alpine镜像，体积更小。SDK 往往集成了开发的所有环境，这个时候如果为了减小镜像体积的话，可以使用Runtime镜像作为应用的运行镜像。
+3. 只Copy需要的文件，而不是拷贝所有文件 4. 多阶段构建 5. 多利用Cache，来减小重复构建时候的耗时 6. 合理使用Run命令。将需要更新软件或者安装应用的步骤放到一起 这也是为了尽量减小构建的中间镜像的层数和大小。同时注意和经常修改的指令分开，这个主要是为了利用缓存，提升构建速度。
+7. 使用.dockerignore文件来忽略不需要构建或者缓存的文件 8. 注意指令顺序。将不变的放在前面，经常修改的放在后面  Back</description>
+    </item>
+    
   </channel>
 </rss>

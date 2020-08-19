@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.72.0" />
 
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/">
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/august/mysql/">
 
     <title>
         
-        My Document | iNote
+        MySQL 30个基本问题 | iNote
         
     </title>
 
@@ -273,12 +272,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/essay/august/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/august/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/august/"><h6>August</h6></a>
@@ -289,7 +288,7 @@
                     HTTPS
                 </a>
         </li>
-        <li data-nav-id="/essay/august/mysql/" class="nav-item my-1">
+        <li data-nav-id="/essay/august/mysql/" class="nav-item my-1 active">
                 
                  <a href="/essay/august/mysql/" class="nav-link p-0">
                     MySQL 30个基本问题
@@ -719,47 +718,162 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-关系型数据库">1. 关系型数据库</a></li>
+    <li><a href="#2-关系型数据库优势">2. 关系型数据库优势</a></li>
+    <li><a href="#3-sql-与-mysql">3. SQL 与 MySQL</a></li>
+    <li><a href="#4-mysql-与-mariadb">4. MySQL 与 MariaDB</a></li>
+    <li><a href="#5-mysql-数据类型">5. MySQL 数据类型</a></li>
+    <li><a href="#6-int10-和-bigint10能存储的数据大小一样吗">6. int(10) 和 bigint(10)能存储的数据大小一样吗？</a></li>
+    <li><a href="#7-存储引擎">7. 存储引擎</a></li>
+    <li><a href="#8-innodb">8. InnoDB</a></li>
+    <li><a href="#9-innodb--引擎的四大特性是什么">9. InnoDB  引擎的四大特性是什么？</a></li>
+    <li><a href="#10-myisam存储引擎">10. MyISAM存储引擎</a></li>
+    <li><a href="#11-myisam--与--innodb--存储引擎-5-大区别">11. MyISAM  与  InnoDB  存储引擎 5 大区别</a></li>
+    <li><a href="#12-select-count-在哪个引擎执行更快">12. SELECT COUNT(*) 在哪个引擎执行更快</a></li>
+    <li><a href="#14-数据库设计三范式">14. 数据库设计三范式</a></li>
+    <li><a href="#15-数据库删除操作中的-deletedrop-truncate-区别在哪">15 数据库删除操作中的 delete、drop、 truncate 区别在哪？</a></li>
+    <li><a href="#16-视图">16. 视图</a></li>
+    <li><a href="#17-存储过程">17. 存储过程</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
-	
 
-	<h1>My Document</h1>
+<h1>MySQL 30个基本问题</h1>
 
-	<hr>
-
-
-
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/linux/"> Linux </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/essay/"> Essay </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/booknote/"> BookNote </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/programing/"> Programming </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/zsmart/"> ZSmart </a>
-			</li>
-		
-
-	
+<hr>
+<h2 id="1-关系型数据库">1. 关系型数据库</h2>
+<p>关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码。</p>
+<p>简单来说，关系模式就是<strong>二维表格模型</strong>。</p>
+<h2 id="2-关系型数据库优势">2. 关系型数据库优势</h2>
+<p>关系型数据库的优势：</p>
+<ul>
+<li>易于理解</li>
+<li>关系型二维表的结构非常贴近现实世界，二维表格，容易理解。</li>
+<li>支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。</li>
+<li>支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。</li>
 </ul>
+<h2 id="3-sql-与-mysql">3. SQL 与 MySQL</h2>
+<p>结构化查询语言 (Structured Query Language) 简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。
+MySQL在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，广泛地应用在 Internet 上的中小型网站中。</p>
+<h2 id="4-mysql-与-mariadb">4. MySQL 与 MariaDB</h2>
+<p>MySQL 最初由瑞典 MySQL AB 公司开发，MySQL 的创始人是乌尔夫·米卡埃尔·维德纽斯，常用昵称蒙提（Monty）。</p>
+<p>在被甲骨文公司收购后，现在属于甲骨文公司（Oracle） 旗下产品。Oracle 大幅调涨MySQL商业版的售价，因此导致自由软件社区们对于Oracle是否还会持续支持MySQL社区版有所隐忧。</p>
+<p>MySQL 的创始人就是之前那个叫 Monty 的大佬以 MySQL为基础成立分支计划 MariaDB</p>
+<p>两者基本完全相同</p>
+<h2 id="5-mysql-数据类型">5. MySQL 数据类型</h2>
+<p>MySQL 数据类型非常丰富，常用类型简单介绍如下：</p>
+<pre><code>    整数类型：BIT、BOOL、TINY INT、SMALL INT、MEDIUM INT、 INT、 BIG INT
 
+    浮点数类型：FLOAT、DOUBLE、DECIMAL
 
+    字符串类型：CHAR、VARCHAR、TINY TEXT、TEXT、MEDIUM TEXT、LONGTEXT、TINY BLOB、BLOB、MEDIUM BLOB、LONG BLOB
 
+    日期类型：Date、DateTime、TimeStamp、Time、Year
 
+    其他数据类型：BINARY、VARBINARY、ENUM、SET...
+</code></pre>
+<h2 id="6-int10-和-bigint10能存储的数据大小一样吗">6. int(10) 和 bigint(10)能存储的数据大小一样吗？</h2>
+<p>不一样，具体原因如下：</p>
+<p>int 能存储四字节有符号整数。
+bigint 能存储八字节有符号整数。
+所以能存储的数据大小不一样，其中的数字 10  代表的只是数据的显示宽度。[^13]</p>
+<p>显示宽度指明Mysql最大可能显示的数字个数，数值的位数小于指定的宽度时数字左边会用空格填充，空格不容易看出。
+如果插入了大于显示宽度的值，只要该值不超过该类型的取值范围，数值依然可以插入且能够显示出来。
+建表的时候指定 zerofill 选项，则不足显示宽度的部分用 0 填充，如果是 1 会显示成 0000000001。
+如果没指定显示宽度， bigint 默认宽度是 20 ，int默认宽度 11</p>
+<h2 id="7-存储引擎">7. 存储引擎</h2>
+<p>查看数据库表当前支持的引擎，可以用下面查询语句查看：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">show table status from <span style="color:#d88200">&#39;your_db_name&#39;</span> where <span style="color:#111">name</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;your_table_name&#39;</span><span style="color:#111">;</span> 
+<span style="color:#75715e"># 查询结果表中的 Engine 字段指示存储引擎类型。</span>
+
+</code></pre></div><p>常用的存储引擎有 InnoDB 存储引擎和 MyISAM 存储引擎，InnoDB 是 MySQL 的默认事务引擎。</p>
+<h2 id="8-innodb">8. InnoDB</h2>
+<p>InnoDB 是 MySQL的默认「事务引擎」，被设置用来处理大量短期（short-lived）事务，短期事务大部分情况是正常提交的，很少会回滚</p>
+<p>InnoDB存储引擎采用多版本并发控制（MVCC，MultiVersion Concurrency Control）来支持高并发。并且实现了四个标准的隔离级别，通过间隙锁next-key locking策略防止幻读的出现。</p>
+<p>引擎的表基于聚簇索引建立，聚簇索引对主键查询有很高的性能。不过它的二级索引secondary index非主键索引中必须包含主键列，所以如果主键列很大的话，其他的所有索引都会很大。因此，若表上的索引较多的话，主键应当尽可能的小。另外InnoDB的存储格式是平台独立。</p>
+<p>InnoDB做了很多优化，比如：磁盘读取数据方式采用的可预测性预读、自动在内存中创建hash索引以加速读操作的自适应哈希索引（adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer)等。</p>
+<p>InnoDB通过一些机制和工具支持真正的热备份，MySQL 的其他存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。</p>
+<h2 id="9-innodb--引擎的四大特性是什么">9. InnoDB  引擎的四大特性是什么？</h2>
+<p>插入缓冲（Insert buffer)
+Insert Buffer 用于非聚集索引的插入和更新操作。先判断插入的非聚集索引是否在缓存池中，如果在则直接插入，否则插入到 Insert Buffer 对象里。再以一定的频率进行 Insert Buffer 和辅助索引叶子节点的 merge 操作，将多次插入合并到一个操作中，提高对非聚集索引的插入性能。</p>
+<p>二次写 (Double write)
+Double Write由两部分组成，一部分是内存中的double write buffer，大小为2MB，另一部分是物理磁盘上共享表空间连续的128个页，大小也为 2MB。在对缓冲池的脏页进行刷新时，并不直接写磁盘，而是通过 memcpy 函数将脏页先复制到内存中的该区域，之后通过doublewrite buffer再分两次，每次1MB顺序地写入共享表空间的物理磁盘上，然后马上调用fsync函数，同步磁盘，避免操作系统缓冲写带来的问题。</p>
+<p>自适应哈希索引 (Adaptive Hash Index)
+InnoDB会根据访问的频率和模式，为热点页建立哈希索引，来提高查询效率。索引通过缓存池的 B+ 树页构造而来，因此建立速度很快，InnoDB存储引擎会监控对表上各个索引页的查询，如果观察到建立哈希索引可以带来速度上的提升，则建立哈希索引，所以叫做自适应哈希索引。</p>
+<p>缓存池
+为了提高数据库的性能，引入缓存池的概念，通过参数 innodb_buffer_pool_size 可以设置缓存池的大小，参数 innodb_buffer_pool_instances 可以设置缓存池的实例个数。缓存池主要用于存储以下内容：</p>
+<p>缓冲池中缓存的数据页类型有：索引页、数据页、undo页、插入缓冲 (insert buffer)、自适应哈希索引(adaptive hash index)、InnoDB存储的锁信息 (lock info)和数据字典信息 (data dictionary)。</p>
+<h2 id="10-myisam存储引擎">10. MyISAM存储引擎</h2>
+<p>MyISAM 是 MySQL 5.1 及之前的版本的默认的存储引擎。MyISAM 提供了大量的特性，包括全文索引、压缩、空间函数（GIS)等，但MyISAM 不「支持事务和行级锁」，对于只读数据，或者表比较小、可以容忍修复操作，依然可以使用它。</p>
+<p>MyISAM「不支持行级锁而是对整张表加锁」。读取时会对需要读到的所有表加共享锁，写入时则对表加排它锁。但在表有读取操作的同时，也可以往表中插入新的记录，这被称为并发插入。</p>
+<p>MyISAM 表可以手工或者自动执行检查和修复操作。但是和事务恢复以及崩溃恢复不同，可能导致一些「数据丢失」，而且修复操作是非常慢的。</p>
+<p>对于 MyISAM 表，即使是BLOB和TEXT等长字段，也可以基于其前 500 个字符创建索引，MyISAM 也支持「全文索引」，这是一种基于分词创建的索引，可以支持复杂的查询。</p>
+<p>如果指定了DELAY_KEY_WRITE选项，在每次修改执行完成时，不会立即将修改的索引数据写入磁盘，而是会写到内存中的键缓冲区，只有在清理键缓冲区或者关闭表的时候才会将对应的索引块写入磁盘。这种方式可以极大的提升写入性能，但是在数据库或者主机崩溃时会造成「索引损坏」，需要执行修复操作。</p>
+<h2 id="11-myisam--与--innodb--存储引擎-5-大区别">11. MyISAM  与  InnoDB  存储引擎 5 大区别</h2>
+<pre><code>InnoDB支持事务，而MyISAM不支持事务
+InnoDB支持行级锁，而MyISAM支持表级锁
+InnoDB支持MVCC, 而MyISAM不支持
+InnoDB支持外键，而MyISAM不支持
+InnoDB不支持全文索引，而MyISAM支持
+</code></pre>
+<h2 id="12-select-count-在哪个引擎执行更快">12. SELECT COUNT(*) 在哪个引擎执行更快</h2>
+<p>SELECT COUNT(*)   常用于统计表的总行数，在 MyISAM  存储引擎中执行更快，前提是不能加有任何WHERE条件。</p>
+<p>这是因为 MyISAM 对于表的行数做了优化，内部用一个变量存储了表的行数，如果查询条件没有 WHERE 条件则是查询表中一共有多少条数据，MyISAM 可以迅速返回结果，如果加 WHERE 条件就不行。</p>
+<p>InnoDB 的表也有一个存储了表行数的变量，但这个值是一个估计值，所以并没有太大实际意义。</p>
+<h2 id="14-数据库设计三范式">14. 数据库设计三范式</h2>
+<p>1范式：1NF是对属性的原子性约束，要求属性具有原子性，不可再分解；(只要是关系型数据库都满足1NF)</p>
+<p>2范式：2NF是对记录的惟一性约束，要求记录有惟一标识，即实体的惟一性；</p>
+<p>3范式：3NF是对字段冗余性的约束，即任何字段不能由其他字段派生出来，它要求字段没有冗余。没有冗余的数据库设计可以做到</p>
+<p>但是，没有冗余的数据库未必是最好的数据库，有时为了提高运行效率，就必须降低范式标准，适当保留冗余数据，具体做法是：在概念数据模型设计时遵守第三范式，降低范式标准的工作放到物理数据模型设计时考虑，降低范式就是增加字段，允许冗余。</p>
+<h2 id="15-数据库删除操作中的-deletedrop-truncate-区别在哪">15 数据库删除操作中的 delete、drop、 truncate 区别在哪？</h2>
+<p>当不再需要该表时可以用 drop 来删除表;
+当仍要保留该表，但要删除所有记录时， 用 truncate来删除表中记录。
+当要删除部分记录时（一般来说有 WHERE 子句约束） 用 delete来删除表中部分记录。</p>
+<h2 id="16-视图">16. 视图</h2>
+<p>视图是虚拟表，并不储存数据，只包含定义时的语句的动态数据。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">CREATE</span>
+    <span style="color:#111">[</span><span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">REPLACE</span><span style="color:#111">]</span>
+    <span style="color:#111">[</span><span style="color:#111">ALGORITHM</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#111">UNDEFINED</span> <span style="color:#f92672">|</span> <span style="color:#111">MERGE</span> <span style="color:#f92672">|</span> <span style="color:#111">TEMPTABLE</span><span style="color:#960050;background-color:#1e0010">}</span><span style="color:#111">]</span>
+    <span style="color:#111">[</span><span style="color:#00a8c8">DEFINER</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">user</span><span style="color:#111">]</span>
+    <span style="color:#111">[</span><span style="color:#00a8c8">SQL</span> <span style="color:#00a8c8">SECURITY</span> <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#00a8c8">DEFINER</span> <span style="color:#f92672">|</span> <span style="color:#00a8c8">INVOKER</span> <span style="color:#960050;background-color:#1e0010">}</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">VIEW</span> <span style="color:#111">view_name</span> <span style="color:#111">[(</span><span style="color:#111">column_list</span><span style="color:#111">)]</span>
+    <span style="color:#00a8c8">AS</span> <span style="color:#111">select_statement</span>
+    <span style="color:#111">[</span><span style="color:#00a8c8">WITH</span> <span style="color:#111">[</span><span style="color:#00a8c8">CASCADED</span> <span style="color:#f92672">|</span> <span style="color:#00a8c8">LOCAL</span><span style="color:#111">]</span> <span style="color:#00a8c8">CHECK</span> <span style="color:#00a8c8">OPTION</span><span style="color:#111">]</span>
+</code></pre></div><h2 id="17-存储过程">17. 存储过程</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00a8c8">delimiter</span> <span style="color:#960050;background-color:#1e0010">分隔符</span>
+<span style="color:#00a8c8">create</span> <span style="color:#00a8c8">procedure</span><span style="color:#f92672">|</span><span style="color:#111">proc</span> <span style="color:#111">proc_name</span><span style="color:#111">()</span>
+<span style="color:#00a8c8">begin</span>
+    <span style="color:#111">sql语句</span>
+<span style="color:#00a8c8">end</span> <span style="color:#960050;background-color:#1e0010">分隔符</span>
+<span style="color:#00a8c8">delimiter</span> <span style="color:#960050;background-color:#1e0010">；</span>    <span style="color:#75715e">--还原分隔符，为了不影响后面的语句的使用
+</span><span style="color:#75715e">--默认的分隔符是；但是为了能在整个存储过程中重用，因此一般需要自定义分隔符（除\外）
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">show</span> <span style="color:#00a8c8">procedure</span> <span style="color:#111">status</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">;</span> <span style="color:#75715e">--查询存储过程，可以不适用like进行过滤
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">drop</span> <span style="color:#00a8c8">procedure</span> <span style="color:#00a8c8">if</span> <span style="color:#00a8c8">exists</span><span style="color:#960050;background-color:#1e0010">；</span><span style="color:#75715e">--删除存储过程
+</span></code></pre></div><p>存储过程和函数是事先经过编译并存储在数据库中的一段 SQL 语句的集合，调用存储过程和函数可以简化应用开发人员的很多工作，减少数据在数据库和应用服务器之间的传输，对于提高数据处理的效率是有好处的。</p>
+<p>相同点</p>
+<pre><code>存储过程和函数都是为了可重复的执行操作数据库的 SQL 语句的集合。
+
+存储过程和函数都是一次编译后缓存起来，下次使用就直接命中已经编译好的 sql 语句，减少网络交互提高了效率。
+</code></pre>
+<p>不同点</p>
+<pre><code>标识符不同，函数的标识符是 function，存储过程是 procedure。
+
+函数返回单个值或者表对象，而存储过程没有返回值，但是可以通过OUT参数返回多个值。
+
+函数限制比较多，比如不能用临时表，只能用表变量，一些函数都不可用等，而存储过程的限制相对就比较少。
+
+一般来说，存储过程实现的功能要复杂一点，而函数的实现的功能针对性比较强
+
+函数的参数只能是 IN 类型，存储过程的参数可以是IN OUT INOUT三种类型。
+
+存储函数使用 select 调用，存储过程需要使用 call 调用。
+</code></pre>
 <hr>
 
 
@@ -769,7 +883,8 @@
 </a>
 
 
-	
+
+    
 
 
                     
@@ -778,7 +893,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/" title="Linux">Linux<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/august/https/" title="HTTPS"><i class="fas fa-chevron-left p-1"></i>HTTPS</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/" title="July">July<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

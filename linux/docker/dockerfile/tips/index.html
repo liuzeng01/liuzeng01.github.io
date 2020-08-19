@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.72.0" />
 
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/docker/dockerfile/tips/">
 
     <title>
         
-        My Document | iNote
+        dockerfile使用注意事项 | iNote
         
     </title>
 
@@ -71,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -125,7 +124,7 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
@@ -155,7 +154,7 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
@@ -178,7 +177,7 @@
                     Go项目分阶段构建实践
                 </a>
         </li>
-        <li data-nav-id="/linux/docker/dockerfile/tips/" class="nav-item my-1">
+        <li data-nav-id="/linux/docker/dockerfile/tips/" class="nav-item my-1 active">
                 
                  <a href="/linux/docker/dockerfile/tips/" class="nav-link p-0">
                     dockerfile使用注意事项
@@ -719,47 +718,41 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-使用官方镜像">1. 使用官方镜像</a></li>
+        <li><a href="#2-from合适的镜像">2. From合适的镜像</a></li>
+        <li><a href="#3-只copy需要的文件而不是拷贝所有文件">3. 只Copy需要的文件，而不是拷贝所有文件</a></li>
+        <li><a href="#4-多阶段构建">4. 多阶段构建</a></li>
+        <li><a href="#5-多利用cache来减小重复构建时候的耗时">5. 多利用Cache，来减小重复构建时候的耗时</a></li>
+        <li><a href="#6-合理使用run命令将需要更新软件或者安装应用的步骤放到一起">6. 合理使用Run命令。将需要更新软件或者安装应用的步骤放到一起</a></li>
+        <li><a href="#7-使用dockerignore文件来忽略不需要构建或者缓存的文件">7. 使用.dockerignore文件来忽略不需要构建或者缓存的文件</a></li>
+        <li><a href="#8-注意指令顺序将不变的放在前面经常修改的放在后面">8. 注意指令顺序。将不变的放在前面，经常修改的放在后面</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
-	
 
-	<h1>My Document</h1>
+<h1>dockerfile使用注意事项</h1>
 
-	<hr>
-
-
-
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/linux/"> Linux </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/essay/"> Essay </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/booknote/"> BookNote </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/programing/"> Programming </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/zsmart/"> ZSmart </a>
-			</li>
-		
-
-	
-</ul>
-
-
-
-
+<hr>
+<h3 id="1-使用官方镜像">1. 使用官方镜像</h3>
+<p>官方镜像往往更加稳定，安全</p>
+<h3 id="2-from合适的镜像">2. From合适的镜像</h3>
+<p>注意alpine ，runtime ，sdk等等镜像的区别。尽量使用alpine镜像，体积更小。SDK 往往集成了开发的所有环境，这个时候如果为了减小镜像体积的话，可以使用Runtime镜像作为应用的运行镜像。</p>
+<h3 id="3-只copy需要的文件而不是拷贝所有文件">3. 只Copy需要的文件，而不是拷贝所有文件</h3>
+<h3 id="4-多阶段构建">4. 多阶段构建</h3>
+<h3 id="5-多利用cache来减小重复构建时候的耗时">5. 多利用Cache，来减小重复构建时候的耗时</h3>
+<h3 id="6-合理使用run命令将需要更新软件或者安装应用的步骤放到一起">6. 合理使用Run命令。将需要更新软件或者安装应用的步骤放到一起</h3>
+<p>这也是为了尽量减小构建的中间镜像的层数和大小。同时注意和经常修改的指令分开，这个主要是为了利用缓存，提升构建速度。</p>
+<h3 id="7-使用dockerignore文件来忽略不需要构建或者缓存的文件">7. 使用.dockerignore文件来忽略不需要构建或者缓存的文件</h3>
+<h3 id="8-注意指令顺序将不变的放在前面经常修改的放在后面">8. 注意指令顺序。将不变的放在前面，经常修改的放在后面</h3>
 <hr>
 
 
@@ -769,7 +762,8 @@
 </a>
 
 
-	
+
+    
 
 
                     
@@ -778,7 +772,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/" title="Linux">Linux<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/docker/dockerfile/practice/" title="Go项目分阶段构建实践"><i class="fas fa-chevron-left p-1"></i>Go项目分阶段构建实践</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kernel/" title="Kernel">Kernel<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

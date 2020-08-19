@@ -400,6 +400,24 @@ K8S集群中有管理节点与工作节点两种类型。管理节点主要负�
     </item>
     
     <item>
+      <title>MySQL 30个基本问题</title>
+      <link>https://liuzeng01.github.io/essay/august/mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/august/mysql/</guid>
+      <description>1. 关系型数据库 关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码。
+简单来说，关系模式就是二维表格模型。
+2. 关系型数据库优势 关系型数据库的优势：
+ 易于理解 关系型二维表的结构非常贴近现实世界，二维表格，容易理解。 支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。 支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。  3. SQL 与 MySQL 结构化查询语言 (Structured Query Language) 简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。 MySQL在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，广泛地应用在 Internet 上的中小型网站中。
+4. MySQL 与 MariaDB MySQL 最初由瑞典 MySQL AB 公司开发，MySQL 的创始人是乌尔夫·米卡埃尔·维德纽斯，常用昵称蒙提（Monty）。
+在被甲骨文公司收购后，现在属于甲骨文公司（Oracle） 旗下产品。Oracle 大幅调涨MySQL商业版的售价，因此导致自由软件社区们对于Oracle是否还会持续支持MySQL社区版有所隐忧。
+MySQL 的创始人就是之前那个叫 Monty 的大佬以 MySQL为基础成立分支计划 MariaDB
+两者基本完全相同
+5. MySQL 数据类型 MySQL 数据类型非常丰富，常用类型简单介绍如下：
+ 整数类型：BIT、BOOL、TINY INT、SMALL INT、MEDIUM INT、 INT、 BIG INT浮点数类型：FLOAT、DOUBLE、DECIMAL字符串类型：CHAR、VARCHAR、TINY TEXT、TEXT、MEDIUM TEXT、LONGTEXT、TINY BLOB、BLOB、MEDIUM BLOB、LONG BLOB日期类型：Date、DateTime、TimeStamp、Time、Year其他数据类型：BINARY、VARBINARY、ENUM、SET.</description>
+    </item>
+    
+    <item>
       <title>NAT网关配置虚拟机静态IP</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/deploy/natip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -558,6 +576,18 @@ var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxM
     </item>
     
     <item>
+      <title>dockerfile使用注意事项</title>
+      <link>https://liuzeng01.github.io/linux/docker/dockerfile/tips/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/docker/dockerfile/tips/</guid>
+      <description> 1. 使用官方镜像 官方镜像往往更加稳定，安全
+2. From合适的镜像 注意alpine ，runtime ，sdk等等镜像的区别。尽量使用alpine镜像，体积更小。SDK 往往集成了开发的所有环境，这个时候如果为了减小镜像体积的话，可以使用Runtime镜像作为应用的运行镜像。
+3. 只Copy需要的文件，而不是拷贝所有文件 4. 多阶段构建 5. 多利用Cache，来减小重复构建时候的耗时 6. 合理使用Run命令。将需要更新软件或者安装应用的步骤放到一起 这也是为了尽量减小构建的中间镜像的层数和大小。同时注意和经常修改的指令分开，这个主要是为了利用缓存，提升构建速度。
+7. 使用.dockerignore文件来忽略不需要构建或者缓存的文件 8. 注意指令顺序。将不变的放在前面，经常修改的放在后面  Back</description>
+    </item>
+    
+    <item>
       <title>Gitlab&#43;kubernetes</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/deploy/gitlab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -582,6 +612,23 @@ var DefaultOptions = Options{ EntryIdxMode: HintKeyValAndRAMIdxMode, //EntryIdxM
       
       <guid>https://liuzeng01.github.io/programing/go/note/july/sqlnodefine/</guid>
       <description>package main import ( &amp;#34;database/sql&amp;#34; &amp;#34;fmt&amp;#34; _ &amp;#34;github.com/go-sql-driver/mysql&amp;#34; ) func main() { //连接数据库 	db, err := sql.Open(&amp;#34;mysql&amp;#34;, &amp;#34;golang:golang@tcp(localhost:3306)/gostudy?charset=utf8&amp;#34;) if err != nil { fmt.Println(&amp;#34;连接数据库失败&amp;#34;, err.Error()) return } defer db.Close() //查询数据库 	query, err := db.Query(&amp;#34;select * from event_filelist&amp;#34;) if err != nil { fmt.Println(&amp;#34;查询数据库失败&amp;#34;, err.Error()) return } defer query.Close() //读出查询出的列字段名 	cols, _ := query.Columns() //values是每个列的值，这里获取到byte里 	values := make([][]byte, len(cols)) //query.Scan的参数，因为每次查询出来的列是不定长的，用len(cols)定住当次查询的长度 	scans := make([]interface{}, len(cols)) //让每一行数据都填充到[][]byte里面 	for i := range values { scans[i] = &amp;amp;values[i] } //最后得到的map 	results := make(map[int]map[string]string) i := 0 for query.</description>
+    </item>
+    
+    <item>
+      <title>Go语言设计模式</title>
+      <link>https://liuzeng01.github.io/programing/go/note/august/design/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/programing/go/note/august/design/</guid>
+      <description>设计模式（Design Pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可重用代码、让代码更容易被他人理解并且保证代码可靠性。
+1. 创建型模式 单例模式 单例模式算是23中设计模式里最简单的一个了，它主要用于保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+在程序设计中，有一些对象通常我们只需要一个共享的实例，比如线程池、全局缓存、对象池等，这种场景下就适合使用单例模式。
+但是，并非所有全局唯一的场景都适合使用单例模式。比如，考虑需要统计一个API调用的情况，有两个指标，成功调用次数和失败调用次数。这两个指标都是全局唯一的，所以有人可能会将其建模成两个单例SuccessApiMetric和FailApiMetric。按照这个思路，随着指标数量的增多，你会发现代码里类的定义会越来越多，也越来越臃肿。这也是单例模式最常见的误用场景，更好的方法是将两个指标设计成一个对象ApiMetric下的两个实例ApiMetic success和ApiMetic fail。 如何判断一个对象是否应该被建模成单例？
+通常，被建模成单例的对象都有“中心点”的含义，比如线程池就是管理所有线程的中心。所以，在判断一个对象是否适合单例模式时，先思考下，这个对象是一个中心点吗？
+在对某个对象实现单例模式时，有两个点必须要注意：（1）限制调用者直接实例化该对象；（2）为该对象的单例提供一个全局唯一的访问方法。
+我们可以利用Go语言package的访问规则来实现，将单例结构体设计成首字母小写，就能限定其访问范围只在当前package下，模拟了C++/Java中的私有构造函数；再在当前package下实现一个首字母大写的访问函数，就相当于static方法的作用了。
+在实际开发中，我们经常会遇到需要频繁创建和销毁的对象。频繁的创建和销毁一则消耗CPU，二则内存的利用率也不高，通常我们都会使用对象池技术来进行优化。考虑我们需要实现一个消息对象池，因为是全局的中心点，管理所有的Message实例，所以将其实现成单例，实现代码如下
+package msgpool ... // 消息池 type messagePool struct { pool *sync.Pool } // 消息池单例 var msgPool = &amp;amp;messagePool{ // 如果消息池里没有消息，则新建一个Count值为0的Message实例  pool: &amp;amp;sync.Pool{New: func() interface{} { return &amp;amp;Message{Count: 0} }}, } // 访问消息池单例的唯一方法 func Instance() *messagePool { return msgPool } // 往消息池里添加消息 func (m *messagePool) AddMsg(msg *Message) { m.pool.Put(msg) } // 从消息池里获取消息 func (m *messagePool) GetMsg() *Message { return m.</description>
     </item>
     
     <item>

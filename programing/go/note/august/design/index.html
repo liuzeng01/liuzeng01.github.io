@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/august/design/">
+
+    <title>
+        
+        Go语言设计模式 | iNote
+        
+    </title>
+
+    
+    <link href="https://liuzeng01.github.iocss/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://liuzeng01.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                iNote
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01" target="_blank">
+                                  More from us
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io" target="_blank">
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/liuzeng01/liuzeng01.github.io/archive/master.zip" target="_blank">
+                                  <button class='btn btn-success mt-n1'>Download</button>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/shell/shellexample/"><h6>Shell 范例</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/shell/shellexample/basic/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellexample/basic/" class="nav-link p-0">
+                    Shell 范例 1 
+                </a>
+        </li>
+        </ul>
+    </li>
+        <li data-nav-id="/linux/shell/shellcase/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/shellcase/" class="nav-link p-0">
+                    Shell Case
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/script/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/script/" class="nav-link p-0">
+                    Script命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/supervisor/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/supervisor/" class="nav-link p-0">
+                    Supervisor
+                </a>
+        </li>
+        <li data-nav-id="/linux/shell/vi/" class="nav-item my-1">
+                
+                 <a href="/linux/shell/vi/" class="nav-link p-0">
+                    Vim快捷键
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/redis/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
+    </li>
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
+                    Harbor 部署
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
+                    Aliyun Registry
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
+                    vue &#43; docker
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/docker/dockerfile/"><h6>dockerfile构建镜像</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/docker/dockerfile/command/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/command/" class="nav-link p-0">
+                    dockerfile基础命令
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/godockerfile/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/godockerfile/" class="nav-link p-0">
+                    分阶段构建减小go镜像体积
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/practice/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/practice/" class="nav-link p-0">
+                    Go项目分阶段构建实践
+                </a>
+        </li>
+        <li data-nav-id="/linux/docker/dockerfile/tips/" class="nav-item my-1">
+                
+                 <a href="/linux/docker/dockerfile/tips/" class="nav-link p-0">
+                    dockerfile使用注意事项
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kernel/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
+    </li>
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/tips/"><h6>K8S使用技巧</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/tips/kubectl/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubectl/" class="nav-link p-0">
+                    kubectl命令用法
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/tips/kubeapi/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/tips/kubeapi/" class="nav-link p-0">
+                    kubectl 使用技巧
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
+    </li>
+    <li data-nav-id="/linux/kubernetes/deploy/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/deploy/"><h6>K8S环境配置记录</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/deploy/golang/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/golang/" class="nav-link p-0">
+                    Golang of linux 
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/k8sbuild/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/k8sbuild/" class="nav-link p-0">
+                    Kubernetes搭建
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/natip/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/natip/" class="nav-link p-0">
+                    NAT网关配置虚拟机静态IP
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/glusterfs/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/glusterfs/" class="nav-link p-0">
+                    GlusterFS
+                </a>
+        </li>
+        <li data-nav-id="/linux/kubernetes/deploy/gitlab/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/deploy/gitlab/" class="nav-link p-0">
+                    Gitlab&#43;kubernetes
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/essay/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/august/https/" class="nav-item my-1">
+                
+                 <a href="/essay/august/https/" class="nav-link p-0">
+                    HTTPS
+                </a>
+        </li>
+        <li data-nav-id="/essay/august/mysql/" class="nav-item my-1">
+                
+                 <a href="/essay/august/mysql/" class="nav-link p-0">
+                    MySQL 30个基本问题
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/essay/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/essay/july/"><h6>July</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/essay/july/hugo/" class="nav-item my-1">
+                
+                 <a href="/essay/july/hugo/" class="nav-link p-0">
+                    hugo语法
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/net/" class="nav-item my-1">
+                
+                 <a href="/essay/july/net/" class="nav-link p-0">
+                    网络相关
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/gin/" class="nav-item my-1">
+                
+                 <a href="/essay/july/gin/" class="nav-link p-0">
+                    Gin
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/golang/" class="nav-item my-1">
+                
+                 <a href="/essay/july/golang/" class="nav-link p-0">
+                    Golang面试题
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/powershell/" class="nav-item my-1">
+                
+                 <a href="/essay/july/powershell/" class="nav-link p-0">
+                    Powershell
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/essay/july/ssh/" class="nav-link p-0">
+                    SSH免密登陆
+                </a>
+        </li>
+        <li data-nav-id="/essay/july/toml/" class="nav-item my-1">
+                
+                 <a href="/essay/july/toml/" class="nav-link p-0">
+                    toml
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
+                
+                 <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
+                    动态规划
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/sre/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/sre/"><h6>SRE</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-item my-1">
+                
+                 <a href="/booknote/sre/sre%E4%BB%8B%E7%BB%8D/" class="nav-link p-0">
+                    SRE介绍
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/booknote/designpattern/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/booknote/designpattern/"><h6>Design Pattern</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/github.com/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/github.com/"><h6>Go语言第三方库</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/github.com/spf13/viper/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/viper/" class="nav-link p-0">
+                    viper
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/x-mod/routine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/x-mod/routine/" class="nav-link p-0">
+                    routine
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/spf13/cobra/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/spf13/cobra/" class="nav-link p-0">
+                    cobra
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/gohugoio/hugo/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/gohugoio/hugo/" class="nav-link p-0">
+                    hugo
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/xujiajun/nutsdb/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/xujiajun/nutsdb/" class="nav-link p-0">
+                    nutsdb
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/github.com/rivo/tview/" class="nav-item my-1">
+                
+                 <a href="/programing/go/github.com/rivo/tview/" class="nav-link p-0">
+                    tview
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/note/july/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/july/"><h6>July Note</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/july/json/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/json/" class="nav-link p-0">
+                    Json 
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sort/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sort/" class="nav-link p-0">
+                    Sort
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ssh/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ssh/" class="nav-link p-0">
+                    SSH
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="nav-link p-0">
+                    文件操作
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/context/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/context/" class="nav-link p-0">
+                    Context
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/grpc/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/grpc/" class="nav-link p-0">
+                    gRPC
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tag/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tag/" class="nav-link p-0">
+                    Tag
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/tran/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/tran/" class="nav-link p-0">
+                    tran
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/scanner/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/scanner/" class="nav-link p-0">
+                    循环读取输入
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/golang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="nav-link p-0">
+                    Go数据结构
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/sqlnodefine/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/sqlnodefine/" class="nav-link p-0">
+                    Go语言查询不定字段
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/ip/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/ip/" class="nav-link p-0">
+                    IP
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/july/mod/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/july/mod/" class="nav-link p-0">
+                    mod
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/note/august/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/note/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/go/note/august/got/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/got/" class="nav-link p-0">
+                    Got下载工具
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/august/qrcode/" class="nav-item my-1">
+                
+                 <a href="/programing/go/note/august/qrcode/" class="nav-link p-0">
+                    二维码生成
+                </a>
+        </li>
+        <li data-nav-id="/programing/go/note/august/design/" class="nav-item my-1 active">
+                
+                 <a href="/programing/go/note/august/design/" class="nav-link p-0">
+                    Go语言设计模式
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/go/gocookbook/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/"><h6>Cook Book</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/go/gocookbook/string/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/go/gocookbook/string/"><h6>String of Go</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/sql/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/sql/"><h6>SQL</h6></a>
+    </li>
+    <li data-nav-id="/programing/java/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/java/"><h6>Java</h6></a>
+    </li>
+    <li data-nav-id="/programing/c/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/c/"><h6>C/C&#43;&#43;</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/c/makefile/" class="nav-item my-1">
+                
+                 <a href="/programing/c/makefile/" class="nav-link p-0">
+                    Makefile
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/python/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
+    </li>
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/programing/javascript/august/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/programing/javascript/august/"><h6>August</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/programing/javascript/august/nodejs/" class="nav-item my-1">
+                
+                 <a href="/programing/javascript/august/nodejs/" class="nav-link p-0">
+                    Node JS
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/programing/flutter/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/programing/flutter/"><h6>Flutter</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
+    </li>
+    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
+                    Core net structrue
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
+                    PCRF Application 
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
+                    PCRF Backend Process
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
+                    Basic Gx Case
+                </a>
+        </li>
+        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
+                
+                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
+                    RX流程调测
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-创建型模式">1. 创建型模式</a>
+      <ul>
+        <li><a href="#单例模式">单例模式</a></li>
+        <li><a href="#建造者模式">建造者模式</a></li>
+        <li><a href="#工厂方法模式">工厂方法模式</a></li>
+        <li><a href="#抽象工厂模式">抽象工厂模式</a></li>
+        <li><a href="#原型模式">原型模式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Go语言设计模式</h1>
+
+<hr>
+<p><strong>设计模式（Design Pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可重用代码、让代码更容易被他人理解并且保证代码可靠性。</strong></p>
+<h2 id="1-创建型模式">1. 创建型模式</h2>
+<h3 id="单例模式">单例模式</h3>
+<p>单例模式算是23中设计模式里最简单的一个了，它主要用于保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
+<p>在程序设计中，有一些对象通常我们只需要一个共享的实例，比如线程池、全局缓存、对象池等，这种场景下就适合使用单例模式。</p>
+<p>但是，并非所有全局唯一的场景都适合使用单例模式。比如，考虑需要统计一个API调用的情况，有两个指标，成功调用次数和失败调用次数。这两个指标都是全局唯一的，所以有人可能会将其建模成两个单例SuccessApiMetric和FailApiMetric。按照这个思路，随着指标数量的增多，你会发现代码里类的定义会越来越多，也越来越臃肿。这也是单例模式最常见的误用场景，更好的方法是将两个指标设计成一个对象ApiMetric下的两个实例ApiMetic success和ApiMetic fail。
+如何判断一个对象是否应该被建模成单例？</p>
+<p>通常，被建模成单例的对象都有“中心点”的含义，比如线程池就是管理所有线程的中心。所以，在判断一个对象是否适合单例模式时，先思考下，这个对象是一个中心点吗？</p>
+<p>在对某个对象实现单例模式时，有两个点必须要注意：（1）限制调用者直接实例化该对象；（2）为该对象的单例提供一个全局唯一的访问方法。</p>
+<p>我们可以利用Go语言package的访问规则来实现，将单例结构体设计成首字母小写，就能限定其访问范围只在当前package下，模拟了C++/Java中的私有构造函数；再在当前package下实现一个首字母大写的访问函数，就相当于static方法的作用了。</p>
+<p>在实际开发中，我们经常会遇到需要频繁创建和销毁的对象。频繁的创建和销毁一则消耗CPU，二则内存的利用率也不高，通常我们都会使用对象池技术来进行优化。考虑我们需要实现一个消息对象池，因为是全局的中心点，管理所有的Message实例，所以将其实现成单例，实现代码如下</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">msgpool</span>
+<span style="color:#f92672">...</span>
+<span style="color:#75715e">// 消息池
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">type</span> <span style="color:#75af00">messagePool</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">pool</span> <span style="color:#f92672">*</span><span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">Pool</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">// 消息池单例
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">msgPool</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">messagePool</span><span style="color:#111">{</span>
+    <span style="color:#75715e">// 如果消息池里没有消息，则新建一个Count值为0的Message实例
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">pool</span><span style="color:#111">:</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">Pool</span><span style="color:#111">{</span><span style="color:#75af00">New</span><span style="color:#111">:</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">Message</span><span style="color:#111">{</span><span style="color:#75af00">Count</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">}</span> <span style="color:#111">}},</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">// 访问消息池单例的唯一方法
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">Instance</span><span style="color:#111">()</span> <span style="color:#f92672">*</span><span style="color:#75af00">messagePool</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">msgPool</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">// 往消息池里添加消息
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">m</span> <span style="color:#f92672">*</span><span style="color:#75af00">messagePool</span><span style="color:#111">)</span> <span style="color:#75af00">AddMsg</span><span style="color:#111">(</span><span style="color:#75af00">msg</span> <span style="color:#f92672">*</span><span style="color:#75af00">Message</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">m</span><span style="color:#111">.</span><span style="color:#75af00">pool</span><span style="color:#111">.</span><span style="color:#75af00">Put</span><span style="color:#111">(</span><span style="color:#75af00">msg</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+<span style="color:#75715e">// 从消息池里获取消息
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">m</span> <span style="color:#f92672">*</span><span style="color:#75af00">messagePool</span><span style="color:#111">)</span> <span style="color:#75af00">GetMsg</span><span style="color:#111">()</span> <span style="color:#f92672">*</span><span style="color:#75af00">Message</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">m</span><span style="color:#111">.</span><span style="color:#75af00">pool</span><span style="color:#111">.</span><span style="color:#75af00">Get</span><span style="color:#111">().(</span><span style="color:#f92672">*</span><span style="color:#75af00">Message</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+<span style="color:#f92672">...</span>
+
+</code></pre></div><p>以上的单例模式就是典型的“饿汉模式”，实例在系统加载的时候就已经完成了初始化。对应地，还有一种“懒汉模式”，只有等到对象被使用的时候，才会去初始化它，从而一定程度上节省了内存。众所周知，“懒汉模式”会带来线程安全问题，可以通过普通加锁，或者更高效的双重检验锁来优化。对于“懒汉模式”，Go语言有一个更优雅的实现方式，那就是利用sync.Once，它有一个Do方法，其入参是一个方法，Go语言会保证仅仅只调用一次该方法。</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 单例模式的“懒汉模式”实现
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#75af00">msgpool</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">messagePool</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">pool</span> <span style="color:#f92672">*</span><span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">Pool</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">once</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">Once</span><span style="color:#111">{}</span>
+<span style="color:#75715e">// 消息池单例，在首次调用时初始化
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">var</span> <span style="color:#75af00">msgPool</span> <span style="color:#f92672">*</span><span style="color:#75af00">messagePool</span>
+<span style="color:#75715e">// 全局唯一获取消息池pool到方法
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">Instance</span><span style="color:#111">()</span> <span style="color:#f92672">*</span><span style="color:#75af00">messagePool</span> <span style="color:#111">{</span>
+    <span style="color:#75715e">// 在匿名函数中实现初始化逻辑，Go语言保证只会调用一次
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">once</span><span style="color:#111">.</span><span style="color:#75af00">Do</span><span style="color:#111">(</span><span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">msgPool</span> <span style="color:#111">=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">messagePool</span><span style="color:#111">{</span>
+            <span style="color:#75715e">// 如果消息池里没有消息，则新建一个Count值为0的Message实例
+</span><span style="color:#75715e"></span>            <span style="color:#75af00">pool</span><span style="color:#111">:</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">Pool</span><span style="color:#111">{</span><span style="color:#75af00">New</span><span style="color:#111">:</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#00a8c8">interface</span><span style="color:#111">{}</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">Message</span><span style="color:#111">{</span><span style="color:#75af00">Count</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">}</span> <span style="color:#111">}},</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">})</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">msgPool</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><h3 id="建造者模式">建造者模式</h3>
+<p>在程序设计中，我们会经常遇到一些复杂的对象，其中有很多成员属性，甚至嵌套着多个复杂的对象。
+对于Go语言来说，最常见的表现就是多层的嵌套实例化：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Message</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Header</span>
+	<span style="color:#75af00">Body</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Header</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">IPAddr</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">Length</span> <span style="color:#00a8c8">int</span>
+	<span style="color:#75af00">Tags</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Tags</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Num</span> <span style="color:#00a8c8">int</span>
+	<span style="color:#75af00">TimeStamp</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Body</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Content</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">TTL</span> <span style="color:#00a8c8">int64</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>对象创建方法有两个明显的缺点：（1）对对象使用者不友好，使用者在创建对象时需要知道的细节太多；（2）代码可读性很差。
+针对这种对象成员较多，创建对象逻辑较为繁琐的场景，就适合使用建造者模式来进行优化。
+建造者模式的作用有如下几个：
+1、封装复杂对象的创建过程，使对象使用者不感知复杂的创建逻辑。
+2、可以一步步按照顺序对成员进行赋值，或者创建嵌套对象，并最终完成目标对象的创建。
+3、对多个对象复用同样的对象创建逻辑。</p>
+<p>实现代码</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">builder</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">msg</span> <span style="color:#f92672">*</span><span style="color:#75af00">Message</span>
+<span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">NewBuilder</span><span style="color:#111">()</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+		<span style="color:#75af00">msg</span><span style="color:#111">:</span>  <span style="color:#f92672">&amp;</span><span style="color:#75af00">Message</span><span style="color:#111">{</span>
+			<span style="color:#75af00">Header</span><span style="color:#111">:</span> <span style="color:#75af00">Header</span><span style="color:#111">{},</span>
+			<span style="color:#75af00">Body</span><span style="color:#111">:</span>   <span style="color:#75af00">Body</span><span style="color:#111">{},</span>
+		<span style="color:#111">},</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span><span style="color:#75af00">WithIpaddr</span><span style="color:#111">(</span><span style="color:#75af00">str</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">IPAddr</span> <span style="color:#111">=</span> <span style="color:#75af00">str</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span><span style="color:#75af00">WithLength</span><span style="color:#111">(</span><span style="color:#75af00">len</span> <span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">Length</span> <span style="color:#111">=</span> <span style="color:#75af00">len</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span><span style="color:#75af00">WithNum</span><span style="color:#111">(</span><span style="color:#75af00">num</span>  <span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">Num</span> <span style="color:#111">=</span> <span style="color:#75af00">num</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span><span style="color:#75af00">WithTimeStamp</span><span style="color:#111">(</span><span style="color:#75af00">now</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Time</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">TimeStamp</span> <span style="color:#111">=</span> <span style="color:#75af00">now</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span><span style="color:#75af00">WithContent</span><span style="color:#111">(</span><span style="color:#75af00">str</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">Content</span> <span style="color:#111">=</span> <span style="color:#75af00">str</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span><span style="color:#75af00">WithTTL</span><span style="color:#111">(</span><span style="color:#75af00">ttl</span> <span style="color:#00a8c8">int64</span><span style="color:#111">)</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">{</span>
+	<span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">TTL</span> <span style="color:#111">=</span> <span style="color:#75af00">ttl</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">b</span> <span style="color:#f92672">*</span><span style="color:#75af00">builder</span><span style="color:#111">)</span> <span style="color:#75af00">Build</span><span style="color:#111">()</span> <span style="color:#f92672">*</span><span style="color:#75af00">Message</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">b</span><span style="color:#111">.</span><span style="color:#75af00">msg</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// 将创建对象，赋予结构体值的部分全部都封装起来
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>使用方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">msg</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">msgbuild</span><span style="color:#111">.</span><span style="color:#75af00">NewBuilder</span><span style="color:#111">().</span>
+		<span style="color:#75af00">WithContent</span><span style="color:#111">(</span><span style="color:#d88200">&#34;This is a builder message&#34;</span><span style="color:#111">).</span>
+		<span style="color:#75af00">WithIpaddr</span><span style="color:#111">(</span><span style="color:#d88200">&#34;127.0.0.1&#34;</span><span style="color:#111">).</span>
+		<span style="color:#75af00">WithLength</span><span style="color:#111">(</span><span style="color:#ae81ff">65536</span><span style="color:#111">).</span>
+		<span style="color:#75af00">WithTimeStamp</span><span style="color:#111">(</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">()).</span>
+		<span style="color:#75af00">WithNum</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">).</span>
+		<span style="color:#75af00">WithTTL</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">).</span>
+		<span style="color:#75af00">Build</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">msg</span><span style="color:#111">)</span>
+	<span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Second</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">().</span><span style="color:#75af00">Unix</span><span style="color:#111">()</span> <span style="color:#111">&gt;</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">TimeStamp</span><span style="color:#111">.</span><span style="color:#75af00">Unix</span><span style="color:#111">()</span><span style="color:#f92672">+</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">TTL</span><span style="color:#111">{</span>
+		<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Now the message is invalid.&#34;</span><span style="color:#111">)</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="工厂方法模式">工厂方法模式</h3>
+<p>工厂方法模式跟上一节讨论的建造者模式类似，都是将对象创建的逻辑封装起来，为使用者提供一个简单易用的对象创建接口。两者在应用场景上稍有区别，建造者模式更常用于需要传递多个参数来进行实例化的场景。
+使用工厂方法来创建对象主要有两个好处：
+1、代码可读性更好。相比于使用C++/Java中的构造函数，或者Go中的{}来创建对象，工厂方法因为可以通过函数名来表达代码含义，从而具备更好的可读性。比如，使用工厂方法productA := CreateProductA()创建一个ProductA对象，比直接使用productA := ProductA{}的可读性要好。
+2、与使用者代码解耦。很多情况下，对象的创建往往是一个容易变化的点，通过工厂方法来封装对象的创建过程，可以在创建逻辑变更时，避免霰弹式修改。
+工厂方法模式也有两种实现方式：（1）提供一个工厂对象，通过调用工厂对象的工厂方法来创建产品对象；（2）将工厂方法集成到产品对象中（C++/Java中对象的static方法，Go中同一package下的函数）</p>
+<p>首先是第一种的模式，可以利用这种模式来创建一系列实现了共同接口的对象。
+实现方法
+首先是结构体定义，接口，以及接口实现</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">internal</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">ERRCODE</span> <span style="color:#00a8c8">int</span>
+<span style="color:#00a8c8">const</span> <span style="color:#111">(</span>
+	<span style="color:#75af00">OutTime</span> <span style="color:#75af00">ERRCODE</span> <span style="color:#111">=</span> <span style="color:#00a8c8">iota</span>
+	<span style="color:#75af00">InvaildContent</span>
+	<span style="color:#75af00">NullReturn</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">ERROR</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">GetContent</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">GetErrCode</span><span style="color:#111">()</span> <span style="color:#75af00">ERRCODE</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">OutOfTimeError</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{</span>
+	<span style="color:#75af00">content</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">errcode</span> <span style="color:#75af00">ERRCODE</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">InvalidContentError</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">content</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">errcode</span> <span style="color:#75af00">ERRCODE</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">NullReturnError</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">content</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">errcode</span> <span style="color:#75af00">ERRCODE</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">e</span> <span style="color:#f92672">*</span><span style="color:#75af00">OutOfTimeError</span><span style="color:#111">)</span><span style="color:#75af00">GetContent</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">content</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">e</span> <span style="color:#f92672">*</span><span style="color:#75af00">OutOfTimeError</span><span style="color:#111">)</span><span style="color:#75af00">GetErrCode</span><span style="color:#111">()</span> <span style="color:#75af00">ERRCODE</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">errcode</span><span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">e</span> <span style="color:#f92672">*</span><span style="color:#75af00">InvalidContentError</span><span style="color:#111">)</span><span style="color:#75af00">GetContent</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">content</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">e</span> <span style="color:#f92672">*</span><span style="color:#75af00">InvalidContentError</span><span style="color:#111">)</span><span style="color:#75af00">GetErrCode</span><span style="color:#111">()</span> <span style="color:#75af00">ERRCODE</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">errcode</span><span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">e</span> <span style="color:#f92672">*</span><span style="color:#75af00">NullReturnError</span><span style="color:#111">)</span><span style="color:#75af00">GetContent</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">content</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">e</span> <span style="color:#f92672">*</span><span style="color:#75af00">NullReturnError</span><span style="color:#111">)</span><span style="color:#75af00">GetErrCode</span><span style="color:#111">()</span> <span style="color:#75af00">ERRCODE</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">e</span><span style="color:#111">.</span><span style="color:#75af00">errcode</span><span style="color:#111">}</span>
+</code></pre></div><p>接下来是工厂创建的方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">internal</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Factory</span> <span style="color:#00a8c8">struct</span><span style="color:#111">{}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">f</span> <span style="color:#f92672">*</span><span style="color:#75af00">Factory</span><span style="color:#111">)</span> <span style="color:#75af00">Create</span><span style="color:#111">(</span><span style="color:#75af00">errcode</span> <span style="color:#75af00">ERRCODE</span><span style="color:#111">)</span> <span style="color:#75af00">ERROR</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">if</span> <span style="color:#75af00">errcode</span> <span style="color:#f92672">==</span> <span style="color:#75af00">OutTime</span><span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">OutOfTimeError</span><span style="color:#111">{</span>
+			<span style="color:#75af00">content</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;This is a out of time error&#34;</span><span style="color:#111">,</span>
+			<span style="color:#75af00">errcode</span><span style="color:#111">:</span> <span style="color:#75af00">OutTime</span><span style="color:#111">,</span>
+		<span style="color:#111">}</span>
+	<span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#75af00">errcode</span> <span style="color:#f92672">==</span> <span style="color:#75af00">InvaildContent</span><span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">InvalidContentError</span><span style="color:#111">{</span>
+			<span style="color:#75af00">content</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;The content is invalid &#34;</span><span style="color:#111">,</span>
+			<span style="color:#75af00">errcode</span><span style="color:#111">:</span> <span style="color:#75af00">InvaildContent</span><span style="color:#111">,</span>
+		<span style="color:#111">}</span>
+	<span style="color:#111">}</span><span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">NullReturnError</span><span style="color:#111">{</span>
+			<span style="color:#75af00">content</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;The Content is null&#34;</span><span style="color:#111">,</span>
+			<span style="color:#75af00">errcode</span><span style="color:#111">:</span> <span style="color:#75af00">NullReturn</span><span style="color:#111">,</span>
+		<span style="color:#111">}</span>
+
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>使用方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">f</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">Factory</span><span style="color:#111">{}</span>
+	<span style="color:#75af00">errs</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">Create</span><span style="color:#111">(</span><span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">InvaildContent</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">errs</span><span style="color:#111">.</span><span style="color:#75af00">GetContent</span><span style="color:#111">())</span>
+	<span style="color:#75af00">errs</span> <span style="color:#111">=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">Create</span><span style="color:#111">(</span><span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">OutTime</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">errs</span><span style="color:#111">.</span><span style="color:#75af00">GetContent</span><span style="color:#111">())</span>
+	<span style="color:#75af00">errs</span> <span style="color:#111">=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">Create</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">errs</span><span style="color:#111">.</span><span style="color:#75af00">GetContent</span><span style="color:#111">())</span>
+<span style="color:#111">}</span>
+
+</code></pre></div><p>第二种的实现方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//简单的在上面的基础上创建下
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">NewOutOfTimeError</span><span style="color:#111">()</span> <span style="color:#75af00">ERROR</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">OutOfTimeError</span><span style="color:#111">{</span>
+		<span style="color:#75af00">content</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;This is a out of time error&#34;</span><span style="color:#111">,</span>
+		<span style="color:#75af00">errcode</span><span style="color:#111">:</span> <span style="color:#75af00">OutTime</span><span style="color:#111">,</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">NewInvaildContentError</span><span style="color:#111">()</span> <span style="color:#75af00">ERROR</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">InvalidContentError</span><span style="color:#111">{</span>
+		<span style="color:#75af00">content</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;The content is invalid &#34;</span><span style="color:#111">,</span>
+		<span style="color:#75af00">errcode</span><span style="color:#111">:</span> <span style="color:#75af00">InvaildContent</span><span style="color:#111">,</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">NewNullContentError</span><span style="color:#111">()</span> <span style="color:#75af00">ERROR</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">NullReturnError</span><span style="color:#111">{</span>
+		<span style="color:#75af00">content</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;The Content is null&#34;</span><span style="color:#111">,</span>
+		<span style="color:#75af00">errcode</span><span style="color:#111">:</span> <span style="color:#75af00">NullReturn</span><span style="color:#111">,</span>
+	<span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>使用方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">errs</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">NewInvaildContentError</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">errs</span><span style="color:#111">.</span><span style="color:#75af00">GetContent</span><span style="color:#111">())</span>
+	<span style="color:#75af00">errs</span> <span style="color:#111">=</span> <span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">NewOutOfTimeError</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">errs</span><span style="color:#111">.</span><span style="color:#75af00">GetContent</span><span style="color:#111">())</span>
+	<span style="color:#75af00">errs</span> <span style="color:#111">=</span> <span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">NewNullContentError</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">errs</span><span style="color:#111">.</span><span style="color:#75af00">GetContent</span><span style="color:#111">())</span>
+
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="抽象工厂模式">抽象工厂模式</h3>
+<p>抽象工厂模式（英语：Abstract factory pattern）是一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。在正常使用中，客户端程序需要创建抽象工厂的具体实现，然后使用抽象工厂作为接口来创建这一主题的具体对象。客户端程序不需要知道（或关心）它从这些内部的工厂方法中获得对象的具体类型，因为客户端程序仅使用这些对象的通用接口。抽象工厂模式将一组对象的实现细节与他们的一般使用分离开来。</p>
+<p>工厂模式用来创建一组相关或者相互依赖的对象，与工厂方法模式的区别就在于，工厂方法模式针对的是一个产品等级结构；而抽象工厂模式则是针对的多个产品等级结构， 我们可以将一种产品等级想象为一个产品族，所谓的产品族，是指位于不同产品等级结构中功能相关联的产品组成的家族。</p>
+<p>注意理解这个多个等级的概念</p>
+<p>在工厂方法模式中，我们通过一个工厂对象来创建一个产品族，具体创建哪个产品，则通过swtich-case的方式去判断。这也意味着该产品组上，每新增一类产品对象，都必须修改原来工厂对象的代码；而且随着产品的不断增多，工厂对象的职责也越来越重，违反了单一职责原则。
+抽象工厂模式通过给工厂类新增一个抽象层解决了该问题，如上图所示，FactoryA和FactoryB都实现·抽象工厂接口，分别用于创建ProductA和ProductB。如果后续新增了ProductC，只需新增一个FactoryC即可，无需修改原有的代码；因为每个工厂只负责创建一个产品，因此也遵循了单一职责原则。</p>
+<p>实现方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">internal</span>
+
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Store</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">GetPublishBook</span><span style="color:#111">()</span> <span style="color:#75af00">Product</span>
+	<span style="color:#75af00">GetCDProduct</span><span style="color:#111">()</span> <span style="color:#75af00">Product</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Product</span> <span style="color:#00a8c8">interface</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Information</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Book</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Name</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Book</span><span style="color:#111">)</span> <span style="color:#75af00">Information</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Name</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">CD</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Maintainer</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">CD</span><span style="color:#111">)</span><span style="color:#75af00">Information</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span>
+	<span style="color:#00a8c8">return</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Maintainer</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>定义个store叫BookStore</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">BookStore</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">s</span> <span style="color:#f92672">*</span><span style="color:#75af00">BookStore</span><span style="color:#111">)</span> <span style="color:#75af00">GetPublishBook</span><span style="color:#111">()</span> <span style="color:#75af00">Product</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">Book</span><span style="color:#111">{</span><span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;BookStore&#39;s Book&#34;</span><span style="color:#111">}}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">s</span> <span style="color:#f92672">*</span><span style="color:#75af00">BookStore</span><span style="color:#111">)</span> <span style="color:#75af00">GetCDProduct</span><span style="color:#111">()</span> <span style="color:#75af00">Product</span> <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">CD</span><span style="color:#111">{</span><span style="color:#75af00">Maintainer</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;BookStore&#39;s Owner&#34;</span><span style="color:#111">}}</span>
+</code></pre></div><p>使用工厂方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">f</span> <span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">Store</span>
+	<span style="color:#75af00">f</span> <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">BookStore</span><span style="color:#111">)</span>
+	<span style="color:#75af00">book</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">GetPublishBook</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">book</span><span style="color:#111">.</span><span style="color:#75af00">Information</span><span style="color:#111">())</span>
+	<span style="color:#75af00">CD</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">GetCDProduct</span><span style="color:#111">()</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">CD</span><span style="color:#111">.</span><span style="color:#75af00">Information</span><span style="color:#111">())</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>接下来就可以动态的往里面加store而不用像工厂模式那样修改switch case了</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">type</span> <span style="color:#75af00">MyStore</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">s</span> <span style="color:#f92672">*</span><span style="color:#75af00">MyStore</span><span style="color:#111">)</span> <span style="color:#75af00">GetPublishBook</span><span style="color:#111">()</span> <span style="color:#75af00">Product</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">Book</span><span style="color:#111">{</span><span style="color:#75af00">Name</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;MyStore&#39;s Book&#34;</span><span style="color:#111">}}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">s</span> <span style="color:#f92672">*</span><span style="color:#75af00">MyStore</span><span style="color:#111">)</span> <span style="color:#75af00">GetCDProduct</span><span style="color:#111">()</span> <span style="color:#75af00">Product</span> <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">CD</span><span style="color:#111">{</span><span style="color:#75af00">Maintainer</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;MyStore&#39;s Owner&#34;</span><span style="color:#111">}}</span>
+</code></pre></div><p>使用方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">f</span> <span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">Store</span>
+	<span style="color:#75af00">f</span> <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">MyStore</span><span style="color:#111">)</span>
+	<span style="color:#75af00">book</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">GetPublishBook</span><span style="color:#111">()</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">book</span><span style="color:#111">.</span><span style="color:#75af00">Information</span><span style="color:#111">())</span>
+	<span style="color:#75af00">CD</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">f</span><span style="color:#111">.</span><span style="color:#75af00">GetCDProduct</span><span style="color:#111">()</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">CD</span><span style="color:#111">.</span><span style="color:#75af00">Information</span><span style="color:#111">())</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>或者往里面加Product都是一样的，只要这个产品实现了Information即可。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghkw23e4r3j31bs0nge82.jpg" alt="结构示例"></p>
+<h3 id="原型模式">原型模式</h3>
+<p>原型模式主要解决对象复制的问题，它的核心就是clone()方法，返回Prototype对象的复制品。在程序设计过程中，往往会遇到有一些场景需要大量相同的对象，如果不使用原型模式，那么我们可能会这样进行对象的创建：新创建一个相同对象的实例，然后遍历原始对象的所有成员变量， 并将成员变量值复制到新对象中。这种方法的缺点很明显，那就是使用者必须知道对象的实现细节，导致代码之间的耦合。另外，对象很有可能存在除了对象本身以外不可见的变量，这种情况下该方法就行不通了。</p>
+<p>对于这种情况，更好的方法就是使用原型模式，将复制逻辑委托给对象本身，这样，上述两个问题也都迎刃而解了。</p>
+<hr>
+
+
+
+<a href="../" class="btn btn-info">
+    Back
+</a>
+
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/note/august/qrcode/" title="二维码生成"><i class="fas fa-chevron-left p-1"></i>二维码生成</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/gocookbook/" title="Cook Book">Cook Book<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://liuzeng01.github.iolib/jquery.min.js"></script> 
+<script src="https://liuzeng01.github.iolib/popper.min.js"></script> 
+
+<script src="https://liuzeng01.github.iojs/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/liuzeng01.github.io";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

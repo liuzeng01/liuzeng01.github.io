@@ -34,5 +34,23 @@
  这个简单，CA权威机构本来也没多少个，所以，浏览器内部都内置了各大CA机构的公钥信息。 简单总结一下： 如果证书被篡改，浏览器就提示不可信，终止通信，如果验证通过，说明公钥没问题，一定没被篡改。  公钥没被篡改，那浏览器生成的对称加密用的密钥用公钥加密发送给服务端，也只有服务端的私钥能解开，所以保证了 对称密钥不可能被截获，对称密钥没被截获，那双方的通信就一定是安全的。</description>
     </item>
     
+    <item>
+      <title>MySQL 30个基本问题</title>
+      <link>https://liuzeng01.github.io/essay/august/mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/august/mysql/</guid>
+      <description>1. 关系型数据库 关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码。
+简单来说，关系模式就是二维表格模型。
+2. 关系型数据库优势 关系型数据库的优势：
+ 易于理解 关系型二维表的结构非常贴近现实世界，二维表格，容易理解。 支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。 支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。  3. SQL 与 MySQL 结构化查询语言 (Structured Query Language) 简称SQL，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。 MySQL在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，广泛地应用在 Internet 上的中小型网站中。
+4. MySQL 与 MariaDB MySQL 最初由瑞典 MySQL AB 公司开发，MySQL 的创始人是乌尔夫·米卡埃尔·维德纽斯，常用昵称蒙提（Monty）。
+在被甲骨文公司收购后，现在属于甲骨文公司（Oracle） 旗下产品。Oracle 大幅调涨MySQL商业版的售价，因此导致自由软件社区们对于Oracle是否还会持续支持MySQL社区版有所隐忧。
+MySQL 的创始人就是之前那个叫 Monty 的大佬以 MySQL为基础成立分支计划 MariaDB
+两者基本完全相同
+5. MySQL 数据类型 MySQL 数据类型非常丰富，常用类型简单介绍如下：
+ 整数类型：BIT、BOOL、TINY INT、SMALL INT、MEDIUM INT、 INT、 BIG INT浮点数类型：FLOAT、DOUBLE、DECIMAL字符串类型：CHAR、VARCHAR、TINY TEXT、TEXT、MEDIUM TEXT、LONGTEXT、TINY BLOB、BLOB、MEDIUM BLOB、LONG BLOB日期类型：Date、DateTime、TimeStamp、Time、Year其他数据类型：BINARY、VARBINARY、ENUM、SET.</description>
+    </item>
+    
   </channel>
 </rss>
