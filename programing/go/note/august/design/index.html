@@ -1064,7 +1064,85 @@
 <h3 id="原型模式">原型模式</h3>
 <p>原型模式主要解决对象复制的问题，它的核心就是clone()方法，返回Prototype对象的复制品。在程序设计过程中，往往会遇到有一些场景需要大量相同的对象，如果不使用原型模式，那么我们可能会这样进行对象的创建：新创建一个相同对象的实例，然后遍历原始对象的所有成员变量， 并将成员变量值复制到新对象中。这种方法的缺点很明显，那就是使用者必须知道对象的实现细节，导致代码之间的耦合。另外，对象很有可能存在除了对象本身以外不可见的变量，这种情况下该方法就行不通了。</p>
 <p>对于这种情况，更好的方法就是使用原型模式，将复制逻辑委托给对象本身，这样，上述两个问题也都迎刃而解了。</p>
-<hr>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">internal</span>
+
+<span style="color:#f92672">import</span> <span style="color:#d88200">&#34;strconv&#34;</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">Person</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">PersonInfo</span>
+	<span style="color:#75af00">WorkExperience</span>
+
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">PersonInfo</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">name</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">age</span> <span style="color:#00a8c8">int</span>
+	<span style="color:#75af00">address</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">education</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">WorkExperience</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">Company</span> <span style="color:#00a8c8">string</span>
+	<span style="color:#75af00">Duration</span> <span style="color:#00a8c8">string</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">SetName</span><span style="color:#111">(</span><span style="color:#75af00">name</span> <span style="color:#00a8c8">string</span><span style="color:#111">){</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">name</span> <span style="color:#111">=</span> <span style="color:#75af00">name</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">SetAge</span><span style="color:#111">(</span><span style="color:#75af00">age</span> <span style="color:#00a8c8">int</span> <span style="color:#111">){</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">age</span> <span style="color:#111">=</span> <span style="color:#75af00">age</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">SetAddress</span><span style="color:#111">(</span><span style="color:#75af00">address</span> <span style="color:#00a8c8">string</span> <span style="color:#111">){</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">address</span> <span style="color:#111">=</span><span style="color:#75af00">address</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">SetEducation</span><span style="color:#111">(</span><span style="color:#75af00">education</span> <span style="color:#00a8c8">string</span><span style="color:#111">){</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">education</span><span style="color:#111">=</span><span style="color:#75af00">education</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">SetWorkExperience</span><span style="color:#111">(</span><span style="color:#75af00">company</span> <span style="color:#111">,</span><span style="color:#75af00">duration</span> <span style="color:#00a8c8">string</span><span style="color:#111">){</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Company</span><span style="color:#111">=</span><span style="color:#75af00">company</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Duration</span><span style="color:#111">=</span><span style="color:#75af00">duration</span>
+<span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">GetPersonInfo</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;Name : &#34;</span><span style="color:#f92672">+</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">name</span> <span style="color:#f92672">+</span><span style="color:#d88200">&#34; Age :&#34;</span><span style="color:#f92672">+</span> <span style="color:#75af00">strconv</span><span style="color:#111">.</span><span style="color:#75af00">Itoa</span><span style="color:#111">(</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">age</span><span style="color:#111">)</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34; Address : &#34;</span><span style="color:#f92672">+</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">address</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34; Education :&#34;</span> <span style="color:#f92672">+</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">education</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">GetWorkExperience</span><span style="color:#111">()</span> <span style="color:#00a8c8">string</span><span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Company</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34; Duration :&#34;</span> <span style="color:#f92672">+</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Duration</span><span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">p</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span><span style="color:#111">)</span><span style="color:#75af00">Clone</span><span style="color:#111">()</span> <span style="color:#f92672">*</span><span style="color:#75af00">Person</span> <span style="color:#111">{</span>
+	<span style="color:#75af00">person</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">*</span><span style="color:#75af00">p</span>  <span style="color:#75715e">//注意这个地方，对指针取指针
+</span><span style="color:#75715e"></span>	<span style="color:#00a8c8">return</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">person</span>
+<span style="color:#111">}</span>
+
+
+
+
+</code></pre></div><p>使用方法</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+	<span style="color:#d88200">&#34;GoStudy/week18/prototype/internal&#34;</span>
+	<span style="color:#d88200">&#34;fmt&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">var</span> <span style="color:#75af00">p</span> <span style="color:#111">=</span> <span style="color:#111">new</span><span style="color:#111">(</span><span style="color:#75af00">internal</span><span style="color:#111">.</span><span style="color:#75af00">Person</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">SetAddress</span><span style="color:#111">(</span><span style="color:#d88200">&#34;南京&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">SetName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;liuzeng&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">SetAge</span><span style="color:#111">(</span><span style="color:#ae81ff">23</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">SetEducation</span><span style="color:#111">(</span><span style="color:#d88200">&#34;NUAA&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">SetWorkExperience</span><span style="color:#111">(</span><span style="color:#d88200">&#34;浩鲸科技&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;2019/6-2020/8&#34;</span><span style="color:#111">)</span>
+
+	<span style="color:#75af00">p2</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">Clone</span><span style="color:#111">()</span>
+	<span style="color:#75af00">p2</span><span style="color:#111">.</span><span style="color:#75af00">SetName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;陈伟&#34;</span><span style="color:#111">)</span>
+	<span style="color:#75af00">p2</span><span style="color:#111">.</span><span style="color:#75af00">SetAge</span><span style="color:#111">(</span><span style="color:#ae81ff">24</span><span style="color:#111">)</span>
+
+	<span style="color:#75af00">p3</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">p2</span><span style="color:#111">.</span><span style="color:#75af00">Clone</span><span style="color:#111">()</span>
+	<span style="color:#75af00">p3</span><span style="color:#111">.</span><span style="color:#75af00">SetName</span><span style="color:#111">(</span><span style="color:#d88200">&#34;胡振飞&#34;</span><span style="color:#111">)</span>
+
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">p</span><span style="color:#111">.</span><span style="color:#75af00">GetPersonInfo</span><span style="color:#111">())</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">p2</span><span style="color:#111">.</span><span style="color:#75af00">GetPersonInfo</span><span style="color:#111">())</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">p3</span><span style="color:#111">.</span><span style="color:#75af00">GetPersonInfo</span><span style="color:#111">())</span>
+	<span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">p3</span><span style="color:#111">.</span><span style="color:#75af00">GetWorkExperience</span><span style="color:#111">())</span>
+
+<span style="color:#111">}</span>
+</code></pre></div><p>结果</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75af00">Name</span> <span style="color:#111">:</span> <span style="color:#75af00">liuzeng</span> <span style="color:#75af00">Age</span> <span style="color:#111">:</span><span style="color:#ae81ff">23</span> <span style="color:#75af00">Address</span> <span style="color:#111">:</span> <span style="color:#75af00">南京</span> <span style="color:#75af00">Education</span> <span style="color:#111">:</span><span style="color:#75af00">NUAA</span>
+<span style="color:#75af00">Name</span> <span style="color:#111">:</span> <span style="color:#75af00">陈伟</span> <span style="color:#75af00">Age</span> <span style="color:#111">:</span><span style="color:#ae81ff">24</span> <span style="color:#75af00">Address</span> <span style="color:#111">:</span> <span style="color:#75af00">南京</span> <span style="color:#75af00">Education</span> <span style="color:#111">:</span><span style="color:#75af00">NUAA</span>
+<span style="color:#75af00">Name</span> <span style="color:#111">:</span> <span style="color:#75af00">胡振飞</span> <span style="color:#75af00">Age</span> <span style="color:#111">:</span><span style="color:#ae81ff">24</span> <span style="color:#75af00">Address</span> <span style="color:#111">:</span> <span style="color:#75af00">南京</span> <span style="color:#75af00">Education</span> <span style="color:#111">:</span><span style="color:#75af00">NUAA</span>
+<span style="color:#75af00">浩鲸科技</span> <span style="color:#75af00">Duration</span> <span style="color:#111">:</span><span style="color:#ae81ff">2019</span><span style="color:#f92672">/</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2020</span><span style="color:#f92672">/</span><span style="color:#ae81ff">8</span>
+
+</code></pre></div><hr>
 
 
 
