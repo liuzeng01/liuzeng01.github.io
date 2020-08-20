@@ -632,6 +632,17 @@ package msgpool ... // 消息池 type messagePool struct { pool *sync.Pool } // 
     </item>
     
     <item>
+      <title>grep/sed/awk</title>
+      <link>https://liuzeng01.github.io/linux/shell/shellexample/grep/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/shell/shellexample/grep/</guid>
+      <description>1. grep 常用命令
+-v 取反 -i 忽略大小写 -c 符合条件的行数 -n 输出的同时打印行号 ^* 以*开头 *$ 以*结尾 ^$ 空行 使用示例
+# 查找在目标文件中含有scsi的行 grep scsi test.txt # 查看目录下所有含有scsi的文件 grep scsi -rl grep scsi -rl * grep scsi * # 反查 grep -v scsci grep -v scsci test.txt # 统计行数 grep -c kworker test.txt # 忽略大小写统计行数 grep -ic kworker test.txt # 输出行号 grep -n kworker test.txt # 输出所有以 ] 结尾的行 grep &amp;#34;]$&amp;#34; test.txt # 输出所有以 root 开始的行 grep &amp;#34;^root&amp;#34; -c test.</description>
+    </item>
+    
+    <item>
       <title>IP</title>
       <link>https://liuzeng01.github.io/programing/go/note/july/ip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

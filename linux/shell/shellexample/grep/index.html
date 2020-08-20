@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/booknote/algorithm/dynamic/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/shell/shellexample/grep/">
 
     <title>
         
-        动态规划 | iNote
+        grep/sed/awk | iNote
         
     </title>
 
@@ -70,17 +70,17 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/shell/shellexample/"><h6>Shell 范例</h6></a>
@@ -91,7 +91,7 @@
                     Shell 范例 1 
                 </a>
         </li>
-        <li data-nav-id="/linux/shell/shellexample/grep/" class="nav-item my-1">
+        <li data-nav-id="/linux/shell/shellexample/grep/" class="nav-item my-1 active">
                 
                  <a href="/linux/shell/shellexample/grep/" class="nav-link p-0">
                     grep/sed/awk
@@ -353,17 +353,17 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/booknote/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/booknote/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/booknote/"><h6>BookNote</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/booknote/algorithm/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/booknote/algorithm/"><h6>algorithm</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1 active">
+        <li data-nav-id="/booknote/algorithm/dynamic/" class="nav-item my-1">
                 
                  <a href="/booknote/algorithm/dynamic/" class="nav-link p-0">
                     动态规划
@@ -726,12 +726,9 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1实例说明什么是动态规划">1.实例说明什么是动态规划</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#2-实际问题解决例子路径最小值问题">2. 实际问题解决例子：路径最小值问题</a></li>
+    <li><a href="#1-grep">1. grep</a></li>
+    <li><a href="#2-sed">2. sed</a></li>
+    <li><a href="#awk">awk</a></li>
   </ul>
 </nav>
 </div>
@@ -739,57 +736,73 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>动态规划</h1>
+<h1>grep/sed/awk</h1>
 
 <hr>
-<h2 id="1实例说明什么是动态规划">1.实例说明什么是动态规划</h2>
-<p><strong>计算1到10的和</strong>
-计算过程：1+2+3+4+5+6+7+8+9+10，得55</p>
-<p>上述如果口算，最快也要前后凑整10的相加，就是需要计算所有的值，才能得出结果。这时候，如果再加一个11，你肯定会脱口而出，得66，为什么直接能说出来呢，因为你记住了前面所求的得和，这一次得计算不需要关心前面这个55怎么来得，<strong>只关注这一步</strong>即可。</p>
-<p>引出定义：（有点难理解）在现实生活中，有一类活动的过程，由于它的特殊性，<strong>可将过程分成若干个互相联系的阶段，在它的每一阶段都需要作出决策，从而使整个过程达到最好的活动效果</strong>。因此各个阶段决策的选取不能任意确定，它依赖于当前面临的状态，又影响以后的发展。当各个阶段决策确定后，就组成一个决策序列，因而也就确定了整个过程的一条活动路线．这种把一个问题看作是一个前后关联具有链状结构的多阶段过程就称为<strong>多阶段决策过程</strong>，这种问题称为多阶段决策问题。在多阶段决策问题中，各个阶段采取的决策，一般来说是与时间有关的，决策依赖于当前状态，又随即引起状态的转移，<strong>一个决策序列就是在变化的状态中产生出来的，故有“动态”的含义</strong>，称这种解决多阶段决策最优化的过程为<strong>动态规划方法</strong>。</p>
-<h4 id="优化理解动态规划是把一个大问题拆解成一堆小问题这个本身没什么问题但是核心不是能拆分而是取决于该问题拆分出的小问题是否能被特定的规律重复利用">优化理解：动态规划是把一个大问题拆解成一堆小问题，这个本身没什么问题，但是核心不是能拆分，而是取决于该问题拆分出的小问题是否能被特定的规律重复利用。</h4>
+<h2 id="1-grep">1. grep</h2>
+<p>常用命令</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">            -v        取反
+            -i        忽略大小写
+            -c        符合条件的行数
+            -n        输出的同时打印行号
+            ^*        以*开头         
+            *$         以*结尾 
+            ^$         空行 
+</code></pre></div><p>使用示例</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查找在目标文件中含有scsi的行</span>
+  grep scsi test.txt
+<span style="color:#75715e"># 查看目录下所有含有scsi的文件</span>
+  grep scsi -rl
+  grep scsi -rl *
+  grep scsi  *
+<span style="color:#75715e"># 反查</span>
+  grep -v scsci
+  grep -v scsci test.txt
+<span style="color:#75715e"># 统计行数</span>
+  grep -c kworker test.txt
+<span style="color:#75715e"># 忽略大小写统计行数</span>
+  grep -ic kworker test.txt
+<span style="color:#75715e"># 输出行号</span>
+  grep -n kworker test.txt
+<span style="color:#75715e"># 输出所有以 ] 结尾的行</span>
+  grep <span style="color:#d88200">&#34;]</span>$<span style="color:#d88200">&#34;</span> test.txt
+<span style="color:#75715e"># 输出所有以 root 开始的行</span>
+  grep <span style="color:#d88200">&#34;^root&#34;</span>  -c test.txt
+</code></pre></div><h2 id="2-sed">2. sed</h2>
+<p>sed是一种流编辑器，是一款处理文本比较优秀的工具，可以结合正则表达式一起使用。
+<img src="https://mmbiz.qpic.cn/mmbiz_png/9ptCsLpiaicQPiawsibgvQFfCpzfbWPEq1eat8icafhx5pgRdFYtHGq5wHQdA9giasoiavvEx3Sx1qSYcLJkVxqtZzcYA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+            d  删除选择的行    
+            s   查找    
+            y  替换
+            i   当前行前面插入一行
+            a  当前行后面插入一行
+            p  打印行       
+            q  退出     
+
+ 替换符:
+
+            数字 ：替换第几处    
+            g :  全局替换    
+            <span style="color:#8045ff">\1</span>:  子串匹配标记，前面搜索可以用元字符集<span style="color:#8045ff">\(</span>..<span style="color:#8045ff">\)</span>
+            <span style="color:#111">&amp;</span>:  保留搜索刀的字符用来替换其他字符
+</code></pre></div><p>使用方式：</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 替换</span> 
+sed <span style="color:#d88200">&#39;s/kworker/work/&#39;</span> test.txt
+<span style="color:#75715e"># 注意不是在原文件中替换，而是输出到屏幕</span>
+
+<span style="color:#75715e"># 删除第二行到第四行，同时显示行数</span>
+sed <span style="color:#d88200">&#39;=;2,4d&#39;</span> test.txt
+
+<span style="color:#75715e"># 替换第n行</span>
+sed <span style="color:#d88200">&#39;2c\hello kitty&#39;</span> word
+<span style="color:#75715e"># 替换第2行到结尾为hello Kitty （但不是每行）</span>
+
+sed <span style="color:#d88200">&#39;2,$c\hello kitty&#39;</span> word
+
+
+</code></pre></div><h2 id="awk">awk</h2>
 <hr>
-<h2 id="2-实际问题解决例子路径最小值问题">2. 实际问题解决例子：路径最小值问题</h2>
-<p><strong>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点</strong></p>
-<p>例如，给定三角形：
-[
-[2],
-[3,4],
-[6,5,7],
-[4,1,8,3]
-]
-自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。</p>
-<p>过程解析：自上而下计算时，只要每一步都记录路径上最小的值即可，因为路径上只能访问相邻的两个点，所以比较两个相邻点和本点数据的和，保存较小的一个值即可。不断向下类推，最后一组数据中最小的值就是i最小路径。</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a8c8">func</span> <span style="color:#75af00">minimumTotal</span><span style="color:#111">(</span><span style="color:#75af00">triangle</span> <span style="color:#111">[][]</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#00a8c8">int</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span><span style="color:#111">,</span> <span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">triangle</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">if</span> <span style="color:#75af00">i</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span><span style="color:#75715e">//第一层没有上一级，不用计算
-</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">continue</span>
-        <span style="color:#111">}</span>
-        <span style="color:#00a8c8">for</span> <span style="color:#75af00">idx</span><span style="color:#111">,</span> <span style="color:#75af00">val</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">v</span> <span style="color:#111">{</span>
-            <span style="color:#00a8c8">if</span> <span style="color:#75af00">idx</span> <span style="color:#f92672">==</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">v</span><span style="color:#111">)</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#111">{</span><span style="color:#75715e">//最后一个值,他的上一级比他小一位数,所以相邻点只有一个直接赋值
-</span><span style="color:#75715e"></span>                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span>
-                <span style="color:#00a8c8">continue</span>
-            <span style="color:#111">}</span>
-            <span style="color:#00a8c8">if</span> <span style="color:#75af00">idx</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#111">{</span><span style="color:#75715e">//第一位，相邻点也只有一个，直接赋值
-</span><span style="color:#75715e"></span>                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span>
-                <span style="color:#00a8c8">continue</span>
-            <span style="color:#111">}</span>
-            <span style="color:#00a8c8">if</span> <span style="color:#75af00">val</span><span style="color:#f92672">+</span><span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">&gt;</span> <span style="color:#75af00">val</span><span style="color:#f92672">+</span><span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#111">{</span><span style="color:#75715e">// 比较相邻点较小值，并记录
-</span><span style="color:#75715e"></span>                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span><span style="color:#75715e">// 不需要原来的值,直接赋值保存即可,因为只关心路径结果即可
-</span><span style="color:#75715e"></span>            <span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
-                <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span> <span style="color:#111">=</span> <span style="color:#75af00">val</span> <span style="color:#f92672">+</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#75af00">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#75af00">idx</span><span style="color:#111">]</span>
-            <span style="color:#111">}</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-    <span style="color:#75af00">min</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">triangle</span><span style="color:#111">)</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span>
-    <span style="color:#00a8c8">for</span> <span style="color:#75af00">_</span><span style="color:#111">,</span> <span style="color:#75af00">v</span> <span style="color:#f92672">:=</span> <span style="color:#00a8c8">range</span> <span style="color:#75af00">triangle</span><span style="color:#111">[</span><span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#75af00">triangle</span><span style="color:#111">)</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#111">{</span><span style="color:#75715e">//最后一组中最小值就是路径最小
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">if</span> <span style="color:#75af00">v</span> <span style="color:#111">&lt;</span> <span style="color:#75af00">min</span> <span style="color:#111">{</span>
-            <span style="color:#75af00">min</span> <span style="color:#111">=</span> <span style="color:#75af00">v</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#75af00">min</span>
-<span style="color:#111">}</span>
-</code></pre></div><hr>
 
 
 
@@ -808,8 +821,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/booknote/algorithm/" title="algorithm"><i class="fas fa-chevron-left p-1"></i>algorithm</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/booknote/sre/" title="SRE">SRE<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/shell/shellexample/basic/" title="Shell 范例 1 "><i class="fas fa-chevron-left p-1"></i>Shell 范例 1 </a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/shell/shellcase/" title="Shell Case">Shell Case<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
