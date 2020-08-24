@@ -238,6 +238,13 @@
 	"content": " Shell \r\rRedis \r\rDocker \r\rKernel \r\rOpenStack \r\rKubernetes \r\r\r Back\r\r"
 },
 {
+	"uri": "https://liuzeng01.github.io/linux/kubernetes/service/nsq/",
+	"title": "NSQ部署实践",
+	"tags": [],
+	"description": "Kubernetes",
+	"content": " 1. nsq基本概念 2. 传统方式部署 # 第一步先下载二进制包 ## https://nsq.io/deployment/installing.html cd /usr/local/nsq-1.1.0.linux-amd64.go1.10.3/bin/ nohup ./nsqlookupd \u0026gt; /dev/null 2\u0026gt;\u0026amp;1 \u0026amp; nohup ./nsqd --lookupd-tcp-address=127.0.0.1:4160 \u0026gt; /dev/null 2\u0026gt;\u0026amp;1 \u0026amp; nohup ./nsqadmin --lookupd-http-address=127.0.0.1:4161 \u0026gt; /dev/null 2\u0026gt;\u0026amp;1 \u0026amp; 3. docker部署 docker部署 docker pull nsqio/nsq docker run -d --name lookupd -p 4160:4160 -p 4161:4161 nsqio/nsq /nsqlookupd docker inspect -f \u0026#39;{{ .NetworkSettings.IPAddress }}\u0026#39; lookupd # 获取nsqlookup的地址172.17.0.1 docker run -d --name nsqd -p 4150:4150 -p 4151:4151 nsqio/nsq /nsqd --broadcast-address=172.17.0.1 --lookupd-tcp-address=172.17.0.2:4160 docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin --lookupd-http-address=172.17.0.2:4161 ## 使用起来不是特别方便 docker-compose部署 version: \u0026#39;2\u0026#39; services: nsqlookupd: image: nsqio/nsq command: /nsqlookupd networks: - nsq-network hostname: nsqlookupd ports: - \u0026#34;4161:4161\u0026#34; - \u0026#34;4160:4160\u0026#34; nsqd: image: nsqio/nsq command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 # command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 -broadcast-address=虚拟机地址 depends_on: - nsqlookupd hostname: nsqd networks: - nsq-network ports: - \u0026#34;4151:4151\u0026#34; - \u0026#34;4150:4150\u0026#34; nsqadmin: image: nsqio/nsq command: /nsqadmin --lookupd-http-address=nsqlookupd:4161 depends_on: - nsqlookupd hostname: nsqadmin ports: - \u0026#34;4171:4171\u0026#34; networks: - nsq-network networks: nsq-network: 4. kubernetes中部署 为了方便利用Kubernetes部署的优点，我拆分了下docker-compose的服务，将nsq容器分开，服务分别绑定，做了下nsq的kubernetes的迁移。\nnsqlookup\napiVersion: apps/v1 kind: Deployment metadata: labels: app: nsqlookup name: nsqlookup spec: replicas: 1 selector: matchLabels: app: nsqlookup template: metadata: labels: app: nsqlookup spec: containers: - image: nsqio/nsq name: nsqlookup ports: - containerPort: 4160 - containerPort: 4161 command: [\u0026#34;/nsqlookupd\u0026#34;] --- apiVersion: v1 kind: Service metadata: name: nsqlookup-service labels: app: nsqlookup spec: ports: - port: 4161 name: port1 targetPort: 4161 - port: 4160 name: port0 targetPort: 4160 selector: app: nsqlookup nsqd\napiVersion: apps/v1 kind: Deployment metadata: labels: app: nsqd name: nsqd spec: replicas: 1 selector: matchLabels: app: nsqd template: metadata: labels: app: nsqd spec: containers: - image: nsqio/nsq name: nsqd ports: - containerPort: 4151 - containerPort: 4150 command: [\u0026#34;/nsqd\u0026#34;] args: [\u0026#34;--lookupd-tcp-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4160\u0026#34;] --- apiVersion: v1 kind: Service metadata: name: nsqd-service labels: app: nsqd spec: ports: - port: 4151 targetPort: 4151 name: port1 - port: 4150 name: port0 targetPort: 4150 selector: app: nsqd nsqadmin\napiVersion: apps/v1 kind: Deployment metadata: labels: app: nsqadmin name: nsqadmin spec: replicas: 1 selector: matchLabels: app: nsqadmin template: metadata: labels: app: nsqadmin spec: containers: - image: nsqio/nsq name: nsqadmin ports: - containerPort: 4171 command: [\u0026#34;/nsqadmin\u0026#34;] args: [\u0026#34;--lookupd-http-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4161\u0026#34;] --- apiVersion: v1 kind: Service metadata: name: nsqadmin-service labels: app: nsqadmin spec: type: NodePort ports: - port: 4171 nodePort: 30050 selector: app: nsqadmin 注意先创建nsqlookup的service成功后才能创建其他两个deployment 然后就可以对nsqd,nsadmin做扩容了\n Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/zsmart/pcrf/structrue/application/",
 	"title": "PCRF Application ",
 	"tags": [],
@@ -662,7 +669,7 @@
 	"title": "K8S概念",
 	"tags": [],
 	"description": "Kubernetes",
-	"content": " \r Back\r\r"
+	"content": " NSQ部署实践 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/linux/kubernetes/deploy/",

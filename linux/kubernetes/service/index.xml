@@ -10,5 +10,14 @@
 	<atom:link href="https://liuzeng01.github.io/linux/kubernetes/service/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>NSQ部署实践</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/service/nsq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/service/nsq/</guid>
+      <description>1. nsq基本概念 2. 传统方式部署 # 第一步先下载二进制包 ## https://nsq.io/deployment/installing.html cd /usr/local/nsq-1.1.0.linux-amd64.go1.10.3/bin/ nohup ./nsqlookupd &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp; nohup ./nsqd --lookupd-tcp-address=127.0.0.1:4160 &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp; nohup ./nsqadmin --lookupd-http-address=127.0.0.1:4161 &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp; 3. docker部署 docker部署 docker pull nsqio/nsq docker run -d --name lookupd -p 4160:4160 -p 4161:4161 nsqio/nsq /nsqlookupd docker inspect -f &amp;#39;{{ .NetworkSettings.IPAddress }}&amp;#39; lookupd # 获取nsqlookup的地址172.17.0.1 docker run -d --name nsqd -p 4150:4150 -p 4151:4151 nsqio/nsq /nsqd --broadcast-address=172.17.0.1 --lookupd-tcp-address=172.17.0.2:4160 docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin --lookupd-http-address=172.</description>
+    </item>
+    
   </channel>
 </rss>

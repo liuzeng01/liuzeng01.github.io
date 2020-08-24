@@ -227,10 +227,18 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/service/nsq/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/service/nsq/" class="nav-link p-0">
+                    NSQ部署实践
+                </a>
+        </li>
+        </ul>
     </li>
     <li data-nav-id="/linux/kubernetes/deploy/" class="nav-item my-1 haschildren
         ">
@@ -769,7 +777,7 @@
 <span style="color:#75715e"># 输出所有以 root 开始的行</span>
   grep <span style="color:#d88200">&#34;^root&#34;</span>  -c test.txt
 </code></pre></div><h2 id="2-sed">2. sed</h2>
-<p>sed是一种流编辑器，是一款处理文本比较优秀的工具，可以结合正则表达式一起使用。
+<p><strong>sed是一种流编辑器，是一款处理文本比较优秀的工具，可以结合正则表达式一起使用。</strong>
 <img src="https://mmbiz.qpic.cn/mmbiz_png/9ptCsLpiaicQPiawsibgvQFfCpzfbWPEq1eat8icafhx5pgRdFYtHGq5wHQdA9giasoiavvEx3Sx1qSYcLJkVxqtZzcYA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
             d  删除选择的行    

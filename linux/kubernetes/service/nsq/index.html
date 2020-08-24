@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/linux/docker/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/service/nsq/">
 
     <title>
         
-        Docker | iNote
+        NSQ部署实践 | iNote
         
     </title>
 
@@ -130,7 +130,7 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
@@ -203,7 +203,7 @@
         
         <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
     </li>
-    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
@@ -227,12 +227,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/service/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/service/"><h6>K8S概念</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/kubernetes/service/nsq/" class="nav-item my-1">
+        <li data-nav-id="/linux/kubernetes/service/nsq/" class="nav-item my-1 active">
                 
                  <a href="/linux/kubernetes/service/nsq/" class="nav-link p-0">
                     NSQ部署实践
@@ -732,34 +732,231 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-nsq基本概念">1. nsq基本概念</a></li>
+    <li><a href="#2-传统方式部署">2. 传统方式部署</a></li>
+    <li><a href="#3-docker部署">3. docker部署</a>
+      <ul>
+        <li><a href="#docker部署">docker部署</a></li>
+        <li><a href="#docker-compose部署">docker-compose部署</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-kubernetes中部署">4. kubernetes中部署</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Docker</h1>
+<h1>NSQ部署实践</h1>
 
 <hr>
+<h2 id="1-nsq基本概念">1. nsq基本概念</h2>
+<h2 id="2-传统方式部署">2. 传统方式部署</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 第一步先下载二进制包</span>
+
+<span style="color:#75715e">## https://nsq.io/deployment/installing.html</span>
+
+<span style="color:#111">cd</span> /usr/local/nsq-1.1.0.linux-amd64.go1.10.3/bin/
+nohup ./nsqlookupd &gt; /dev/null 2&gt;<span style="color:#111">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#111">&amp;</span>
+nohup ./nsqd --lookupd-tcp-address<span style="color:#f92672">=</span>127.0.0.1:4160 &gt; /dev/null 2&gt;<span style="color:#111">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#111">&amp;</span>
+nohup ./nsqadmin --lookupd-http-address<span style="color:#f92672">=</span>127.0.0.1:4161 &gt; /dev/null 2&gt;<span style="color:#111">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#111">&amp;</span>
+
+
+</code></pre></div><h2 id="3-docker部署">3. docker部署</h2>
+<h3 id="docker部署">docker部署</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+docker pull nsqio/nsq
+docker run -d --name lookupd -p 4160:4160 -p 4161:4161 nsqio/nsq /nsqlookupd
+docker inspect -f <span style="color:#d88200">&#39;{{ .NetworkSettings.IPAddress }}&#39;</span> lookupd <span style="color:#75715e"># 获取nsqlookup的地址172.17.0.1</span>
+docker run -d --name nsqd -p 4150:4150 -p 4151:4151 nsqio/nsq /nsqd --broadcast-address<span style="color:#f92672">=</span>172.17.0.1 --lookupd-tcp-address<span style="color:#f92672">=</span>172.17.0.2:4160
+docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin  --lookupd-http-address<span style="color:#f92672">=</span>172.17.0.2:4161
+
+<span style="color:#75715e">## 使用起来不是特别方便</span>
+
+
+</code></pre></div><h3 id="docker-compose部署">docker-compose部署</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">version</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;2&#39;</span>
+
+<span style="color:#00a8c8">services</span><span style="color:#111">:</span>
+
+  <span style="color:#00a8c8">nsqlookupd</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+    <span style="color:#00a8c8">command</span><span style="color:#111">:</span> /nsqlookupd
+    <span style="color:#00a8c8">networks</span><span style="color:#111">:</span>
+      - nsq-network
+    <span style="color:#00a8c8">hostname</span><span style="color:#111">:</span> nsqlookupd
+    <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+      - <span style="color:#d88200">&#34;4161:4161&#34;</span>
+      - <span style="color:#d88200">&#34;4160:4160&#34;</span>
+
+  <span style="color:#00a8c8">nsqd</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+    <span style="color:#00a8c8">command</span><span style="color:#111">:</span> /nsqd --lookupd-tcp-address=nsqlookupd<span style="color:#111">:</span><span style="color:#ae81ff">4160</span>
+    <span style="color:#75715e"># command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 -broadcast-address=虚拟机地址</span>
+    <span style="color:#00a8c8">depends_on</span><span style="color:#111">:</span>
+      - nsqlookupd
+    <span style="color:#00a8c8">hostname</span><span style="color:#111">:</span> nsqd
+    <span style="color:#00a8c8">networks</span><span style="color:#111">:</span>
+      - nsq-network
+    <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+      - <span style="color:#d88200">&#34;4151:4151&#34;</span>
+      - <span style="color:#d88200">&#34;4150:4150&#34;</span>
+
+  <span style="color:#00a8c8">nsqadmin</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+    <span style="color:#00a8c8">command</span><span style="color:#111">:</span> /nsqadmin --lookupd-http-address=nsqlookupd<span style="color:#111">:</span><span style="color:#ae81ff">4161</span>
+    <span style="color:#00a8c8">depends_on</span><span style="color:#111">:</span>
+      - nsqlookupd
+    <span style="color:#00a8c8">hostname</span><span style="color:#111">:</span> nsqadmin
+    <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+      - <span style="color:#d88200">&#34;4171:4171&#34;</span>
+    <span style="color:#00a8c8">networks</span><span style="color:#111">:</span>
+      - nsq-network
+
+<span style="color:#00a8c8">networks</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">nsq-network</span><span style="color:#111">:</span>
 
 
 
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/linux/docker/cmd/"> docker命令 </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/linux/docker/dockerfile/"> dockerfile构建镜像 </a>
-			</li>
-		
+</code></pre></div><h2 id="4-kubernetes中部署">4. kubernetes中部署</h2>
+<p>为了方便利用Kubernetes部署的优点，我拆分了下docker-compose的服务，将nsq容器分开，服务分别绑定，做了下nsq的kubernetes的迁移。</p>
+<p>nsqlookup</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqlookup
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqlookup
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">matchLabels</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqlookup
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqlookup
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqlookup
+        <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4160</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4161</span>
+        <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/nsqlookupd&#34;</span><span style="color:#111">]</span>
+---
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Service
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqlookup-service
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqlookup
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+  - <span style="color:#00a8c8">port</span><span style="color:#111">:</span> <span style="color:#ae81ff">4161</span>
+    <span style="color:#00a8c8">name</span><span style="color:#111">:</span> port1
+    <span style="color:#00a8c8">targetPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4161</span>
+  - <span style="color:#00a8c8">port</span><span style="color:#111">:</span> <span style="color:#ae81ff">4160</span>
+    <span style="color:#00a8c8">name</span><span style="color:#111">:</span> port0
+    <span style="color:#00a8c8">targetPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4160</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqlookup
 
-	
-</ul>
+
+
+</code></pre></div><p>nsqd</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqd
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">matchLabels</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqd
+        <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4151</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4150</span>
+        <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/nsqd&#34;</span><span style="color:#111">]</span>
+        <span style="color:#00a8c8">args</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;--lookupd-tcp-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4160&#34;</span><span style="color:#111">]</span>
+---
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Service
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqd-service
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+  - <span style="color:#00a8c8">port</span><span style="color:#111">:</span> <span style="color:#ae81ff">4151</span>
+    <span style="color:#00a8c8">targetPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4151</span>
+    <span style="color:#00a8c8">name</span><span style="color:#111">:</span> port1
+  - <span style="color:#00a8c8">port</span><span style="color:#111">:</span> <span style="color:#ae81ff">4150</span>
+    <span style="color:#00a8c8">name</span><span style="color:#111">:</span> port0
+    <span style="color:#00a8c8">targetPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4150</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+
+
+</code></pre></div><p>nsqadmin</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqadmin
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqadmin
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">matchLabels</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqadmin
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqadmin
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqadmin
+        <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4171</span>
+        <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/nsqadmin&#34;</span><span style="color:#111">]</span>
+        <span style="color:#00a8c8">args</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;--lookupd-http-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4161&#34;</span><span style="color:#111">]</span>
+---
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Service
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqadmin-service
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqadmin
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">type</span><span style="color:#111">:</span> NodePort
+  <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+  - <span style="color:#00a8c8">port</span><span style="color:#111">:</span> <span style="color:#ae81ff">4171</span>
+    <span style="color:#00a8c8">nodePort</span><span style="color:#111">:</span> <span style="color:#ae81ff">30050</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqadmin
 
 
 
 
+</code></pre></div><p>注意先创建nsqlookup的service成功后才能创建其他两个deployment
+然后就可以对nsqd,nsadmin做扩容了</p>
 <hr>
 
 
@@ -779,8 +976,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/redis/" title="Redis"><i class="fas fa-chevron-left p-1"></i>Redis</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/docker/cmd/" title="docker命令">docker命令<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/service/" title="K8S概念"><i class="fas fa-chevron-left p-1"></i>K8S概念</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kubernetes/deploy/" title="K8S环境配置记录">K8S环境配置记录<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
