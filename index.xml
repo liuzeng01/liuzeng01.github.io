@@ -199,6 +199,16 @@ func (f *File) Read(b []byte) (n int, err error) func main() { // 只读方式�
     </item>
     
     <item>
+      <title>Kubernetes集群中Pod获取自身信息</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/template/podservice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/template/podservice/</guid>
+      <description>env: - name: MY_NODE_NAME valueFrom: fieldRef: fieldPath: spec.nodeName - name: MY_POD_NAME valueFrom: fieldRef: fieldPath: metadata.name - name: MY_POD_NAMESPACE valueFrom: fieldRef: fieldPath: metadata.namespace - name: MY_POD_IP valueFrom: fieldRef: fieldPath: status.podIP - name: MY_POD_SERVICE_ACCOUNT valueFrom: fieldRef: fieldPath: spec.serviceAccountName 用在获取pod相关信息的情景下，比如部署NSQD服务的时候，给NSQD注册一个广播地址，需要用到这个
+piVersion: apps/v1 kind: Deployment metadata: labels: app: nsqd name: nsqd spec: replicas: 1 selector: matchLabels: app: nsqd template: metadata: labels: app: nsqd spec: containers: - image: nsqio/nsq name: nsqd env: - name: HOSTIP valueFrom: fieldRef: fieldPath: status.</description>
+    </item>
+    
+    <item>
       <title>NSQ部署实践</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/service/nsq/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

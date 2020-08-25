@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/go/note/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/template/podservice/">
 
     <title>
         
-        Note | iNote
+        Kubernetes集群中Pod获取自身信息 | iNote
         
     </title>
 
@@ -70,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -203,7 +203,7 @@
         
         <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
     </li>
-    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
@@ -277,12 +277,12 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/kubernetes/template/podservice/" class="nav-item my-1">
+        <li data-nav-id="/linux/kubernetes/template/podservice/" class="nav-item my-1 active">
                 
                  <a href="/linux/kubernetes/template/podservice/" class="nav-link p-0">
                     Kubernetes集群中Pod获取自身信息
@@ -407,12 +407,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/programing/go/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/go/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/"><h6>Go</h6></a>
@@ -460,7 +460,7 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/go/note/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/programing/go/note/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/go/note/"><h6>Note</h6></a>
@@ -746,29 +746,64 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Note</h1>
+<h1>Kubernetes集群中Pod获取自身信息</h1>
 
 <hr>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
+        <span style="color:#00a8c8">env</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> MY_NODE_NAME
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> spec.nodeName
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> MY_POD_NAME
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> metadata.name
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> MY_POD_NAMESPACE
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> metadata.namespace
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> MY_POD_IP
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> status.podIP
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> MY_POD_SERVICE_ACCOUNT
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> spec.serviceAccountName
+</code></pre></div><p>用在获取pod相关信息的情景下，比如部署NSQD服务的时候，给NSQD注册一个广播地址，需要用到这个</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">piVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqd
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">matchLabels</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqd
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqd
+        <span style="color:#00a8c8">env</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> HOSTIP
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> status.podIP
+        <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4151</span>
+        - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4150</span>
+        <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/nsqd&#34;</span><span style="color:#111">]</span>
+        <span style="color:#00a8c8">args</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;--lookupd-tcp-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4160&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;--broadcast-address=$(HOSTIP)&#34;</span><span style="color:#111">]</span>
 
 
-
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/programing/go/note/july/"> July Note </a>
-			</li>
-		
-			<li class="h2 py-1">
-				<a href="/programing/go/note/august/"> August </a>
-			</li>
-		
-
-	
-</ul>
-
-
-
-
-<hr>
+</code></pre></div><hr>
 
 
 
@@ -787,8 +822,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/go/github.com/rivo/tview/" title="tview"><i class="fas fa-chevron-left p-1"></i>tview</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/go/note/july/" title="July Note">July Note<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/template/" title="K8S资源模板"><i class="fas fa-chevron-left p-1"></i>K8S资源模板</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/" title="Essay">Essay<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

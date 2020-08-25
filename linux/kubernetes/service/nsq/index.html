@@ -277,10 +277,18 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1
+    <li data-nav-id="/linux/kubernetes/template/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/template/"><h6>K8S资源模板</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/linux/kubernetes/template/podservice/" class="nav-item my-1">
+                
+                 <a href="/linux/kubernetes/template/podservice/" class="nav-link p-0">
+                    Kubernetes集群中Pod获取自身信息
+                </a>
+        </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -869,7 +877,7 @@ docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin  --lookupd-http-a
 
 </code></pre></div><p>nsqd</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
-<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">piVersion</span><span style="color:#111">:</span> apps/v1
 <span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
 <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
   <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
@@ -888,11 +896,17 @@ docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin  --lookupd-http-a
       <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
       - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nsqio/nsq
         <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqd
+        <span style="color:#00a8c8">env</span><span style="color:#111">:</span>
+        - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> HOSTIP
+          <span style="color:#00a8c8">valueFrom</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">fieldRef</span><span style="color:#111">:</span>
+              <span style="color:#00a8c8">fieldPath</span><span style="color:#111">:</span> status.podIP
         <span style="color:#00a8c8">ports</span><span style="color:#111">:</span>
         - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4151</span>
         - <span style="color:#00a8c8">containerPort</span><span style="color:#111">:</span> <span style="color:#ae81ff">4150</span>
         <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/nsqd&#34;</span><span style="color:#111">]</span>
-        <span style="color:#00a8c8">args</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;--lookupd-tcp-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4160&#34;</span><span style="color:#111">]</span>
+        <span style="color:#00a8c8">args</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;--lookupd-tcp-address=$(NSQLOOKUP_SERVICE_SERVICE_HOST):4160&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;--broadcast-address=$(HOSTIP)&#34;</span><span style="color:#111">]</span>
+
 ---
 <span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
 <span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Service
