@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/linux/shell/shellexample/basic/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/openstack/deploy/">
 
     <title>
         
-        Shell 范例 1  | iNote
+        OpenStack部署 | iNote
         
     </title>
 
@@ -75,17 +75,17 @@
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/shell/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/linux/shell/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/shell/"><h6>Shell</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/linux/shell/shellexample/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/shell/shellexample/"><h6>Shell 范例</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/shell/shellexample/basic/" class="nav-item my-1 active">
+        <li data-nav-id="/linux/shell/shellexample/basic/" class="nav-item my-1">
                 
                  <a href="/linux/shell/shellexample/basic/" class="nav-link p-0">
                     Shell 范例 1 
@@ -140,24 +140,6 @@
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
-                
-                 <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
-                    Harbor 部署
-                </a>
-        </li>
-        <li data-nav-id="/linux/docker/cmd/aliyunrepo/" class="nav-item my-1">
-                
-                 <a href="/linux/docker/cmd/aliyunrepo/" class="nav-link p-0">
-                    Aliyun Registry
-                </a>
-        </li>
-        <li data-nav-id="/linux/docker/cmd/npm/" class="nav-item my-1">
-                
-                 <a href="/linux/docker/cmd/npm/" class="nav-link p-0">
-                    vue &#43; docker
-                </a>
-        </li>
         </ul>
     </li>
     <li data-nav-id="/linux/docker/dockerfile/" class="nav-item my-1 haschildren
@@ -198,12 +180,12 @@
         
         <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
     </li>
-    <li data-nav-id="/linux/openstack/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/openstack/deploy/" class="nav-item my-1
+    <li data-nav-id="/linux/openstack/deploy/" class="nav-item my-1 parent active
         ">
         
         <a class="nav-link p-0" href="/linux/openstack/deploy/"><h6>OpenStack部署</h6></a>
@@ -660,78 +642,26 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents">
-  <ul>
-    <li><a href="#1-数值操作">1. 数值操作</a></li>
-    <li><a href="#2-逻辑语句">2. 逻辑语句</a>
-      <ul>
-        <li><a href="#while">while</a></li>
-        <li><a href="#heading"></a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+	<nav id="TableOfContents"></nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Shell 范例 1 </h1>
+<h1>OpenStack部署</h1>
 
 <hr>
-<h2 id="1-数值操作">1. 数值操作</h2>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 赋值，递增</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># i=1</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># let i++</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># echo $i</span>
-<span style="color:#ae81ff">2</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span>#
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># ((i++))</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># echo $i</span>
-<span style="color:#ae81ff">3</span>
-<span style="color:#75715e">## 运算</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># expr $i *  5</span>
-<span style="color:#ae81ff">15</span>
 
-<span style="color:#75715e">## 求幂</span>
-<span style="color:#f92672">[</span>root@master week1<span style="color:#f92672">]</span><span style="color:#75715e"># let $i=2**2</span>
-<span style="color:#ae81ff">4</span>
-<span style="color:#75715e">## 进制转换 obase:目标进制 ，ibase：当前进制；转换数值</span>
-<span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># echo &#34;obase=10;ibase=8;11&#34;| bc -l</span>
-<span style="color:#ae81ff">9</span>
-<span style="color:#75715e">## 产生一系列数值</span>
-<span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># seq 1 10</span>
-<span style="color:#ae81ff">1</span>
-<span style="color:#ae81ff">2</span>
-<span style="color:#ae81ff">3</span>
-<span style="color:#ae81ff">4</span>
-<span style="color:#ae81ff">5</span>
-<span style="color:#ae81ff">6</span>
-<span style="color:#ae81ff">7</span>
-<span style="color:#ae81ff">8</span>
-<span style="color:#ae81ff">9</span>
-<span style="color:#ae81ff">10</span>
-<span style="color:#f92672">[</span>root@master ~<span style="color:#f92672">]</span><span style="color:#75715e"># seq 1 2 10</span>
-<span style="color:#ae81ff">1</span>
-<span style="color:#ae81ff">3</span>
-<span style="color:#ae81ff">5</span>
-<span style="color:#ae81ff">7</span>
-<span style="color:#ae81ff">9</span>
+
+
+<ul class="docs-children list-unstyled">
+
+	
+</ul>
 
 
 
 
-</code></pre></div><h2 id="2-逻辑语句">2. 逻辑语句</h2>
-<h3 id="while">while</h3>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
-</span><span style="color:#75715e"></span>
-<span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-<span style="color:#00a8c8">while</span> <span style="color:#f92672">[</span> <span style="color:#111">$i</span> -lt <span style="color:#ae81ff">10000</span> <span style="color:#f92672">]</span> <span style="color:#75715e"># lt 小于</span>
-<span style="color:#00a8c8">do</span>
-        <span style="color:#f92672">((</span>i++<span style="color:#f92672">))</span>
-<span style="color:#00a8c8">done</span>
-<span style="color:#111">echo</span> <span style="color:#111">$i</span>
-</code></pre></div><h3 id="heading"></h3>
 <hr>
 
 
@@ -751,8 +681,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/shell/shellexample/" title="Shell 范例"><i class="fas fa-chevron-left p-1"></i>Shell 范例</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/shell/shellexample/grep/" title="grep/sed/awk">grep/sed/awk<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/openstack/" title="OpenStack"><i class="fas fa-chevron-left p-1"></i>OpenStack</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kubernetes/" title="Kubernetes">Kubernetes<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

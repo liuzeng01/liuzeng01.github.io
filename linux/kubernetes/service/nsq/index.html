@@ -198,10 +198,17 @@
         
         <a class="nav-link p-0" href="/linux/kernel/"><h6>Kernel</h6></a>
     </li>
-    <li data-nav-id="/linux/openstack/" class="nav-item my-1
+    <li data-nav-id="/linux/openstack/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/openstack/"><h6>OpenStack</h6></a>
+        <ul class="list-unstyled ml-2">
+    <li data-nav-id="/linux/openstack/deploy/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/linux/openstack/deploy/"><h6>OpenStack部署</h6></a>
+    </li>
+        </ul>
     </li>
     <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
         ">
@@ -664,6 +671,14 @@
       </ul>
     </li>
     <li><a href="#4-kubernetes中部署">4. kubernetes中部署</a></li>
+    <li><a href="#写两个服务测试下消息队列">写两个服务测试下消息队列</a>
+      <ul>
+        <li><a href="#1-producer">1. producer</a></li>
+        <li><a href="#2-consumer">2. consumer</a></li>
+        <li><a href="#3-dockerfile">3. Dockerfile</a></li>
+        <li><a href="#4-deployment-yaml">4. deployment yaml</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
@@ -884,6 +899,220 @@ docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin  --lookupd-http-a
 
 </code></pre></div><p>注意先创建nsqlookup的service成功后才能创建其他两个deployment
 然后就可以对nsqd,nsadmin做扩容了</p>
+<h2 id="写两个服务测试下消息队列">写两个服务测试下消息队列</h2>
+<h3 id="1-producer">1. producer</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+    <span style="color:#d88200">&#34;fmt&#34;</span>
+    <span style="color:#d88200">&#34;github.com/nsqio/go-nsq&#34;</span>
+    <span style="color:#d88200">&#34;io/ioutil&#34;</span>
+    <span style="color:#d88200">&#34;log&#34;</span>
+    <span style="color:#d88200">&#34;sync&#34;</span>
+    <span style="color:#d88200">&#34;time&#34;</span>
+    <span style="color:#d88200">&#34;os&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">var</span> <span style="color:#75af00">err</span> <span style="color:#00a8c8">error</span>
+
+<span style="color:#75715e">// 推送消息
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">nsqdaddr</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Getenv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;NSQD_SERVICE_SERVICE_HOST&#34;</span><span style="color:#111">)</span>
+    <span style="color:#75af00">url</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nsqdaddr</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;:4150&#34;</span>
+    <span style="color:#75af00">topicName</span> <span style="color:#f92672">:=</span> <span style="color:#d88200">&#34;test&#34;</span>
+    <span style="color:#75af00">config</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">NewConfig</span><span style="color:#111">()</span>
+
+    <span style="color:#75715e">// new
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">producer</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">NewProducer</span><span style="color:#111">(</span><span style="color:#75af00">url</span><span style="color:#111">,</span> <span style="color:#75af00">config</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;nsq.NewProducer&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">return</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;nsq.NewProducer&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;√&#34;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">defer</span> <span style="color:#75af00">producer</span><span style="color:#111">.</span><span style="color:#75af00">Stop</span><span style="color:#111">()</span>
+
+    <span style="color:#75af00">producer</span><span style="color:#111">.</span><span style="color:#75af00">SetLogger</span><span style="color:#111">(</span><span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">New</span><span style="color:#111">(</span><span style="color:#75af00">ioutil</span><span style="color:#111">.</span><span style="color:#75af00">Discard</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">LstdFlags</span><span style="color:#111">),</span> <span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">LogLevelInfo</span><span style="color:#111">)</span>
+    <span style="color:#75715e">//  ping
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">err</span> <span style="color:#111">=</span> <span style="color:#75af00">producer</span><span style="color:#111">.</span><span style="color:#75af00">Ping</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;producer.Ping&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">return</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;producer.Ping&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;√&#34;</span><span style="color:#111">)</span>
+
+    <span style="color:#75af00">msgCt</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">1000</span>
+    <span style="color:#75af00">wg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">WaitGroup</span><span style="color:#111">{}</span>
+    <span style="color:#75af00">wg</span><span style="color:#111">.</span><span style="color:#75af00">Add</span><span style="color:#111">(</span><span style="color:#75af00">msgCt</span><span style="color:#111">)</span>
+    <span style="color:#75715e">// 测试10 次
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75af00">i</span> <span style="color:#111">&lt;</span> <span style="color:#75af00">msgCt</span><span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#f92672">++</span> <span style="color:#111">{</span>
+
+        <span style="color:#75715e">// 消息内容
+</span><span style="color:#75715e"></span>        <span style="color:#75af00">msg</span> <span style="color:#f92672">:=</span>  <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Now</span><span style="color:#111">().</span><span style="color:#75af00">Format</span><span style="color:#111">(</span><span style="color:#d88200">&#34;0102150405&#34;</span><span style="color:#111">)</span>
+        <span style="color:#75af00">sendMessage</span><span style="color:#111">(</span><span style="color:#75af00">producer</span><span style="color:#111">,</span> <span style="color:#75af00">topicName</span><span style="color:#111">,</span> <span style="color:#75af00">msg</span><span style="color:#111">)</span>
+        <span style="color:#75af00">wg</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">()</span>
+
+        <span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#75af00">time</span><span style="color:#111">.</span><span style="color:#75af00">Millisecond</span><span style="color:#111">)</span>
+        <span style="color:#75715e">// time.Sleep(1 * time.Second)
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+
+    <span style="color:#75af00">wg</span><span style="color:#111">.</span><span style="color:#75af00">Wait</span><span style="color:#111">()</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;producer.Push.Status&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;ok&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// 发送消息
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">func</span> <span style="color:#75af00">sendMessage</span><span style="color:#111">(</span><span style="color:#75af00">producer</span> <span style="color:#f92672">*</span><span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">Producer</span><span style="color:#111">,</span> <span style="color:#75af00">topicName</span> <span style="color:#00a8c8">string</span><span style="color:#111">,</span> <span style="color:#75af00">msg</span> <span style="color:#00a8c8">string</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+
+    <span style="color:#75af00">err</span> <span style="color:#111">=</span> <span style="color:#75af00">producer</span><span style="color:#111">.</span><span style="color:#75af00">Publish</span><span style="color:#111">(</span><span style="color:#75af00">topicName</span><span style="color:#111">,</span> <span style="color:#111">[]</span><span style="color:#111">byte</span><span style="color:#111">(</span><span style="color:#75af00">msg</span><span style="color:#111">))</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#75af00">err</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">nil</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;producer.Publish&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">return</span>
+    <span style="color:#111">}</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;producer.Publish&#34;</span><span style="color:#111">,</span><span style="color:#75af00">msg</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;√&#34;</span><span style="color:#111">)</span>
+
+<span style="color:#111">}</span>
+
+
+
+
+</code></pre></div><h3 id="2-consumer">2. consumer</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#f92672">package</span> <span style="color:#75af00">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#111">(</span>
+    <span style="color:#d88200">&#34;fmt&#34;</span>
+    <span style="color:#d88200">&#34;github.com/nsqio/go-nsq&#34;</span>
+    <span style="color:#d88200">&#34;io/ioutil&#34;</span>
+    <span style="color:#d88200">&#34;log&#34;</span>
+    <span style="color:#d88200">&#34;os&#34;</span>
+    <span style="color:#d88200">&#34;sync&#34;</span>
+<span style="color:#111">)</span>
+
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">testNSQ</span><span style="color:#111">()</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">type</span> <span style="color:#75af00">NSQHandler</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#111">(</span><span style="color:#75af00">this</span> <span style="color:#f92672">*</span><span style="color:#75af00">NSQHandler</span><span style="color:#111">)</span> <span style="color:#75af00">HandleMessage</span><span style="color:#111">(</span><span style="color:#75af00">msg</span> <span style="color:#f92672">*</span><span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">Message</span><span style="color:#111">)</span> <span style="color:#00a8c8">error</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;receive&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">NSQDAddress</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;message:&#34;</span><span style="color:#111">,</span> <span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#75af00">msg</span><span style="color:#111">.</span><span style="color:#75af00">Body</span><span style="color:#111">))</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">nil</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">const</span> <span style="color:#111">(</span>
+    <span style="color:#75af00">TOPIC</span>   <span style="color:#111">=</span> <span style="color:#d88200">&#34;test&#34;</span>
+    <span style="color:#75af00">CHANNEL_1</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;consumer_channel_1&#34;</span>
+    <span style="color:#75af00">CHANNEL_2</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;consumer_channel_2&#34;</span>
+<span style="color:#111">)</span>
+
+<span style="color:#00a8c8">func</span> <span style="color:#75af00">testNSQ</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">URL</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">os</span><span style="color:#111">.</span><span style="color:#75af00">Getenv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;NSQD_SERVICE_SERVICE_HOST&#34;</span><span style="color:#111">)</span> <span style="color:#f92672">+</span><span style="color:#d88200">&#34;:4150&#34;</span>
+    <span style="color:#75af00">waiter</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">sync</span><span style="color:#111">.</span><span style="color:#75af00">WaitGroup</span><span style="color:#111">{}</span>
+    <span style="color:#75af00">waiter</span><span style="color:#111">.</span><span style="color:#75af00">Add</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+
+    <span style="color:#00a8c8">go</span> <span style="color:#00a8c8">func</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+        <span style="color:#00a8c8">defer</span> <span style="color:#75af00">waiter</span><span style="color:#111">.</span><span style="color:#75af00">Done</span><span style="color:#111">()</span>
+
+        <span style="color:#75af00">config</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">NewConfig</span><span style="color:#111">()</span>
+        <span style="color:#75af00">config</span><span style="color:#111">.</span><span style="color:#75af00">MaxInFlight</span> <span style="color:#111">=</span> <span style="color:#ae81ff">10</span>
+
+        <span style="color:#00a8c8">for</span> <span style="color:#75af00">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75af00">i</span> <span style="color:#111">&lt;</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#f92672">++</span> <span style="color:#111">{</span>
+            <span style="color:#75af00">consumer</span><span style="color:#111">,</span> <span style="color:#75af00">err</span> <span style="color:#f92672">:=</span> <span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">NewConsumer</span><span style="color:#111">(</span><span style="color:#75af00">TOPIC</span><span style="color:#111">,</span> <span style="color:#75af00">CHANNEL_1</span><span style="color:#111">,</span> <span style="color:#75af00">config</span><span style="color:#111">)</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#00a8c8">nil</span> <span style="color:#f92672">!=</span> <span style="color:#75af00">err</span> <span style="color:#111">{</span>
+                <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;err&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+                <span style="color:#00a8c8">return</span>
+            <span style="color:#111">}</span>
+            <span style="color:#75af00">consumer</span><span style="color:#111">.</span><span style="color:#75af00">SetLogger</span><span style="color:#111">(</span><span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">New</span><span style="color:#111">(</span><span style="color:#75af00">ioutil</span><span style="color:#111">.</span><span style="color:#75af00">Discard</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">log</span><span style="color:#111">.</span><span style="color:#75af00">LstdFlags</span><span style="color:#111">),</span> <span style="color:#75af00">nsq</span><span style="color:#111">.</span><span style="color:#75af00">LogLevelInfo</span><span style="color:#111">)</span>
+            <span style="color:#75af00">consumer</span><span style="color:#111">.</span><span style="color:#75af00">AddHandler</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#75af00">NSQHandler</span><span style="color:#111">{})</span>
+            <span style="color:#75af00">err</span> <span style="color:#111">=</span> <span style="color:#75af00">consumer</span><span style="color:#111">.</span><span style="color:#75af00">ConnectToNSQD</span><span style="color:#111">(</span><span style="color:#75af00">URL</span><span style="color:#111">)</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#00a8c8">nil</span> <span style="color:#f92672">!=</span> <span style="color:#75af00">err</span> <span style="color:#111">{</span>
+                <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;err&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">err</span><span style="color:#111">)</span>
+                <span style="color:#00a8c8">return</span>
+            <span style="color:#111">}</span>
+
+            <span style="color:#75af00">fmt</span><span style="color:#111">.</span><span style="color:#75af00">Println</span><span style="color:#111">(</span><span style="color:#75af00">CHANNEL_1</span><span style="color:#111">,</span><span style="color:#75af00">i</span><span style="color:#111">)</span>
+        <span style="color:#111">}</span>
+        <span style="color:#00a8c8">select</span> <span style="color:#111">{}</span>
+    <span style="color:#111">}()</span>
+
+
+
+
+
+</code></pre></div><h3 id="3-dockerfile">3. Dockerfile</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">FROM</span><span style="color:#d88200"> golang:alpine AS build-env</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ADD</span> . <span style="color:#111">$GOPATH</span>/src/nsq<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ENV</span> <span style="color:#111">GOPROXY</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;https://goproxy.cn,direct&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">RUN</span> <span style="color:#111">cd</span> <span style="color:#111">$GOPATH</span>/src/nsq <span style="color:#f92672">&amp;&amp;</span> go mod download<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">RUN</span> <span style="color:#111">cd</span> <span style="color:#111">$GOPATH</span>/src/nsq/consumer <span style="color:#f92672">&amp;&amp;</span> go build -o consumer <span style="color:#f92672">&amp;&amp;</span> cp consumer /<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">RUN</span> <span style="color:#111">cd</span> <span style="color:#111">$GOPATH</span>/src/nsq/producer <span style="color:#f92672">&amp;&amp;</span> go build -o producer <span style="color:#f92672">&amp;&amp;</span> cp producer /<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># final stage</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">FROM</span><span style="color:#d88200"> alpine as consumer</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">WORKDIR</span><span style="color:#d88200"> /app</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">COPY</span> --from<span style="color:#f92672">=</span>build-env producer /app<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">COPY</span> --from<span style="color:#f92672">=</span>build-env consumer /app<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ENTRYPOINT</span> ./consumer <span style="color:#f92672">&amp;&amp;</span> ./producer<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h3 id="4-deployment-yaml">4. deployment yaml</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqtest2
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqtest2
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">matchLabels</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqtest2
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqtest2
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> <span style="color:#ae81ff">192.168.24.131</span><span style="color:#111">:</span><span style="color:#ae81ff">5000</span>/public/nsqtest <span style="color:#75715e"># 个人镜像仓库地址 </span>
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqtest2
+        <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/app/producer&#34;</span><span style="color:#111">]</span>
+<span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> apps/v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Deployment
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqtest
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqtest
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">replicas</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">selector</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">matchLabels</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqtest
+  <span style="color:#00a8c8">template</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">labels</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">app</span><span style="color:#111">:</span> nsqtest
+    <span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+      - <span style="color:#00a8c8">image</span><span style="color:#111">:</span> <span style="color:#ae81ff">192.168.24.131</span><span style="color:#111">:</span><span style="color:#ae81ff">5000</span>/public/nsqtest
+        <span style="color:#00a8c8">name</span><span style="color:#111">:</span> nsqtest
+        <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;/app/consumer&#34;</span><span style="color:#111">]</span>
+
+
+
+
+</code></pre></div><p>producer容器会不停的重启，生成消息并发送到nsq队列，然后consumer容器会从消息队列里面取出来进行消费</p>
+<p>试了下 ，利用kubernetes管理 消息队列应用的好处</p>
+<ol>
+<li>消费者生产者都可以自由的伸缩，并且可以调度到不同的主机上，不影响任何业务</li>
+<li>消息队列可以自由伸缩，当消息过多的时候 ，可以增加实例，消息少的时候，可以收缩</li>
+<li>namespace隔离</li>
+</ol>
 <hr>
 
 
