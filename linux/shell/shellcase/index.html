@@ -646,93 +646,6 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/zsmart/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/"><h6>ZSmart</h6></a>
-        <ul class="list-unstyled ml-2">
-    <li data-nav-id="/zsmart/charging/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/charging/"><h6>Charging</h6></a>
-        <ul class="list-unstyled ml-2">
-    <li data-nav-id="/zsmart/charging/chargingcode/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/charging/chargingcode/"><h6>Charging Code </h6></a>
-    </li>
-    <li data-nav-id="/zsmart/charging/testcase/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/charging/testcase/"><h6>Charging Test Case</h6></a>
-    </li>
-        </ul>
-    </li>
-    <li data-nav-id="/zsmart/pcrf/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/pcrf/"><h6>PCRF</h6></a>
-        <ul class="list-unstyled ml-2">
-    <li data-nav-id="/zsmart/pcrf/corenet/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/pcrf/corenet/"><h6>Core Net</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/zsmart/pcrf/corenet/net/" class="nav-item my-1">
-                
-                 <a href="/zsmart/pcrf/corenet/net/" class="nav-link p-0">
-                    Core net structrue
-                </a>
-        </li>
-        </ul>
-    </li>
-    <li data-nav-id="/zsmart/pcrf/structrue/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/pcrf/structrue/"><h6>PCRF Structrue</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/zsmart/pcrf/structrue/application/" class="nav-item my-1">
-                
-                 <a href="/zsmart/pcrf/structrue/application/" class="nav-link p-0">
-                    PCRF Application 
-                </a>
-        </li>
-        <li data-nav-id="/zsmart/pcrf/structrue/process/" class="nav-item my-1">
-                
-                 <a href="/zsmart/pcrf/structrue/process/" class="nav-link p-0">
-                    PCRF Backend Process
-                </a>
-        </li>
-        </ul>
-    </li>
-    <li data-nav-id="/zsmart/pcrf/testcase/" class="nav-item my-1 haschildren
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/pcrf/testcase/"><h6>Test Case</h6></a>
-        <ul class="list-unstyled ml-2">
-        <li data-nav-id="/zsmart/pcrf/testcase/basic/" class="nav-item my-1">
-                
-                 <a href="/zsmart/pcrf/testcase/basic/" class="nav-link p-0">
-                    Basic Gx Case
-                </a>
-        </li>
-        <li data-nav-id="/zsmart/pcrf/testcase/rxbasic/" class="nav-item my-1">
-                
-                 <a href="/zsmart/pcrf/testcase/rxbasic/" class="nav-link p-0">
-                    RX流程调测
-                </a>
-        </li>
-        </ul>
-    </li>
-    <li data-nav-id="/zsmart/pcrf/pcrfcode/" class="nav-item my-1
-        ">
-        
-        <a class="nav-link p-0" href="/zsmart/pcrf/pcrfcode/"><h6>PCRF Code</h6></a>
-    </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
         </ul>
     </div>
 </nav>
@@ -765,6 +678,8 @@
         <li><a href="#15筛选报错日志">15.筛选报错日志</a></li>
       </ul>
     </li>
+    <li><a href="#16-获取本机ip地址">16. 获取本机IP地址</a></li>
+    <li><a href="#17">17.</a></li>
   </ul>
 </nav>
 </div>
@@ -1256,7 +1171,11 @@ systemctl list-units --type<span style="color:#f92672">=</span>service  <span st
         <span style="color:#111">echo</span> <span style="color:#111">$file</span>
         cat -n <span style="color:#111">$file</span><span style="color:#111">|</span>grep <span style="color:#111">$1</span>
 <span style="color:#00a8c8">done</span>
-</code></pre></div><hr>
+</code></pre></div><h2 id="16-获取本机ip地址">16. 获取本机IP地址</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ifconfig eth0<span style="color:#111">|</span>grep <span style="color:#d88200">&#34;inet addr&#34;</span><span style="color:#111">|</span>awk <span style="color:#d88200">&#39;{print $2}&#39;</span><span style="color:#111">|</span>awk -F: <span style="color:#d88200">&#39;{print $2}&#39;</span>
+</code></pre></div><p>这个网卡的名称可以具体情况具体定</p>
+<h2 id="17">17.</h2>
+<hr>
 
 
 

@@ -11,15 +11,6 @@
     
     
     <item>
-      <title>Basic Gx Case</title>
-      <link>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/basic/</guid>
-      <description>PCRF融合模式测试记录 1. PCRF V9 融合模式基本结构 2. PCRF对接OCS配置流程 3. PCRF侧配置流程 a 配置需要使用的静态属性 界面路径： PCRF center ---&amp;gt; PCRF Common Data ---&amp;gt; PCRF Attribute新增需要使用的各类静态属性及动态属性 b 配置Monitor Key 界面路径： PCRF center ---&amp;gt; Policy Rule ---&amp;gt; Usage Monitor 新增一个Monitor Key,并且为Monitor Key 新增一条 Reservation Rule c 配置一条QoS策略 界面路径： PCRF center ---&amp;gt; Policy Rule ---&amp;gt; QoS Rule首先先配置ARP(Allocation Retention Priority),资源抢占能力及优先级然后配置一条QoS策略，包含以下配置内容：QoS Policy name,QoS Policy Code,ARP,Upload Speed limit,Download Speed limit等 d 配置一条Policy Rule 界面路径: PCRF center ---&amp;gt; Policy Rule ---&amp;gt; Policy Rule配置Policy Rule对应的Policy Name,Policy code,Policy rule Type,QoS Rule,Monitor Key等，基本的一条PolicyRule就配置结束了涉及到更加复杂的场景,还需要继续配置其他的policy rule e 配置一个新的event 4.</description>
-    </item>
-    
-    <item>
       <title>dockerfile基础命令</title>
       <link>https://liuzeng01.github.io/linux/docker/dockerfile/command/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -218,15 +209,6 @@ piVersion: apps/v1 kind: Deployment metadata: labels: app: nsqd name: nsqd spec:
     </item>
     
     <item>
-      <title>PCRF Application </title>
-      <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/application/</guid>
-      <description>  Back</description>
-    </item>
-    
-    <item>
       <title>routine</title>
       <link>https://liuzeng01.github.io/programing/go/github.com/x-mod/routine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -335,15 +317,6 @@ context 包就是为了解决上面所说的这些问题而开发的：在 一�
     </item>
     
     <item>
-      <title>Core net structrue</title>
-      <link>https://liuzeng01.github.io/zsmart/pcrf/corenet/net/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/zsmart/pcrf/corenet/net/</guid>
-      <description>  Back</description>
-    </item>
-    
-    <item>
       <title>Gin</title>
       <link>https://liuzeng01.github.io/essay/july/gin/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -449,30 +422,12 @@ systemctl stop firewalld.service  Back</description>
     </item>
     
     <item>
-      <title>PCRF Backend Process</title>
-      <link>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/zsmart/pcrf/structrue/process/</guid>
-      <description>  Back</description>
-    </item>
-    
-    <item>
       <title>Powershell</title>
       <link>https://liuzeng01.github.io/essay/july/powershell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://liuzeng01.github.io/essay/july/powershell/</guid>
       <description> 1. 查看笔记本电脑电池信息 powercfg /batteryreport /output eport.html  Back</description>
-    </item>
-    
-    <item>
-      <title>RX流程调测</title>
-      <link>https://liuzeng01.github.io/zsmart/pcrf/testcase/rxbasic/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://liuzeng01.github.io/zsmart/pcrf/testcase/rxbasic/</guid>
-      <description>  Back</description>
     </item>
     
     <item>
