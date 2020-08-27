@@ -476,6 +476,13 @@
 	"content": " August \r\r\r Back\r\r"
 },
 {
+	"uri": "https://liuzeng01.github.io/linux/kubernetes/tips/proxy/",
+	"title": "kube proxy",
+	"tags": [],
+	"description": "Kubernetes",
+	"content": " 1. 利用kubectl proxy kubectl proxy curl -v 127.0.0.1:8001 2. 在容器中访问 # 在外部允许匿名访问api kubectl create clusterrolebinding test:anonymous --clusterrole=cluster-admin --user=system:anonymous # 容器内需要有curl curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes # 这个cacert证书指定的是ca证书的位置 ，后面的kubernetes指定的是k8s集群中默认的服务，在pod里面可以通过环境变量或者dns直接访问他 export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt # 可以直接指定ca在环境变量里面，这样容器就可以直接访问api了 3. 利用sidecar container访问 这个其实就是启动了一个类似于proxy的代理容器，和第一个方法是非常相同的 首先把系统的kubectl拷贝到当前目录下，写个简单的启动脚本和dockerfile\n#!/bin/sh API_SERVER=\u0026#34;https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT\u0026#34; CA_CRT=\u0026#34;/var/run/secrets/kubernetes.io/serviceaccount/ca.crt\u0026#34; TOKEN=\u0026#34;$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\u0026#34; /kubectl proxy --server=\u0026#34;$API_SERVER\u0026#34; --certificate-authority=\u0026#34;$CA_CRT\u0026#34; --token=\u0026#34;$TOKEN\u0026#34; --accept-paths=\u0026#39;^.*\u0026#39; dockerfile\nFROMalpineADD . .RUN chmod +x proxy.sh \u0026amp;\u0026amp; chmod +x kubectlENTRYPOINT /proxy.sh然后 docker build docker push就行了 编一个pod的yaml\napiVersion: v1 kind: Pod metadata: name: curl-with-ambassador spec: containers: - name: main image: nginx command: [\u0026#34;sleep\u0026#34;, \u0026#34;9999999\u0026#34;] - name: proxy image: 192.168.24.131:5000/public/kube-proxy 然后在容器内访问127.0.0.1:8001就行了，可以访问kubernetes的API组合\n4. 利用curl访问 curl -v https://192.168.24.131:6443 --cacret /etc/kubernetes/pki/ca.crt # 这个就是ca证书的位置，访问的网址是apiserver对外暴露的地址 5. swagger-ui 这个暂时还没有搞定\n Back\r\r"
+},
+{
 	"uri": "https://liuzeng01.github.io/linux/openstack/",
 	"title": "OpenStack",
 	"tags": [],
@@ -592,7 +599,7 @@
 	"title": "K8S使用技巧",
 	"tags": [],
 	"description": "Kubernetes",
-	"content": " kubectl命令用法 \r\rkubectl 使用技巧 \r\r\r Back\r\r"
+	"content": " kubectl命令用法 \r\rkube proxy \r\rkubectl 使用技巧 \r\r\r Back\r\r"
 },
 {
 	"uri": "https://liuzeng01.github.io/linux/kubernetes/service/",

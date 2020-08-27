@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/programing/javascript/">
+    <link rel="canonical" href="https://liuzeng01.github.io/linux/kubernetes/tips/proxy/">
 
     <title>
         
-        JavaScript | iNote
+        kube proxy | iNote
         
     </title>
 
@@ -70,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -210,12 +210,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/"><h6>Kubernetes</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 haschildren
+    <li data-nav-id="/linux/kubernetes/tips/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/kubernetes/tips/"><h6>K8S使用技巧</h6></a>
@@ -226,7 +226,7 @@
                     kubectl命令用法
                 </a>
         </li>
-        <li data-nav-id="/linux/kubernetes/tips/proxy/" class="nav-item my-1">
+        <li data-nav-id="/linux/kubernetes/tips/proxy/" class="nav-item my-1 active">
                 
                  <a href="/linux/kubernetes/tips/proxy/" class="nav-link p-0">
                     kube proxy
@@ -420,7 +420,7 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/programing/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/programing/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/"><h6>Programming</h6></a>
@@ -632,7 +632,7 @@
         
         <a class="nav-link p-0" href="/programing/python/"><h6>python</h6></a>
     </li>
-    <li data-nav-id="/programing/javascript/" class="nav-item my-1 parent active haschildren
+    <li data-nav-id="/programing/javascript/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/programing/javascript/"><h6>JavaScript</h6></a>
@@ -666,30 +666,79 @@
 
 </div>
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
-	<nav id="TableOfContents"></nav>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-利用kubectl-proxy">1. 利用kubectl proxy</a></li>
+    <li><a href="#2-在容器中访问">2. 在容器中访问</a></li>
+    <li><a href="#3-利用sidecar-container访问">3. 利用sidecar container访问</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#4-利用curl访问">4. 利用curl访问</a></li>
+    <li><a href="#5-swagger-ui">5. swagger-ui</a></li>
+  </ul>
+</nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>JavaScript</h1>
+<h1>kube proxy</h1>
 
 <hr>
+<h2 id="1-利用kubectl-proxy">1. 利用kubectl proxy</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+kubectl proxy
+curl -v 127.0.0.1:8001
 
 
+</code></pre></div><h2 id="2-在容器中访问">2. 在容器中访问</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 在外部允许匿名访问api</span>
+kubectl create clusterrolebinding test:anonymous --clusterrole<span style="color:#f92672">=</span>cluster-admin --user<span style="color:#f92672">=</span>system:anonymous
 
-<ul class="docs-children list-unstyled">
-			<li class="h2 py-1">
-				<a href="/programing/javascript/august/"> August </a>
-			</li>
-		
+<span style="color:#75715e"># 容器内需要有curl</span>
+ curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes
+<span style="color:#75715e"># 这个cacert证书指定的是ca证书的位置  ，后面的kubernetes指定的是k8s集群中默认的服务，在pod里面可以通过环境变量或者dns直接访问他</span>
 
-	
-</ul>
+ <span style="color:#111">export</span> <span style="color:#111">CURL_CA_BUNDLE</span><span style="color:#f92672">=</span>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+<span style="color:#75715e"># 可以直接指定ca在环境变量里面，这样容器就可以直接访问api了</span>
 
 
+</code></pre></div><h2 id="3-利用sidecar-container访问">3. 利用sidecar container访问</h2>
+<h4 id="这个其实就是启动了一个类似于proxy的代理容器和第一个方法是非常相同的">这个其实就是启动了一个类似于proxy的代理容器，和第一个方法是非常相同的</h4>
+<p>首先把系统的kubectl拷贝到当前目录下，写个简单的启动脚本和dockerfile</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span><span style="color:#111">API_SERVER</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;https://</span><span style="color:#111">$KUBERNETES_SERVICE_HOST</span><span style="color:#d88200">:</span><span style="color:#111">$KUBERNETES_SERVICE_PORT</span><span style="color:#d88200">&#34;</span>
+<span style="color:#111">CA_CRT</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;/var/run/secrets/kubernetes.io/serviceaccount/ca.crt&#34;</span>
+<span style="color:#111">TOKEN</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;</span><span style="color:#00a8c8">$(</span>cat /var/run/secrets/kubernetes.io/serviceaccount/token<span style="color:#00a8c8">)</span><span style="color:#d88200">&#34;</span>
+/kubectl proxy --server<span style="color:#f92672">=</span><span style="color:#d88200">&#34;</span><span style="color:#111">$API_SERVER</span><span style="color:#d88200">&#34;</span> --certificate-authority<span style="color:#f92672">=</span><span style="color:#d88200">&#34;</span><span style="color:#111">$CA_CRT</span><span style="color:#d88200">&#34;</span> --token<span style="color:#f92672">=</span><span style="color:#d88200">&#34;</span><span style="color:#111">$TOKEN</span><span style="color:#d88200">&#34;</span> --accept-paths<span style="color:#f92672">=</span><span style="color:#d88200">&#39;^.*&#39;</span>
+</code></pre></div><p>dockerfile</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#00a8c8">FROM</span><span style="color:#d88200"> alpine</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ADD</span> .  .<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">RUN</span> chmod +x proxy.sh <span style="color:#f92672">&amp;&amp;</span> chmod +x kubectl<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#00a8c8">ENTRYPOINT</span> /proxy.sh<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>然后 docker build docker push就行了 
+编一个pod的yaml</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00a8c8">apiVersion</span><span style="color:#111">:</span> v1
+<span style="color:#00a8c8">kind</span><span style="color:#111">:</span> Pod
+<span style="color:#00a8c8">metadata</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">name</span><span style="color:#111">:</span> curl-with-ambassador
+<span style="color:#00a8c8">spec</span><span style="color:#111">:</span>
+  <span style="color:#00a8c8">containers</span><span style="color:#111">:</span>
+  - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> main
+    <span style="color:#00a8c8">image</span><span style="color:#111">:</span> nginx
+    <span style="color:#00a8c8">command</span><span style="color:#111">:</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;sleep&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;9999999&#34;</span><span style="color:#111">]</span>
+  - <span style="color:#00a8c8">name</span><span style="color:#111">:</span> proxy
+    <span style="color:#00a8c8">image</span><span style="color:#111">:</span> <span style="color:#ae81ff">192.168.24.131</span><span style="color:#111">:</span><span style="color:#ae81ff">5000</span>/public/kube-proxy
+</code></pre></div><p>然后在容器内访问127.0.0.1:8001就行了，可以访问kubernetes的API组合</p>
+<h2 id="4-利用curl访问">4. 利用curl访问</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+curl -v https://192.168.24.131:6443 --cacret /etc/kubernetes/pki/ca.crt
+<span style="color:#75715e"># 这个就是ca证书的位置，访问的网址是apiserver对外暴露的地址</span>
 
-
+</code></pre></div><h2 id="5-swagger-ui">5. swagger-ui</h2>
+<p>这个暂时还没有搞定</p>
 <hr>
 
 
@@ -709,8 +758,8 @@
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/programing/python/" title="python"><i class="fas fa-chevron-left p-1"></i>python</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/programing/javascript/august/" title="August">August<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/kubernetes/tips/kubectl/" title="kubectl命令用法"><i class="fas fa-chevron-left p-1"></i>kubectl命令用法</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/kubernetes/tips/kubeapi/" title="kubectl 使用技巧">kubectl 使用技巧<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

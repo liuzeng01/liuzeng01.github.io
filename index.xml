@@ -502,6 +502,18 @@ scratch镜像是Docker项目预定义的最小的镜像。 Docker用于Go程序�
     </item>
     
     <item>
+      <title>kube proxy</title>
+      <link>https://liuzeng01.github.io/linux/kubernetes/tips/proxy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/linux/kubernetes/tips/proxy/</guid>
+      <description>1. 利用kubectl proxy kubectl proxy curl -v 127.0.0.1:8001 2. 在容器中访问 # 在外部允许匿名访问api kubectl create clusterrolebinding test:anonymous --clusterrole=cluster-admin --user=system:anonymous # 容器内需要有curl curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes # 这个cacert证书指定的是ca证书的位置 ，后面的kubernetes指定的是k8s集群中默认的服务，在pod里面可以通过环境变量或者dns直接访问他 export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt # 可以直接指定ca在环境变量里面，这样容器就可以直接访问api了 3. 利用sidecar container访问 这个其实就是启动了一个类似于proxy的代理容器，和第一个方法是非常相同的 首先把系统的kubectl拷贝到当前目录下，写个简单的启动脚本和dockerfile
+#!/bin/sh API_SERVER=&amp;#34;https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT&amp;#34; CA_CRT=&amp;#34;/var/run/secrets/kubernetes.io/serviceaccount/ca.crt&amp;#34; TOKEN=&amp;#34;$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)&amp;#34; /kubectl proxy --server=&amp;#34;$API_SERVER&amp;#34; --certificate-authority=&amp;#34;$CA_CRT&amp;#34; --token=&amp;#34;$TOKEN&amp;#34; --accept-paths=&amp;#39;^.*&amp;#39; dockerfile
+FROMalpineADD . .RUN chmod +x proxy.sh &amp;amp;&amp;amp; chmod +x kubectlENTRYPOINT /proxy.sh然后 docker build docker push就行了 编一个pod的yaml
+apiVersion: v1 kind: Pod metadata: name: curl-with-ambassador spec: containers: - name: main image: nginx command: [&amp;#34;sleep&amp;#34;, &amp;#34;9999999&amp;#34;] - name: proxy image: 192.</description>
+    </item>
+    
+    <item>
       <title>Supervisor</title>
       <link>https://liuzeng01.github.io/linux/shell/supervisor/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
