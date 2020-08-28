@@ -528,6 +528,16 @@ supervisor是所有进程的父进程，管理着启动的子进展，supervisor
     </item>
     
     <item>
+      <title>一次XHR错误的排查过程</title>
+      <link>https://liuzeng01.github.io/essay/august/xhr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/august/xhr/</guid>
+      <description> EROR问题 ： 在使用VSCode打开远程SSH服务器的时候，迟迟打不开终端，MobaXterm使用是正常的。报错为XHR error1. 排查是否属于密钥的问题 cat /root/.ssh/authorized_keys # 查看与本机密钥是否一致 2. 排查时区问题 yum install ntp cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ntpdate cn.pool.ntp.org date 3. 排查下载插件的问题 将时区与本地的时间校对之后还是打不开，怀疑是之前插件的时区设置也有问题 ，于是删除了 vscode下面的bin，重新加载后解决
+搜索历史命令： ctrl +r </description>
+    </item>
+    
+    <item>
       <title>GlusterFS</title>
       <link>https://liuzeng01.github.io/linux/kubernetes/deploy/glusterfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

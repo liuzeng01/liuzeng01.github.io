@@ -4,11 +4,11 @@
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://liuzeng01.github.io/linux/docker/cmd/harbor/">
+    <link rel="canonical" href="https://liuzeng01.github.io/essay/august/xhr/">
 
     <title>
         
-        Harbor 部署 | iNote
+        一次XHR错误的排查过程 | iNote
         
     </title>
 
@@ -70,7 +70,7 @@
                 <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
             </form>
          <ul class="navbar-nav flex-column pt-3">
-    <li data-nav-id="/linux/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/linux/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/"><h6>Linux</h6></a>
@@ -130,17 +130,17 @@
         
         <a class="nav-link p-0" href="/linux/redis/"><h6>Redis</h6></a>
     </li>
-    <li data-nav-id="/linux/docker/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/linux/docker/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/"><h6>Docker</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 parent haschildren
+    <li data-nav-id="/linux/docker/cmd/" class="nav-item my-1 haschildren
         ">
         
         <a class="nav-link p-0" href="/linux/docker/cmd/"><h6>docker命令</h6></a>
         <ul class="list-unstyled ml-2">
-        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1 active">
+        <li data-nav-id="/linux/docker/cmd/harbor/" class="nav-item my-1">
                 
                  <a href="/linux/docker/cmd/harbor/" class="nav-link p-0">
                     Harbor 部署
@@ -307,12 +307,12 @@
     </li>
         </ul>
     </li>
-    <li data-nav-id="/essay/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/"><h6>Essay</h6></a>
         <ul class="list-unstyled ml-2">
-    <li data-nav-id="/essay/august/" class="nav-item my-1 haschildren
+    <li data-nav-id="/essay/august/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/essay/august/"><h6>August</h6></a>
@@ -329,7 +329,7 @@
                     MySQL 30个基本问题
                 </a>
         </li>
-        <li data-nav-id="/essay/august/xhr/" class="nav-item my-1">
+        <li data-nav-id="/essay/august/xhr/" class="nav-item my-1 active">
                 
                  <a href="/essay/august/xhr/" class="nav-link p-0">
                     一次XHR错误的排查过程
@@ -674,24 +674,13 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#1-介绍">1. 介绍</a></li>
-    <li><a href="#2-组成">2. 组成</a>
+    <li><a href="#1-排查是否属于密钥的问题">1. 排查是否属于密钥的问题</a></li>
+    <li><a href="#2-排查时区问题">2. 排查时区问题</a></li>
+    <li><a href="#3-排查下载插件的问题">3. 排查下载插件的问题</a>
       <ul>
-        <li><a href="#1-组成harbor的容器">1 组成Harbor的容器</a></li>
-        <li><a href="#2-harbor依赖的外部组件">2. Harbor依赖的外部组件</a></li>
-        <li><a href="#3-harbor自有组件">3. Harbor自有组件</a></li>
+        <li><a href="#搜索历史命令-ctrl-r">搜索历史命令： ctrl +r</a></li>
       </ul>
     </li>
-    <li><a href="#3-部署">3. 部署</a>
-      <ul>
-        <li><a href="#1-安装docker">1. 安装docker</a></li>
-        <li><a href="#2-安装docker-compose">2. 安装docker-compose</a></li>
-        <li><a href="#3-安装harbor">3. 安装harbor</a></li>
-      </ul>
-    </li>
-    <li><a href="#4-推送镜像">4. 推送镜像</a></li>
-    <li><a href="#5harbor停止与启动命令">5.Harbor停止与启动命令</a></li>
-    <li><a href="#todo-需要补充https的部分添加自签证书什么的">TODO: 需要补充https的部分，添加自签证书什么的</a></li>
   </ul>
 </nav>
 </div>
@@ -699,132 +688,39 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Harbor 部署</h1>
+<h1>一次XHR错误的排查过程</h1>
 
 <hr>
-<h2 id="1-介绍">1. 介绍</h2>
-<p>Harbor是一个用于存储和分发Docker镜像的企业级Registry服务器，通过添加一些企业必须的功能特性，例如安全、标识和管理等，扩展了开源Docker Distribution。作为一个企业级私有Registry服务器，Harbor提供了更好的性能和安全。提升用户 使用Registry构建和运行环境传输镜像的效率。Harbor支持安装在多个Registry节点的镜像资源复制，镜像全部保存在私有Registry中，确保数据和知识产权在公司内部网络中管控。另外，Harbor也提供了高级的安全特性，诸如用户管理，访问控制和活动审计等</p>
-<h2 id="2-组成">2. 组成</h2>
-<h3 id="1-组成harbor的容器">1 组成Harbor的容器</h3>
-<pre><code>Harbor大概需要以下几个容器组成：
-ui：Harbor的核心服务
-log：运行着rsyslog的容器，进行日志收集
-mysql：由官方mysql镜像构成的数据库容器
-nginx：使用nginx做反向代理
-registry：官方的Docker registry
-adminserver：Harbor的配置数据管理器
-jobservice：Harbor的任务管理服务
-redis：用于存储session
-</code></pre>
-<h3 id="2-harbor依赖的外部组件">2. Harbor依赖的外部组件</h3>
-<ul>
-<li>
-<p>Nginx（即proxy代理层）：Nginx前端代理，主要用于分发前端页面ui访问和镜像上传和下载流量。Harbor的registry,UI,token等服务，通过一个前置的反向代理统一接收浏览器、Docker客户端的请求，并将强求转发给后端不同的服务。</p>
-</li>
-<li>
-<p>Registry v2：镜像仓库，负责存储镜像文件。Docker官方镜像仓库，负责存储Docker镜像，并处理docker push/pull命令。由于我们对用户进行访问控制，即不同的用户对Docker image有不同的读写权限，Registry会指向同一个token服务，强制用户的每次docker pull/push请求都要携带一个合法的token，Registry会通过公钥对token进行解密验证。</p>
-</li>
-<li>
-<p>Database（Mysql或者Postgresql）：为core services提供数据库服务，负责存储用户权限、审计日志、Docker image分组信息等数据。</p>
-</li>
-</ul>
-<h3 id="3-harbor自有组件">3. Harbor自有组件</h3>
-<p>Core services（Admin Server）：这是Harbor的核心功能，主要提供以下服务：</p>
-<ul>
-<li>UI：提供图形化界面，帮助用户管理registry上的镜像（image），并对用户进行授权。</li>
-<li>webhook：为了及时获取registry上image状态变化的情况，在Registry上配置webhook，把状态传递给UI模块。</li>
-<li>Auth服务：负责根据用户权限给每个docker push/pull命令签发token。Docker客户端向Registry服务发起的请求，如果不包含token，会被重定向到这里，获得token后再重新向Registry进行请求。</li>
-<li>API：提供Harbor RESTful API。</li>
-</ul>
-<h2 id="3-部署">3. 部署</h2>
-<h3 id="1-安装docker">1. 安装docker</h3>
-<h3 id="2-安装docker-compose">2. 安装docker-compose</h3>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-<span style="color:#d88200">`</span>uname -s<span style="color:#d88200">`</span>-<span style="color:#d88200">`</span>uname -m<span style="color:#d88200">`</span> -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-docker-compose --version <span style="color:#75715e"># 查看是否安装成功</span>
-</code></pre></div><h3 id="3-安装harbor">3. 安装harbor</h3>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 这里采用在线安装的方式，也可以采用离线安装的方式</span>
-wget https://github.com/goharbor/harbor/releases/download/v1.10.4/harbor-online-installer-v1.10.4.tgz
-tar xvf harbor-online-installer-v1.10.4.tgz
-
-<span style="color:#75715e"># 接下来修改下配置文件harbor.yaml</span>
-<span style="color:#75715e"># hostname: 192.168.24.131 (自己本机地址)</span>
-<span style="color:#75715e"># port: 5000 （自己定义端口号，记得不要使用80端口）</span>
-<span style="color:#75715e"># harbor_admin_password: Harbor12345 （admin进入密码）</span>
-<span style="color:#75715e"># 然后将https那几行注释掉。虚拟机内部的docker仓库，可以先使用http</span>
 
 
-<span style="color:#75715e"># 启动准备文件</span>
-./prepare.sh
+<div class="card my-3 border-top-0 border-right-0 border-bottom-0 border-left border-primary rounded" style="border-width:4px !important;">
+    <div class="wrap border border-left-0 rounded">
+        
+        <div class="card-header border-0 bg-white pl-3 text-primary">
+            <h3>EROR</h3>
+        </div>
+        
+        <div class="card-body pt-1">
+            问题 ： 在使用VSCode打开远程SSH服务器的时候，迟迟打不开终端，MobaXterm使用是正常的。报错为XHR error
+        </div>
+    </div>
+</div>
 
-<span style="color:#75715e"># 启动安装文件</span>
-./install.sh
+<h2 id="1-排查是否属于密钥的问题">1. 排查是否属于密钥的问题</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat /root/.ssh/authorized_keys
+<span style="color:#75715e"># 查看与本机密钥是否一致</span>
 
-<span style="color:#75715e"># 在浏览器里面登陆控制台</span>
-192.168.24.131:5000
-
-<span style="color:#75715e"># 修改默认密码</span>
-
-<span style="color:#75715e"># 新建项目</span>
-
-<span style="color:#75715e"># 因为使用的是http建立的仓库，所以还需要配置下insecure参数</span>
-
-
-</code></pre></div><h2 id="4-推送镜像">4. 推送镜像</h2>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vim /usr/lib/systemd/system/docker.service
-<span style="color:#75715e"># 给启动配置添加参数</span>
-<span style="color:#111">ExecStart</span><span style="color:#f92672">=</span>/usr/bin/dockerd  --insecure-registry 192.168.24.131:5000
-<span style="color:#75715e"># 重启docker</span>
-systemctl daemon-reload
-systemctl restart docker
-<span style="color:#75715e"># 拉取一个测试镜像</span>
-docker pull hello-world
-docker images 
-<span style="color:#75715e"># 修改下镜像的tag，进行推送</span>
-docker tag hello-world 192.168.24.131:5000/public/hello-world <span style="color:#75715e"># pubilc 是之前harbor新增的项目</span>
-docker login 192.168.24.131:5000
-docker push 192.168.24.131:5000/public/hello-world
-
-<span style="color:#75715e"># 登陆控制台查看结果</span>
-
-
-<span style="color:#75715e"># 现在查看下后台镜像仓库存储位置的信息</span>
-<span style="color:#111">cd</span> /usr/harbor/data/registry/docker/registry/v2/repositories/public/hello-world
-
-<span style="color:#f92672">[</span>root@master hello-world<span style="color:#f92672">]</span><span style="color:#75715e"># ls -lrta</span>
-    total <span style="color:#ae81ff">0</span>
-    drwxr-xr-x <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">25</span> Aug  <span style="color:#ae81ff">2</span> 20:32 ..
-    drwxr-xr-x <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">20</span> Aug  <span style="color:#ae81ff">2</span> 20:32 _layers
-    drwxr-xr-x <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span>  <span style="color:#ae81ff">6</span> Aug  <span style="color:#ae81ff">2</span> 20:32 _uploads
-    drwxr-xr-x <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">55</span> Aug  <span style="color:#ae81ff">2</span> 20:32 .
-    drwxr-xr-x <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">35</span> Aug  <span style="color:#ae81ff">2</span> 20:32 _manifests
-<span style="color:#75715e"># 可以看到，已经成功的推送镜像到镜像仓库了。</span>
-
-<span style="color:#75715e"># 同理，可以通过别的主机来拉取镜像 ，只需要添加--insecure-registry参数就行</span>
-<span style="color:#f92672">[</span>root@k8s-node1 ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker pull 192.168.24.131:5000/public/hello-world:v1</span>
-    v1: Pulling from public/hello-world
-    0e03bdcc26d7: Pull <span style="color:#111">complete</span>
-    Digest: sha256:90659bf80b44ce6be8234e6ff90a1ac34acbeb826903b02cfa0da11c82cbc042
-    Status: Downloaded newer image <span style="color:#00a8c8">for</span> 192.168.24.131:5000/public/hello-world:v1
-
-</code></pre></div><h2 id="5harbor停止与启动命令">5.Harbor停止与启动命令</h2>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 停止</span>
-docker-compose -f docker-compose.yaml down -v
-<span style="color:#75715e"># 启动</span>
-docker-compose -f docker-compose.yaml up -d 
-</code></pre></div><h2 id="todo-需要补充https的部分添加自签证书什么的">TODO: 需要补充https的部分，添加自签证书什么的</h2>
-<hr>
+</code></pre></div><h2 id="2-排查时区问题">2. 排查时区问题</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install ntp
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ntpdate cn.pool.ntp.org
+date
 
 
 
-<ul class="docs-children list-unstyled">
-
-	
-</ul>
-
-
-
-
+</code></pre></div><h2 id="3-排查下载插件的问题">3. 排查下载插件的问题</h2>
+<p>将时区与本地的时间校对之后还是打不开，怀疑是之前插件的时区设置也有问题 ，于是删除了 vscode下面的bin，重新加载后解决</p>
+<h3 id="搜索历史命令-ctrl-r">搜索历史命令： ctrl +r</h3>
 
 
     
@@ -836,8 +732,8 @@ docker-compose -f docker-compose.yaml up -d
 
     <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/linux/docker/cmd/" title="docker命令"><i class="fas fa-chevron-left p-1"></i>docker命令</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/linux/docker/cmd/aliyunrepo/" title="Aliyun Registry">Aliyun Registry<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/essay/august/mysql/" title="MySQL 30个基本问题"><i class="fas fa-chevron-left p-1"></i>MySQL 30个基本问题</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/essay/july/" title="July">July<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

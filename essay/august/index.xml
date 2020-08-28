@@ -52,5 +52,15 @@ MySQL 的创始人就是之前那个叫 Monty 的大佬以 MySQL为基础成立�
  整数类型：BIT、BOOL、TINY INT、SMALL INT、MEDIUM INT、 INT、 BIG INT浮点数类型：FLOAT、DOUBLE、DECIMAL字符串类型：CHAR、VARCHAR、TINY TEXT、TEXT、MEDIUM TEXT、LONGTEXT、TINY BLOB、BLOB、MEDIUM BLOB、LONG BLOB日期类型：Date、DateTime、TimeStamp、Time、Year其他数据类型：BINARY、VARBINARY、ENUM、SET.</description>
     </item>
     
+    <item>
+      <title>一次XHR错误的排查过程</title>
+      <link>https://liuzeng01.github.io/essay/august/xhr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://liuzeng01.github.io/essay/august/xhr/</guid>
+      <description> EROR问题 ： 在使用VSCode打开远程SSH服务器的时候，迟迟打不开终端，MobaXterm使用是正常的。报错为XHR error1. 排查是否属于密钥的问题 cat /root/.ssh/authorized_keys # 查看与本机密钥是否一致 2. 排查时区问题 yum install ntp cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ntpdate cn.pool.ntp.org date 3. 排查下载插件的问题 将时区与本地的时间校对之后还是打不开，怀疑是之前插件的时区设置也有问题 ，于是删除了 vscode下面的bin，重新加载后解决
+搜索历史命令： ctrl +r </description>
+    </item>
+    
   </channel>
 </rss>
