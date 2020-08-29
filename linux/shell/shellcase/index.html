@@ -698,7 +698,15 @@
       </ul>
     </li>
     <li><a href="#16-获取本机ip地址">16. 获取本机IP地址</a></li>
-    <li><a href="#17">17.</a></li>
+    <li><a href="#17-彩色输出">17. 彩色输出</a></li>
+    <li><a href="#18-获取进程id">18. 获取进程ID</a></li>
+    <li><a href="#19-shell一些builtin特性">19. shell一些builtin特性</a></li>
+    <li><a href="#20-数组和列表">20 数组和列表</a></li>
+    <li><a href="#21-获取终端信息">21. 获取终端信息</a></li>
+    <li><a href="#22获取输入密码">22.获取输入密码</a></li>
+    <li><a href="#23日期相关">23.日期相关</a></li>
+    <li><a href="#24-获取所有参数">24. 获取所有参数</a></li>
+    <li><a href="#25-重复执行直到完成">25. 重复执行直到完成</a></li>
   </ul>
 </nav>
 </div>
@@ -1193,8 +1201,101 @@ systemctl list-units --type<span style="color:#f92672">=</span>service  <span st
 </code></pre></div><h2 id="16-获取本机ip地址">16. 获取本机IP地址</h2>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ifconfig eth0<span style="color:#111">|</span>grep <span style="color:#d88200">&#34;inet addr&#34;</span><span style="color:#111">|</span>awk <span style="color:#d88200">&#39;{print $2}&#39;</span><span style="color:#111">|</span>awk -F: <span style="color:#d88200">&#39;{print $2}&#39;</span>
 </code></pre></div><p>这个网卡的名称可以具体情况具体定</p>
-<h2 id="17">17.</h2>
-<hr>
+<h2 id="17-彩色输出">17. 彩色输出</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> <span style="color:#111">echo</span> -e <span style="color:#d88200">&#34;\e[1;32m Green color \e[0m&#34;</span>
+ <span style="color:#75715e"># 输出颜色</span>
+ <span style="color:#111">echo</span> -e <span style="color:#d88200">&#34;\e[1;42m Green PlayGround \e[0m&#34;</span>
+ <span style="color:#75715e"># 背景色</span>
+30-37
+40-47
+黑红绿黄蓝红青白
+</code></pre></div><h2 id="18-获取进程id">18. 获取进程ID</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pgrep xxx
+<span style="color:#75715e">## 获取进程所涉及的环境变量</span>
+cat /proc/xxx/environ <span style="color:#111">|</span>tr <span style="color:#d88200">&#39;\0&#39;</span> <span style="color:#d88200">&#39;\n&#39;</span>
+
+
+</code></pre></div><h2 id="19-shell一些builtin特性">19. shell一些builtin特性</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 获取某变量长度</span>
+<span style="color:#111">var</span><span style="color:#f92672">=</span><span style="color:#00a8c8">$(</span>ls -lrt<span style="color:#00a8c8">)</span>
+<span style="color:#111">echo</span> <span style="color:#d88200">${#</span><span style="color:#111">var</span><span style="color:#d88200">}</span>
+
+<span style="color:#75715e"># 获取当前shell</span>
+<span style="color:#111">echo</span> <span style="color:#111">$0</span>
+<span style="color:#111">echo</span> <span style="color:#111">$SHELL</span>
+
+<span style="color:#75715e"># 判断是否为root</span>
+<span style="color:#111">$UID</span> -ne <span style="color:#ae81ff">0</span>
+
+<span style="color:#75715e"># 获取退出状态码</span>
+<span style="color:#111">echo</span> <span style="color:#111">$?</span>
+
+<span style="color:#75715e"># 利用tee来保存输出</span>
+ls -lrt <span style="color:#111">|</span>tee test.log
+ls -lrt <span style="color:#111">|</span>tee -a test.log <span style="color:#75715e">## 追加内容</span>
+</code></pre></div><h2 id="20-数组和列表">20 数组和列表</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
+</span><span style="color:#75715e"></span><span style="color:#111">declare</span> -A map1
+map1<span style="color:#f92672">[</span>test<span style="color:#f92672">]=</span><span style="color:#ae81ff">23</span>
+map1<span style="color:#f92672">[</span>dev<span style="color:#f92672">]=</span><span style="color:#ae81ff">34</span>
+
+
+<span style="color:#00a8c8">for</span> num in <span style="color:#d88200">${</span><span style="color:#111">!map1[*]</span><span style="color:#d88200">}</span>
+<span style="color:#00a8c8">do</span>
+<span style="color:#111">echo</span> <span style="color:#111">$num</span>
+<span style="color:#00a8c8">done</span>
+<span style="color:#75715e"># 输出键名</span>
+
+<span style="color:#00a8c8">for</span> num in <span style="color:#d88200">${</span><span style="color:#111">map1</span><span style="color:#111">[*]</span><span style="color:#d88200">}</span>
+<span style="color:#00a8c8">do</span>
+<span style="color:#111">echo</span> <span style="color:#111">$num</span>
+<span style="color:#00a8c8">done</span>
+<span style="color:#75715e"># 输出值名</span>
+
+<span style="color:#00a8c8">for</span> num in <span style="color:#d88200">${</span><span style="color:#111">!map1[*]</span><span style="color:#d88200">}</span>
+<span style="color:#00a8c8">do</span>
+<span style="color:#111">echo</span> <span style="color:#111">$num</span>,<span style="color:#d88200">${</span><span style="color:#111">map1</span><span style="color:#111">[</span><span style="color:#111">$num</span><span style="color:#111">]</span><span style="color:#d88200">}</span>
+<span style="color:#00a8c8">done</span>
+<span style="color:#75715e">## 键值对</span>
+</code></pre></div><h2 id="21-获取终端信息">21. 获取终端信息</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tput lines
+tput cols
+<span style="color:#75715e"># 获取终端行数列数</span>
+tput longtime <span style="color:#75715e"># 终端名称</span>
+tput cup <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># 移动光标</span>
+tput setb n <span style="color:#75715e"># 设置颜色</span>
+color ls <span style="color:#75715e"># 展示颜色</span>
+tput self m <span style="color:#75715e"># 设置前景色</span>
+
+
+</code></pre></div><h2 id="22获取输入密码">22.获取输入密码</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#111">echo</span> <span style="color:#d88200">&#39;Please input the password&#39;</span>
+stty -echo
+<span style="color:#111">read</span> password
+stty <span style="color:#111">echo</span>
+<span style="color:#111">echo</span> <span style="color:#111">$password</span>
+<span style="color:#75715e"># stty -echo 不显示输出</span>
+<span style="color:#75715e"># stty echo 显示输出</span>
+</code></pre></div><h2 id="23日期相关">23.日期相关</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">date
+date +%s <span style="color:#75715e"># 显示unix时间戳</span>
+<span style="color:#75715e">## ntpdate -s time-b.nist.gov</span>
+</code></pre></div><h2 id="24-获取所有参数">24. 获取所有参数</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#! /bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">for</span> i in <span style="color:#d88200">`</span>seq <span style="color:#ae81ff">1</span> <span style="color:#111">$#</span><span style="color:#d88200">`</span>
+<span style="color:#00a8c8">do</span>
+<span style="color:#111">echo</span> <span style="color:#111">$i</span> <span style="color:#111">$1</span>
+<span style="color:#111">shift</span>
+<span style="color:#00a8c8">done</span>
+
+</code></pre></div><h2 id="25-重复执行直到完成">25. 重复执行直到完成</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+
+
+</code></pre></div><hr>
 
 
 
